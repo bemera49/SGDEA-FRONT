@@ -1,0 +1,83 @@
+<app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+<div class="container-fluid">
+  <!-- Start Row One -->
+  <div class="row ">
+      <!-- start Detail card -->
+      <div class="col-12">
+          <div class="card ">
+              <div class="card-header card-header-info card-header-icon">
+                  <div class="card-icon">
+                      <i class="material-icons">{{ initCardHeaderIcon }}</i>
+                  </div>
+                  <h4 class="card-title">
+                     Plantillas
+                  </h4>
+              </div>
+              <div class="card-body">
+                  <form [formGroup]="templateForm" class="row mt-4">
+                    <div class="col-md-4">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Tipos de Plantillas</mat-label>
+                        <mat-select formControlName="templateType" >
+                          <mat-option *ngFor="let tt of templateTypes" [value]=tt.id>{{tt.nombre}} </mat-option>
+
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                      <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Código de la plantilla</mat-label>
+                        <input matInput formControlName="templateCode" >
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                      <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Nombre de la plantilla</mat-label>
+                        <input matInput formControlName="templateName" >
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Versión</mat-label>
+                        <mat-select formControlName="version">
+                          <mat-option [value]="'1'">1</mat-option>
+                          <mat-option [value]="'2'">2</mat-option>
+                          <mat-option [value]="'3'">3</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Módulo</mat-label>
+                        <mat-select formControlName="module">
+                          <mat-option *ngFor="let m of modules" [value]="m.idRolModuloOperacion">{{m.nombreRolModuloOperacion}} </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-12">
+                      <div class="card" *ngIf="activeEditor">
+                        <div class="card-header card-header-info card-header-icon">
+                            <h4 class="card-title">{{ 'Editar Plantilla' | translate }}</h4>
+                        </div>
+
+                        <div class="card-body">
+                            <sgda-editor [initialData]="editorContent" (ckDocument)="changeDocument($event)"></sgda-editor>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="col-12 mt-4">
+                      <div mat-dialog-actions style="display:flex;justify-content: end;gap: 10px">
+                        <button (click)="onSubmit()" class="btn bg-primary text-white rounded border-0 py-2 px-5"  type="submit" >Guardar</button>
+                        <button routerLink="/setting/templates-index" class="btn bg-white border border-primary rounded py-2 px-5 text-primary" type="button">Cancelar</button>
+                    </div>
+                    </div>
+                  </form>
+
+              </div>
+          </div>
+
+      </div>
+      <!-- End Detail card -->
+  </div>
+  <!-- End Row One -->
+</div>

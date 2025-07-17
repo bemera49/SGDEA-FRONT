@@ -1,0 +1,66 @@
+
+<div class="test">
+  <h2 style="color: #000000; font-weight: 300; font-family: 'Poppins', sans-serif;">
+    <strong>Asignar Profesional</strong>
+  </h2>
+  <div class="card">
+    <div class="card-body">
+      <div class="table-responsive">
+        <h3 style="color: #000000; font-weight: 300; font-family: 'Poppins', sans-serif;">
+          <strong>Listado de Profesionales</strong>
+        </h3><br>
+        <table class="table">
+          <thead>
+            <tr>
+              <th style="visibility: hidden;"></th>
+              <th><strong>Profesional HCO</strong></th>
+              <th><strong>Solicitudes</strong></th>
+              <th>Seleccionar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of AnalystReceived">
+              <td style="visibility: hidden;">
+                <span class="semaforo">{{ item.id }}</span>
+              </td>
+              <td>
+                <a href="javascript:void(0)" (click)="redireccionar(item.id)"
+                  style="text-decoration: underline;">{{ item.name_analyst }}</a>
+              </td>
+
+              <td>
+                <span class="estado-solicitud">{{ item.cantidad_tareas }}</span>
+              </td>
+              <td>
+                <input 
+                  type="radio" 
+                  name="selectedAnalyst" 
+                  [value]="item.id" 
+                  [(ngModel)]="selectedAnalystId">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Importación paginator -->
+       <!--
+        <div class="pagination-container">
+          <app-pagination (rechargeTable)="refreshAnalystReceived()" [itemsDefault]="itemsPerDefault"></app-pagination>
+        </div>
+      -->
+
+
+
+      <div class="text-center">
+        <button 
+          (click)="guardarSeleccionados()" 
+          class="btn btn-primary"
+          [disabled]="!selectedAnalystId">Guardar</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,26 @@
+<app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+<button (click)="location.back()" mat-button style="width: 150px">
+    <mat-icon>chevron_left</mat-icon>Volver
+</button>
+
+
+<!-- respuesta proeyctara hu023 incorporada -->
+<!-- respuesta proeyctara hu023 incorporada-->
+
+<!-- aprobar -rechazar -->
+<div class="d-flex justify-content-end">
+    <button class="btn btn-primary mr-2" (click)="gestion('aprobar')">Aprobar</button>
+    <button class="btn btn-primary" (click)="gestion('rechazar')">Rechazar</button>
+</div>
+<!-- aprobar -rechazar -->
+
+<!-- tablas -->
+<app-table class="table w-100 border" [config]="dataConfigCuentasAsociadas">
+</app-table>
+
+<app-table class="table w-100 border" [config]="dataConfigProceso">
+</app-table>
+
+<app-table class="table w-100 border" [config]="dataConfigSolAsociadas">
+</app-table>
+<!-- tablas -->

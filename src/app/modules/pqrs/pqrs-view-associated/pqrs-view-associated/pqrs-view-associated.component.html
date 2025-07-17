@@ -1,0 +1,156 @@
+<main class="w-100" style="margin-top: 100px;">
+    <div style="width: 80%; margin: 0 auto;">
+         
+        <button mat-button (click)="navigateTo()"> 
+            <mat-icon>chevron_left</mat-icon>
+            Volver
+        </button>
+        
+        <h2>PQRS #{{this.pqrsForm.get('idRadiRadicado')?.value}}</h2>
+    </div>
+    <form [formGroup]="pqrsForm" class="row" style="width: 80%; margin: 0 auto;">
+        <span class="d-flex flex-column col-md-6 col-lg-6">
+          <label>Número de cuenta contrato</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input placeholder="Número de cuenta contrato" matInput formControlName="numeroCuentaContrato">
+            <mat-error
+              *ngIf="pqrsForm.controls['numeroCuentaContrato'].invalid && pqrsForm.controls['numeroCuentaContrato'].touched">
+              Este campo es requerido
+            </mat-error>
+          </mat-form-field>
+        </span>
+    
+        <span class="d-flex flex-column col-md-6 col-lg-6">
+          <label>Estado del vencimiento</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input placeholder="Estado del vencimiento" matInput formControlName="estadoRadiRadicado">
+            <mat-error
+              *ngIf="pqrsForm.controls['estadoRadiRadicado'].invalid && pqrsForm.controls['estadoRadiRadicado'].touched">
+              Este campo es requerido
+            </mat-error>
+          </mat-form-field>
+        </span>
+    
+        <span class="d-flex flex-column col-md-6 col-lg-6">
+          <label>Número de contacto</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input placeholder="Número de contacto" matInput formControlName="contactoSap">
+            <mat-error *ngIf="pqrsForm.controls['contactoSap'].invalid && pqrsForm.controls['contactoSap'].touched">
+              Este campo es requerido
+            </mat-error>
+          </mat-form-field>
+        </span>
+    
+        <span class="d-flex flex-column col-md-6 col-lg-6">
+          <label>Fecha de radicación</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input placeholder="Fecha de radicación" matInput formControlName="creacionRadiRadicado">
+            <mat-error
+              *ngIf="pqrsForm.controls['creacionRadiRadicado'].invalid && pqrsForm.controls['creacionRadiRadicado'].touched">
+              Este campo es requerido
+            </mat-error>
+          </mat-form-field>
+        </span>
+    
+        <span class="d-flex flex-column col-md-6 col-lg-6">
+          <label>Tipo de solicitud</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input placeholder="Tipo de solicitud" matInput formControlName="tipo_solicitud">
+            <mat-error
+              *ngIf="pqrsForm.controls['tipo_solicitud'].invalid && pqrsForm.controls['tipo_solicitud'].touched">
+              Este campo es requerido
+            </mat-error>
+          </mat-form-field>
+        </span>
+    
+        <span class="d-flex flex-column col-md-6 col-lg-6">
+          <label>Canal</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input placeholder="Canal" matInput formControlName="cg_medio_recepcion">
+            <mat-error
+              *ngIf="pqrsForm.controls['cg_medio_recepcion'].invalid && pqrsForm.controls['cg_medio_recepcion'].touched">
+              Este campo es requerido
+            </mat-error>
+          </mat-form-field>
+        </span>
+    
+        <span class="d-flex flex-column col-md-6 col-lg-6">
+          <label>Clasificación Interna</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input placeholder="Clasificación Interna" matInput formControlName="clasificacionInternaId">
+            <mat-error
+              *ngIf="pqrsForm.controls['clasificacionInternaId'].invalid && pqrsForm.controls['clasificacionInternaId'].touched">
+              Este campo es requerido
+            </mat-error>
+          </mat-form-field>
+        </span>
+    
+        <span class="d-flex flex-column col-md-6 col-lg-6">
+          <label>Fecha de asignación</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input placeholder="Fecha de asignación" matInput formControlName="asignacionRadiRadicado">
+            <mat-error
+              *ngIf="pqrsForm.controls['asignacionRadiRadicado'].invalid && pqrsForm.controls['asignacionRadiRadicado'].touched">
+              Este campo es requerido
+            </mat-error>
+          </mat-form-field>
+        </span>
+    
+        <span class="d-flex flex-column col-md-6 col-lg-6">
+          <label>Usuario que asignó</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input placeholder="Usuario que asignó" matInput formControlName="user_idTramitador">
+            <mat-error
+              *ngIf="pqrsForm.controls['user_idTramitador'].invalid && pqrsForm.controls['user_idTramitador'].touched">
+              Este campo es requerido
+            </mat-error>
+          </mat-form-field>
+        </span>
+    
+        <span class="d-flex flex-column col-md-6 col-lg-6">
+          <label>Fecha de solicitud</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input placeholder="Fecha de solicitud" matInput formControlName="fechaDocumentoRadiRadicado">
+            <mat-error
+              *ngIf="pqrsForm.controls['fechaDocumentoRadiRadicado'].invalid && pqrsForm.controls['fechaDocumentoRadiRadicado'].touched">
+              Este campo es requerido
+            </mat-error>
+          </mat-form-field>
+        </span>
+    
+        <span class="d-flex flex-column col-md-6 col-lg-6">
+          <label>Usuario que solicita</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input placeholder="Usuario que solicita" matInput formControlName="user_idCreador">
+            <mat-error
+              *ngIf="pqrsForm.controls['user_idCreador'].invalid && pqrsForm.controls['user_idCreador'].touched">
+              Este campo es requerido
+            </mat-error>
+          </mat-form-field>
+        </span>
+    
+        <span class="d-flex flex-column col-md-6 col-lg-6">
+          <label>Causal de devolución</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input placeholder="Causal de devolución" matInput formControlName="returnCause">
+            <mat-error *ngIf="pqrsForm.controls['returnCause'].invalid && pqrsForm.controls['returnCause'].touched">
+              Este campo es requerido
+            </mat-error>
+          </mat-form-field>
+        </span>
+    
+    <!-- 
+        <div *ngFor="let doc of anexos" class="d-flex mb-4 flex-wrap align-items-center" style="gap: 8px">
+          <div class="border rounded d-flex py-2 px-1 mt-1 flex-row align-items-center"
+            style="max-width: max-content; gap: 2px">
+            <img src="assets/img/pdf-icon.svg">
+            <div class="text-pdf">{{ doc.name }}</div>
+            <button class="button-pdf" (click)="downloadFile(doc.url)">
+              <mat-icon>download</mat-icon>
+            </button>
+          </div>
+        </div> -->
+    
+      </form>
+</main>
+

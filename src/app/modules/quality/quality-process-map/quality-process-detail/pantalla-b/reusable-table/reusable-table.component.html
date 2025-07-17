@@ -1,0 +1,160 @@
+<div class="containertable">
+  <table class="table ">
+    <tbody class="tableint">
+      <ng-container *ngIf="tableType === 'process'">
+        <!-- Filas para la tabla de proceso -->
+        <tr class="FirtsRow">
+          <th class="columna-1 columna">Nombre del proceso</th>
+          <td class="columna columna-2 ">{{ cleanName(data.name, data.code) }}</td>
+        </tr>
+        <tr>
+          <th class="columna-1 columna">Código</th>
+          <td class="columna columna-2 ">{{ data.code }}</td>
+        </tr>
+        <tr>
+          <th class="columna-1 columna">Nivel</th>
+          <td class="columna columna-2 ">{{ data.level }}</td>
+        </tr>
+        <tr>
+          <th class="columna-1 columna">Vigente desde</th>
+          <td class="columna columna-2 ">{{ data.from }}</td>
+        </tr>
+        <tr>
+          <th class="columna-1 columna">Vigente hasta</th>
+          <td class="columna columna-2 ">{{ data.until }}</td>
+        </tr>
+        <!-- Continúa con más filas según sea necesario -->
+      </ng-container>
+
+      <ng-container *ngIf="tableType === 'subprocess'">
+        <!-- Filas para la tabla de subproceso -->
+        <tr class="FirtsRow">
+          <th class="columna-1 columna">Nombre del subproceso </th>
+          <td class="columna columna-2 ">{{ cleanName(data.name, data.code) }}</td>
+        </tr>
+        <tr>
+          <th class="columna-1 columna">Nivel</th>
+          <td class="columna columna-2 ">{{ data.level }}</td>
+        </tr>
+        <tr>
+          <th class="columna-1 columna">Código</th>
+          <td class="columna columna-2 ">{{ data.code }}</td>
+        </tr>
+
+        <tr>
+          <th class="columna-1 columna">Vigente desde</th>
+          <td class="columna columna-2 ">{{ data.from }}</td>
+        </tr>
+        <tr>
+          <th class="columna-1 columna">Vigente hasta</th>
+          <td class="columna columna-2 ">{{ data.until }}</td>
+        </tr>
+        <!-- Continúa con más filas según sea necesario -->
+      </ng-container>
+
+      <ng-container *ngIf="tableType === 'Arearesponsable'">
+        <!-- Filas para la tabla de area responsable -->
+        <tr class="FirtsRow">
+          <th class="columna-1 columna">Dirección / División / Oficina </th>
+          <td class="columna columna-2 ">{{ Areaname }}</td>
+        </tr>
+        <tr>
+          <th class="columna-1 columna">Gerencia </th>
+          <td class="columna columna-2 ">{{ managementName }}</td>
+        </tr>
+        <tr>
+          <th class="columna-1 columna">Centro de costos</th>
+          <td class="columna columna-2 ">{{ centerOfCostName}}</td>
+        </tr>
+        <tr>
+          <th class="columna-1">Jefe de área</th>
+          <td class="columna-2 ">{{ areaHeadName }}</td>
+        </tr>
+        <!-- Continúa con más filas según sea necesario -->
+      </ng-container>
+      <ng-container *ngIf="tableType === 'description'">
+        <!-- Filas para la tabla de subproceso -->
+        <tr class="FirtsRow">
+          <th class="columna-1">Nombre de expediente</th>
+          <td class="columna columna-2 ">{{ cleanName(data.name, data.code) }}</td>
+        </tr>
+        <tr>
+          <th class="columna-1">Grupo</th>
+          <td class="columna columna-2 ">{{ datossubproces.code }}</td>
+        </tr>
+        <tr>
+          <th class="columna-1">Subprocesos</th>
+          <td class="columna columna-2 ">{{ datossubproces.name }}</td>
+        </tr>
+
+        <tr>
+          <th class="columna-1">Descripción del cambio</th>
+          <td class="columna columna-2 ">{{ data.from }}</td>
+        </tr>
+        <tr>
+          <th class="columna-1">Numero de folios</th>
+          <td class="columna columna-2 ">{{ data.invoice }}</td>
+        </tr>
+        <tr>
+          <th class="columna-1">Versión del documento</th>
+          <td class="columna columna-2 ">{{ data.version }}</td>
+        </tr>
+        <tr>
+          <th class="columna-1">Vigente desde</th>
+          <td class="columna columna-2 ">{{ data.until }}</td>
+        </tr>
+        <tr>
+          <th class="columna-1">Vigente hasta</th>
+          <td class="columna columna-2 ">{{ data.until }}</td>
+        </tr>
+        <!-- Continúa con más filas según sea necesario -->
+      </ng-container>
+      <ng-container *ngIf="tableType === 'LevelOfDescriptión'">
+        <!-- Filas para la tabla de subproceso -->
+        <tr class="FirtsRow">
+          <th class="columna-1 columna">Archivo satélite</th>
+          <td class="columna columna-2 ">{{ data.code }}</td>
+        </tr>
+        <tr>
+          <th class="columna-1 columna">Proceso</th>
+          <td class="columna columna-2 ">{{ nameProces }}</td>
+        </tr>
+        <tr>
+          <th class="columna-1 columna">Unidad administrativa</th>
+          <td class="columna columna-2 ">{{ data.trd.administrative_unit }}</td>
+        </tr>
+
+        <tr>
+          <th class="columna-1 columna">Tipo Documental</th>
+          <td class="columna columna-2 ">{{ data.documental }}</td>
+        </tr>
+      </ng-container>
+      <ng-container *ngIf="tableType === 'file'">
+        <tr class="FirtsRow">
+          <th class="columna-1 columna">Fecha de aprobación</th>
+          <td class="columna columna-2 ">{{ data.from }}</td>
+        </tr>
+        <tr>
+          <th class="columna-1 columna">Nombre del documento</th>
+          <td class="columna columna-2 ">{{ cleanName(data.name, data.code) }}</td>
+        </tr>
+        <tr>
+          <th class="columna-1 columna">Subtitulo</th>
+          <td class="columna columna-2 ">{{ cleanName(data.subtitle, data.code) }}</td>
+        </tr>
+        <tr>
+          <th class="columna-1 columna">Principio de procedencia</th>
+          <td class="columna columna-2 ">{{ data.trd.administrative_unit }}</td>
+        </tr>
+        <tr>
+          <th class="columna-1 columna">Código</th>
+          <td class="columna columna-2 ">{{ data.code }}</td>
+        </tr>
+        <tr>
+          <th class="columna-1 columna">Tipo tema</th>
+          <td class="columna columna-2 ">{{ data.topic_type }}</td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>

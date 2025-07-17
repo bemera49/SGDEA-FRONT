@@ -1,0 +1,84 @@
+.custom-dialog-content {
+    padding: 24px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background-color: #E0F7FA;
+    border-radius: 50%;
+    margin-right: 16px;
+}
+
+.header h2 {
+    flex-grow: 1;
+    margin: 0;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.close-button {
+    color: #000000;
+}
+
+.upload-container {
+    border: 2px dashed #00A3E4;
+    padding: 16px;
+    text-align: center;
+    margin-top: 24px;
+}
+
+.upload-icon {
+    font-size: 48px;
+    color: #9E9E9E;
+}
+
+.file-types {
+    font-weight: bold;
+    color: #757575;
+    margin: 16px 0;
+}
+
+.upload-link {
+    color: #00A3E4;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.custom-dialog-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 24px;
+    border-top: 1px solid #E0E0E0;
+}
+
+.cancel-button, .accept-button {
+    width: 45%;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.cancel-button {
+    background-color: #FFFFFF;
+    color: #00A3E4;
+    border: 2px solid #00A3E4;
+    border-radius: 8px;
+}
+
+.accept-button {
+    background-color: #00A3E4;
+    color: #FFFFFF;
+    border: 2px solid #00A3E4;
+    border-radius: 8px;
+}

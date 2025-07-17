@@ -1,0 +1,83 @@
+<h2 mat-dialog-title>
+    <span class="material-icons" style="float: left;">
+        handshake
+    </span>
+    Trabajo colaborativo
+    <button mat-icon-button (click)="closeModal()" style="float: right;">
+        <span class="material-icons">close</span>
+    </button>
+</h2>
+
+<h3>Adicionar usuario</h3>
+<hr>
+<mat-dialog-content>
+    <div class="row" [formGroup]="moduleForm">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt-2">
+            <mat-form-field [ngClass]="{'mat-form-field-invalid': moduleForm.get('idDependenciaTramitador').invalid && moduleForm.get('idDependenciaTramitador').touched}">
+                <mat-label>{{ 'selectDependenciaDes' | translate }}</mat-label>
+                <mat-select id="idDependenciaTramitador" formControlName="idDependenciaTramitador" name="idDependenciaTramitador" (selectionChange)="getListUsuarios($event.value, 'destino')" required>
+                    <mat-option>
+                        <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listDependenciasFilter" [searching]="true"></ngx-mat-select-search>
+                    </mat-option>
+                    <mat-option *ngFor="let dependencia of filteredlistDependencias | async" [value]="dependencia.id">
+                        {{ dependencia.val }}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="!moduleForm.get('idDependenciaTramitador').valid && moduleForm.get('idDependenciaTramitador').touched">{{ 'El campo es obligatorio' | translate }}</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt-2">
+            <mat-form-field [ngClass]="{'mat-form-field-invalid': moduleForm.get('idUsuarioTramitador').invalid && moduleForm.get('idUsuarioTramitador').touched}">
+                <mat-label>{{ 'selectUsuarioDes' | translate }}</mat-label>
+                <mat-select id="idUsuarioTramitador" formControlName="idUsuarioTramitador" name="idUsuarioTramitador" required>
+                    <mat-option>
+                        <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listUsuariosFilter" [searching]="true"></ngx-mat-select-search>
+                    </mat-option>
+                    <mat-option *ngFor="let usuario of filteredlistUsuarios | async" [value]="usuario.id">
+                        {{ usuario.val }}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="!moduleForm.get('idUsuarioTramitador').valid && moduleForm.get('idUsuarioTramitador').touched">{{ 'El campo es obligatorio' | translate }}</mat-error>
+            </mat-form-field>
+        </div>
+        <div  class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-12">
+            <button class="btn btn-success" (click)="trabajoColaborativoService.agregarRegistro(this.radicado_id,moduleForm.get('idUsuarioTramitador').value)">
+                Agregar
+            </button>
+        </div>
+    </div>
+    <h3>Usuarios actuales</h3>
+    <hr>
+    <div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col" style="font-weight: 600;">#</th>
+                    <th scope="col" style="font-weight: 600;">Área</th>
+                    <th scope="col" style="font-weight: 600;">Usuario</th>
+                    <th scope="col" style="font-weight: 600;">Acciones</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="trabajoColaborativoRegistros.length > 0">
+                <tr *ngFor="let registro of trabajoColaborativoRegistros; let i = index">
+                    <th scope="row">{{ i + 1 }}</th>
+                    <td>{{ registro.nombreGdTrdDependencia }}</td>
+                    <td>{{ registro.user_name }}</td>
+                    <td>
+                        <button class="border-0 rounded text-primary"
+                            (click)="trabajoColaborativoService.eliminarRegistro(this.radicado_id,registro.user_id)">
+                            <mat-icon class="pt-1 text-danger">delete</mat-icon>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button class="btn btn-primary"
+        (click)="trabajoColaborativoService.iniciarTrabajoColaborativo(this.radicado_id)">
+        Iniciar Trabajo colaborativo
+    </button>
+</mat-dialog-actions>

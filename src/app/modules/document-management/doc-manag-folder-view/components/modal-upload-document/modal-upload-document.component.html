@@ -1,0 +1,25 @@
+<h4>Cargar documento</h4>
+
+<div class="container">
+
+  <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+    <mat-form-field class="col-md-12 col-lg-12 mt-4">
+      <mat-label>Asunto / Contenido</mat-label>
+      <input type="text" matInput formControlName="descripcion" name="descripcion" id="descripcion" maxlength="100" />
+    </mat-form-field>
+
+    <mat-form-field (click)="inputFile.click()" appearance="fill" class="col-md-12 col-lg-12" style="cursor: pointer;">
+      <mat-label>Seleccione el archivo</mat-label>
+      <input matInput [value]="nameFile" formControlName="fileUpload" placeholder="Seleccione un archivo" readonly
+        style="cursor: pointer;">
+      <input #inputFile type="file" hidden (change)="uploadFile($event)">
+      <!-- accept=".doc .docx" -->
+      <mat-icon matSuffix>attach_file</mat-icon>
+    </mat-form-field>
+
+    <button type="submit" [mat-dialog-close]="true" [disabled]="!updateForm.valid" at-raised-button
+      class="btn btn-success btn-just-icon btn-round buttonIconMenu">
+      <mat-icon>cloud_upload</mat-icon>
+    </button>
+  </form>
+</div>

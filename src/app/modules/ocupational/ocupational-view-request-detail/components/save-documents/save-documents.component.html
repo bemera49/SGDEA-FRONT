@@ -1,0 +1,17 @@
+<form (ngSubmit)="onSubmit()" class="documents-form">
+
+  <div class="flex-between">
+    <app-document-modifiable [document]="documentoOffice" [title]="'Documento propuesto*'" [acceptFile]="'office'"
+      [(valueFile)]="fileOffice" [(stateDownload)]="stateOffice"></app-document-modifiable>
+
+    <ng-container *ngIf="documentoDiagram">
+      <app-document-modifiable [document]="documentoDiagram" [title]="'Diagrama*'" [acceptFile]="'vx'"
+        [(valueFile)]="fileDiagram" [(stateDownload)]="stateDiagrama"></app-document-modifiable>
+    </ng-container>
+  </div>
+
+  <div class="flex-center">
+    <app-button-continue [text]="'Guardar cambios'" [onDisabled]="stateOffice || stateDiagrama"></app-button-continue>
+  </div>
+
+</form>

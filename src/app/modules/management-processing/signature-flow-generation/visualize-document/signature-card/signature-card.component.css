@@ -1,0 +1,13 @@
+.subtitle {
+    font-weight: 500;
+    font-size: 22px;
+    
+}
+
+.even {
+    background-color: rgba(0, 0, 0, 0.05)
+  }
+  
+  .odd {
+    background-color: #fff;
+  }

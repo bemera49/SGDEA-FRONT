@@ -1,0 +1,9 @@
+<div class="select-container">
+  <label id="select-table">
+    <select class="select-meeting" placeholder="Seleccionar" [formControlName]="nameFR" name="select-table"
+      id="select-table">
+      <option *ngFor="let item of data" [value]="item.id"> {{item.nombre}} </option>
+    </select>
+  </label>
+  <img class="icon" src="/assets/img/arrow-down.svg" alt="icon" />
+</div>

@@ -1,0 +1,26 @@
+.title {
+    color: black
+}
+
+.returnaq {
+    margin-bottom: 0px;
+    margin-right: 15px;
+    margin-left: 25px;
+    padding: 0 0 20px 15px;
+}
+
+.returnaq-icon {
+    font-size: 1rem;
+}
+
+.botonvolver {
+    border: none;
+    background: none;
+}
+.image-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+    overflow-y: auto;
+}

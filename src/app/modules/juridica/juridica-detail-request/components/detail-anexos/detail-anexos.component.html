@@ -1,0 +1,61 @@
+<!-- Componente de anexos -->
+<div class="card">
+  <div class="card-body">
+    <form [formGroup]="formDetalleSolicitud">
+      <!-- Tipo de solicitud -->
+      <div class="grid-container">
+        <div class="column">
+          <div class="label">Tipo de solicitud *</div>
+          <mat-form-field appearance="outline" class="input-mata">
+            <mat-select placeholder="Buscar por" formControlName="tipo_solicitud">
+              <mat-option *ngFor="let clasificacion of TypeRequest" [value]="clasificacion">
+                {{clasificacion}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- Detalle de la solicitud -->
+      <div class="label">Detalle de la solicitud *</div>
+      <mat-card class="cuenta-card">
+        <textarea rows="10" cols="10" matInput placeholder="Inserte" formControlName="detalle_solicitud" formControlName="detalle_solicitud"></textarea>
+      </mat-card>
+    </form>
+    <br>
+
+    <!-- Cargar soportes -->
+    <div class="label">Anexos</div>
+    <button mat-button (click)="fileInput.click()" class="styled-button">
+      Seleccionar archivos
+    </button>
+    <input #fileInput type="file" multiple (change)="onFileSelected($event)" class="input-off" />
+
+    <table class="uploaded-files-table styled-table" *ngIf="hasFiles()">
+      <thead>
+        <tr>
+          <th>Nombre anexo</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let file of uploadedFiles; let i = index">
+          <td>{{ file.name }}</td>
+          <td>
+            <button mat-icon-button (click)="deleteFile(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Enviar todo el request -->
+    <div class="save-button-container">
+      <button mat-button class="styled-button save-button" (click)="validApproved()">
+        Guardar
+      </button>
+    </div>
+
+  </div>
+</div>

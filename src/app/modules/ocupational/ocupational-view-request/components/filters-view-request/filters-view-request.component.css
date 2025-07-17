@@ -1,0 +1,22 @@
+.container-filters{
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  column-gap: 83px;
+  row-gap: 41px;
+  margin: 21px 0;
+}
+
+.title-table{
+  font-weight: 600;
+}
+
+.input-mata{
+  width: 325px;
+}
+
+.container-date{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

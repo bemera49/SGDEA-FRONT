@@ -1,0 +1,183 @@
+<div>
+  <app-breadcrumb
+    [breadcrumbOn]="breadcrumbOn"
+    [breadcrumbRouteActive]="breadcrumbRouteActive"
+  ></app-breadcrumb>
+</div>
+
+<div class="container-gestionar-traslado content-main mb-4 px-3">
+  <div class="d-flex flex-column">
+    <h3 class="text-black font-weight-bold">
+      Consultar solicitudes de préstamo de documentos
+    </h3>
+  </div>
+</div>
+
+<div class="container-filters">
+  <form [formGroup]="formConsulta">
+    <div class="inputs">
+      <div class="input">
+        <mat-label>Número SAP o radicado</mat-label>
+        <mat-form-field appearance="outline">
+          <input
+            formControlName="avisoSap"
+            matInput
+            maxlength="12"
+            placeholder="Escriba"
+          />
+        </mat-form-field>
+      </div>
+      <div class="input">
+        <mat-label>Oficina productora</mat-label>
+        <mat-form-field appearance="outline">
+          <mat-select formControlName="ofiProductora" placeholder="Seleccione">
+            <mat-option *ngFor="let item of arrayDependencias" [value]="item">
+              {{ item.codigoGdTrdDependencia }} |
+              {{ item.nombreGdTrdDependencia }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="input">
+        <mat-label>Fecha inicial</mat-label>
+        <div class="input-date">
+          <mat-form-field appearance="outline">
+            <input
+              matInput
+              [matDatepicker]="picker"
+              formControlName="fInicial"
+              placeholder="Seleccione"
+            />
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <button (click)="picker.open()">
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+          </button>
+        </div>
+      </div>
+      <div class="input">
+        <mat-label>Fecha final</mat-label>
+        <div class="input-date">
+          <mat-form-field appearance="outline">
+            <input
+              matInput
+              [matDatepicker]="picker2"
+              formControlName="fFinal"
+              placeholder="Seleccione"
+            />
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+          <button (click)="picker2.open()">
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="picker2"
+            ></mat-datepicker-toggle>
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div
+  class="d-flex flex-row flex-wrap justify-content-end pt-2"
+  style="gap: 15px 15px; padding: 0% 1rem"
+>
+  <button
+    (click)="clean()"
+    mat-stroked-button
+    class="text-primary font-weight-bold border border-primary"
+  >
+    LIMPIAR
+  </button>
+
+  <button
+    (click)="submit()"
+    mat-raised-button
+    class="text-white px-4 bg-primary"
+    aria-label="Example icon-button with a menu"
+  >
+    CONSULTAR
+  </button>
+</div>
+
+<div class="container-table">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">FECHA SOLICITUD</th>
+        <th scope="col">SEMAFORO</th>
+        <th scope="col">TIEMPO TRANSCURRIDO</th>
+        <th scope="col">No. SAP</th>
+        <th scope="col">DEPENDENCIA SOLICITANTE</th>
+        <th scope="col">SERIE</th>
+        <th scope="col">SUBSERIE</th>
+        <th scope="col">UBICACIÓN TOPOGRÁFICA</th>
+        <th scope="col">TIPO DE EXPEDIENTE</th>
+        <th scope="col">No. FOLIOS</th>
+        <th scope="col">NOMBRE SOLICITANTE</th>
+        <th scope="col">ESTADO</th>
+        <th scope="col">VER</th>
+        <th scope="col">VER INVENTARIO</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let item of filteredArray; index as i">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ item.fechaSolicitudGaPrestamoExpediente }}</td>
+        <td style="text-align: center">
+          <i
+            [ngClass]="
+              item.semaforo == 'red'
+                ? 'sem_rojo'
+                : item.semaforo == 'green'
+                ? 'sem_green'
+                : item.semaforo == 'yellow'
+                ? 'sem_yellow'
+                : 'sem_white'
+            "
+            class="material-icons"
+            >notifications</i
+          >
+        </td>
+        <td style="text-align: center">{{ item.tiempoTranscurridodias }}</td>
+        <td>{{ item.numeroSap }}</td>
+        <td>{{ item.dependency }}</td>
+        <td>{{ item.serie }}</td>
+        <td>{{ item.subserie }}</td>
+        <td>{{ item.ubicacionTopologica }}</td>
+        <td>{{ item.loanType }}</td>
+        <td>{{ item.noFolios }}</td>
+        <td>{{ item.user }}</td>
+        <td>
+          {{
+            item.estado === 1
+              ? "Aprobado"
+              : item.estado === null
+              ? "Pendiente"
+              : item.estado === 2
+              ? "Finalizado"
+              : item.estado === 3
+              ? "Prórroga"
+              : "Rechazado"
+          }}
+        </td>
+        <td (click)="viewDetail(item)" style="cursor: pointer">
+          <i class="material-icons">zoom_in</i>
+        </td>
+        <td
+          style="text-align: center; cursor: pointer"
+          (click)="navigateToDetail(item.id)"
+        >
+          <i class="material-icons">inventory</i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

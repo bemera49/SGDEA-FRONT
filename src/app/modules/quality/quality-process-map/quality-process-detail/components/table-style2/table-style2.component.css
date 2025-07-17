@@ -1,0 +1,47 @@
+:host {
+    display: flex;
+    border: 0.063rem solid #E2E2E2;
+    border-radius: 8px !important;
+    padding: 0.75rem;
+    box-sizing: border-box;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: "Poppins", sans-serif;
+    font-size: 0.875rem;
+}
+tr {
+  align-items: center;
+  text-align: left;
+}
+td {
+  align-items: center;
+  text-align: left;
+}
+
+th {
+  background-color: transparent;
+  align-items: center;
+  text-align: left;
+}
+.tablerow2 {
+  border-bottom: 0.063rem solid #E2E2E2;
+  padding: 0em;
+}
+.tablecicon {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.extesionicon{
+  width: 1rem;
+  height: 1rem;
+}
+
+.iconos {
+  padding: 0.2rem;
+  cursor: pointer;
+  color: #6C6B76;
+}

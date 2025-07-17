@@ -1,0 +1,10 @@
+<div class="container-select">
+  <label id="option">{{label}}</label>
+  <mat-radio-group aria-label="Select an option" [formControl]="control">
+    <mat-radio-button [value]="1" class="option">Si</mat-radio-button>
+    <mat-radio-button [value]="0" class="option">No</mat-radio-button>
+  </mat-radio-group>
+  <mat-error *ngIf="control.invalid">
+    <span class="error">Debe seleccionar una opción.</span>
+  </mat-error>
+</div>

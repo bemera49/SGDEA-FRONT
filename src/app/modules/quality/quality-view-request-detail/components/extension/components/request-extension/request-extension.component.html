@@ -1,0 +1,38 @@
+<form [formGroup]="form" (ngSubmit)="confirm()">
+  <app-layout-section [title]="'Solicitud tiempo adicional'">
+    <div class="row  w-100  ">
+      <div class="col-12 mt-2">
+        <mat-form-field appearance="outline">
+          <mat-label>Justificación</mat-label>
+          <textarea disabled [value]="this.justification" matInput></textarea>
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+        <mat-form-field appearance="outline" >
+          <mat-label>Prórroga</mat-label>
+          <input type="number" formControlName="extension"   required matInput>
+          <mat-error *ngIf="form.controls['extension'].invalid &&   form.controls['extension'].touched || form.controls['extension'].invalid">
+            <span class="error">Debe ingresar un número del 1 al 30.</span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Fecha desición de prórroga</mat-label>
+          <input formControlName="extensionDate" type="date" matInput>
+        </mat-form-field>
+      </div>
+      <div class="col-12">
+        <mat-form-field appearance="outline">
+          <mat-label>Observaciones</mat-label>
+          <textarea formControlName="observations" rows="5" type="text" matInput></textarea>
+        </mat-form-field>
+      </div>
+      <div class="col-12 d-flex w-100 justify-content-center my-3">
+        <button type="submit" class="btn bg-primary">Decidir Prórroga</button>
+      </div>
+    </div>
+  </app-layout-section>
+</form>
+
+

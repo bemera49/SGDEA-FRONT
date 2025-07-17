@@ -1,0 +1,43 @@
+<mat-dialog-content class="modal-container">
+  <div class="d-flex flex-row align-items-center justify-content-end">
+    <button mat-icon-button (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <h2 mat-dialog-title class="w-100 mt-2 text-body">{{ data.title }}</h2>
+
+  <div class="text-area">
+    <mat-label>Objetivo/Justificación*</mat-label>
+    <mat-form-field appearance="outline" class="w-100">
+      <textarea
+        matInput
+        placeholder="Escriba"
+        [(ngModel)]="description"
+        maxlength="100"
+        rows="4"
+      ></textarea>
+    </mat-form-field>
+  </div>
+
+  <div
+    class="d-flex flex-row flex-wrap justify-content-end pt-2"
+    style="gap: 15px 15px; padding: 0% 1rem"
+  >
+    <button
+      (click)="close()"
+      mat-stroked-button
+      class="text-primary font-weight-bold border border-primary"
+    >
+      Cancelar
+    </button>
+
+    <button
+      (click)="submit()"
+      mat-raised-button
+      class="text-white px-4 bg-primary"
+      aria-label="Example icon-button with a menu"
+    >
+      Aceptar
+    </button>
+  </div>
+</mat-dialog-content>

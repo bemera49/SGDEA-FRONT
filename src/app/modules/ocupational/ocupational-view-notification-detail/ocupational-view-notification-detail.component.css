@@ -1,0 +1,75 @@
+.text-pdf {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 160px;
+  font-size: 14px;
+}
+
+.button-pdf {
+  border: none;
+  background: none;
+  padding: 0;
+  color: #6c6b76;
+  
+}
+
+.mat-mdc-radio-button ~ .mat-mdc-radio-button {
+  margin-left: 16px;
+}
+
+.gap-40{
+  gap: 40px;
+}
+
+.gap-5{
+  gap: 5px;
+}
+
+
+.strong-tile{
+  font-size: 16px;
+  font-weight: 700;
+  color:#6B737C;
+}
+
+.tipo-documento{
+  width: fit-content;
+  font-size: 18px;
+  font-weight: 400;
+  color: #6C6B76;
+}
+
+.container-pdf{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 280px;
+  margin: 12px 0;
+  padding: 7px;
+  border:1px solid #acacac81;
+  border-radius: 8px;
+}
+
+.container-pdf p{
+  margin: 0;
+}
+.button-diagrama{
+  border: none;
+  text-align: center;
+  width: 147px;
+  background-color: #2a8cdd;
+  color: #fff;
+  padding: .5em;
+  border-radius: 10px;
+}
+
+.container-documents{
+  display: flex;
+  justify-content: flex-start;
+  padding: 0 7px;
+  gap: 394px;
+}
+
+h3 , h4{
+  font-weight: 600;
+}

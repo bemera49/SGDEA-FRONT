@@ -1,0 +1,49 @@
+<app-filters-view-request></app-filters-view-request>
+
+<div class="d-flex justify-content-end mt-3">
+  <button class="btn btn-secondary" type="button" id="exportToExcelButton"
+    style="background-color: #00A3E4; margin-right: 10px;" (click)="downloadFileExcel()">
+    <span style="font-family: 'Arial', sans-serif; font-size: 18px; color: white; text-transform: none;">Exportar a
+      Excel</span>
+  </button>
+</div><br>
+
+<div #dataTable class="table-responsive" *ngIf="itemsTable.length > 0   else message">
+  <table class="table">
+    <thead>
+      <tr>
+        <th *ngFor="let header of headers">
+          {{ header.header }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr *ngFor="let item of itemsTable">
+        <td>
+          <a [routerLink]="['/quality/quality-view-request', item.id]">{{ item.filed }}</a>
+        </td>
+        <td class="items">{{ item.applicant.applicant }}</td>
+        <td class="items">{{ item.date}}</td>
+        <td class="items">{{ item.process}}</td>
+        <td class="items">{{ item.documentary_type}}</td>
+        <td class="items">{{ item.request_type}}</td>
+        <td class="items">{{ item.state}}</td>
+
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+
+<div class="pagination-container">
+  <app-pagination (rechargeTable)="refreshTaskReceived()" [itemsDefault]="itemsPerDefault"></app-pagination>
+</div>
+
+<ng-template #message>
+  <div class="d-flex flex-column justify-content-center align-items-center">
+    <img src="/assets/img/Documents.svg" alt="document" class="img-document" />
+    <strong>019.No se encontraron registros
+      que coincidan con su consulta</strong>
+  </div>
+</ng-template>

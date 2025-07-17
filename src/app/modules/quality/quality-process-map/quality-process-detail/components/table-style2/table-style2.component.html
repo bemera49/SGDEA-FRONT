@@ -1,0 +1,34 @@
+  <ng-container *ngIf="tableType === 'characterization'">
+    <table>
+      <thead>
+        <tr>
+          <th class="w-20% p-6"></th>
+          <th class="w-30% p-6">Nombre</th>
+          <th class="w-20% p-6">#</th>
+          <th class="w-20% p-6"></th>
+        </tr>
+      </thead>
+      <tbody class="">
+        <tr *ngFor="let row of rows" class="tablerow2">
+          <td class="w-20% filatable ">
+            <ng-container [ngSwitch]="row.extesion">
+              <img *ngSwitchCase="'xlsx'" class="mr-4 extesionicon" src="assets/img/logos/excel-icon.svg" alt="Excel Icon">
+              <img *ngSwitchCase="'docx'" class="mr-4 extesionicon" src="assets/img/logos/word-icon.svg" alt="Word Icon">
+              <img *ngSwitchCase="'pptx'" class="mr-4 extesionicon" src="assets/img/logos/powerpoint-icon.svg" alt="PowerPoint Icon">
+            </ng-container>
+          </td>
+          <td class="w-30% filatable">{{ cleanName(row.name, this.characterization.code) }}</td>
+          <td class="w-20% filatable">{{ row.version }}</td>
+          <td class="w-10% filatable tablecicon">
+            <ng-container class="flex container-icons">
+              <img *ngIf="DiagramView === true && diagramdata" src="assets/img/logos/marker.svg" alt="vision Icon"
+                (click)="descargarDocumento(diagramdata.id, diagramdata.original_name )" class="iconos">
+            </ng-container>
+              <i class="material-icons returnaq-icon iconos" (click)="descargarDocumento(row.ID, row.original_name)">{{
+                download }}</i>
+            <i class="material-icons returnaq-icon iconos" (click)="onRowClicked(row.ID)">{{fullscreen}}</i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>

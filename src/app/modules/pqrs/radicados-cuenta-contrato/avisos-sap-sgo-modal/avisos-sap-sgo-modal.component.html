@@ -1,0 +1,19 @@
+<mat-dialog-content class="mat-typography custom-dialog-content">
+    <div class="header">
+      <div class="icon-container">
+        <span class="material-icons">folder</span>
+      </div>
+      <h2>Detalle del Aviso</h2>
+      <button mat-icon-button mat-dialog-close class="close-button">
+        <span class="material-icons">close</span>
+      </button>
+    </div>
+    <div class="content">
+      <p><strong>Respuesta:</strong> {{ aviso.detalle_respuesta }}</p>
+      <p><strong>Estado Actual:</strong> {{ aviso.estado_aviso }}</p>
+      <p><strong>Fecha de Respuesta:</strong> {{ aviso.fecha_respuesta | date }}</p>
+      <p><strong>Usuario:</strong> {{ aviso.usuario }}</p>
+    </div>
+    <button mat-button class="accept-button" (click)="descargarPDF()">Descargar PDF</button>
+  </mat-dialog-content>
+  

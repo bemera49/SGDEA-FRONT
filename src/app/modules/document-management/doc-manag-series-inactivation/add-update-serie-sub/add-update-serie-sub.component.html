@@ -1,0 +1,171 @@
+<mat-dialog-content class="mat-typography">
+
+    <mat-tab-group>
+        <mat-tab label="Información básica">
+            <section class="containerQDetail">
+                <!-- Card datos de contactos -->
+                <div class="contenedorCard">
+
+                    <div class="formulario" [formGroup]="serieSubserieForm">
+                        <div class="row">
+                            <div class="column">
+                                <div class="label">Código de la serie*</div>
+                                <mat-form-field appearance="outline" class="input-mata">
+                                    <input type="number" matInput formControlName="codigoGdTrdSerie">
+                                </mat-form-field>
+                            </div>
+                            <div class="column">
+                                <div class="label">Nombre de la serie*</div>
+                                <mat-form-field appearance="outline" class="input-mata">
+                                    <input type="text" matInput formControlName="nombreGdTrdSerie">
+                                </mat-form-field>
+                            </div>
+                            <div class="column">
+                                <div class="label">Clasificación de seguridad</div>
+                                <mat-form-field appearance="outline" class="input-mata">
+                                    <mat-select formControlName="clasificacion_seguridad">
+                                        <mat-option value="Reservada">Reservada</mat-option>
+                                        <mat-option value="Clasificada">Clasificada</mat-option>
+                                        <mat-option value="Pública">Pública</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div formGroupName="subSeries">
+                            <!-- Identificación Subserie -->
+                            <section class="example-section row">
+                                <div class="column" *ngIf="disableFields">
+                                    <div class="label">Código de la subserie*</div>
+                                    <mat-form-field appearance="outline" class="input-mata">
+                                        <input type="number" matInput formControlName="codigoGdTrdSubserie">
+                                    </mat-form-field>
+                                </div>
+                                <div class="column" *ngIf="disableFields">
+                                    <div class="label">Nombre de la subserie*</div>
+                                    <mat-form-field appearance="outline" class="input-mata">
+                                        <input type="text" matInput formControlName="nombreGdTrdSubserie">
+                                    </mat-form-field>
+                                </div>
+                                <!-- ¿Contiene subseries? -->
+                                <div class="column">
+                                    <div class="label">¿Contiene subseries?</div>
+                                    <mat-radio-group class="example-radio-group" formControlName="contieneSubseries"
+                                        (change)="onContieneSubseriesChange($event.value)">
+                                        <mat-radio-button class="example-margin" [value]="true">Sí</mat-radio-button>
+                                        <mat-radio-button class="example-margin" [value]="false">No</mat-radio-button>
+                                    </mat-radio-group>
+                                </div>
+                            </section>
+
+                            <!-- Retención y Disposición final -->
+                            <div class="row">
+                                <div class="column">
+                                    <div class="card">
+                                        <h3 class="title">Retención</h3>
+                                        <div class="row">
+                                            <div class="column">
+                                                <div class="label">Archivo de gestión*</div>
+                                                <mat-form-field appearance="outline" class="input-mata">
+                                                    <input type="number" matInput
+                                                        formControlName="retencion_archivo_gestion">
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="column">
+                                                <div class="label">Archivo central*</div>
+                                                <mat-form-field appearance="outline" class="input-mata">
+                                                    <input type="number" matInput
+                                                        formControlName="retencion_archivo_central">
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <div class="card">
+                                        <h3 class="title">Disposición final</h3>
+                                        <div class="row">
+                                            <mat-radio-group class="example-radio-group"
+                                                formControlName="disposicion_final">
+                                                <mat-radio-button class="example-margin"
+                                                    [value]="'Conservación total'">Conservación total</mat-radio-button>
+                                                <mat-radio-button class="example-margin"
+                                                    [value]="'Eliminación'">Eliminación</mat-radio-button>
+                                                <mat-radio-button class="example-margin"
+                                                    [value]="'Selección'">Selección</mat-radio-button>
+                                            </mat-radio-group>
+                                            <div>
+                                                <mat-checkbox formControlName="reproduccion_tecnica">Reproducción
+                                                    técnica</mat-checkbox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Observaciones y estado -->
+                            <div class="row">
+                                <div class="column">
+                                    <div class="card">
+                                        <div class="label">Procedimientos *</div>
+                                        <textarea rows="5" cols="70" matInput placeholder="Inserte"
+                                            formControlName="procedimientoGdTrdSubserie"></textarea>
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <div class="label">Estado*</div>
+                                    <mat-form-field appearance="outline" class="input-mata">
+                                        <mat-select formControlName="estadoGdTrdSubserie">
+                                            <mat-option value=10>Activa</mat-option>
+                                            <mat-option value=0>Inactiva</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Botones habilitados para crear serie -->
+                        <div *ngIf="this.config.action == 'create_serie'"
+                            class="buttons d-flex justify-content-center align-items-center">
+                            <button mat-button style="color: #00A3E4;" (click)="onClose()">
+                                <strong>Cancelar</strong>
+                            </button>
+                            <button class="custom-add-button" (click)="createSerie()">
+                                Guardar
+                            </button>
+                        </div>
+
+                        <!-- Botones habilitados para crear subserie -->
+                        <div *ngIf="this.config.action == 'create_subserie'"
+                            class="buttons d-flex justify-content-center align-items-center">
+                            <button mat-button style="color: #00A3E4;" (click)="onClose()">
+                                <strong>Cancelar</strong>
+                            </button>
+                            <button class="custom-add-button" (click)="createSubserie()">
+                                Guardar
+                            </button>
+                        </div>
+
+                        <!-- Botones habilitados para crear editar -->
+                        <div *ngIf="this.config.action == 'editar'"
+                            class="buttons d-flex justify-content-center align-items-center">
+                            <button mat-button style="color: #00A3E4;" (click)="onClose()">
+                                <strong>Cancelar</strong>
+                            </button>
+                            <button class="custom-add-button" (click)="editarSerieSubserie()">
+                                Guardar
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </mat-tab>
+
+        <mat-tab label="Metadatos de contenido" *ngIf="this.config.metadatos">
+            <app-add-metadatos [dataSerie]="this.config.data"></app-add-metadatos>
+        </mat-tab>
+    </mat-tab-group>
+
+
+</mat-dialog-content>

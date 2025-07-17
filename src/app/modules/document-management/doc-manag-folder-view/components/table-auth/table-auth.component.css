@@ -1,0 +1,15 @@
+table {
+  width: 90%;
+  box-shadow: 0px 0px 3px #a99c9c !important;
+}
+
+.highlight-clicked {
+  cursor: pointer;
+  background-color: rgb(174, 219, 235);
+}
+
+/* Cambiar el fondo al pasar el ratón */
+.highlight-hover {
+  cursor: pointer;
+  background-color: rgb(174, 219, 235);
+}

@@ -1,0 +1,521 @@
+{
+    "status": true,
+    "data": {
+        "id": 14,
+        "name": "Direccionamiento estrategico y planeación",
+        "subtitle": "Quae est eum ea.",
+        "code": "MPMA",
+        "from": "1993-04-22",
+        "until": "2018-06-03",
+        "level": "Estratégico",
+        "description": "",
+        "procedure_lead_area": {
+            "area": "",
+            "management": "",
+            "direction": "",
+            "cost_center": "",
+            "area_head": ""
+        },
+        "characterizations": {
+            "id": 114,
+            "documental": "Caracterización",
+            "name": "CARACTERIZACIÓN-Animi modi sint.",
+            "subtitle": "CARACTERIZACIÓN-In laboriosam cumque doloremque et id.",
+            "code": "rl30pm94zn",
+            "version": "1.0",
+            "invoice": 75,
+            "document_date": "1981-02-20",
+            "from": "2001-08-13",
+            "until": "2003-01-05",
+            "notes": "Pariatur delectus incidunt blanditiis. Nihil et quis sunt perferendis sapiente voluptas. Blanditiis et est voluptas omnis. Ut vel delectus soluta tempore.",
+            "description_change": "Tempore quae non culpa id dolorem.",
+            "topic_type": "Tema 3",
+            "description": "CARACTERIZACIÓN",
+            "trd": {
+                "administrative_unit": "",
+                "serie": "ACTAS",
+                "subserie": "Actas de comité",
+                "document_type": "comunicaciones oficiales"
+            },
+            "files": {
+                "id": 13,
+                "original_name": "Doc-MPFD0802F01-03-7 Caracterizacion de procesos.xlsx",
+                "name": "Doc-MPFD0802F01-03-7 Caracterizacion de procesos.xlsx",
+                "path": "calidad/documentos",
+                "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                "extesion": ".xlsx",
+                "size": 48.9,
+                "down_count": 0,
+                "description": "Caracterizacion en Microsoft excel"
+            }
+        },
+        "subprocess": [
+            {
+                "id": 10,
+                "name": "Laborum officia et atque.",
+                "subtitle": "Aut assumenda eligendi tempore.",
+                "code": "MPMA",
+                "from": "2010-01-22",
+                "until": "1996-12-03",
+                "description": "Doloribus unde sed adipisci eveniet autem.",
+                "documents": [
+                    {
+                        "id": 20,
+                        "documental": "Instructivo",
+                        "name": "Velit ratione in.",
+                        "subtitle": "Voluptate voluptatem consequatur dignissimos error officia.",
+                        "code": "mj56ly65fm",
+                        "version": "3.0",
+                        "invoice": 78,
+                        "document_date": "2013-05-18",
+                        "from": "1989-08-23",
+                        "until": "2014-03-26",
+                        "notes": "Similique ad non quis voluptates rerum. Soluta vitae quae soluta aut illum quos alias. Optio fugiat aliquam voluptatem est deleniti quod.",
+                        "description_change": "Natus quo sint quasi soluta velit dolore.",
+                        "topic_type": "Tema 2",
+                        "description": "....",
+                        "trd": {
+                            "administrative_unit": "",
+                            "serie": "ACTAS",
+                            "subserie": "Actas de comité",
+                            "document_type": "actas"
+                        },
+                        "files": {
+                            "id": 81,
+                            "original_name": "Assumenda. de procesos.xlsx",
+                            "name": "Omnis ut. de procesos.xlsx",
+                            "path": "calidad/documentos",
+                            "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                            "extesion": ".xlsx",
+                            "size": 48.9,
+                            "down_count": 0,
+                            "description": "Documento en Microsoft excel"
+                        }
+                    },
+                    {
+                        "id": 26,
+                        "documental": "Instructivo",
+                        "name": "Dolorum neque et quo.",
+                        "subtitle": "At quis unde dolores.",
+                        "code": "sz17ix50lt",
+                        "version": "3.0",
+                        "invoice": 70,
+                        "document_date": "2023-11-05",
+                        "from": "1999-11-05",
+                        "until": "2022-01-24",
+                        "notes": "Deleniti numquam totam voluptatem autem tempora esse qui. Quasi architecto labore et id nihil. Ex magnam dicta voluptas.",
+                        "description_change": "Quae occaecati amet voluptates at nobis dolorem.",
+                        "topic_type": "Tema 3",
+                        "description": "....",
+                        "trd": {
+                            "administrative_unit": "",
+                            "serie": "ACTAS",
+                            "subserie": "Actas de comité",
+                            "document_type": "actas"
+                        },
+                        "files": {
+                            "id": 40,
+                            "original_name": "Aut qui. de procesos.xlsx",
+                            "name": "Magni. de procesos.xlsx",
+                            "path": "calidad/documentos",
+                            "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                            "extesion": ".xlsx",
+                            "size": 48.9,
+                            "down_count": 0,
+                            "description": "Documento en Microsoft excel"
+                        }
+                    }
+                ]
+            },
+            {
+                "id": 32,
+                "name": "Possimus occaecati perspiciatis maxime.",
+                "subtitle": "Quis temporibus dolor.",
+                "code": "deleniti",
+                "from": "1996-09-11",
+                "until": "2007-08-03",
+                "description": "Atque sunt doloremque libero aspernatur et.",
+                "documents": []
+            },
+            {
+                "id": 34,
+                "name": "Vero dolor.",
+                "subtitle": "Ex consequuntur accusamus iusto sed.",
+                "code": "animi",
+                "from": "1979-09-19",
+                "until": "2015-04-11",
+                "description": "Dolor aut nostrum non doloremque exercitationem repellendus.",
+                "documents": [
+                    {
+                        "id": 22,
+                        "documental": "Formato",
+                        "name": "Voluptatem adipisci vero.",
+                        "subtitle": "Repellendus accusamus est fugiat voluptas.",
+                        "code": "am88fj38jd",
+                        "version": "2.0",
+                        "invoice": 8,
+                        "document_date": "2023-06-15",
+                        "from": "1977-01-17",
+                        "until": "2004-11-23",
+                        "notes": "Quasi culpa ducimus magni explicabo nulla dolores ea. Voluptatem placeat quidem autem quis explicabo reprehenderit iusto. Eaque laboriosam accusamus ut excepturi.",
+                        "description_change": "Dolor et quos similique rerum omnis.",
+                        "topic_type": "Tema 2",
+                        "description": "....",
+                        "trd": {
+                            "administrative_unit": "",
+                            "serie": "ACTAS",
+                            "subserie": "Actas de comité",
+                            "document_type": "actas"
+                        },
+                        "files": {
+                            "id": 76,
+                            "original_name": "Quod molestiae. de procesos.xlsx",
+                            "name": "Eligendi pariatur. de procesos.xlsx",
+                            "path": "calidad/documentos",
+                            "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                            "extesion": ".xlsx",
+                            "size": 48.9,
+                            "down_count": 0,
+                            "description": "Documento en Microsoft excel"
+                        }
+                    }
+                ]
+            },
+            {
+                "id": 37,
+                "name": "Voluptatem corporis.",
+                "subtitle": "Placeat ut.",
+                "code": "at",
+                "from": "2008-09-20",
+                "until": "1993-10-21",
+                "description": "Dolores dicta iusto nisi aspernatur et aut.",
+                "documents": [
+                    {
+                        "id": 21,
+                        "documental": "Instructivo",
+                        "name": "Ipsa voluptas.",
+                        "subtitle": "Voluptatem quis harum distinctio et.",
+                        "code": "fx20df65ma",
+                        "version": "2.0",
+                        "invoice": 32,
+                        "document_date": "1989-02-04",
+                        "from": "1978-12-01",
+                        "until": "1982-06-15",
+                        "notes": "Vel dolore corrupti nam hic eum in molestias. Eum iste provident mollitia quis doloremque voluptatem. Quas praesentium enim distinctio porro.",
+                        "description_change": "Amet inventore impedit voluptas.",
+                        "topic_type": "Tema 3",
+                        "description": "....",
+                        "trd": {
+                            "administrative_unit": "",
+                            "serie": "ACTAS",
+                            "subserie": "Actas de comité",
+                            "document_type": "actas"
+                        },
+                        "files": {
+                            "id": 45,
+                            "original_name": "Vel. de procesos.xlsx",
+                            "name": "Sunt. de procesos.xlsx",
+                            "path": "calidad/documentos",
+                            "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                            "extesion": ".xlsx",
+                            "size": 48.9,
+                            "down_count": 0,
+                            "description": "Documento en Microsoft excel"
+                        }
+                    },
+                    {
+                        "id": 55,
+                        "documental": "Formato",
+                        "name": "Aut blanditiis aspernatur.",
+                        "subtitle": "Non ut nulla sit quidem.",
+                        "code": "ga89un46pe",
+                        "version": "3.0",
+                        "invoice": 4,
+                        "document_date": "1972-12-06",
+                        "from": "1984-08-29",
+                        "until": "1971-05-09",
+                        "notes": "Eum nihil necessitatibus corrupti itaque et. Provident qui eius sed autem molestias. Nostrum qui nihil qui quis recusandae.",
+                        "description_change": "Et consequatur quo corporis temporibus.",
+                        "topic_type": "Tema 1",
+                        "description": "....",
+                        "trd": {
+                            "administrative_unit": "",
+                            "serie": "ACTAS",
+                            "subserie": "Actas de comité",
+                            "document_type": "actas"
+                        },
+                        "files": null
+                    }
+                ]
+            },
+            {
+                "id": 52,
+                "name": "Ex consequatur mollitia.",
+                "subtitle": "Quis illo.",
+                "code": "blanditiis",
+                "from": "1985-05-29",
+                "until": "2014-10-07",
+                "description": "Eius eum eos minus quaerat.",
+                "documents": [
+                    {
+                        "id": 34,
+                        "documental": "Formato",
+                        "name": "Ut voluptatibus tempore.",
+                        "subtitle": "Odio ullam quis reprehenderit quidem molestias odio.",
+                        "code": "lj12ik90hg",
+                        "version": "1.0",
+                        "invoice": 49,
+                        "document_date": "2008-07-27",
+                        "from": "2010-10-05",
+                        "until": "1973-04-25",
+                        "notes": "Qui quia deserunt facere ex. Debitis laudantium aut est blanditiis dolores. Quia qui et accusamus nostrum consequatur maxime.",
+                        "description_change": "Error incidunt ex ad.",
+                        "topic_type": "Tema 2",
+                        "description": "....",
+                        "trd": {
+                            "administrative_unit": "",
+                            "serie": "ACTAS",
+                            "subserie": "Actas de comité",
+                            "document_type": "actas"
+                        },
+                        "files": null
+                    },
+                    {
+                        "id": 88,
+                        "documental": "Instructivo",
+                        "name": "Veniam aliquam accusantium.",
+                        "subtitle": "Et voluptatibus iure at ipsam.",
+                        "code": "gb01ov40lq",
+                        "version": "3.0",
+                        "invoice": 7,
+                        "document_date": "2014-04-10",
+                        "from": "2023-01-07",
+                        "until": "2004-06-22",
+                        "notes": "Reprehenderit incidunt ut sunt sed. Fuga accusantium ut sed error aliquam similique. Voluptas saepe quaerat et quia qui.",
+                        "description_change": "Iste reiciendis impedit placeat officiis nesciunt nihil.",
+                        "topic_type": "Tema 2",
+                        "description": "....",
+                        "trd": {
+                            "administrative_unit": "",
+                            "serie": "ACTAS",
+                            "subserie": "Actas de comité",
+                            "document_type": "actas"
+                        },
+                        "files": null
+                    }
+                ]
+            },
+            {
+                "id": 65,
+                "name": "Consectetur culpa itaque dicta.",
+                "subtitle": "Earum enim alias.",
+                "code": "similique",
+                "from": "2004-12-30",
+                "until": "1986-11-21",
+                "description": "Veniam maxime voluptatem alias sapiente ut.",
+                "documents": []
+            },
+            {
+                "id": 99,
+                "name": "Eius veritatis fuga sint.",
+                "subtitle": "Rerum dolor laudantium accusamus.",
+                "code": "nihil",
+                "from": "1994-12-28",
+                "until": "1988-09-27",
+                "description": "Voluptatem exercitationem et mollitia ipsam.",
+                "documents": [
+                    {
+                        "id": 99,
+                        "documental": "Procedimiento",
+                        "name": "CARACTERIZACIÓN-Aut quae non deserunt.",
+                        "subtitle": "CARACTERIZACIÓN-Et ab dolores corrupti ducimus numquam.",
+                        "code": "ow85so06zo",
+                        "version": "1.0",
+                        "invoice": 8,
+                        "document_date": "1999-11-22",
+                        "from": "1977-06-23",
+                        "until": "2012-11-10",
+                        "notes": "Omnis error quia voluptas ducimus architecto. Beatae cupiditate aut sint autem ex nemo quaerat quia. Qui consequuntur officiis omnis est quidem.",
+                        "description_change": "Maiores reiciendis et quos sed odio.",
+                        "topic_type": "Tema 3",
+                        "description": "CARACTERIZACIÓN",
+                        "trd": {
+                            "administrative_unit": "",
+                            "serie": "ACTAS",
+                            "subserie": "Actas de comité",
+                            "document_type": "comunicaciones oficiales"
+                        },
+                        "files": [
+                            {
+                                "id": 26,
+                                "original_name": "Diagrama-MPFD0802F01-03-Caracterizacion de procesos.xlsx",
+                                "description": "Diagrama-MPFD0802F01-03- Caracterizacion de procesos.xlsx",
+                                "path": "calidad/documentos",
+                                "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                                "extesion": ".vsdx",
+                                "size": 48.9,
+                                "down_count": 0,
+                                "name": "Diagrama-MPFD0802F01-03 Caracterizacion en Microsoft excel"
+                            },
+                            {
+                                "id": 27,
+                                "original_name": "Procedimiento-MPFD0802F01-03-Caracterizacion de procesos.xlsx",
+                                "name": "Procedimiento-MPFD0802F01-03- Caracterizacion de procesos.xlsx",
+                                "path": "calidad/documentos",
+                                "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                                "extesion": ".docx",
+                                "size": 48.9,
+                                "down_count": 0,
+                                "description": "Procedimiento-MPFD0802F01-03 Caracterizacion en Microsoft excel"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": 124,
+                "name": "Et officia unde.",
+                "subtitle": "Velit fuga quis.",
+                "code": "reiciendis",
+                "from": "2002-02-13",
+                "until": "1998-03-07",
+                "description": "Inventore dolor quia id reiciendis.",
+                "documents": [
+                    {
+                        "id": 10,
+                        "documental": "Instructivo",
+                        "name": "Aut autem reprehenderit.",
+                        "subtitle": "Nihil impedit debitis quam consequuntur voluptatem sed.",
+                        "code": "ny59ak82jt",
+                        "version": "2.0",
+                        "invoice": 60,
+                        "document_date": "2015-08-03",
+                        "from": "2010-06-27",
+                        "until": "1988-10-25",
+                        "notes": "Et ut id aut asperiores repellendus. Mollitia fugiat deleniti porro. Et aut excepturi perferendis ut animi. Distinctio molestiae alias assumenda explicabo quia aut consectetur.",
+                        "description_change": "Est natus ea vel.",
+                        "topic_type": "Tema 1",
+                        "description": "....",
+                        "trd": {
+                            "administrative_unit": "",
+                            "serie": "ACTAS",
+                            "subserie": "Actas de comité",
+                            "document_type": "actas"
+                        },
+                        "files": {
+                            "id": 77,
+                            "original_name": "Enim. de procesos.xlsx",
+                            "name": "Iusto. de procesos.xlsx",
+                            "path": "calidad/documentos",
+                            "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                            "extesion": ".xlsx",
+                            "size": 48.9,
+                            "down_count": 0,
+                            "description": "Documento en Microsoft excel"
+                        }
+                    }
+                ]
+            },
+            {
+                "id": 160,
+                "name": "Cum voluptatem est cupiditate.",
+                "subtitle": "Ut accusantium amet.",
+                "code": "ut",
+                "from": "1977-12-20",
+                "until": "1988-12-28",
+                "description": "Et possimus non sit hic.",
+                "documents": [
+                    {
+                        "id": 51,
+                        "documental": "Formato",
+                        "name": "Nostrum consequatur dolorum iste.",
+                        "subtitle": "Repudiandae sunt laboriosam ipsa.",
+                        "code": "tp16by75rx",
+                        "version": "3.0",
+                        "invoice": 43,
+                        "document_date": "2017-11-21",
+                        "from": "1975-04-03",
+                        "until": "1999-04-07",
+                        "notes": "Delectus cumque praesentium distinctio cupiditate nulla. Et est sed eius dolorum. Sit et distinctio voluptas qui impedit.",
+                        "description_change": "A est earum omnis.",
+                        "topic_type": "Tema 1",
+                        "description": "....",
+                        "trd": {
+                            "administrative_unit": "",
+                            "serie": "ACTAS",
+                            "subserie": "Actas de comité",
+                            "document_type": "actas"
+                        },
+                        "files": {
+                            "id": 46,
+                            "original_name": "Illo et. de procesos.xlsx",
+                            "name": "Similique. de procesos.xlsx",
+                            "path": "calidad/documentos",
+                            "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                            "extesion": ".xlsx",
+                            "size": 48.9,
+                            "down_count": 0,
+                            "description": "Documento en Microsoft excel"
+                        }
+                    }
+                ]
+            },
+            {
+                "id": 175,
+                "name": "Sit non voluptatem deserunt modi.",
+                "subtitle": "Voluptatum et ullam.",
+                "code": "nisi",
+                "from": "2015-02-01",
+                "until": "1974-10-26",
+                "description": "Voluptates in hic dolorem nostrum accusantium modi repellendus optio.",
+                "documents": []
+            },
+            {
+                "id": 189,
+                "name": "Impedit aspernatur nam.",
+                "subtitle": "Omnis cumque.",
+                "code": "qui",
+                "from": "1985-11-11",
+                "until": "1979-07-31",
+                "description": "Aut vitae rerum qui rerum qui.",
+                "documents": [
+                    {
+                        "id": 36,
+                        "documental": "Formato",
+                        "name": "Et eligendi est autem.",
+                        "subtitle": "Voluptate praesentium ipsam aut qui et.",
+                        "code": "eu70fh49vc",
+                        "version": "1.0",
+                        "invoice": 92,
+                        "document_date": "1993-07-01",
+                        "from": "2001-06-02",
+                        "until": "1998-01-25",
+                        "notes": "Omnis eos laborum ipsum adipisci quia. Iusto in deserunt eligendi voluptas maiores sint non illum.",
+                        "description_change": "Alias consequatur neque commodi at qui.",
+                        "topic_type": "Tema 2",
+                        "description": "....",
+                        "trd": {
+                            "administrative_unit": "",
+                            "serie": "ACTAS",
+                            "subserie": "Actas de comité",
+                            "document_type": "actas"
+                        },
+                        "files": {
+                            "id": 30,
+                            "original_name": "Odio. de procesos.xlsx",
+                            "name": "Earum vero. de procesos.xlsx",
+                            "path": "calidad/documentos",
+                            "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                            "extesion": ".xlsx",
+                            "size": 48.9,
+                            "down_count": 0,
+                            "description": "Documento en Microsoft excel"
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    "message": "success",
+    "token": "Rvn7YIZwhdGCW0SjhF-1fy6o4IAFzC8q_1712515675"
+}

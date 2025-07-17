@@ -1,0 +1,66 @@
+<ng-container *ngIf="process">
+
+  <ng-container [ngSwitch]="getCurrentStep()">
+    <ng-container *ngSwitchCase="1">
+      <section class="pl-5">
+        <header id="headerContainer">
+          <div class="flex pl-2 h-max-68 row mx-2 mb-0">
+            <div class="justify-content-center align-items-center mt-3 mx-3" id='containerheader'>
+              <img class="imagenheader" src="assets/img/logos/detailProcesstitle.svg" alt="Título del proceso" />
+            </div>
+            <div class="flex col justify-content-start">
+              <span class="mb-0 subtituloPAB">Proceso</span>
+              <h3 class="mt-0 titulo-pa titlecomponent font-weight-bold font-size-2">
+                {{ process.code }} - {{ process.name }}
+              </h3>
+            </div>
+          </div>
+        </header>
+
+        <article>
+          <div class="pt-2 pl-3 flex row">
+            <div class="mt-4 ml-3 mr-2" id='containerIcon'>
+              <i class="material-icons returnaq-icon conteicon">{{ Info }}</i>
+            </div>
+            <h3 class="align-content-center titlecomponent font-weight-bold">Información general</h3>
+          </div>
+
+          <div class="p-2 flex row containerselect">
+            <div class="d-flex  mt-3 mx-1" id='containerIcon'>
+              <i class='material-icons returnaq-icon conteicon'>{{ article }}</i>
+            </div>
+
+            <div class="flex justify-content-start contencenter">
+              <span class="flex mb-0 titlecomponent font-weight-bold textspanDescription">Descripción</span>
+              <div class="flex row bg-transparent pb-0 mt-0 containerdes">
+                <div class="btn-circle-custom mx-1" [style.backgroundColor]="'#008ED6'">
+                  <i class="material-icons returnaq-icon" style="color:#F2FBFF; font-size: 1rem;">
+                    {{circle }}</i>
+                </div>
+                <span class="mt-1 textdescription">{{
+                  process.name }}</span>
+              </div>
+            </div>
+
+            <div class="d-flex row justify-content-start">
+              <div class="d-flex justify-content-center align-items-center mt-3 mx-3" id='containerIcon'>
+                <i class="material-icons returnaq-icon conteicon">{{ calendar }}</i>
+              </div>
+              <div class="flex col justify-content-start color-black font-weight-bold">
+                <span class="flex mb-0 titlecomponent font-weight-bold textspanDescription">Vigente desde</span>
+                <div>
+                  <span class="mt-1 dateDescription ">{{process.until}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <app-tree-process [subProcess]="process.subprocess" (showDescription)="onshowDescription()"></app-tree-process>
+
+      </section>
+    </ng-container>
+
+  </ng-container>
+
+</ng-container>

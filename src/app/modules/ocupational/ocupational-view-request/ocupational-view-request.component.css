@@ -1,0 +1,24 @@
+.button-crear{
+  display:flex;
+  align-items: center;
+  height: 44px;
+  width: fit-content;
+  padding: 12px 20px;
+  border:none;
+  border-radius: 12px;
+  gap: 12px; 
+  color: #fff;
+  background-color: #00A3E4;
+}
+
+.button-crear span{
+  display: inline-block;
+  min-width: 77%;
+}
+
+
+.icon-mat{
+  height: 16px;
+  width: 16px;
+  font-size: 20px;
+}

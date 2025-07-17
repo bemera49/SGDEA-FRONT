@@ -1,0 +1,114 @@
+/* Inicio estilos generales */
+.containerQDetail {
+    display: flex;
+    align-items: stretch;
+    height: 100%;
+    width: 100%;
+}
+
+.contenedorCard {
+    margin: 20px auto;
+    padding: 0 2%;
+    max-width: 100%;
+    width: 90%;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.input-mata {
+    width: 100%;
+}
+
+.card {
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.card .row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.example-section {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.example-margin {
+    margin-right: 20px;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.title {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.example-radio-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.buttons-row {
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.buttons-row button {
+    margin: 0 10px;
+}
+
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-add-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #00A3E4;
+    border: 2px solid #00A3E4;
+    /* Aumenta el grosor del borde */
+    border-radius: 8px;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}

@@ -1,0 +1,93 @@
+<!-- En una tabla traemos los profesionales -->
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card text-center">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Nombre Profesional</th>
+                                    <th>Solicitud Asignadas</th>
+                                    <th> Ver </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Le agregamos un checkbox para asignarlo a uno o más profesionales -->
+                                <tr *ngFor="let professional of options">
+                                    <td>
+                                        <mat-checkbox (change)="assignProfessional($event.checked,
+                                            professional)"></mat-checkbox>
+                                    </td>
+                                    <td>{{ professional.nombre_profesional }}</td>
+                                    <td>{{ professional.solicitudes_asignadas }}</td>
+                                    <td>
+                                        <button class="btn btn-primary" (click)="viewProfessional(professional)" [disabled]="professional.solicitudes_asignadas == 0">
+                                            <span class="material-icons blue-eye-icon">visibility</span></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Botones de asignar responsable y devolver -->
+            <div class="" style="display: flex; justify-content: space-evenly;">
+                <div class="">
+                    <button class="btn btn-danger" (click)="returnRequest()">Devolver</button>
+                </div>
+                <div class="">
+                    <button class="btn btn-primary" (click)="assignProfessional2()">Asignar Responsable</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Tabla para visualizar las solicitudes asignadas -->
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card text-center">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th><strong></strong></th>
+                                    <th>RADICADO</th>
+                                    <th>FECHA ASIGNACIÓN</th>
+                                    <th>FECHA RESPUESTA</th>
+                                    <th>RANGO</th>
+                                    <th>TIPO SOLICITUD</th>
+                                    <th>ESTADO</th>
+                                    <th> Ver </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Le agregamos un checkbox para asignarlo a uno o más profesionales -->
+                                <tr *ngFor="let professional of professionalAssignments">
+                                    <td>
+                                        <span class="semaforo" [ngClass]="getColorClass(professional.color)"></span>
+                                    </td>
+                                    <td>{{ professional?.radicado }}</td>
+                                    <td>{{ professional?.fecha_asignacion }}</td>
+                                    <td>{{ professional?.fecha_respuesta}}</td>
+                                    <td>{{ professional?.rango }}</td>
+                                    <td>{{ professional?.tipo_solicitud }}</td>
+                                    <td>{{ professional?.estado }}</td>
+                                    <td>
+                                        <button class="btn btn-primary" (click)="viewProfessional2(professional)" [disabled]="professional.solicitudes_asignadas == 0">
+                                            <span class="material-icons blue-eye-icon">visibility</span></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

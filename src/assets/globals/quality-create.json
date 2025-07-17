@@ -1,0 +1,145 @@
+{
+  "status": true,
+  "data": {
+    "filed": "R2024-000002",
+    "date": "2021-05-05",
+    "applicant": {
+      "id": 1,
+      "user": "SGDA Soporte",
+      "position": null,
+      "management": "",
+      "cost_center": ""
+    },
+    "state": {
+      "id": 1,
+      "nombre": "En trámite"
+    },
+    "level": [
+      {
+        "id": 1,
+        "nombre": "Estratégico"
+      },
+      {
+        "id": 2,
+        "nombre": "Misional"
+      },
+      {
+        "id": 3,
+        "nombre": "Facilitadores"
+      },
+      {
+        "id": 4,
+        "nombre": "De Evaluación"
+      }
+    ],
+    "process": [
+      {
+        "id": 1,
+        "nombre": "At aut quo voluptatem."
+      },
+      {
+        "id": 2,
+        "nombre": "Rerum similique perspiciatis cupiditate."
+      },
+      {
+        "id": 3,
+        "nombre": "Eligendi odio est vero."
+      },
+      {
+        "id": 4,
+        "nombre": "Et eligendi quia."
+      },
+      {
+        "id": 5,
+        "nombre": "Doloremque iusto et."
+      },
+      {
+        "id": 6,
+        "nombre": "Deleniti sapiente suscipit."
+      },
+      {
+        "id": 7,
+        "nombre": "Asperiores optio dolores earum."
+      },
+      {
+        "id": 8,
+        "nombre": "Id laudantium maiores consequatur."
+      },
+      {
+        "id": 9,
+        "nombre": "Necessitatibus illum et."
+      },
+      {
+        "id": 10,
+        "nombre": "Ut sit aperiam accusamus."
+      },
+      {
+        "id": 11,
+        "nombre": "Quidem ut velit."
+      },
+      {
+        "id": 12,
+        "nombre": "Alias ipsum voluptas quis itaque."
+      },
+      {
+        "id": 13,
+        "nombre": "Ullam ipsa molestias blanditiis."
+      },
+      {
+        "id": 14,
+        "nombre": "Velit nostrum ipsam non."
+      },
+      {
+        "id": 15,
+        "nombre": "Molestiae facilis est."
+      },
+      {
+        "id": 16,
+        "nombre": "In fugiat asperiores."
+      },
+      {
+        "id": 17,
+        "nombre": "Inventore assumenda ut."
+      },
+      {
+        "id": 18,
+        "nombre": "Nostrum ut omnis voluptas."
+      }
+    ],
+    "sub_process": null,
+    "documentary_type": [
+      {
+        "id": 1,
+        "nombre": "Caracterización"
+      },
+      {
+        "id": 2,
+        "nombre": "Procedimiento"
+      },
+      {
+        "id": 3,
+        "nombre": "Instructivo"
+      },
+      {
+        "id": 4,
+        "nombre": "Formato"
+      }
+    ],
+    "privacy": [
+      {
+        "id": 1,
+        "nombre": "Público externo"
+      },
+      {
+        "id": 2,
+        "nombre": "Público interno"
+      },
+      {
+        "id": 3,
+        "nombre": "Restringido"
+      }
+    ]
+  },
+  "message": "success",
+  "token": "HgYsmzEEXvFqMShoO-MipI1NpeBP7DCG_1712710109"
+}

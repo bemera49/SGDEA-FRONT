@@ -1,0 +1,17 @@
+<section class="containerQDetail">
+
+  <div class="pantallaA-full" [ngClass]="{'pantallaA': mostrarPantallaB}">
+    <app-screen-one></app-screen-one> <!-- Pantalla A -->
+  </div>
+
+  <button (click)="togglePantallaB()" class="btn btn-circle-custom"
+    [style.backgroundColor]="mostrarPantallaB ? '#008ED6' : '#008ED6'">
+    <i class="material-icons returnaq-icon" [style.color]="mostrarPantallaB ? '#ffffff' : '#ffffff'">{{ mostrarPantallaB
+      ? 'keyboard_arrow_right' : 'keyboard_arrow_left' }}</i>
+  </button>
+
+  <div class="pantallab" *ngIf="mostrarPantallaB" style="flex: 1;">
+    <app-screen-two></app-screen-two>
+  </div>
+
+</section>

@@ -1,0 +1,28 @@
+.date-container {
+    position: relative;
+    display: inline-block;
+}
+
+.date-picker-meeting {
+    position: relative;
+    width: 180px;
+    height: 34px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid #E2E2E2;
+    line-height: 12px;
+    background-color: #fff;
+}
+
+.icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 15.16px;
+    height: 14.35px;
+}
+
+.select-meeting:required {
+    border: 1px solid #e41212;
+}

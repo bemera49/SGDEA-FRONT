@@ -1,0 +1,69 @@
+<mat-tab-group>
+  <!--TAB 1-->
+  <mat-tab label="Solicitud">
+    <form [formGroup]="SolicitudFormGroup">
+      <app-layout-section [title]="'Solicitud'">
+        <div class="row ">
+          <div class="col-md-6" *ngFor="let data of dataInformation">
+            <app-row-information [label]="data.label" [info]="data.value"></app-row-information>
+          </div>
+        </div>
+      </app-layout-section>
+
+      <app-layout-section [title]="'Selección multiple'">
+        <strong class="strong-tile">La solicitud aplica a</strong>
+        <p class="tipo-documento text-muted">hola</p>
+      </app-layout-section>
+      <app-layout-section [title]="'Nuevos documentos'">
+        <strong class="strong-tile">Documento propuesto</strong>
+        <div class="container-pdf">
+          <div class="d-flex">
+            <img src="/assets/img/pdf-icon.svg" alt="icon">
+            <p>Nombredearchivo.pdf</p>
+          </div>
+          <div class="d-flex">
+            <mat-icon aria-hidden="false" aria-label=" visibility icon" fontIcon="visibility">visibility</mat-icon>
+            <mat-icon aria-hidden="false" aria-label=" arrow_downward icon"
+              fontIcon="arrow_downward">arrow_downward</mat-icon>
+          </div>
+        </div>
+        <strong class="strong-tile">Diagrama</strong>
+        <div>
+          <mat-icon aria-hidden="false" aria-label=" visibility icon" fontIcon="link">link</mat-icon>
+          <a href="docuemntos">https://ejemplo.com.co</a>
+        </div>
+      </app-layout-section>
+
+    </form>
+  </mat-tab>
+
+  <ng-container *ngIf="'Rechazado'; else valida">
+    <mat-tab label="Documento propuesto">
+      <app-layout-section [title]="'Ver detalles +'">
+        <div class="d-flex flex-column justify-content-center align-items-center">
+          <img src="assets/img/platilla-diagrama.png" alt="diagrama" />
+          <button mat-raised-button class="text-white bg-primary m-5">Diagrama</button>
+        </div>
+      </app-layout-section>
+    </mat-tab>
+
+    <ng-container *ngIf="'Varios documentos'">
+      <mat-tab label="Documentos adicionales">
+        <app-table-da [dataTable]="request.ducumentos"></app-table-da>
+        <div class="w-100 d-flex justify-content-center mt-5 gap-5">
+          <button mat-raised-button class="text-white bg-primary">Solicitar</button>
+          <button mat-button class="border border-primary text-primary">Cancelar</button>
+        </div>
+      </mat-tab>
+    </ng-container>
+    <mat-tab label="Plan de análisis">
+      <app-tab-analysis-plan></app-tab-analysis-plan>
+    </mat-tab>
+
+  </ng-container>
+  <ng-template #valida>
+    <!-- el desarrollo de esta vista se explica en el HU-10 -->
+    <mat-tab label="Validación"></mat-tab>
+  </ng-template>
+
+</mat-tab-group>

@@ -1,0 +1,30 @@
+.container-documents{
+  max-width: 540px;
+  min-height: 100%;
+  padding: .6em;
+  border-radius: 7px;
+  border: 1px solid rgb(202, 198, 198);
+ 
+}
+.documento-title{
+  margin: 0;
+  font-size: 16px;
+}
+
+.documents-container{
+  display: flex;
+  gap: 14px;
+}
+
+.documents-container div{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.description{
+  background: none;
+  border: none;
+  text-decoration: underline;
+  color: hsl(199, 100%, 53%);
+}

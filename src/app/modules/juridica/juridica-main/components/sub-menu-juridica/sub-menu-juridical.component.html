@@ -1,0 +1,13 @@
+<nav class="nav-juridical">
+  <menu class="menu-juridical">
+    <li><a href="">Inicio</a></li>
+    <li><span>/</span></li>
+    <li><a href="">Jurídica</a></li>
+    <li><span>/</span></li>
+    <ng-container *ngFor="let item of ItemsMenu">
+      <li><a [routerLink]="['/juridical/',item.link]" routerLinkActive="router-link-active-juridical">{{item.text}}</a>
+      </li>
+      <li><span>/</span></li>
+    </ng-container>
+  </menu>
+</nav>

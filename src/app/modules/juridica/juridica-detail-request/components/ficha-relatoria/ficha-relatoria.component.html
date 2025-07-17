@@ -1,0 +1,160 @@
+<!-- Componente de anexos -->
+<div class="card">
+    <div class="card-body">
+        <form [formGroup]="formFichaRelatoria">
+            <!--No se modifica-->
+            <div class="grid-container" hidden> <!-- Oculto -->
+                <div class="column">
+                    <div class="label">Id Concepto</div>
+                </div>
+                <div class="column">
+                    <mat-form-field appearance="outline" class="input-mata" disabled>
+                        <input type="text" matInput value={{idConcepto}} formControlName="idConcepto">
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <!--No se modifica-->
+            <div class="grid-container">
+                <div class="column">
+                    <div class="label">Fecha</div>
+                </div>
+                <div class="column">
+                    <mat-form-field appearance="outline" class="input-mata" disabled>
+                        <input matInput formControlName="fechaConcepto">
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <!--No se modifica-->
+            <div class="grid-container">
+                <div class="column">
+                    <div class="label">Abogado</div>
+                </div>
+                <div class="column">
+                    <mat-form-field appearance="outline" class="input-mata" disabled>
+                        <input type="text" matInput value={{abogado}} formControlName="abogado">
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <!-- Se modifica-->
+            <div class="grid-container">
+                <div class="column">
+                    <div class="label">Clasificación *</div>
+                </div>
+                <div class="column">
+                    <mat-form-field appearance="outline" class="input-mata">
+                        <mat-select placeholder="Buscar por" formControlName="idClasificacion"
+                            (selectionChange)="getSubClasificacionRelatoria()">
+                            <mat-option *ngFor="let clasificacion of dataClasificacionRelatoria"
+                                [value]="clasificacion.id">
+                                {{clasificacion.descripcion}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <!-- Se modifica-->
+            <div class="grid-container">
+                <div class="column">
+                    <div class="label">Subclasificación *</div>
+                </div>
+                <div class="column">
+                    <mat-form-field appearance="outline" class="input-mata">
+                        <mat-select placeholder="Buscar por" formControlName="idSubClasificacion">
+                            <mat-option *ngFor="let subClasificacion of dataSubClasificacionRelatoria"
+                                [value]="subClasificacion.id">
+                                {{subClasificacion.descripcionSubClasificacion}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <!-- Se modifica-->
+            <div class="grid-container">
+                <div class="column">
+                    <div class="label">Problema jurídico *</div>
+                </div>
+                <div class="column">
+                    <mat-card class="cuenta-card">
+                        <textarea rows="5" cols="70" matInput placeholder="Inserte"
+                            formControlName="problemaJuridico"></textarea>
+                    </mat-card>
+                </div>
+            </div>
+
+            <!-- Se modifica-->
+            <div class="grid-container">
+                <div class="column">
+                    <div class="label">Respuesta *</div>
+                </div>
+                <div class="column">
+                    <mat-card class="cuenta-card">
+                        <textarea rows="5" cols="70" placeholder="Máscara de nombrado" matInput placeholder="Inserte"
+                            formControlName="respuestaProblemaJuri"></textarea>
+                    </mat-card>
+                </div>
+            </div>
+
+            <!-- Se modifica-->
+            <div class="grid-container">
+                <div class="column">
+                    <div class="label">Descriptor *</div>
+                </div>
+                <div class="column">
+                    <mat-form-field appearance="outline" class="input-mata">
+                        <mat-select placeholder="Buscar por" formControlName="idDescriptor">
+                            <mat-option *ngFor="let descriptor of dataDescriptoresRelatoria" [value]="descriptor.id">
+                                {{descriptor.descripcion}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <!-- Se modifica-->
+            <div class="grid-container">
+                <div class="column">
+                    <div class="label">Restrictor *</div>
+                </div>
+                <div class="column">
+                    <mat-form-field appearance="outline" class="input-mata">
+                        <mat-select placeholder="Buscar por" formControlName="idRestrictor">
+                            <mat-option *ngFor="let restrictor of dataRestrictoresRelatoria" [value]="restrictor.id">
+                                {{restrictor.descripcion}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="buttons-relatoria">
+                <button type="button" class="btn btn-primary search-concept-btn" (click)="toggleSearchConcept()">
+                    <span class="material-icons">find_in_page</span> Buscar concepto
+                </button>
+
+                <button *ngIf="!this.idFichaRelatoria" (click)="validApproved()"
+                    class="btn btn-primary search-concept-btn" type="submit">Guardar
+                    ficha</button>
+                <button *ngIf="this.idFichaRelatoria" (click)="updatefichaRelatoria()"
+                    class="btn btn-primary search-concept-btn" type="submit">Editar</button>
+            </div>
+
+        </form>
+
+        <div class="overlay" [class.open]="viewConcepts">
+            <div class="content">
+                <app-search-concept></app-search-concept>
+            </div>
+            <!-- Botón para cerrar el componente de búsqueda -->
+            <button class="btn btn-close-overlay" (click)="toggleSearchConcept()">
+                <i class="material-icons">close</i>
+            </button>
+        </div>
+
+
+    </div>
+</div>

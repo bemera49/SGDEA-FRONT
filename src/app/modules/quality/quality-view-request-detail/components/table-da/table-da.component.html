@@ -1,0 +1,72 @@
+<app-layout-section>
+  <div class="d-flex flex-column mt-4 ">
+    <h3 class="text-black font-weight-bold">Documentos adicionales</h3>
+  </div>
+  <div>
+    <div class="container-table">
+      <table class="table">
+        <thead>
+          <ng-container *ngFor="let item of headers">
+            <th *ngIf="!item.action">{{ item.name }}</th>
+            <th *ngIf="item.action">
+              <button type="button" class="button-table add-items">+</button>
+            </th>
+          </ng-container>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of dataTable; let i = index">
+            <th scope="row">
+              <button (click)="deleteAditionalDocument(item.id)" class="button-table remove-items"
+                type="button">-</button>
+            </th>
+            <td>{{item.document_file.name}}</td>
+            <td>{{item.documentary_type}}</td>
+            <td>{{item.request_type}}</td>
+            <td>{{item.justification}}</td>
+            <td *can="['calidad%consultar%solicitudes%tramitadas']">
+              <app-download-doc
+                [fileDoc]="item.document_file"
+                [idDoc]="item.document_file.id"></app-download-doc>
+            </td>
+            <!-- <td *can="['calidad%analista%MapaProcesos']">
+              <app-download-doc [fileDoc]="item.document_file" [idDoc]="item.document_file.id"></app-download-doc>
+            </td> -->
+            <td *can="['calidad%analista%MapaProcesos']">
+              <app-document-modifiable
+                [idTask]="idTipeTask"
+                [document]="item.document_file"
+                [title]="''"
+                [acceptFile]="'office'"
+                [(valueFile)]="multipleFile[i].proposed_document"></app-document-modifiable>
+            </td>
+            <td>
+              <button *ngIf="taskId === 6 && !canEditMetadata ||taskId === 7 && !canEditMetadata || idTipeTask == 19 "
+                (click)="editMetadata(item.id)" class="btn btn-primary rounded-4">Editar metadata</button>
+            </td>
+            <td *ngIf="item.sgc_tipo_tarea_id === 9">
+              <button
+                (click)="openModal(item.id)"
+                mat-raised-button
+                class="text-white px-4 bg-primary"
+                aria-label="Example icon-button with a menu"
+                style="border: none; border-radius: 4px; height: 42px"
+                [disabled]="botonesDeshabilitados[item.id]">
+                Solicitar publicación
+              </button>
+            </td>
+
+          </tr>
+
+        </tbody>
+      </table>
+
+    </div>
+    <div *ngIf="idTipeTask == 19">
+      <app-button-continue
+        (click)="onSubmit()"
+        *can="['calidad%analista%MapaProcesos']"
+        [text]="'Guardar cambios'"
+        [onDisabled]="true"></app-button-continue>
+    </div>
+  </div>
+</app-layout-section>

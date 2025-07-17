@@ -1,0 +1,17 @@
+<section class="px-3">
+  <app-sub-menu-quality [ItemsMenu]="items"></app-sub-menu-quality>
+
+  <div class="d-flex flex-row justify-content-between">
+    <h2 class="font-weight-bold">Solicitudes</h2>
+    <button *can="['calidad%solicitar%creación%modificación%eliminación%documentos']"
+      [routerLink]="'/quality/quality-create-request'" class="button-crear">
+      <mat-icon class="icon-mat">add</mat-icon>
+      <span>Crear solicitud</span>
+    </button>
+  </div>
+
+  <article class="border border-2 rounded-lg p-5  my-3 mat-elevation-z1">
+    <app-table-request></app-table-request>
+  </article>
+
+</section>

@@ -1,0 +1,48 @@
+<app-layout-section>
+  <form (ngSubmit)="onSubmit()">
+    <div class="container-table">
+      <table>
+        <thead>
+          <ng-container *ngFor="let item of headers">
+            <th *ngIf="!item.action">{{item.name}}</th>
+            <th *ngIf="item.action">
+              <button type="button" class="button-table add-items">+</button>
+            </th>
+          </ng-container>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let item of dataTable; let i = index" class="tr-da">
+            <td>
+              <button class="button-table remove-items" type="button">-</button>
+            </td>
+            <td>
+              <app-text-meetings [text]="item.document_file.name"></app-text-meetings>
+            </td>
+            <td>
+              <app-text-meetings [text]="item.documentary_type"></app-text-meetings>
+            </td>
+            <td>
+              <app-text-meetings [text]="item.request_type"></app-text-meetings>
+            </td>
+            <td>
+              <app-text-meetings [text]="item.justification"></app-text-meetings>
+            </td>
+
+            <td *can="['calidad%consultar%solicitudes%tramitadas']">
+              <app-download-doc [fileDoc]="item.document_file" [idDoc]="item.document_file.id"></app-download-doc>
+            </td>
+
+            <td *can="['calidad%analista%MapaProcesos']">
+              <app-document-modifiable [document]="item.document_file" [title]="''" [acceptFile]="'office'"
+                [(valueFile)]="multipleFile[i].proposed_document"></app-document-modifiable>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <app-button-continue *can="['calidad%analista%MapaProcesos']" [text]="'Guardar cambios'"
+      [onDisabled]="true"></app-button-continue>
+  </form>
+</app-layout-section>

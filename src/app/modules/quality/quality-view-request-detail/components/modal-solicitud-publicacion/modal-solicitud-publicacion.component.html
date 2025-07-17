@@ -1,0 +1,106 @@
+<mat-dialog-content  *ngIf="infoData" class="modal-container">
+  <div class="d-flex flex-row align-items-center justify-content-end">
+    <button mat-icon-button (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <h2 mat-dialog-title class="w-100 mt-2 text-body">
+    Solicitud publicación SIDEAP
+  </h2>
+  <p>Diligencia los campos para solicitar la publicacion del documento.</p>
+  <div class="container-field">
+    <!-- Numero radicado y Tipo de solicitud -->
+    <div class="input-group">
+      <div class="input">
+        <label>Número de radicado</label>
+        <p>{{ infoData.radicade }}</p>
+      </div>
+      <div class="input">
+        <label>Tipo de solicitud</label>
+        <p>{{ infoData.solicitudeType }}</p>
+      </div>
+    </div>
+    <!-- Nombre del documento -->
+    <div class="input">
+      <label>Nombre del documento</label>
+      <p>{{ infoData.documentName }}</p>
+    </div>
+    <!-- Codigo del documento y gerencia -->
+    <div class="input-group">
+      <div class="input">
+        <label>Código del documento</label>
+        <p>
+          {{ infoData.documentCode === null ? "N/A" : infoData.documentCode }}
+        </p>
+      </div>
+      <div class="input">
+        <label>Gerencia</label>
+        <p>{{ infoData.gerency }}</p>
+      </div>
+    </div>
+    <!-- Direccion -->
+    <div class="input">
+      <label>Dirección/División/Oficina</label>
+      <p>{{ infoData.officeAddress }}</p>
+    </div>
+  </div>
+  <div class="container-form">
+    <form [formGroup]="formSolicitud">
+      <div class="input">
+        <label>Correo para envio*</label>
+        <input formControlName="email" type="text" />
+      </div>
+      <div class="input">
+        <label>Cargar PDF*</label>
+        <div class="file-input-container">
+          <input
+            type="file"
+            (change)="onFileChange($event)"
+            #fileInput
+            style="display: none"
+          />
+          <span *ngIf="formSolicitud.get('file').value">
+            {{ formSolicitud.get("file").value.name }}
+          </span>
+          <button (click)="fileInput.click()" class="btn-file">
+            <mat-icon>attach_file</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div class="input">
+        <label>Observaciones*</label>
+        <input formControlName="observations" type="text" />
+      </div>
+    </form>
+  </div>
+
+  <div class="container-buttons">
+    <button
+      (click)="close()"
+      mat-stroked-button
+      class="text-primary font-weight-bold border border-primary"
+    >
+      Cancelar
+    </button>
+
+    <button
+      (click)="submit()"
+      mat-raised-button
+      class="text-white px-4 bg-primary"
+      aria-label="Example icon-button with a menu"
+    >
+      Solicitar
+    </button>
+  </div>
+</mat-dialog-content>
+<ng-container *ngIf="!infoData">
+  Error al cargar la data
+  <button
+  (click)="closeDialog()"
+  mat-stroked-button
+  class="text-primary font-weight-bold border border-primary"
+>
+  Cerrar
+</button>
+</ng-container>
+

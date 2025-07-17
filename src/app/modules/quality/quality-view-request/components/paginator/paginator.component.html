@@ -1,0 +1,35 @@
+<div *can="['calidad%consultar%solicitudes%tramitadas']" class="flex-align-items container-paginator">
+
+  <div class="container-row">
+    <p class="m-0">Filas por pagina</p>
+    <div class="flex-align-items container-select">
+      <mat-form-field appearance="outline" class="select-paginator">
+        <mat-select [(value)]="initPerPages">
+          <mat-option *ngFor="let row of rowPages" [value]="row" (click)="setCurrenRowPages(row)">{{row}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="flex-align-items container-items">
+    <button class="button-pagination" (click)="left()">
+      <mat-icon class="row" class="icon-row" aria-hidden="false" aria-label="chevron_left"
+        fontIcon="chevron_left">chevron_left</mat-icon>
+    </button>
+    <ul class="flex-align-items container-pages">
+      <li *ngFor="let item of pages">
+        <button class="button-pagination" (click)="setCurrentPages(item)"
+          [ngClass]="{'button-pagination-active': item  === currentPages }">{{item}}</button>
+      </li>
+    </ul>
+    <button class="button-pagination" (click)="right()">
+      <mat-icon class="row" class="icon-row" aria-hidden="false" aria-label="navigate_next"
+        fontIcon="navigate_next">navigate_next</mat-icon>
+    </button>
+  </div>
+
+  <button class="button-update" (click)="onUpdate()">
+    <mat-icon class="row" class="icon-row" aria-hidden="false" aria-label="autorenew"
+      fontIcon="autorenew">autorenew</mat-icon>
+  </button>
+</div>

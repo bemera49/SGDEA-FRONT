@@ -1,0 +1,86 @@
+<table>
+  <thead>
+    <ng-container *ngFor="let item of headersItems">
+      <th *ngIf="!item.action" class="title">{{item.name}}</th>
+      <th *ngIf="item.action">
+        <button type="button" class="button-table add-items" (click)="onAddItem()">+</button>
+      </th>
+    </ng-container>
+  </thead>
+
+  <ng-content></ng-content>
+  <!--  <tbody formArrayName="multiple_file">
+    
+        <tr *ngFor="let item of multipleFile.controls; let i = index" class="tr-da" [formGroupName]="i">
+
+          <td>
+            <button type="button" class="button-table remove-items" (click)="onRemoveItem(i)">-</button>
+          </td>
+
+          <td>
+            <mat-form-field appearance="outline" class="inputs">
+              <mat-label>Nombre del documento</mat-label>
+              <input matInput formControlName="name" placeholder="Número de radicado" maxlength="200">
+              <mat-error *ngIf="formGroupProps.get('multiple_file').get(i.toString()).get('name').invalid">
+                El campo es requerido.
+              </mat-error>
+            </mat-form-field> 
+
+          </td>
+          <td>
+
+            <mat-form-field appearance="outline" class="inputs">
+              <mat-label>Tipo documental</mat-label>
+              <mat-select formControlName="documentary_type">
+                <mat-option *ngFor="let item of documentaryType " [value]="item.id">{{item.nombre}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="formGroupProps.get('multiple_file').get(i.toString()).get('documentary_type').invalid">
+                El campo es requerido.
+              </mat-error>
+            </mat-form-field>
+
+          </td>
+
+          <td>
+
+            <mat-form-field appearance="outline" class="inputs">
+              <mat-label>Tipo solicitud</mat-label>
+              <mat-select formControlName="request_type">
+                <mat-option *ngFor="let item of requestType" [value]="item.id">{{item.nombre}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="formGroupProps.get('multiple_file').get(i.toString()).get('request_type').invalid">
+                El campo es requerido.
+              </mat-error>
+            </mat-form-field>
+
+          </td>
+
+          <td>
+
+            <mat-form-field appearance="outline" class="inputs">
+              <mat-label>Justificación</mat-label>
+              <input matInput formControlName="justification" placeholder="Número de radicado" maxlength="2000">
+              <mat-error *ngIf="formGroupProps.get('multiple_file').get(i.toString()).get('justification').invalid">
+                El campo es requerido.
+              </mat-error>
+            </mat-form-field>
+
+          </td>
+          <td>
+
+            <mat-form-field (click)="inputFile.click()" appearance="fill" class="inputs" style="cursor: pointer;">
+              <mat-label>Documento propuesto</mat-label>
+              <input matInput formControlName="proposed_document" [value]="nameFile[i]"
+                placeholder="Seleccione un archivo" readonly style="cursor: pointer;">
+              <input #inputFile type="file" hidden (change)="uploadFile($event,i)">
+              <mat-icon matSuffix>attach_file</mat-icon>
+            </mat-form-field>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="d-flex flex-wrap align-items-center justify-content-center mt-4" style="gap: 10px 30px;">
+      <app-button-continue *ngIf="formGroupProps.get('solicitudAplica').value === 1 " [text]="'Solicitar'"
+        [onDisabled]="formGroupProps.valid && getItems()"></app-button-continue>
+    </div>  -->

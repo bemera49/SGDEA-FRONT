@@ -1,0 +1,38 @@
+<div class="flex-align-items container-paginator">
+  <!-- Input rows -->
+  <div class="container-row">
+    <span class="m-0" style="color: #2c3948; font-weight: bold;"> <strong>Filas por página</strong></span>
+    <div [formGroup]="formPaginator" class="flex-align-items container-select">
+      <mat-form-field appearance="outline" class="select-paginator">
+        <input type="number" matInput formControlName="itemsPerPage" class="input-paginator">
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="flex-align-items container-items">
+    <!-- Arrow reverse -->
+    <button class="button-pagination" (click)="previousPage()">
+      <mat-icon aria-hidden="false" aria-label="chevron_left" fontIcon="chevron_left"></mat-icon>
+    </button>
+
+    <!-- Item especifico -->
+    <ul class="flex-align-items container-pages">
+      <li *ngFor="let page of visiblePages; let i = index">
+        <button class="button-pagination" [ngClass]="{'button-pagination-active': currentPage === page - 1 }"
+          (click)="goToPage(page)">
+          {{ page }}
+        </button>
+      </li>
+    </ul>
+
+    <!-- Arrow next -->
+    <button class="button-pagination" (click)="nextPage()">
+      <mat-icon aria-hidden="false" aria-label="navigate_next" fontIcon="navigate_next"></mat-icon>
+    </button>
+  </div>
+
+  <!-- button update -->
+  <button type="submit" class="button-update" (click)="rechargeTaskReceived()">
+    <mat-icon aria-hidden="false" aria-label="autorenew" fontIcon="autorenew">autorenew</mat-icon>
+  </button>
+</div>

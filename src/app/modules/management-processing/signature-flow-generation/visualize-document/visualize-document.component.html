@@ -1,0 +1,59 @@
+<div style="width: 90%; margin: 0 auto;">
+    <button mat-button (click)="goBack()" style="width: 150px">
+    <mat-icon>chevron_left</mat-icon>Volver
+    </button>
+    <h3 class="title-page">Flujo de firma de documentos</h3>
+    <h4>Seleccionar posicion de firmantes</h4>
+    <div style="width: 100%; display: flex; justify-content: flex-end;">
+        <button mat-button class="bg-primary text-white m-4" (click)="crearFlujo()" >Crear flujo de firma</button>
+    </div>
+</div>
+
+<form [formGroup]="formFecha"  style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; padding: 16px;  width: 90%; margin: 0 auto; border: 1px solid #E2E2E2; border-radius: 20px; margin: 0 auto; background: white; margin-bottom: 40px;">
+    <span style="grid-column: 0 / 3;">
+        <label>Asunto </label>
+        <mat-form-field appearance="outline">
+            <input type="text" matInput placeholder="Ingrese" formControlName="asunto">
+            <mat-error *ngIf="rest$.isError(formFecha, 'asunto', 'required')">
+                Este campo es requerido
+            </mat-error>
+        </mat-form-field>
+    </span>
+
+    <span>
+        <label>Proyector </label>
+        <mat-form-field appearance="outline">
+            <input type="text" matInput placeholder="Ingrese" formControlName="proyector">
+            <mat-error *ngIf="rest$.isError(formFecha, 'proyector', 'required')">
+                Este campo es requerido
+            </mat-error>
+        </mat-form-field>
+
+       
+    </span>
+
+    <span>
+        <label>Fecha límite *</label>
+        <mat-form-field appearance="outline">
+            <input matInput type="datetime-local" placeholder="start date" formControlName="fechaLimite">
+          </mat-form-field>
+    </span> 
+
+</form>
+
+<div class="card" style="width: 90%; height: 1000px; margin: 0 auto; margin-bottom: 120px; display: flex; flex-direction: row; justify-content: space-between; align-items: center; gap: 40px">
+
+    <div style="height: 90%; width: 50%; display: flex; flex-direction: column; justify-content: flex-start; padding-left: 40px; gap: 40px">
+        <app-signature-card title="Usuarios revisores" *ngIf="data" [data]="data[0]"> </app-signature-card>
+
+        <app-signature-card title="Usuarios aprobadores" *ngIf="data" [data]="data[1]"> </app-signature-card>
+
+        <app-signature-card title="Usuarios aprobadores y firmantes" *ngIf="data" [data]="data[2]"> </app-signature-card>
+
+    </div>
+
+    <ngx-doc-viewer viewer="google" [url]="mainDocument" style="  width: 50%; height: 100%; max-height: 2000px; max-width: 2000px;">
+
+    </ngx-doc-viewer>
+</div>
+

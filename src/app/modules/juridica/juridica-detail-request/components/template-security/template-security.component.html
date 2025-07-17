@@ -1,0 +1,23 @@
+<div class="body">
+    <div class="container" [formGroup]="form">
+        <div class="title">Seleccionar plantilla</div>
+        <label for="nombrePlantilla">Nombre plantilla</label>
+        <mat-form-field>
+            <mat-select placeholder="Nombre plantilla" id="nombrePlantilla" formControlName="nameTemplate">
+                <mat-option value="conceptoJuridico">Concepto jurídico</mat-option>
+                <mat-option value="comunicadoInterno">Comunicado interno</mat-option>
+                <mat-option value="ayudaDeMemoria">Ayuda de memoria</mat-option>
+            </mat-select>
+        </mat-form-field>
+    
+        <label for="nivelSeguridad">Nivel de seguridad</label>
+        <mat-form-field>
+            <mat-select placeholder="Nivel de seguridad" id="nivelSeguridad" formControlName="securityLevel">
+                <mat-option value="publico">Público</mat-option>
+                <mat-option value="reservado">Reservado</mat-option>
+                <mat-option value="clasificado">Clasificado</mat-option>
+            </mat-select>
+        </mat-form-field>
+        
+    </div>
+</div>

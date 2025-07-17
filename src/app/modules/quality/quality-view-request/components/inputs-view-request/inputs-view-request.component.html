@@ -1,0 +1,17 @@
+<div class="inputs-container" [ngSwitch]="type">
+  <label for="items">{{label}}</label>
+  <ng-container *ngSwitchCase="'select'">
+    <select class="select-view-request" [formControl]="control">
+      <option value="" disabled selected hidden>Selecciona una opción</option>
+      <option *ngFor="let item of data " [value]="item.id"> {{item.nombre}} </option>
+    </select>
+    <img class="icon" src="/assets/img/arrow-down.svg" alt="icon" />
+  </ng-container>
+  <ng-container *ngSwitchCase="'date'">
+    <input [type]="type" class="input-view-request" [formControl]="control" />
+  </ng-container>
+  <ng-container *ngSwitchDefault>
+    <input [type]="type" class="input-view-request" [formControl]="control" (input)="onInput($event)"
+      [placeholder]="placeholderProp" />
+  </ng-container>
+</div>

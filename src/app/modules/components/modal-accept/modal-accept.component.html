@@ -1,0 +1,11 @@
+<ng-template #template let-data>
+  <p class="text-center">{{ data.paragraph }}</p>
+</ng-template>
+
+<mat-dialog-content>
+  <ng-container *ngTemplateOutlet="template; context: { $implicit: data }"></ng-container>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="close()" color="accent">Aceptar</button>
+</mat-dialog-actions>

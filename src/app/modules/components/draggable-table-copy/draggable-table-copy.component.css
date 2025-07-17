@@ -1,0 +1,26 @@
+.cdk-drag-placeholder {
+    border: 1px solid #999;
+    opacity: 0.5;  /* Hacerlo semitransparente */
+    background-color: #d2d2d2;  /* Un fondo suave */
+    transition: all 0.3s ease;  /* Transición suave */
+  }
+
+  th {
+    white-space: nowrap;      /* Previene el salto de línea en el texto */
+    overflow: hidden;          /* Oculta cualquier desbordamiento de texto que no quepa en el espacio asignado */
+    text-overflow: ellipsis;   /* Añade puntos suspensivos si el texto se desborda */
+    min-width: max-content;    /* Ajusta el ancho mínimo al contenido del texto */
+  }
+
+  th {
+    width: max-content;    /* Hace que el ancho del encabezado sea igual al del contenido más largo */
+    padding: 0 16px;
+  }
+
+  .table-row {
+    min-width: 300px; min-height: 200px; text-align: center; border-bottom: 1px solid #E2E2E2; padding: 24px;
+}
+
+.table-header-column {
+    min-width: 300px; text-align: center; padding-bottom: 16px;
+}

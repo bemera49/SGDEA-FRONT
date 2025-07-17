@@ -1,0 +1,68 @@
+.container-filters {
+  form {
+    margin: 1rem 1rem 0rem 1rem;
+    .inputs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      .input {
+        .input-date {
+          display: grid;
+          grid-template-columns: 90% 10%;
+          button {
+            background-color: transparent;
+            border: none;
+            height: 55px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.container-table {
+  padding: 1%;
+  height: 50%;
+  overflow: scroll;
+  scrollbar-width: thin;
+}
+
+th {
+  text-align: center;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.sem_rojo {
+  color: red;
+  font-size: 48px !important;
+  animation: pulse 1s infinite; /* Cambia la velocidad ajustando los segundos */
+}
+
+.sem_green {
+  color: green;
+  font-size: 48px !important;
+  animation: pulse 2s infinite;
+}
+
+.sem_yellow {
+  color: yellow;
+  font-size: 48px !important;
+  animation: pulse 2s infinite;
+}
+
+.sem_white {
+  color: white;
+  font-size: 48px !important;
+  animation: pulse 2s infinite;
+}

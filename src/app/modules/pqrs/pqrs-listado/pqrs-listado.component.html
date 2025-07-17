@@ -1,0 +1,17 @@
+<app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+<!-- <h1 style="margin: 80px 0 40px 80px">Bandeja de tareas</h1> -->
+
+<div class="d-flex flex-row flex-nowrap"
+    style="gap: 15px; padding: 0px 20px;overflow-x: auto;overflow-y: hidden;width: 95%;">
+    <app-card *ngFor="let estado of pqrsEstados" (click)="changeFilter(estado.estado_id)"
+        [cardConfig]="{title: estado.estado_nombre, color: '#008ED6', number:estado.count}">
+    </app-card>
+</div>
+<app-initial-list [showButtonFiltrer]="showButtonFiltrer" [initialNotificationMessage]="initialNotificationMessage"
+    [initialNotificationStatus]="initialNotificationStatus" [initCardHeaderStatus]="initCardHeaderStatus"
+    [initCardHeaderIcon]="initCardHeaderIcon" [initCardHeaderTitle]="initCardHeaderTitle" [dtTitles]="dtTitles"
+    [routeLoadDataTablesService]="routeLoadDataTablesService" (selectedRowsEmiter)="selectedRowsReceiveData($event)"
+    [routeData]="route" [NoDecrypt]="true" [statusParamsAdd]="statusParamsAdd" [dataParamsAdd]="dataParamsAdd"
+    [isredirectionPath]="false" [sweetLoadingInitStatus]="false" [canSelectAll]="false" [canViewItemNumber]="false"
+    [dtSearchingActive]="true" [viewPagination]="true"></app-initial-list>
+<app-floating-button [menuButtons]="menuButtons" (menuEmiterData)="menuReceiveData($event)"></app-floating-button>

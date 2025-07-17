@@ -1,0 +1,148 @@
+<mat-drawer-container class="example-container" autosize opened
+    style="width: 100vw; max-width: 2000px; height: 100vh; max-height: 1200px;">
+
+    <mat-drawer #drawer opened class="example-sidenav " mode="side" style="border-radius: 20px;">
+
+        <div class="position-relative"
+            style="width: 300px; min-width: 192px; height: 100vh; display: flex; align-items: center; flex-direction: column;">
+            <div style="margin-top: 10%;">
+
+                <figure style="cursor: pointer;">
+                    <a [routerLink]="'/'">
+                        <img src="/assets/dist/img/apeiron_logo.png" width="150px" height="150px" alt="">
+                    </a>
+                </figure>
+
+            </div>
+            <div *ngIf="userData.username!=''"
+                style="width: 90%; height: 100%; display: flex; margin-top: 20px; align-items: center; flex-direction: column;">
+                <div
+                    style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #E2E2E2; width: 100%; gap: 20px; padding-bottom: 20px;">
+                    <figure style="margin-top: 20px;">
+                        <span
+                            style="
+                            margin: 0; 
+                            width: 50px; 
+                            height: 50px; 
+                            background-color: rgb(70, 123, 228);  line-height: 20px; font-weight: 600; font-size: 18px; letter-spacing: 1px; text-transform: uppercase; color: white; padding: 8px; border-radius: 10px;">
+                            {{ getInitials() }}
+                        </span>
+                    </figure>
+                    <span>
+                        <p style="margin: 0; padding: 0; font-weight: bold;">{{userData?.nombre}}</p>
+                        <p style="margin: 0; padding: 0; font-weight: 200;">{{ userData.Rol.nombreRol}}</p>
+                    </span>
+
+                </div>
+
+                <main *ngIf="userData.username!=''">
+                    <section style="margin: 40px 0; ">
+                        <h4 class="navbar-section-title">SISTEMA</h4>
+
+                        <p style="display: flex; gap: 10px;">
+                            <button mat-flat-button class="navbar-section.subtitle" (click)="logout()">
+                                <mat-icon fontSet="material-icons-outlined" style="color: #6C6B76; margin-right: 8px;">
+                                    logout
+                                </mat-icon>
+                                Cerrar sesión
+                            </button>
+                        </p>
+
+                        <p style="display: flex; gap: 10px;">
+                            <button mat-flat-button class="navbar-section.subtitle">
+                                <mat-icon fontSet="material-icons-outlined" style="color: #6C6B76; margin-right: 8px;">
+                                    settings
+                                </mat-icon>
+                                Ajustes
+                            </button>
+                        </p>
+
+
+                        <p style="display: flex; gap: 10px;">
+                            <button mat-flat-button class="navbar-section.subtitle position-relative"
+                                (click)="verNotificacionesBtn()">
+                                <mat-icon
+                                    class="material-icons-outlined animate__animated animate__shakeX animate__infinite"
+                                    style="color: #6C6B76; margin-right: 8px;">
+                                    notifications
+                                </mat-icon>
+                                <div *ngIf="notificationsList.length>0"
+                                    class="d-flex justify-content-center align-items-center align-content-center position-absolute"
+                                    style="border-radius: 100%;background-color: red;color :white;width: 20px; height: 20px; top: 0; left: 0;">
+                                    {{notificationsList.length}}</div>
+                                Notificaciones
+                            </button>
+                        </p>
+                    </section>
+
+                    <section>
+                        <h4 class="navbar-section-title">ACCIONES</h4>
+
+                        <ng-container *ngFor="let item of menuItems; let i = index">
+                            <p style="display: flex; gap: 10px; width: 100%; justify-content: space-between;">
+
+                                <span class="d-flex justify-content-center align-items-center">
+                                    <mat-icon fontSet="material-icons-outlined" class="mr-4"
+                                        style="color: #6C6B76; font-size: 24px; width: 24px; height: 24px; line-height: 24px;">
+                                        {{menuItems[i].icontype}}
+                                    </mat-icon>
+                                    <a class="" data-toggle="collapse" style="color: #6C6B76;"
+                                        [href]="'#collapse' + menuItems[i].ruta" aria-expanded="false"
+                                        aria-controls="collapseExample">
+                                        {{menuItems[i].nombre}}
+                                    </a>
+                                </span>
+                                <mat-icon style="color: #6C6B76;">
+                                    expand_more
+                                </mat-icon>
+                            </p>
+
+                            <div class="collapse" [id]="'collapse' + menuItems[i].ruta">
+                                <a *ngFor="let subMenuCol of subMenuCols[menuItems[i].idModulo]" class="dropdown-item"
+                                    [routerLink]="subMenuCol.ruta_completa ? subMenuCol.route : subMenuCol.ruta_completa ? subMenuCol.route : '/' + menuItems[i].ruta + '/' + subMenuCol.route"
+                                    routerLinkActive="active-link"
+                                    [ngClass]="{'active-link': router.url.includes(subMenuCol.ruta_completa ? subMenuCol.route : '/' + menuItems[i].ruta + '/' + subMenuCol.route)}">
+                                    {{ subMenuCol.name }}
+                                </a>
+                            </div>
+                        </ng-container>
+                    </section>
+                </main>
+            </div>
+
+            <div *ngIf="verNotificaciones==true" class="position-absolute p-1"
+                style="width: 280px;background-color: white;top: 190px;right: 0px; border: 1px solid #008ED6;max-height: 400px;overflow-y: auto;">
+                <div class="d-flex flex-column">
+                    <div class="d-flex flex-row justify-content-between align-items-center align-content-center">
+                        <div style="font-weight: bold;">
+                            Notificaciones
+                        </div>
+                        <button mat-flat-button (click)="verNotificaciones=false">X</button>
+                    </div>
+                    <div style="color: #a4a4a9;">Tienes {{notificationsList.length}} nuevas notificaciones</div>
+                </div>
+
+                <div class="p-3">
+
+                    <div class="d-flex flex-column" *ngFor="let noti of notificationsList">
+                        <div class="d-flex flex-row flex-nowrap mb-1 p-1" style="border-bottom: 1px solid #008ED6;">
+                            <div class="px-1">
+                                <div>{{noti.mensaje}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </mat-drawer>
+
+    <mat-drawer-content>
+        <router-outlet>
+        </router-outlet>
+    </mat-drawer-content>
+
+</mat-drawer-container>

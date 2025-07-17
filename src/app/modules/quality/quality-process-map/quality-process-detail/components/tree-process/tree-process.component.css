@@ -1,0 +1,82 @@
+/* Estilos generales del acordeón */
+.container-tree .acordion .card-tree {
+  background: #FFFFFF;
+  border: 1px solid #E2E2E2;
+  border-radius: 8px;
+  margin-bottom: 1.5772870662460567vh;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 0.875rem;
+  padding-left: 1rem !important;
+  overflow-x: auto;
+}
+
+/* Estilos para los elementos de encabezado (títulos) */
+.card-tree-h {
+  display:flex;
+  align-items: start;
+  flex-wrap: nowrap;
+}
+
+.treetitle {
+  color: #6C6B76 ;
+  white-space: nowrap;
+}
+
+.codetitle {
+  color: #023F5E;
+  text-align:left;
+  font-weight:bold;
+  min-width: 5.20834vw;
+  white-space: nowrap;
+}
+.codetitle-treeh{
+  font-weight: bold;
+  min-width: 6.5vw;
+}
+.card-tree-b {
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  border:none;
+  border-top: 0.063rem solid #E2E2E2;
+  justify-content: flex-start;
+}
+.iconostypefile {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Estilos para los elementos secundarios (subtítulos y archivos) */
+.card-tree-inter {
+  width: 100%;
+
+}
+
+/* Estilos para el texto azul */
+.blue-text {
+  color: #023F5E;
+}
+.flipped {
+  transform: rotate(180deg);
+  /* Rota el icono 180 grados */
+}
+
+.file {
+  display: flex;
+  border:none;
+  background:transparent;
+  text-align: start;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  padding-left: 1.6rem;
+}
+.contain-filed {
+  display: flex;
+  padding-left: 8rem;
+  flex-wrap: nowrap;
+}
+.black-text {
+  color:black;
+}

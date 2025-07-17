@@ -1,0 +1,147 @@
+<!-- 
+ *  HU 004 - Solicitar autorización para devolución fuera de tiempo permitido
+ *  HU 015 - Solicitar autorización para transaccion en sap
+ *  HU 016 - Aprobación de solicitud para ejecutar transacción en SAP
+-->
+
+<mat-dialog-content *ngIf="!loading" style="max-height: 90vh;overflow-y: auto;">
+  <div class="d-flex flex-row align-items-center justify-content-between">
+    <mat-icon class="text-primary">refresh</mat-icon>
+    <button mat-icon-button (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <h2 mat-dialog-title class="w-100 mt-2 text-body">{{ data.title }}</h2>
+  <p class="w-100">Completa los campos para realizar el proceso.</p>
+
+  <form [formGroup]="form" class="row">
+
+    <span class="d-flex flex-column col-md-6 col-lg-6">
+      <label>Tipo de solicitud de autorización*</label>
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-select placeholder="Seleccione" formControlName="tipo_sol" (selectionChange)="changeTipoSol($event.value)">
+          <mat-option style="overflow: hidden;white-space: wrap;line-height: 14px;" *ngFor="let us of listTipoSol"
+            [value]="us.value">{{us.name}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.controls['tipo_sol'].invalid && form.controls['tipo_sol'].touched">
+          Este campo es requerido
+        </mat-error>
+      </mat-form-field>
+    </span>
+
+    <!-- case SOLICITUD PARA RECHAZO EXTEMPORANEO HU004  -->
+    <span class="d-flex flex-column col-md-6 col-lg-6" *ngIf="!!form.controls['us_autorizador']">
+      <label>Usuario autorizador*</label>
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-select placeholder="Seleccione" formControlName="us_autorizador">
+          <mat-option *ngFor="let us of listUsAprobadores" [value]="us.value">{{us.name}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.controls['us_autorizador'].invalid && form.controls['us_autorizador'].touched">
+          Este campo es requerido
+        </mat-error>
+      </mat-form-field>
+    </span>
+
+    <span class="d-flex flex-column col-md-6 col-lg-6" *ngIf="!!form.controls['causal_rechazo']">
+      <label>Causal de rechazo*</label>
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-select placeholder="Seleccione" formControlName="causal_rechazo">
+          <mat-option *ngFor="let causal of listCausalesRechazo" [value]="causal.value">{{causal.name}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.controls['causal_rechazo'].invalid && form.controls['causal_rechazo'].touched">
+          Este campo es requerido
+        </mat-error>
+      </mat-form-field>
+    </span>
+    <!-- case SOLICITUD PARA RECHAZO EXTEMPORANEO HU004  -->
+
+    <span class="d-flex flex-column col-md-12 col-lg-12 mt-2" *ngIf="!!form.controls['tipo_sol']">
+      <label>Justificación
+        {{form.controls['causal_rechazo']?.value == 4 ? "especifica la causal" :""}} *
+      </label>
+      <mat-form-field appearance="outline" class="w-100">
+        <textarea matInput placeholder="justificacion" formControlName="justificacion"></textarea>
+        <mat-error *ngIf="form.controls['justificacion'].invalid && form.controls['justificacion'].touched">
+          Este campo es requerido
+        </mat-error>
+      </mat-form-field>
+    </span>
+
+  </form>
+
+
+
+  <!-- si la transaccion es aprobada no podemos hacer ninguna accion -->
+  <div *ngIf="!isAprove">
+
+    <!-- BTN HU004 - HU015  -->
+    <div *ngIf="!(canAprove && data.data.from == 'aprobar') && !form.controls['urlFile'].value"
+      class="d-flex flex-wrap flex-md-nowrap justify-content-center" style="gap: 10px">
+      <button type="button" mat-stroked-button class="border border-primary text-primary bg-white w-100"
+        (click)="close()" [disabled]="modalOpen">Cancelar</button>
+      <button aif mat-flat-button class="bg-primary text-white w-100" (click)="onConfirm()"
+        [disabled]="modalOpen">Aceptar</button>
+    </div>
+    <!-- BTN HU004 - HU015 -->
+
+    <!-- BTN HU016  -->
+    <div *ngIf="canAprove && data.data.from == 'aprobar'"
+      class="d-flex flex-wrap flex-md-nowrap justify-content-center mb-2" style="gap: 10px">
+      <button type="button" mat-stroked-button class="text-white bg-danger w-100" (click)="action('rechazar')"
+        [disabled]="modalOpen">Rechazar</button>
+      <button aif mat-flat-button class="bg-primary text-white w-100" (click)="action('aprobar')"
+        [disabled]="modalOpen">Aprobar</button>
+    </div>
+    <!-- BTN HU016  -->
+
+    <!-- BTN HU017  -->
+    <div *ngIf="canAproveNoAprovadas && data.data.from == 'aprobar'"
+      class="d-flex flex-wrap flex-md-nowrap justify-content-center mb-2" style="gap: 10px">
+      <button type="button" mat-stroked-button class="text-white bg-danger w-100" (click)="close()"
+        [disabled]="modalOpen">Cancelar</button>
+      <button aif mat-flat-button class="bg-primary text-white w-100" (click)="onConfirm()"
+        [disabled]="modalOpen">Guardar</button>
+    </div>
+    <!-- BTN HU017  -->
+  </div>
+
+  <!-- manejo de documento cargado -->
+  <div *ngIf="form.controls['urlFile'].value">
+
+    <div class="w-100 mb-5 d-flex flex-row justify-content-start" style="gap: 10px">
+      <!-- si la transaccion es aprobada no podemos hacer ninguna accion -->
+      <button *ngIf="!isAprove" type="button" mat-stroked-button
+        class="d-flex justify-content-center align-content-center border-primary text-primary bg-white w-25 text-wrap"
+        style="line-height: 15px;" (click)="descargarPlantilla()" [disabled]="modalOpen">
+        <mat-icon class="mat-18">download</mat-icon>
+        Descargar plantilla
+      </button>
+      <button *ngIf="!isAprove && estadoDocumento!=20" type="button" mat-stroked-button
+        class="d-flex justify-content-center align-content-center bg-primary text-white w-25 text-wrap"
+        style="line-height: 15px;" (click)="inputFile.click()" [disabled]="modalOpen">
+        <mat-icon class="mat-18">upload</mat-icon>
+        Cargar plantilla
+      </button>
+      <input #inputFile hidden type="file" name="fileUpload" (change)="cargarPlantilla($event)" />
+      <button *ngIf="canSavePlantilla" type="button" mat-stroked-button
+        class="d-flex justify-content-center align-content-center align-items-center bg-primary text-white w-25 text-wrap"
+        (click)="savePlantilla()" [disabled]="modalOpen">
+        Guardar
+      </button>
+    </div>
+
+    <ngx-doc-viewer [url]="form.controls['urlFile'].value" viewer="google"
+      style="width:100%;height:100vh; max-height: 2000px;">
+    </ngx-doc-viewer>
+
+  </div>
+  <!-- manejo de documento cargado -->
+
+</mat-dialog-content>
+
+<div *ngIf="loading" class="d-flex justify-content-center  w-100">
+  <div class=" spinner-border text-primary" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<div
+  class="container border border-2"
+  [style.border-bottom]="'1.5px solid' + cardConfig.color"
+  [routerLink]="cardConfig.link"
+>
+  
+  <mat-icon class="text-white bg-primary" >image</mat-icon>
+
+  <h4 class="font-weight-bold">{{ cardConfig.title }}</h4>
+
+  <div class="link d-flex justify-content-end">
+    <span class="d-flex flex-row align-items-center">
+        Ver estructura
+        <mat-icon class="mx-">chevron_right</mat-icon>
+    </span>
+  </div>
+</div>

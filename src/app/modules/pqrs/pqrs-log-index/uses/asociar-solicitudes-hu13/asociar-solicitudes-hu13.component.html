@@ -1,0 +1,77 @@
+<div class="d-flex flex-column justify-content-start text-start modal-container" style="overflow: hidden;">
+  <div class="d-flex flex-row align-items-center justify-content-between">
+    <i class="material-icons text-primary cap-icon">description</i>
+    <button (click)="close()" class="btn-none">
+      <i class="material-icons">close</i>
+    </button>
+  </div>
+
+  <p class="my-3 w-100 modal-message font-weight-bold">Asociar solicitudes</p>
+  <p class="mb-25 w-100 modal-description">Selecciona las solicitudes que deseas asociar.</p>
+
+
+  <mat-dialog-content class="mat-typography">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox (change)="$event ? masterToggle() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()"
+                        [aria-label]="checkboxLabel()">
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()"
+                        (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)"
+                        [aria-label]="checkboxLabel(row)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+    
+      <!-- Position Column -->
+      <ng-container matColumnDef="idRadiRadicado">
+        <th mat-header-cell *matHeaderCellDef> Radicado </th>
+        <td mat-cell *matCellDef="let element"> {{element.idRadiRadicado}} </td>
+      </ng-container>
+    
+      <!-- Name Column -->
+      <ng-container matColumnDef="numeroCuentaContrato">
+        <th mat-header-cell *matHeaderCellDef>  Cuenta </th>
+        <td mat-cell *matCellDef="let element"> {{element.numeroCuentaContrato}} </td>
+      </ng-container>
+    
+      <!-- Weight Column -->
+      <ng-container matColumnDef="contactoSap">
+        <th mat-header-cell *matHeaderCellDef> CONT </th>
+        <td mat-cell *matCellDef="let element"> {{element.contactoSap}} </td>
+      </ng-container>
+    
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="usuario_que_solicita">
+        <th mat-header-cell *matHeaderCellDef> Nombre del solicitante </th>
+        <td mat-cell *matCellDef="let element"> {{element.usuario_que_solicita}} </td>
+      </ng-container>
+     
+      <ng-container matColumnDef="creacionRadiRadicado">
+        <th mat-header-cell *matHeaderCellDef> Fecha radicado </th>
+        <td mat-cell *matCellDef="let element"> {{element.creacionRadiRadicado}} </td>
+      </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+          (click)="selection.toggle(row)">
+      </tr>
+    </table>
+  </mat-dialog-content>
+
+
+
+  <div class="d-flex flex-row w-100 align-items-center justify-content-center" style="margin-top: 20px; gap: 0px 10px;">
+    <button class="btn bg-white border border-primary text-primary text-center modal-button"
+      (click)="close()">Cancelar</button>
+    <button class="btn btn-primary text-center modal-button" (click)="asociar()" [disabled]="this.selection.selected.length == 0">Aceptar</button>
+  </div>
+</div>

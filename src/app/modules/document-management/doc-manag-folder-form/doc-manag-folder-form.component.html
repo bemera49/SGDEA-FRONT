@@ -1,0 +1,392 @@
+<app-breadcrumb *ngIf="statusBreadcrumbOn" [breadcrumbOn]="breadcrumbOn"
+  [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <form id="moduleForm" [formGroup]="moduleForm" class="form-horizontal" (ngSubmit)="submitForm()">
+          <!-- Start card optional -->
+          <div class="card" *ngIf="cardRadiStatus">
+            <div class="card-header card-header-info card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">fact_check</i>
+              </div>
+              <h4 class="card-title">
+                {{ "Radicados seleccionados para incluir en el nuevo expediente" | translate }}
+              </h4>
+            </div>
+            <div class="card-body">
+              <!-- Data table -->
+              <div class="table-responsive">
+                <div class="material-datatables">
+                  <table class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%"
+                    style="width: 100%">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>{{ "Número radicado" | translate }}</th>
+                        <th>{{ "Asunto" | translate }}</th>
+                        <th>{{ "Tipo radicado" | translate }}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let row of dataRadicados; index as i">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ row["numeroRadiRadicado"] }}</td>
+                        <td>{{ row["asuntoRadiRadicado"] }}</td>
+                        <td>{{ row["tipoRadicado"] }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <!-- /Data table -->
+            </div>
+          </div>
+          <!-- End card opctional -->
+
+          <!-- Start card One -->
+          <div class="card">
+            <div class="card-header card-header-info card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">{{ initCardHeaderIcon }}</i>
+              </div>
+              <h4 class="card-title">{{ textForm | translate }}</h4>
+            </div>
+            <div class="card-body">
+              <div class="row">
+
+
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mt-2">
+                  <mat-form-field>
+                    <mat-label>{{ "Dependencia" | translate }}</mat-label>
+                    <mat-select (selectionChange)="getListSeriesId($event.value)" id="idGdTrdDependencia"
+                      formControlName="idGdTrdDependencia" name="idGdTrdDependencia" required>
+                      <mat-option *ngFor="let dep of dependencia" [value]="dep.id">
+                        {{dep.val}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="
+                              !moduleForm.get('idGdTrdDependencia').valid &&
+                              moduleForm.get('idGdTrdDependencia').touched
+                            ">{{ "El campo es obligatorio" | translate }}</mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mt-2">
+                  <mat-form-field>
+                    <mat-label>{{ "selectSerie" | translate }}</mat-label>
+                    <mat-select (selectionChange)="getSubSerie($event.value)" id="idGdTrdSerie"
+                      formControlName="idGdTrdSerie" name="idGdTrdSerie" required>
+                      <mat-option *ngFor="let dep of series " [value]="dep.id">
+                        {{dep.val}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="!moduleForm.get('idGdTrdSerie').valid && moduleForm.get('idGdTrdSerie').touched">
+                      {{ "El campo es obligatorio" | translate }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <!-- 
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mt-2">
+                  <mat-form-field>
+                    <mat-label>{{ "selectSerie" | translate }}</mat-label>
+                    <mat-select id="idGdTrdSerie" formControlName="idGdTrdSerie" name="idGdTrdSerie"
+                      (selectionChange)="getListSuberies($event.value)" required>
+                      <mat-option>
+                        <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate"
+                          [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate"
+                          formControlName="listSeriesFilter" [searching]="true"></ngx-mat-select-search>
+                      </mat-option>
+                      <mat-option *ngFor="let serie of filteredlistSeries | async" [value]="serie.id">
+                        {{ serie.val }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="!moduleForm.get('idGdTrdSerie').valid && moduleForm.get('idGdTrdSerie').touched">
+                      {{ "El campo es obligatorio" | translate }}
+                    </mat-error>
+                  </mat-form-field>
+                </div> -->
+
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mt-2">
+                  <mat-form-field>
+                    <mat-label>{{ "selectSubserie" | translate }}</mat-label>
+                    <mat-select id="idGdTrdSubserie" formControlName="idGdTrdSubserie" name="idGdTrdSubserie"
+                      (selectionChange)="setIdSubSeries($event.value)">
+                      <mat-option *ngFor="let sub of subSeries " [value]="sub.id">
+                        {{sub.val}}</mat-option>
+                    </mat-select>
+                    <mat-error
+                      *ngIf="!moduleForm.get('idGdTrdSubserie').valid && moduleForm.get('idGdTrdSubserie').touched">{{
+                      "El campo es obligatorio" | translate }}</mat-error>
+                  </mat-form-field>
+
+                </div>
+
+
+                <!-- <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mt-2">
+                  <mat-form-field>
+                    <mat-label>{{ "selectSubserie" | translate }}</mat-label>
+                    <mat-select id="idGdTrdSubserie" formControlName="idGdTrdSubserie" name="idGdTrdSubserie" required>
+                      <mat-option>
+                        <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate"
+                          [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate"
+                          formControlName="listSubseriesFilter" [searching]="true"></ngx-mat-select-search>
+                      </mat-option>
+                      <mat-option *ngFor="let subserie of filteredlistSubseries | async" [value]="subserie.id">
+                        {{ subserie.val }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error
+                      *ngIf="!moduleForm.get('idGdTrdSubserie').valid && moduleForm.get('idGdTrdSubserie').touched">{{
+                      "El campo es obligatorio" | translate }}</mat-error>
+                  </mat-form-field>
+                </div> -->
+
+                <!-- <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mt-2" style="text-align: center">
+                  <mat-card-content>
+                    <mat-label>{{ "¿Existe físicamente?" | translate }}</mat-label>
+                    <section class="example-section">
+                      <mat-slide-toggle (change)="MatSlideToggleChangeMulti($event)"
+                        formControlName="existeFisicamenteGdExpediente" class="" [color]="color">
+                        {{ msgExisteFisicamente | translate }}
+                      </mat-slide-toggle>
+                    </section>
+                  </mat-card-content>
+                </div> -->
+              </div>
+            </div>
+          </div>
+          <!-- End card One -->
+
+
+          <div class="card" *ngIf="metadatos.length > 0">
+            <div class="card-header card-header-info card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">{{ initCardHeaderIcon }}</i>
+              </div>
+              <h4 class="card-title">{{ metaDataText | translate }}</h4>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mt-2"
+                  *ngFor="let metadata of metadatos; let i = index">
+                  <mat-form-field>
+                    <mat-label>{{ metadata.nombre | translate }}</mat-label>
+                    <input matInput type="text" [formControlName]="'metadata_' + metadata.id"
+                      placeholder="{{ 'ingrese' + metadata.nombre | translate }}" maxlength="250"  />
+                    <mat-error
+                      *ngIf="!moduleForm.get('metadata_' + metadata.id)?.valid && moduleForm.get('metadata_' + metadata.id)?.touched">
+                      {{ "El campo es obligatorio" | translate }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- https://www.acueducto.com.co/wassigue1/VisorBaseEAB/ -->
+
+
+          <!-- Start card Two -->
+          <div class="card">
+            <div class="card-header card-header-info card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">{{ initCardHeaderIcon }}</i>
+              </div>
+              <h4 class="card-title">{{ "Información basica" | translate }}</h4>
+            </div>
+            <div class="card-body">
+              <div class="row">
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field class="example-full-width" [ngClass]="{ 'has-success': validTextType  }">
+                    <mat-label>{{ "Código de expediente" | translate }}</mat-label>
+                    <input matInput type="text" id="numeroGdExpediente" formControlName="numeroGdExpediente"
+                      maxlength="250" required />
+                    <mat-error *ngIf="
+                            !moduleForm.get('numeroGdExpediente').valid && moduleForm.get('numeroGdExpediente').touched
+                          ">
+                      {{ "El campo es obligatorio" | translate }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field class="example-full-width" [ngClass]="{ 'has-success': validTextType }">
+                    <mat-label>{{ "Nombre expediente" | translate }}</mat-label>
+                    <input matInput type="text" id="nombreGdExpediente" formControlName="nombreGdExpediente"
+                      placeholder="{{ 'ingreseNombreExpediente' | translate }}" maxlength="250" required />
+                    <mat-error *ngIf="
+                            !moduleForm.get('nombreGdExpediente').valid && moduleForm.get('nombreGdExpediente').touched
+                          ">
+                      {{ "El campo es obligatorio" | translate }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="z-index: 1040 !important">
+                  <mat-form-field>
+                    <mat-label>{{ "Fecha inicio " | translate }}</mat-label>
+                    <input matInput id="fechaInicio" [min]="minDate" [max]="maxDate" formControlName="fechaInicio"
+                      name="fechaInicio" [matDatepicker]="picker" placeholder="{{ 'Ingrese una fecha' | translate }}"
+                      (click)="picker.open()" required />
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi #picker></mat-datepicker>
+                    <mat-error *ngIf="
+                            !moduleForm.get('fechaInicio').valid &&
+                            moduleForm.get('fechaInicio').touched
+                          ">
+                      {{ "El campo es obligatorio" | translate }}.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="z-index: 1040 !important">
+                  <mat-form-field>
+                    <mat-label>{{ "Fecha final " | translate }}</mat-label>
+                    <input matInput id="fechaFin" name="fechaFin" [min]="minDate" [max]="maxDate"
+                      formControlName="fechaFin" [matDatepicker]="picker2"
+                      placeholder="{{ 'Ingrese una fecha' | translate }}" (click)="picker2.open()" required />
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi #picker2></mat-datepicker>
+                    <mat-error *ngIf="
+                            !moduleForm.get('fechaFin').valid &&
+                            moduleForm.get('fechaFin').touched
+                          ">
+                      {{ "El campo es obligatorio" | translate }}.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="z-index: 1040 !important">
+                  <mat-form-field>
+                    <mat-label>{{ "Fecha creación del expediente" | translate }}</mat-label>
+                    <input matInput id="creacionGdExpediente" [min]="minDate" [max]="maxDate"
+                      formControlName="creacionGdExpediente" [matDatepicker]="picker3"
+                      placeholder="{{ 'Ingrese una fecha' | translate }}" (click)="picker3.open()" required />
+                    <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi #picker3></mat-datepicker>
+                    <!-- <mat-error *ngIf="
+                            !moduleForm.get('fechaProcesoGdExpediente').valid &&
+                            moduleForm.get('fechaProcesoGdExpediente').touched
+                          ">
+                      {{ "El campo es obligatorio" | translate }}.
+                    </mat-error> -->
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="z-index: 1040 !important">
+                  <mat-form-field>
+                    <mat-label>{{ "Fecha cierre" | translate }}</mat-label>
+                    <input matInput id="fechaCierre" name="fechaCierre" [min]="minDate" [max]="maxDate"
+                      formControlName="fechaCierre" [matDatepicker]="picker4"
+                      placeholder="{{ 'Ingrese una fecha' | translate }}" (click)="picker3.open()" required />
+                    <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi #picker4></mat-datepicker>
+                    <mat-error *ngIf="
+                            !moduleForm.get('fechaCierre').valid &&
+                            moduleForm.get('fechaCierre').touched
+                          ">
+                      {{ "El campo es obligatorio" | translate }}.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field>
+                    <mat-label>{{ "Estado" | translate }}</mat-label>
+                    <mat-select id="estadoGdExpediente" formControlName="estadoGdExpediente" name="estadoGdExpediente"
+                      required>
+                      <mat-option [value]="10">activo</mat-option>
+                      <mat-option [value]="0">inactivo</mat-option>
+                    </mat-select>
+                    <mat-error
+                      *ngIf="!moduleForm.get('estadoGdExpediente').valid && moduleForm.get('estadoGdExpediente').touched">{{
+                      "El campo es obligatorio" | translate }}</mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field>
+                    <mat-label>{{ "Fase de archivo" | translate }}</mat-label>
+                    <mat-select id="ubicacionGdExpediente" formControlName="ubicacionGdExpediente"
+                      name="ubicacionGdExpediente" required>
+                      <mat-option [value]="1">Archivo de gestión</mat-option>
+                      <mat-option [value]="2">Archivo Central</mat-option>
+                      <mat-option [value]="3">Archivo Histórico</mat-option>
+
+                    </mat-select>
+                    <!--                     <mat-error
+                      *ngIf="!moduleForm.get('estadoGdExpediente').valid && moduleForm.get('estadoGdExpediente').touched">{{
+                      "El campo es obligatorio" | translate }}</mat-error> -->
+                  </mat-form-field>
+                </div>
+
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="z-index: 1040 !important">
+                  <mat-form-field>
+                    <mat-label>{{ "Usuario creador" | translate }}</mat-label>
+                    <input matInput formControlName="user" required />
+
+                    <!-- <mat-error *ngIf="
+                            !moduleForm.get('fechaProcesoGdExpedie2nte').valid &&
+                            moduleForm.get('fechaProcesoGdExpediente').touched
+                          ">
+                      {{ "El campo es obligatorio" | translate }}.
+                    </mat-error> -->
+                  </mat-form-field>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+          <!-- End card Two -->
+
+          <!-- <div class="card">
+            <div class="card-header card-header-info card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">{{ initCardHeaderIcon }}</i>
+              </div>
+              <h4 class="card-title">{{ "dependenciasQueHacenParteDeLaGestionDelExpediente" | translate }}</h4>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-2">
+                  <mat-form-field>
+                    <mat-label>{{ "Dependencia" | translate }}</mat-label>
+                    <mat-select multiple id="idGdExpedientesDependencias" formControlName="idGdExpedientesDependencias"
+                      name="idGdExpedientesDependencias">
+                      <mat-option>
+                        <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate"
+                          [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate"
+                          formControlName="gdExpedientesDependenciasFilter" [searching]="true"></ngx-mat-select-search>
+                      </mat-option>
+                      <mat-option *ngFor="let depeAll of filteredgdExpedientesDependencias | async"
+                        [value]="depeAll.id">
+                        {{ depeAll.val }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="
+                            !moduleForm.get('gdExpedientesDependenciasFilter').valid &&
+                            moduleForm.get('gdExpedientesDependenciasFilter').touched
+                          ">{{ "El campo es obligatorio" | translate }}</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div> -->
+
+          <button type="submit" id="sendForm" style="display: none"></button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <app-floating-button [menuButtons]="menuButtons"
+    (menuEmiterData)="menuPrimaryReceiveData($event)"></app-floating-button>
+</div>

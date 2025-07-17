@@ -1,0 +1,126 @@
+<!-- Componente de anexos -->
+<div class="card">
+    <div class="card-body">
+
+        <h3 class="title">
+            Información general
+        </h3>
+
+        <!-- CAMPOS: Radicado, Fecha de creación, Status aviso, Hora creación, Fecha Inicio deseado, Fecha fin deseado  -->
+        <div class="grid-container">
+            <div class="column">
+                <div class="label">Radicado</div>
+                <div class="value">{{ numeroRadiRadicado }}</div>
+            </div>
+            <div class="column">
+                <div class="label">Fecha de creación</div>
+                <div class="value">{{ fcreacionRadicado | date: 'dd/MM/yyyy' }}</div>
+            </div>
+
+            <div class="column">
+                <div class="label">Status aviso</div>
+                <div class="value">{{ statusAviso }}</div>
+            </div>
+            <div class="column">
+                <div class="label">Hora creación</div>
+                <div class="value">{{ horaCreacion }}</div>
+            </div>
+
+            <div class="column">
+                <div class="label">Fecha inicio deseado</div>
+                <div class="value">{{ fechaInicioDeseadaSap | date: 'dd/MM/yyyy' }}</div>
+            </div>
+            <div class="column">
+                <div class="label">Fecha fin deseado</div>
+                <div class="value">{{ fechaFinDeseado | date: 'dd/MM/yyyy' }}</div>
+            </div>
+        </div>
+
+        <!-- CAMPOS: Descripción -->
+        <div class="item-unit">
+            <div class="column">
+                <div class="label">Circunstancias</div>
+                <div class="value">{{ circustancias }}</div>
+            </div>
+        </div>
+        <!-- CAMPOS: Circunstancias -->
+        <div class="item-unit">
+            <div class="column">
+                <div class="label">Descripción</div>
+                <div class="value">{{ descripcion }}</div>
+            </div>
+        </div>
+
+        <!-- CAMPOS: Número aviso, Clase aviso, Funcionario, Número de orden, Autor aviso -->
+        <div class="grid-container">
+            <div class="column">
+                <div class="label">Número aviso</div>
+                <div class="value">{{ numeroAviso }}</div>
+            </div>
+            <div class="column">
+                <div class="label">Clase aviso</div>
+                <div class="value">{{ claseAviso }}</div>
+            </div>
+
+            <div class="column">
+                <div class="label">Funcionario</div>
+                <div class="value">{{ funcionario }}</div>
+            </div>
+            <div class="column">
+                <div class="label">Número de orden</div>
+                <div class="value">{{ numeroOrden }}</div>
+            </div>
+
+            <div class="column">
+                <div class="label">Autor aviso</div>
+                <div class="value">{{ autorAvisoSap }}</div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Componente de anexos -->
+<app-attachments [attachmentsDetail]="attachments"></app-attachments>
+
+<!-- card observaciones -->
+<div class="card" *ngIf="data?.key_tipo_tarea == 'DESIGNAR_RESPONSABLE' ||  (data?.observacion && data?.key_tipo_tarea == 'EVALUAR_SOLICITUD')">
+    <div class="card-body">
+        <h3 class="title"><strong>Observaciones</strong></h3>
+        <mat-card class="mt-4 border-2 border w-100">
+            <form class="form">
+
+                <h6 style="color: #A4A4AD; "><strong>Motivo de aprobación o devolución</strong></h6>
+
+                <mat-form-field class="full-width">
+                    <input matInput placeholder="Inserte" [formControl]="observation">
+                    <mat-error *ngIf="observation.hasError('required') && observation.touched">
+                        Campo obligatorio
+                    </mat-error>
+                </mat-form-field>
+
+            </form>
+        </mat-card>
+    </div>
+</div>
+
+<!-- Justificacion -->
+<div class="card" *ngIf="data?.justificacion">
+    <div class="card-body">
+        <h3 class="title"><strong>Justificación</strong></h3>
+        <mat-card class="mt-4 border-2 border w-100">
+            <form class="form">
+
+                <h6 style="color: #A4A4AD; "><strong>Justificación</strong></h6>
+
+                <mat-form-field class="full-width">
+                    <input matInput placeholder="Inserte" [formControl]="justification">
+                    <mat-error *ngIf="justification.hasError('required') && justification.touched">
+                        Campo obligatorio
+                    </mat-error>
+                </mat-form-field>
+
+            </form>
+        </mat-card>
+    </div>
+</div>

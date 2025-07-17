@@ -1,0 +1,89 @@
+<mat-card class="mat-typography custom-card-content">
+
+    <div class="card-container">
+
+        <div class="contentTitle">
+            <span class="material-icons icon-calendar">
+                edit_calendar
+            </span><br>
+            <h3 class="title">Reemplazo de vacaciones</h3><br>
+            <h3 class="subtitle">Completa los siguientes campos para proceder con el reemplazo.</h3>
+        </div>
+        <br>
+
+        <form class="form" [formGroup]="formVacacionesReemplazo">
+            <div class="row">
+                <div class="column">
+                    <div class="label">Rol de funcionario *</div>
+                    <mat-form-field appearance="outline" class="input-mata">
+                        <mat-select placeholder="Seleccione" formControlName="rol_funcionario"
+                            (selectionChange)="this.getUserByIdRol()">
+                            <mat-option *ngFor="let rol of rolesFiltered" [value]="rol.idRol">
+                                {{rol.nombreRol}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error>Este campo es requerido</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="column">
+                    <div class="label">Funcionario que sale *</div>
+                    <mat-form-field appearance="outline" class="input-mata">
+                        <mat-select placeholder="Seleccione" formControlName="usuario_sale_id"
+                            [disabled]="formVacacionesReemplazo.get('rol_funcionario').invalid"
+                            (selectionChange)="this.getUserNotSelected()">
+                            <mat-option *ngFor="let user of usersFilteredByIdRol" [value]="user.id">
+                                {{ user.username }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error>Este campo es requerido</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="column">
+                    <div class="label">Funcionario de reemplazo *</div>
+                    <mat-form-field appearance="outline" class="input-mata">
+                        <mat-select placeholder="Seleccione" formControlName="usuario_reemplazo_id"
+                            [disabled]="formVacacionesReemplazo.get('usuario_sale_id').invalid">
+                            <mat-option *ngFor="let user of usersFilteredNotSelected" [value]="user.id">
+                                {{user.username}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error>Este campo es requerido</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="column">
+                    <div class="label">Fecha inicial</div>
+                    <mat-form-field appearance="outline" class="input-mata" disabled>
+                        <input type="text" matInput placeholder="dd / mm / aaaa" formControlName="fecha_inicial">
+                        <mat-icon matPrefix>calendar_month</mat-icon>
+                    </mat-form-field>
+                </div>
+
+                <div class="column">
+                    <div class="label">Fecha final</div>
+                    <mat-form-field appearance="outline" class="input-mata" disabled>
+                        <input type="text" matInput placeholder="dd / mm / aaaa" formControlName="fecha_final">
+                        <mat-icon matPrefix>calendar_month</mat-icon>
+                    </mat-form-field>
+                </div>
+
+            </div>
+        </form>
+
+    </div>
+
+    <mat-card-actions align="center" class="custom-card-actions">
+        <button mat-button class="cancel-button" (click)="OpenModalCancelReemplazo()">Cancelar</button>
+        <button mat-button class="accept-button" [disabled]="formVacacionesReemplazo.invalid"
+            (click)="aceptedVacationsUser()">Guardar</button>
+    </mat-card-actions>
+</mat-card>

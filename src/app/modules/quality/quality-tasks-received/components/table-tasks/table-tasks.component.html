@@ -1,0 +1,55 @@
+<div class="test">
+  <h2 style="color: #000000; font-weight: 300; font-family: 'Poppins', sans-serif;">
+    <strong>Tareas recibidas</strong>
+  </h2>
+  <div class="card">
+    <div class="card-body">
+      <div class="table-responsive">
+        <h3 style="color: #000000; font-weight: 300; font-family: 'Poppins', sans-serif;">
+          <strong>Listado de tareas</strong>
+        </h3><br>
+        <table class="table">
+          <thead>
+            <tr>
+              <th><strong>-</strong></th>
+              <th><strong># Radicado</strong></th>
+              <th><strong>Fecha radicación</strong></th>
+              <th><strong>Fecha vencimiento</strong></th>
+              <th><strong>Tipo de solicitud</strong></th>
+              <th><strong>Tarea</strong></th>
+              <th><strong>Fecha asignación</strong></th>
+              <th><strong>Estado de la solicitud</strong></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of this.TaskReceived">
+              <td>
+                <span class="semaforo" [ngClass]="getColorClass(item.semaphore)"></span>
+              </td>
+              <td>
+                <a href="javascript:void(0)" (click)="redireccionar(item.request_id,item.sgc_tipo_tarea_id)"
+                  style="text-decoration: underline;">{{ item.filed }}</a>
+              </td>
+              <td>{{ item.filed_date | date: 'dd/MM/yyyy HH:mm:ss' }}</td> <!-- Fecha solicitud -->
+              <td>{{ item.due_date | date: 'dd/MM/yyyy HH:mm:ss' }}</td> <!-- Fecha vencimiento -->
+              <td>{{ item.request_type }}</td>
+              <td>{{ item.task }}</td>
+              <td>{{ item.assignment_date | date: 'dd/MM/yyyy HH:mm:ss' }}</td> <!-- Fecha asignación -->
+              <td>
+                <span class="estado-solicitud">
+                  {{ item.request_status }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Importación paginator -->
+      <div class="pagination-container">
+        <app-pagination (rechargeTable)="refreshTaskReceived()" [itemsDefault]="itemsPerDefault"></app-pagination>
+      </div>
+
+    </div>
+  </div>
+</div>

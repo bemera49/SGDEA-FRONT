@@ -1,0 +1,200 @@
+/* Inicio estilos generales */
+.containerQDetail {
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+  width: 100%;
+
+}
+
+.butonesGlobalesDetail{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.contenedorCard {
+  margin: 20px auto;
+  padding: 0 2%;
+  max-width: 100%;
+  width: 90%;
+}
+
+.nav-submenu {
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+
+.h4 {
+  font: 1.5625rem;
+}
+
+.card-title {
+  margin-bottom: 10px;
+}
+
+/* Fin estilos generales */
+
+
+/* Inicio estilos dropdown */
+.dropdown-item .material-icons {
+  color: #6C6B76;
+  margin-right: 8px;
+}
+
+.custom-button {
+  background-color: #00A3E4;
+  margin-right: 10px;
+  border-radius: 15px;
+  padding-right: 30px;
+}
+
+.custom-button .button-text {
+  font-family: 'Arial', sans-serif;
+  font-size: 16px;
+  color: white;
+  text-transform: none;
+}
+
+.dropdown-toggle::after {
+  margin-left: 10px;
+  color: white;
+}
+
+/* Fin estilos dropdown */
+
+
+/* Inicio Estilos Tabs */
+.custom-tab-group .mat-tab-label {
+  color: #555;
+  /* Color del texto inactivo */
+  font-weight: normal;
+}
+
+.custom-tab-group .mat-tab-label-active {
+  color: #000;
+  /* Color del texto activo */
+  font-weight: bold;
+  border-bottom: 2px solid #3f51b5;
+}
+
+/* Fin Estilos Tabs */
+
+
+/* INICIO Vista desplegable */
+
+/* Importante para los estilos de Vista desplegable*/
+.seeConcepts {
+  width: 0px;
+  /* Ancho del panel, definido en unidades de rem */
+  right: 0px;
+  /* Posición del panel alineado al borde derecho de la pantalla */
+  top: 0px;
+  /* Distancia desde el borde superior de la pantalla */
+  background: #FFFFFF;
+  /* Fondo del panel, establecido en color blanco */
+  box-shadow: -5px 4px 15px rgba(0, 0, 0, 0.05);
+  /* Sombra del panel para darle un efecto de elevación */
+  border-radius: 20px 0px 0px 20px;
+  /* Bordes redondeados en la esquina superior izquierda e inferior izquierda */
+  padding: 0.938rem;
+  /* Espacio interno alrededor del contenido del panel */
+  overflow: hidden;
+  /* Evitar que el contenido sobresalga */
+  transition: width 0.5s ease;
+  /* Transición para el efecto de deslizamiento */
+  display: none;
+
+}
+
+/* Clase adicional para el contenido interno para asegurar que se ajuste */
+.seeConcepts .content {
+  width: 100%;
+  height: auto;
+  /* Ajusta la altura automáticamente al contenido */
+}
+
+.seeConcepts.open {
+  width: 70vw;
+  /* Ancho deseado cuando el panel está abierto */
+  display: block;
+  /* Asegura que el panel sea visible */
+  height: 230vh;
+  /* Ajusta la altura automáticamente al contenido */
+  max-height: 300vh;
+  /* Asegura que el panel no exceda la altura de la ventana */
+  overflow-y: auto;
+  /* Permite desplazarse si el contenido es demasiado alto */
+  box-sizing: border-box;
+  /* Incluye el padding y el border en el width y height */
+}
+
+/* boton para cerrar Vista desplegable */
+.btn-circle-custom {
+  flex-grow: 0;
+  flex-shrink: 0;
+  border: 2px solid;
+  background-color: #008ED6;
+  border-radius: 50%;
+  width: 1.875rem;
+  height: 1.875rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-top: 2rem;
+  left: 1.1%;
+}
+
+/* responsive Vista desplegable */
+@media (max-width: 768px) {
+  .containerQDetail {
+    flex-direction: column;
+    align-items: center;
+    padding: 1em;
+  }
+
+  .seeConcepts {
+    width: 100%;
+    max-width: none;
+    margin: 0 0 1rem 0;
+    flex-grow: 1 !important;
+    /* Añadido */
+  }
+
+  .seeConcepts {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .btn-circle-custom {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+/* FIN Vista desplegable */
+
+
+app-sub-menu-juridical {
+  margin-bottom: 1rem;
+  /* Ajusta según sea necesario */
+}
+
+/* inicio botones subsanar */
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-subsanar {
+  margin: 0 5px;
+  /* Adjust spacing as needed */
+  height: 40px;
+}
+
+/* fin botones subsanar */

@@ -1,0 +1,71 @@
+<nav aria-label="nav-quality">
+  <menu class="menu-quality">
+    <li><a href="#/quality/quality-process-map">Mapa Proceso</a></li>
+    <li><span>/</span></li>
+    <li><span (click)="getreturnStep(1)">{{titleProcess}}</span></li>
+    <li><span>/</span></li>
+    <li *ngIf="!isCharacterizationSelected" (click)="getreturnStep(1)">{{titleSubproces}}</li>
+    <li *ngIf="!isCharacterizationSelected"><span>/</span></li>
+    <li class="breadcrumb-item active" aria-current="page">{{titleDocument}}</li>
+  </menu>
+</nav>
+
+<ng-container>
+  <app-header-process-map [Procedure]="Procedure" [isCharacterization]="Characterization" [stepReturn]="true"
+    [diagramData]="diagramdata" [diagramView]="DiagramView" (gostep)="gostep($event)"
+    (getreturnStep)="getreturnStep($event)" (descargarDocumento)="descargarDocumento($event)" [filebyId]="filebyId"
+    typeheader="documents">
+  </app-header-process-map>
+</ng-container>
+<nav class="w-100% row py-2 justify-content-around border-top align-content-center">
+</nav>
+<ng-container *ngIf="Procedure">
+  <section>
+    <ng-container>
+      <header class="table">
+        <div class=" mb-1 ml-3 mr-1" id='containerIcon'>
+          <i class="material-icons returnaq-icon conteicon">{{ Info }}</i>
+        </div>
+        <div>
+          <h6 class="titletable">Ficha de identificación</h6>
+        </div>
+      </header>
+      <section>
+        <ng-container>
+          <app-reusable-table [data]="Procedure" tableType="file"></app-reusable-table>
+        </ng-container>
+      </section>
+    </ng-container>
+    <ng-container>
+      <header class="table">
+        <div class=" mb-1 ml-3 mr-1" id='containerIcon'>
+          <i class="material-icons returnaq-icon conteicon">{{ Info }}</i>
+        </div>
+        <div>
+          <h6 class="titletable">Nivel descripción </h6>
+        </div>
+      </header>
+      <section>
+        <app-reusable-table *ngIf="Procedure" [nameProces]="datoProces" [data]="Procedure"
+          tableType="LevelOfDescriptión"></app-reusable-table>
+      </section>
+    </ng-container>
+    <!-- Tabla Mostrar Descripción del documento -->
+    <ng-container>
+      <header class="table">
+        <div class=" mb-1 ml-3 mr-1" id='containerIcon'>
+          <i class="material-icons returnaq-icon conteicon">{{ Info }}</i>
+        </div>
+        <div>
+          <h6 class="titletable">descripción</h6>
+        </div>
+      </header>
+      <section>
+        <ng-container *ngIf="datoSubproces">
+          <app-reusable-table [datossubproces]="datoSubproces" [data]="Procedure"
+            tableType="description"></app-reusable-table>
+        </ng-container>
+      </section>
+    </ng-container>
+  </section>
+</ng-container>

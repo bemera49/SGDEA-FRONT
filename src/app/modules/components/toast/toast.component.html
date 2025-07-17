@@ -1,0 +1,12 @@
+<div (mouseenter)="stopCountDown()" (mouseleave)="countDown()" class="toast_wrapper" [@openClose]="toastService.data && toastService.data.show ? 'open' : 'closed'">
+    <div class="inner_wrapper">
+      <span class="toast_icon material-icons">close</span>
+      <div class="divider"></div>
+      <div class="toast_content">
+        <h5 class="toast_title">{{ toastService.data.title }}</h5>
+        <div class="toast_text">{{ toastService.data.content }}</div>
+      </div>
+    </div>
+    <div class="progress_bar" [ngClass]="{ 'success': toastService.data && toastService.data.type === 1 }" #element></div>
+</div>
+  

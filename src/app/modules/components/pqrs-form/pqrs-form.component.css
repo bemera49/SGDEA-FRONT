@@ -1,0 +1,100 @@
+.example-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10px;
+}
+
+.section-slider-toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 0px;
+}
+
+.left-slider-toggle {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  line-height: 1.42857;
+  color: #aaaaaa;
+  font-weight: 400;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.iconTitleNoRadi {
+  color: #9a9a9a;
+  font-size: 30px;
+}
+
+.titleNoRadicado {
+  color: #365c8a;
+  font-weight: 400;
+}
+
+#swal2-title {
+  font-size: 20px !important;
+}
+
+.swal2-popup .swal2-title {
+  font-size: 20px !important;
+  font-size: 1.3em !important;
+}
+
+@media (max-width: 600px) {
+  .section-slider-toggle,
+  .example-section {
+    padding-bottom: 25px;
+  }
+}
+
+/* desactivar el stepper para que no se pueda interactuar */
+::ng-deep .mat-horizontal-stepper-header {
+  pointer-events: none !important;
+}
+::ng-deep .mat-step-header .mat-step-icon-selected {
+  background-color: #00a3e4;
+}
+
+.mat-horizontal-stepper-header-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mat-horizontal-stepper-content {
+  margin-top: 20px;
+}
+/* desactivar el stepper vvertical para que no se pueda interactuar */
+::ng-deep .mat-vertical-stepper-header {
+  pointer-events: none !important;
+}
+::ng-deep .mat-step-header .mat-step-icon-selected {
+  background-color: #00a3e4;
+}
+
+.mat-vertical-stepper-header-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mat-vertical-stepper-content {
+  margin-top: 20px;
+}
+
+.mat-form-field {
+  height: 70px;
+}
+
+.float-right {
+  float: right;
+}
+
+.breadcrumb {
+  background-color: #fff;
+}

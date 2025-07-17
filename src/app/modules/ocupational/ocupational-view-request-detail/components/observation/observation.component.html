@@ -1,0 +1,39 @@
+<!-- ACA ESTA HU09 -->
+
+<form [formGroup]="ObservationForm" (ngSubmit)="onSubmit()">
+  <app-layout-section [title]="'Observacion'">
+
+      <div class="row">
+        <div class="col-md-12">
+            <mat-form-field appearance="outline" class="observations">
+              <mat-label>Motivo de la Devolucion</mat-label>
+              <textarea matInput formControlName="observacion" maxlength="2000" rows="4"></textarea>
+            </mat-form-field>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="w-100 d-flex justify-content-center mt-2 gap-2">
+      
+            <ng-container>
+              <div class="text-center">
+                <button  type="submit" class="btn btn-primary">Devolver</button>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+
+
+  
+  </app-layout-section>
+</form>
+
+
+
+
+
+
+

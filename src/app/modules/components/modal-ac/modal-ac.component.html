@@ -1,0 +1,13 @@
+<mat-dialog-content>
+  <div class="d-flex flex-column justify-content-center align-items-center p-4">
+    <img src={{data.img}} alt="{{data.paragraph}}">
+    <p class="w-auto text-muted p-4">{{data.paragraph}}</p>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div class="d-flex justify-content-around w-100">
+    <button class="border border-primary text-primary" mat-button mat-dialog-close>No</button>
+    <button mat-button mat-dialog-close cdkFocusInitial mat-raised-button [mat-dialog-close]="true"
+      class="text-white bg-primary">Si</button>
+  </div>
+</mat-dialog-actions>

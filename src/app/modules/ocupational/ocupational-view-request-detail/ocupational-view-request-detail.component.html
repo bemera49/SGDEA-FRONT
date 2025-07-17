@@ -1,0 +1,128 @@
+<div *ngIf="!isMap()">
+
+  <app-sub-menu-ocupational [ItemsMenu]="itemsMenu"></app-sub-menu-ocupational>
+
+  <app-button-back-arrow [href]="exit"></app-button-back-arrow>
+
+  <div class="content-main px-3 mb-4">
+    <div class="d-flex flex-row flex-wrap justify-content-between align-items-center mb-3" style="gap: 15px">
+      <div class="d-flex flex-column">
+        <h2 class="text-black font-weight-bold">Solicitud {{dataView.filed}}</h2>
+        <b>{{dataView.state}}</b>
+      </div>
+      <div class="d-flex flex-row align-items-center flex-wrap justify-content-end" style="gap: 15px 15px">
+      </div>
+    </div>
+
+    <mat-tab-group #stepper *ngIf="tipoTareaId != 0">
+      <!--TAB 1-->
+
+      <mat-tab label="Solicitud">
+        <form [formGroup]="solicitudForm">
+          <app-layout-section>
+            <h3>Solicitud</h3>
+            <h4>Información general</h4>
+            <h4></h4>
+            <div class="row ">
+              <div class="col-md-6" *ngFor="let data of dataInformation">
+                <app-row-information [label]="data.label" [info]="data.value"></app-row-information>
+              </div>
+            </div>
+          </app-layout-section>
+
+        </form>
+      </mat-tab>
+      <!--TAB 2-->
+      <mat-tab label="Anexos" *ngIf="tipoTareaId == 1">
+
+        <form (submit)="submitFormReceive()" [formGroup]="pqrsForm" enctype="multipart/form-data" style="gap: 5px 0px">
+
+        <div class="row">
+          <div class="col-md-6">
+            <mat-card class="border border-2 mt-4">
+              <h3 class="font-weight-bold">Anexos</h3>
+              <div class="col-md-6 col-lg-6">
+              </div>
+              <div  class="col-md-12 col-lg-12 mt-2">
+                <!-- Input de archivo oculto -->
+                <input type="file" #fileInput (change)="onFileSelected($event)" multiple accept=".pdf"
+                  style="display: none;">
+
+                <button type="button" (click)="checkAndTriggerFileInput(fileInput)" class="btn btn-primary">Subir Anexos</button>
+                <p *ngIf="fileSizeError" style="color: red;">El archivo no debe superar los 5 MB.</p>
+
+
+
+                <!-- Botón visible para el usuario con estilos de Bootstrap -->
+                 <!-- 
+                <button type="button" (click)="fileInput.click()" class="btn btn-primary">Subir Anexos</button>
+                <p *ngIf="fileSizeError" style="color: red;">El archivo no debe superar los 5 MB.</p>
+                 -->
+                <ul class="mt-2">
+                  <li *ngFor="let archivo of archivosSubidos; let i = index" class="mt-1">
+                    {{ archivo.name }}
+                    <button type="button" (click)="eliminarArchivo(i)" class="btn btn-danger btn-sm">Eliminar</button>
+                  </li>
+                </ul>
+              </div>
+        
+            </mat-card>
+          </div>
+
+          <div class="col-md-6">
+            <mat-card class="border border-2 mt-4">
+              <h3 class="font-weight-bold">Tipo de Solicitud</h3>
+        
+              <div class="col-md-12 col-lg-12 mt-2">
+                <div class="container-select" *ngIf="TiposolicitudReceived && TiposolicitudReceived.length">
+                  <mat-select aria-label="No asignado" formControlName="tipoSolicitud">
+                    <mat-option *ngFor="let item of TiposolicitudReceived" [value]="item.id">
+                      {{item.nombre}}
+                    </mat-option>
+                  </mat-select>
+                </div>
+              </div>          
+              
+              <mat-error *ngIf="pqrsForm.invalid && pqrsForm.controls['tipoSolicitud'].touched">
+                <span class="error">Debe seleccionar un tipo de solicitud.</span>
+              </mat-error>
+
+            </mat-card>
+            </div>
+      
+        </div>
+
+            <mat-card class="border border-2 mt-4">
+              <div class="row">
+                <div class="col-md-12">
+                    <mat-form-field appearance="outline" class="observations">
+                      <mat-label>Aclaraciones</mat-label>
+                      <textarea matInput formControlName="aclaracion" maxlength="2000" rows="4"></textarea>
+                    </mat-form-field>
+                </div>
+              </div>
+      
+            </mat-card>
+
+
+
+
+            <button type="submit" [disabled]="!selectedFile || fileSizeError" class="btn px-5 py-3 mt-4 d-flex justify-content-center mx-auto mat-raised-button bg-primary">Guardar</button>
+      
+            <!-- 
+            <button type="submit"
+          class="btn px-5 py-3 mt-4 d-flex justify-content-center mx-auto mat-raised-button bg-primary" >Guardar</button>
+            
+            -->
+
+      </form>
+
+
+      </mat-tab>
+
+
+
+    </mat-tab-group>
+    
+  </div>
+</div>

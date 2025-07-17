@@ -1,0 +1,257 @@
+<div>
+  <app-breadcrumb
+    [breadcrumbOn]="breadcrumbOn"
+    [breadcrumbRouteActive]="breadcrumbRouteActive"
+  ></app-breadcrumb>
+</div>
+
+<div class="container-gestionar-traslado content-main mb-4 px-3">
+  <div class="d-flex flex-column">
+    <button (click)="goBack()" mat-button style="width: 150px">
+      <mat-icon>chevron_left</mat-icon>Volver
+    </button>
+    <h3 class="text-black font-weight-bold">
+      {{ infoData.title }}
+    </h3>
+  </div>
+</div>
+<div class="modal-container">
+  <div class="container-view">
+    <form [formGroup]="formSolicitud">
+      <div class="inputs">
+        <div class="input">
+          <mat-label>Fecha de solicitud*</mat-label>
+          <mat-form-field appearance="outline">
+            <input
+              formControlName="fsolicitud"
+              matInput
+              placeholder="Escriba"
+            />
+          </mat-form-field>
+        </div>
+        <div class="input">
+          <mat-label>Dependencia que solicita*</mat-label>
+          <mat-form-field appearance="outline">
+            <input
+              formControlName="dependencia"
+              matInput
+              maxlength="150"
+              placeholder="Escriba"
+            />
+          </mat-form-field>
+        </div>
+        <div class="input">
+          <mat-label>Nombre del solicitante*</mat-label>
+          <mat-form-field appearance="outline">
+            <input
+              formControlName="nombreSolicitante"
+              matInput
+              maxlength="100"
+              placeholder="Escriba"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="inputs">
+        <div class="input">
+          <mat-label>Aviso SAP*</mat-label>
+          <mat-form-field appearance="outline">
+            <input
+              formControlName="avisoSap"
+              matInput
+              maxlength="12"
+              placeholder="Escriba"
+            />
+          </mat-form-field>
+        </div>
+        <div class="input">
+          <mat-label>Fecha inicial de préstamo*</mat-label>
+          <div class="input-date">
+            <mat-form-field appearance="outline">
+              <input
+                matInput
+                [matDatepicker]="picker"
+                formControlName="fInicial"
+                placeholder="Seleccione"
+              />
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <button (click)="picker.open()">
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+            </button>
+          </div>
+        </div>
+        <div class="input">
+          <mat-label>Fecha final de préstamo*</mat-label>
+          <div class="input-date">
+            <mat-form-field appearance="outline">
+              <input
+                matInput
+                [matDatepicker]="picker2"
+                formControlName="fFinal"
+                placeholder="Seleccione"
+              />
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+            <button (click)="picker2.open()">
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker2"
+              ></mat-datepicker-toggle>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="input-motivo">
+        <mat-label>Motivo de la solicitud*</mat-label>
+        <mat-form-field appearance="outline">
+          <textarea
+            formControlName="motivo"
+            matInput
+            maxlength="500"
+            placeholder="Escriba"
+          ></textarea>
+        </mat-form-field>
+      </div>
+    </form>
+  </div>
+  <h3 *ngIf="urlActive === 'ViewDetail'">Expedientes solicitados</h3>
+  <div *ngIf="urlActive === 'ViewDetail'" class="container-table">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Dependencia</th>
+          <th scope="col">Serie</th>
+          <th scope="col">Subserie</th>
+          <th scope="col">Expediente</th>
+          <th scope="col">Fecha Ini</th>
+          <th scope="col">Fecha Fin</th>
+          <th scope="col">Archivo</th>
+          <th scope="col">Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of infoData.data; index as i">
+          <th scope="row">{{ i + 1 }}</th>
+          <th>{{ item.dependenciaCreador }}</th>
+          <th>{{ item.serie }}</th>
+          <th>{{ item.subserie }}</th>
+          <th>{{ item.nombreExpediente }}</th>
+          <th>{{ item.fechaInicio ?? "N/A" }}</th>
+          <th>{{ item.fechaFin ?? "N/A" }}</th>
+          <th>{{ item.archivo }}</th>
+          <th>{{ item.statusText }}</th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div
+    *ngIf="urlActive === 'ViewDetail'"
+    class="d-flex flex-row flex-wrap justify-content-end pt-2"
+    style="gap: 15px 15px; padding: 0% 1rem"
+  >
+    <button
+      (click)="listadoPrestamo()"
+      mat-stroked-button
+      class="text-primary font-weight-bold border border-primary"
+    >
+      {{ btnIzquierdoDefault }}
+    </button>
+
+    <button
+      (click)="submit()"
+      mat-raised-button
+      class="text-white px-4 bg-primary"
+      aria-label="Example icon-button with a menu"
+    >
+      {{ btnDerechoDefault }}
+    </button>
+  </div>
+  <div
+    *ngIf="infoData.estado === 3 || infoData.estadoRegPro === 1"
+    class="d-flex container-view"
+    style="gap: 15px 15px; padding: 0% 1rem; flex-direction: column"
+  >
+    <h3 class="text-black font-weight-bold">Descripción de Prórroga:</h3>
+    <p>
+      {{ infoData.justificaPrestamo }}
+    </p>
+  </div>
+  <section *can="['expediente%approved%folder-view-loan']">
+    <div
+      *ngIf="
+        infoData.estado === null ||
+        infoData.estadoRegPro === 1
+      "
+      class="d-flex flex-row flex-wrap justify-content-end pt-2"
+      style="gap: 15px 15px; padding: 0% 1rem"
+    >
+      <button
+        (click)="listadoPrestamo()"
+        mat-stroked-button
+        class="text-primary font-weight-bold border border-primary"
+      >
+        {{ btnIzquierdoDefault }}
+      </button>
+
+      <button
+        (click)="submit()"
+        mat-raised-button
+        class="text-white px-4 bg-primary"
+        aria-label="Example icon-button with a menu"
+      >
+        {{ btnDerechoDefault }}
+      </button>
+    </div>
+  </section>
+
+  <div
+    *ngIf="
+      infoData.estado !== null &&
+      urlActive !== 'ViewDetail' &&
+      infoData.estadoRegPro === null
+    "
+    class="d-flex container-view"
+    style="gap: 15px 15px; padding: 0% 1rem; flex-direction: column"
+  >
+    <h3 class="text-black font-weight-bold">Descripción/Justificación:</h3>
+    <p>
+      {{
+        infoData.estado === 1
+          ? infoData.aprobacionSolicitud
+          : infoData.rechazoSolicitud
+      }}
+    </p>
+  </div>
+
+  <div
+    *ngIf="
+      infoData.estado === 1 &&
+      urlActive !== 'ViewDetail' &&
+      userData.idRol !== 37
+    "
+    class="d-flex flex-row flex-wrap justify-content-end pt-2"
+    style="gap: 15px 15px; padding: 0% 1rem"
+  >
+    <button
+      (click)="openModalProrroga('Solicitud de Devolución')"
+      mat-stroked-button
+      class="text-primary font-weight-bold border border-primary"
+    >
+      DEVOLUCIÓN
+    </button>
+
+    <button
+      (click)="openModalProrroga('Solicitud de Prórroga')"
+      mat-raised-button
+      class="text-white px-4 bg-primary"
+      aria-label="Example icon-button with a menu"
+    >
+      PRORROGAR
+    </button>
+  </div>
+</div>

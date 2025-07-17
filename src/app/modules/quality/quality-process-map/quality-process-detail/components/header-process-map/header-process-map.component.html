@@ -1,0 +1,61 @@
+<ng-container *ngIf="typeheader === 'documents'">
+  <header class="d-flex row pl-4" id="headerContainer">
+    <div class="pl-2">
+      <div class="d-flex justify-content-center align-items-center" id="containerIcon" *ngIf="filebyId">
+        <ng-container [ngSwitch]="filebyId.extesion">
+          <img *ngSwitchCase="'xlsx'" src='assets/img/logos/excel-icon.svg' alt="Excel Icon">
+          <img *ngSwitchCase="'docx'" src='assets/img/logos/word-icon.svg' alt="Word Icon">
+          <img *ngSwitchCase="'pptx'" src='assets/img/logos/powerpoint-icon.svg' alt="PowerPoint Icon">
+          <img *ngSwitchCase="'vsdx'" src='assets/img/logos/Visio-icon.svg' alt="Vision Icon">
+        </ng-container>
+      </div>
+    </div>
+    <div class="col mb-0 centerheader">
+      <span class="mb-0 subtituloPAB">Metadatos documento</span>
+      <h5 class="mt-0 mb-0 tituloPB" *ngIf="Procedure"> {{Procedure.code}} - {{ cleanName(Procedure.name,
+        Procedure.code) }}</h5>
+      <h5 class="mt-0 mb-0 tituloPB" *ngIf="!Procedure">No hay Procedimiento correspondiente al subproceso</h5>
+      <span class="mb-0 subtituloPAB" *ngIf="Procedure"> {{Procedure.documental}}</span>
+    </div>
+    <!-- Iconos -->
+    <div id="container-icons" *ngIf="Procedure">
+      <ng-container class="flex container-icons">
+        <img *ngIf="diagramView === true && diagramData" src="assets/img/logos/marker.svg" alt="vision Icon"
+          (click)="onDescargarDocumento(diagramData.id, diagramData.original_name )" class="header-icon mr-1">
+      </ng-container>
+      <!-- icono del lapiz para editar m[as adelante en HU-25] -->
+      <i class="material-icons returnaq-icon header-icon mr-1">{{ edit}}</i>
+      <i class="material-icons returnaq-icon header-icon mr-1"
+        (click)="onDescargarDocumento(filebyId.id, filebyId.original_name)">{{ download}}</i>
+      <i *ngIf="!stepReturn" class="material-icons returnaq-icon header-icon" (click)="onGoStep(Procedure.id, 3)">{{
+        fullscreen}}</i>
+      <i *ngIf="stepReturn && !isCharacterization"
+        class="material-icons returnaq-icon iconos padding-icon header-icon step3" (click)="ongetreturnStep(2)">{{
+        close_fullscreen }}</i>
+      <i *ngIf="stepReturn && isCharacterization"
+        class="material-icons returnaq-icon iconos padding-icon header-icon stepcaracterizaction"
+        (click)="ongetreturnStep(1)">{{
+        close_fullscreen }}</i>
+
+    </div>
+  </header>
+</ng-container>
+<ng-container *ngIf="typeheader === 'Subproces' || typeheader === 'Process'">
+  <header class="d-flex row pl-4 " id="headerContainer">
+    <div class="pl-2">
+      <div class="d-flex justify-content-center align-items-center" id="containerIcon">
+        <i class="material-icons returnaq-icon mt-1" id="conteicon">{{ account_tree }}</i>
+      </div>
+    </div>
+    <div class="col mb-0 centerheader">
+      <span class="mb-0 subtituloPAB" *ngIf="typeheader === 'Process'">Ficha de proceso</span>
+      <span class="mb-0 subtituloPAB" *ngIf="typeheader === 'Subproces'">Ficha de subProceso</span>
+      <h5 class="mt-0 mb-0 tituloPB">{{data.code}} - {{ cleanName(data.name, data.code) }}</h5>
+    </div>
+    <!-- Iconos -->
+    <div id="container-icons" *ngIf="typeheader === 'Subproces'">
+      <i class="material-icons returnaq-icon iconos header-icon" (click)="onGoStep(data.id, 2)">{{
+        fullscreen}}</i>
+    </div>
+  </header>
+</ng-container>

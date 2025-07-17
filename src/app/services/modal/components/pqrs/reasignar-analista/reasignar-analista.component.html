@@ -1,0 +1,38 @@
+<!-- HU 009 - Reasignacion general analista -->
+
+<mat-dialog-content class="modal-container">
+    <div class="d-flex flex-row align-items-center justify-content-between">
+      <mat-icon class="text-primary">person</mat-icon>
+      <button mat-icon-button (click)="onConfirmClose()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <h2 mat-dialog-title class="w-100 mt-2 text-body">{{ data.title }}</h2>
+    <p class="w-100">Completa los campos para completar la reasignación</p>
+
+    <form class="row" [formGroup]="form">
+      <mat-form-field appearance="fill" class="col-md-12">
+        <mat-label>Funcionario para reasignar</mat-label>
+        <mat-select formControlName="funcionario">
+          <mat-option *ngFor="let funcionario of funcionarios" [value]="funcionario.id">{{funcionario?.user_detalle?.full_name}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.controls['funcionario'].invalid || form.controls['funcionario'].touched">
+          Este campo es requerido
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="col-md-12">
+        <mat-label>Motivo para reasignación</mat-label>
+        <textarea formControlName="motivo" matInput></textarea>
+        <mat-error *ngIf="form.controls['motivo'].invalid || form.controls['motivo'].touched">
+          Este campo es requerido
+        </mat-error>
+      </mat-form-field>
+
+      <div class="d-flex flex-wrap flex-md-nowrap justify-content-center" style="gap: 10px">
+        <button type="button" mat-stroked-button class="border border-primary text-primary bg-white w-100" (click)="onConfirmClose()">Cancelar</button>
+        <button mat-flat-button class="bg-primary text-white w-100" (click)="onConfirm()">Guardar</button>
+      </div>
+    </form>
+</mat-dialog-content>

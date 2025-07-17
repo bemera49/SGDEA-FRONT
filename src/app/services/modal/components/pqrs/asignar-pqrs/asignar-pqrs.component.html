@@ -1,0 +1,42 @@
+<!-- HU 008 - Asignar PQRS o solicitud -->
+
+<mat-dialog-content class="modal-container">
+  <div class="d-flex flex-row align-items-center justify-content-between">
+    <mat-icon class="text-primary">account_tree</mat-icon>
+    <button mat-icon-button (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <form [formGroup]="form">
+    <h2 mat-dialog-title class="w-100 mt-2 text-body">{{ data.title }}</h2>
+    <p class="w-100">Completa los campos para realizar el proceso.</p>
+
+    <span class="d-flex flex-column col-md-12 col-lg-12">
+      <label>Area*</label>
+      <mat-form-field appearance="outline" class="w-100">
+        <input placeholder="Area" matInput formControlName="area">
+        <mat-error *ngIf="form.controls['area'].invalid && form.controls['area'].touched">
+          Este campo es requerido
+        </mat-error>
+      </mat-form-field>
+    </span>
+    <span class="d-flex flex-column col-md-12 col-lg-12">
+      <label>Usuario proyector*</label>
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-select placeholder="Usuario proyector" formControlName="us_proyector">
+          <mat-option *ngFor="let us of listProyectores" [value]="us.value">{{us.name}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.controls['us_proyector'].invalid && form.controls['us_proyector'].touched">
+          Este campo es requerido
+        </mat-error>
+      </mat-form-field>
+    </span>
+  </form>
+
+  <div class="d-flex flex-wrap flex-md-nowrap justify-content-center" style="gap: 10px">
+    <button type="button" mat-stroked-button class="border border-primary text-primary bg-white w-100" (click)="close()"
+      [disabled]="modalOpen">Cancelar</button>
+    <button mat-flat-button class="bg-primary text-white w-100" [disabled]="form.invalid" (click)="submit()"
+      [disabled]="modalOpen">Aceptar</button>
+  </div>
+</mat-dialog-content>

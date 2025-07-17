@@ -1,0 +1,89 @@
+<div class="test">
+  <h2 style="color: #000000; font-weight: 300; font-family: 'Poppins', sans-serif;">
+    <strong>Trazabilidad</strong>
+  </h2>
+  <div class="card">
+    <div class="card-body">
+      <div class="table-responsive">
+        <h3 style="color: #000000; font-weight: 300; font-family: 'Poppins', sans-serif;">
+          <strong>Listado de Colaboradores</strong>
+        </h3><br>
+  
+          <!--
+          <table class="table">
+          <thead>
+          <tr>
+          <th><strong>Analista DGCP</strong></th>
+          <th><strong>Estado SAP</strong></th>
+          <th><strong># Radicado</strong></th>
+          <th><strong>Tipo de solicitud</strong></th>
+          <th><strong>Nombre del documento</strong></th>
+          <th><strong>Fecha designación</strong></th>
+          <th><strong>Estado de la solicitud</strong></th>
+          </tr>
+          </thead>
+          <tbody *ngIf="this.TraceabilityReceived">
+          <tr *ngFor="let item of this.TraceabilityReceived" [ngClass]="{'gray-row': isNoEmptyObject(item.inactive)}">
+          <td>{{ item.name_analyst }}</td>
+          <td>{{ displayState(item.analyst_state) }}</td>
+          <td>{{ item.filed }}</td>
+          <td>{{ item.request_type }}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.date | date: 'shortDate' }}</td>
+          <td>{{ item.state }}</td>
+          </tr>
+          </tbody>
+          </table>
+          -->
+  
+        <table class="table">
+          <thead>
+            <tr>
+              <th><strong>Analista DGCP</strong></th>
+              <th><strong>Estado SAP</strong></th>
+              <th><strong># Radicado</strong></th>
+              <th><strong>Tipo de solicitud</strong></th>
+              <th><strong>Nombre del documento</strong></th>
+              <th><strong>Fecha designación</strong></th>
+              <th><strong>Estado de la solicitud</strong></th>
+            </tr>
+          </thead>
+          <tbody *ngIf="TraceabilityReceived">
+            <ng-container *ngFor="let item of TraceabilityReceived; let i = index" >
+              <ng-container *ngIf="item.solicitude && item.solicitude.length > 0; else noSolicitudeTemplate">
+                <ng-container *ngFor="let subItem of item.solicitude">
+                  <tr [ngClass]="{'gray-row': isNoEmptyObject(item.inactive)}">
+                    <td>{{ item.name_analyst }}</td>
+                    <td>{{ displayState(item.analyst_state) }}</td>
+                    <td>{{ subItem.filed }}</td>
+                    <td>{{ subItem.request_type }}</td>
+                    <td>{{ subItem.name }}</td>
+                    <td>{{ subItem.date | date: 'shortDate' }}</td>
+                    <td>{{ subItem.state }}</td>
+                  </tr>
+                </ng-container>
+              </ng-container>
+              <ng-template #noSolicitudeTemplate>
+                <tr [ngClass]="{'gray-row': isNoEmptyObject(item.inactive)}">
+                  <td>{{ item.name_analyst }}</td>
+                  <td>{{ displayState(item.analyst_state) }}</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </ng-template>
+            </ng-container>
+          </tbody>
+        </table>
+
+      <div class="pagination-container">
+        <app-pagination (rechargeTable)="refreshTraceabilityReceived()" [itemsDefault]="itemsPerDefault"></app-pagination>
+      </div>
+  </div>
+  
+  </div>
+  </div>
+  </div>
+  

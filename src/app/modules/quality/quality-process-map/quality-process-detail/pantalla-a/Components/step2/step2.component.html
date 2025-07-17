@@ -1,0 +1,85 @@
+<nav aria-label="nav-quality">
+  <menu class="menu-quality">
+    <li><a href="#/quality/quality-process-map">Mapa Proceso</a></li>
+    <li><span>/</span></li>
+    <li class="breadcrumb-item"><span (click)="returnStep(1)">{{titleProcess}}</span></li>
+    <li><span>/</span></li>
+    <li class="breadcrumb-item active" aria-current="page">{{titleSubproces}}</li>
+  </menu>
+</nav>
+
+<section class="pl-5">
+  <header class="d-flex row pl-4" id="headerContainer">
+    <div class="pt-4">
+      <div class="d-flex justify-content-center align-items-center" id="containerIconh">
+        <i class="material-icons returnaq-icon mt-1" id="conteicon">{{ account_tree }}</i>
+      </div>
+    </div>
+    <div class="col mb-0">
+      <span class="mb-0 subtituloPAB">Subproceso</span>
+      <h5 class="mt-0 mb-0 tituloPB">{{DatosSubprocess.code}} - {{DatosSubprocess.name}}</h5>
+    </div>
+    <button class="returnstepicon">
+      <i class="material-icons returnaq-icon iconosheader padding-icon returnstepicon" (click)="returnStep(1)">{{
+        close_fullscreen }}</i>
+    </button>
+  </header>
+  <mat-tab-group class="w-100% border-top align-content-center" [(selectedIndex)]="selectedTab"
+    (selectedIndexChange)="selectedTab = $event">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <i *ngIf="selectedTab === 0" class="material-icons returnaq-icon iconosnav">{{ Info }}</i>
+        <span class="titlenav">
+          Información
+        </span>
+      </ng-template>
+      <section class="flex p-4" *ngIf="DatosSubprocess">
+        <ng-container>
+          <header class="table">
+            <div class=" mb-1 ml-3 mr-1" id='containerIcon'>
+              <i class="material-icons returnaq-icon conteicon">{{ Info }}</i>
+            </div>
+            <div>
+              <h6 class="titletable">Información general del Subproceso</h6>
+            </div>
+          </header>
+          <section>
+            <app-reusable-table [data]="DatosSubprocess" tableType="subprocess"></app-reusable-table>
+          </section>
+        </ng-container>
+
+        <ng-container>
+          <header class="table">
+            <div class=" mb-1 ml-3 mr-1" id='containerIcon'>
+              <i class="material-icons returnaq-icon conteicon">{{ Info }}</i>
+            </div>
+            <div>
+              <h6 class="titletable">Área responsable del subproceso </h6>
+            </div>
+          </header>
+          <section>
+            <app-reusable-table *ngIf="datosProceso" [data]="this.datosProceso.procedure_lead_area"
+              tableType="Arearesponsable"></app-reusable-table>
+          </section>
+        </ng-container>
+
+
+        <ng-container>
+          <header class="table">
+            <div class=" mb-1 ml-3 mr-1" id='containerIcon'>
+              <i class="material-icons returnaq-icon conteicon">{{ Info }}</i>
+            </div>
+            <div>
+              <h6 class="titletable">Documentos</h6>
+            </div>
+          </header>
+          <section>
+            <p>Selecciona un documento para ver más Información</p>
+            <app-table-style3 [documents]="tablesub3" tableType="Procedimientosstep2"
+              (downloadClicked)="descargarDocumento($event)"></app-table-style3>
+          </section>
+        </ng-container>
+
+      </section>
+    </mat-tab>
+  </mat-tab-group>

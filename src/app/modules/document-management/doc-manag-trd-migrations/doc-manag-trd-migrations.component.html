@@ -1,0 +1,86 @@
+<div class="w-100 py-4">
+  <mat-form-field appearance="outline">
+    <mat-label>Nombre versión TRD*</mat-label>
+    <input [(ngModel)]="nameTrdVersion" disabled matInput>
+  </mat-form-field>
+
+  <div class="mb-3">
+    <label for="formFile" class="form-label">Seleccionar archivo</label>
+    <input class="form-control"  (change)="onFileSelected($event)" type="file" id="formFile">
+  </div>
+
+
+   <!-- Start Row One -->
+   <div class="row ">
+    <!-- start Detail card -->
+    <div class="col-12">
+        <div class="card ">
+            <div class="card-header card-header-info card-header-icon">
+                <h4 class="card-title">
+                  Registro de migraciones
+                </h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <!-- Datatable -->
+                        <div #dataTable class="table-responsive" *ngIf="trdMigrations.length > 0   else ''">
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">Nombre Archivo</th>
+                                <th scope="col">Fecha Cargue</th>
+                                <th scope="col">Cantidad  Registros</th>
+                                <th scope="col">Estado</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let trd of trdMigrations; let i = index">
+                                <th scope="row">{{trd.nombre}}</th>
+                                <td >{{trd.fecha}} </td>
+                                <td>{{trd.registros}}</td>
+                                <td>{{trd.registros > 1 ? 'Sin novedades': 'Con novedades' }}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <!-- Non results alert -->
+                        <div class="alert alert-primary" role="alert" *ngIf="!trdMigrations.length">
+                         No encontramos migraciones asociadas a esta TRD
+                        </div>
+                        <!-- Pagination -->
+                        <nav class="d-flex justify-content-end" aria-label="Page navigation example">
+                          <ul class="pagination">
+                            <li class="page-item" [class.disabled]="currentPage === 1">
+                              <a class="page-link" (click)="onPageChange(currentPage - 1)" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                              </a>
+                            </li>
+                            <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="currentPage === i + 1">
+                              <a class="page-link" (click)="onPageChange(i + 1)">{{ i + 1 }}</a>
+                            </li>
+                            <li class="page-item" [class.disabled]="currentPage === totalPages">
+                              <a class="page-link" (click)="onPageChange(currentPage + 1)" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </nav>
+                    </div>
+                    <div *ngIf="trdMigrations.length > 0   else ''" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 w-100">
+                        <div class="d-flex justify-content-end mt-3">
+                          <button class="btn bg-primary" type="button" id="exportToExcelButton"
+                            style="background-color: #00A3E4;  margin-right: 10px;" (click)="downloadFileExcel()">
+                            Exportar a Excel
+                          </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- End Detail card -->
+</div>
+<!-- End Row One -->
+</div>

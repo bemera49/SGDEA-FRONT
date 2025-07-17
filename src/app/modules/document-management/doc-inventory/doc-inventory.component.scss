@@ -1,0 +1,49 @@
+::ng-deep .mat-form-field-wrapper {
+  padding-bottom: 0 !important;
+}
+.container-form {
+  margin: 1rem 1rem 0rem 1rem;
+  padding: 1%;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+  background-color: white;
+  border-radius: 8px;
+  form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 0;
+    .input {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      mat-label {
+        width: 30%;
+      }
+      mat-form-field {
+        width: 50%;
+      }
+    }
+  }
+}
+.container-table {
+  padding: 1%;
+  height: 60%;
+  overflow: scroll;
+  scrollbar-width: thin;
+}
+
+.buttons-exportar {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  position: sticky;
+  bottom: 0;
+  background: #fff;
+  z-index: 1;
+  flex-wrap: wrap; /* Permite que los botones se reorganicen en varias líneas si es necesario */
+}
+
+.exportar {
+  display: flex;
+  gap: 10px; /* Espacio entre los botones de exportación */
+  flex-wrap: wrap; /* Permite que los botones se reorganicen en varias líneas si es necesario */
+}

@@ -1,0 +1,48 @@
+<section class="container-tree mt-3">
+  <div *ngFor="let subprocess of datosTree" class="acordion border-3x">
+    <button class="card-tree row d-flex w-100">
+      <div class="card-tree-h row " (click)="toggleExpandedAccordion($event, subprocess)">
+        <i class="material-icons returnaq-icon iconos mr-1"
+          [style.color]="subprocess.expanded ? '#023F5E' : '#E2E2E2'">{{ subprocess.expanded ? 'expand_less' :
+          'expand_more'
+          }}</i>
+        <!-- Aplicamos la clase condicionalmente -->
+        <span class="codetitle d-inline-block mr-5"
+          [ngClass]="{'blue-text': subprocess.expanded}">{{subprocess.code}}</span>
+        <span class="treetitle ml-4" [ngClass]="{'blue-text': subprocess.expanded}">{{ subprocess.name }}</span>
+      </div>
+
+      <div *ngIf="subprocess.expanded" class="card-tree-b p-0">
+        <div *ngFor="let document of subprocess.documents" class="acordion w-100">
+          <div class="card-tree-inter w-100 ">
+            <!-- <button class="card-tree-h file container-file" (click)="toggleExpandedAccordion($event,)">
+              <i class="material-icons returnaq-icon iconos"
+                [style.color]="document.expanded ? '#023F5E' : '#E2E2E2'">{{ document.expanded ? 'expand_less' :
+                'expand_more' }}</i>
+              
+              <span class=" mr-2 codetitle-treeh d-inline-block treetitle"
+                [ngClass]="{'blue-text': document.expanded}">{{document.code}}</span>
+              <span class="treetitle" [ngClass]="{'blue-text': document.expanded}">{{ cleanName(document.name,
+                document.code) }}</span>
+            </button>
+ -->
+            <button *ngFor="let file of document.files " (click)="toggleExpandedAccordion($event,  document)"
+              class="file contain-filed ">
+              <img src='assets/img/logos/TreeIconfiles.svg' class="material-icons returnaq-icon mr-1 ml-4" />
+              <ng-container [ngSwitch]="file.extesion">
+                <img class="iconostypefile mr-1" *ngSwitchCase="'xlsx'" src='assets/img/logos/excel-icon.svg'
+                  alt="Excel Icon">
+                <img class="iconostypefile mr-1" *ngSwitchCase="'docx'" src='assets/img/logos/word-icon.svg'
+                  alt="Word Icon">
+                <img class="iconostypefile mr-1" *ngSwitchCase="'pptx'" src='assets/img/logos/powerpoint-icon.svg'
+                  alt="PowerPoint Icon">
+              </ng-container>
+              <span class="treetitle black-text"> {{ cleanName(file.name, file.code) }}</span>
+            </button>
+
+          </div>
+        </div>
+      </div>
+    </button>
+  </div>
+</section>

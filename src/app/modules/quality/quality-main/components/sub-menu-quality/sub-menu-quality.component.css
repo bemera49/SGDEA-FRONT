@@ -1,0 +1,33 @@
+a{
+  text-decoration: none;
+}
+
+li{
+  list-style-type: none;
+}
+
+menu{
+  padding: 0;
+}
+.menu-quality{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.menu-quality li a{
+  font-weight: 300;
+  color: #A4A4AD;
+}
+
+.menu-quality li span{
+  color: #A4A4AD;
+}
+
+.menu-quality li a:hover{
+  color: #023F5E;
+}
+
+.menu-quality li a.router-link-active-quality{
+  color: #023F5E;
+}

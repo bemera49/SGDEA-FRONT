@@ -1,0 +1,103 @@
+<div class="table-responsive">
+  <table>
+    <!--     || tableType === 'Procedimientos'" -->
+    <ng-container *ngIf="tableType === 'subproceso'">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Nombre del subproceso</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of pro">
+          <td data-label="Code">{{ row.code }}</td>
+          <td data-label="Name">{{ cleanName(row.name, row.code) }}</td>
+          <td data-label="Actions">
+            <i class="material-icons returnaq-icon iconos padding-icon" (click)="getStep(row.id)">{{
+              fullscreen }}</i>
+          </td>
+        </tr>
+      </tbody>
+    </ng-container>
+
+    <ng-container *ngIf="tableType === 'documents'">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Nombre del documento</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of pro">
+          <td data-label="Code">{{ row.code }}</td>
+          <td data-label="Name">{{ cleanName(row.name, row.code) }}</td>
+          <td data-label="Actions">
+            <i class="material-icons returnaq-icon iconos padding-icon" (click)="getStep(row.id)">{{
+              fullscreen }}</i>
+          </td>
+        </tr>
+      </tbody>
+    </ng-container>
+
+    <ng-container *ngIf="tableType === 'Procedimientosstep2'">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Code</th>
+          <th>Tipo</th>
+          <th>#</th>
+          <th>Name</th>
+          <th>Subtitulo</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of documents; let i = index" (click)="handleRowClick(row, i)"
+          [ngClass]="{'selected-row': checked[i]}">
+          <td data-label="Select">
+            <label>
+              <input type="checkbox" [(ngModel)]="checked[i]" [value]="row.id" [checked]="selectindex === i"
+                (change)="selectitem(i)" (click)="handleRowClick(row, i)">
+            </label>
+          </td>
+          <td data-label="Code" class="codecolumn">
+            <span>
+              <ng-container [ngSwitch]="row.extesion">
+                <img class="tableicon" *ngSwitchCase="'xlsx'" src='assets/img/logos/excel-icon.svg' alt="Excel Icon">
+                <img class="tableicon" *ngSwitchCase="'docx'" src='assets/img/logos/word-icon.svg' alt="Word Icon">
+                <img class="tableicon" *ngSwitchCase="'pptx'" src='assets/img/logos/powerpoint-icon.svg'
+                  alt="PowerPoint Icon">
+                <img class="tableicon" *ngSwitchCase="'vsdx'" src='assets/img/logos/Visio-icon.svg' alt="Vision Icon">
+              </ng-container>
+              {{ row.code }}
+            </span>
+          </td>
+          <td data-label="Tipo">
+            <span>{{ truncateText(row.documental, 7) }}</span>
+          </td>
+          <td data-label="#">
+            <span>{{ row.version }}</span>
+          </td>
+          <td data-label="Name">
+            <span>{{ cleanName(row.name, row.code) }}</span>
+          </td>
+          <td data-label="Subtitulo">
+            <span>{{ cleanName(row.subtitle, row.code) }}</span>
+          </td>
+          <td data-label="Download">
+            <i *ngIf="!checked[i]" class="material-icons returnaq-icon iconos padding-icon"
+              (click)="DownloadClick(row.fileId, row.name)">
+              {{ download }}
+            </i>
+          </td>
+        </tr>
+      </tbody>
+    </ng-container>
+  </table>
+  <div class="container-pag" *ngIf="tableType === 'subproceso'">
+    <app-pagination (rechargeTable)=" refreshTaskReceived()" [itemsDefault]="itemsPerDefault"></app-pagination>
+  </div>
+
+</div>b

@@ -1,0 +1,26 @@
+.modal-container {
+    width: 600px;
+}
+label {
+  font-weight: 400;
+}
+
+
+.modal-button {
+    width: 90%;
+}
+
+td {
+  font-size: 14px;
+}
+
+@media (max-width: 600px) {
+    .modal-container {
+        width: 100%;
+    }
+
+    .modal-button {
+        width: 80%;
+    }
+}
+

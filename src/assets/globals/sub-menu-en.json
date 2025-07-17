@@ -1,0 +1,377 @@
+{
+  "users": [
+    {
+      "name": "Manage users",
+      "route": "users/users-index/false",
+      "operacion": "user%index",
+      "icon": "person",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Manage profiles",
+      "route": "users/roles-index",
+      "operacion": "roles%roles%index",
+      "icon": "people",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Manage operations",
+      "route": "users/operations-index",
+      "operacion": "roles%roles-operaciones%index",
+      "icon": "build",
+      "ruta_completa": 1
+    }
+  ],
+  "documentManagement": [
+    {
+      "name": "Dependencies",
+      "route": "documentManagement/dependencies-index",
+      "operacion": "gestionDocumental%trd-dependencias%index",
+      "icon": "dns",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Upload TRD",
+      "route": "documentManagement/upload-trd",
+      "operacion": "gestionDocumental%trd%load-trd-file",
+      "icon": "settings_applications",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Versioning TRD",
+      "route": "documentManagement/version-trd-index",
+      "operacion": "gestionDocumental%trd-tmp%index",
+      "icon": "bookmarks",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Folder",
+      "route": "/documentManagementfolder-index/false",
+      "operacion": "gestionDocumental%expedientes%index",
+      "icon": "fact_check",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Gestionar Series y Subseries",
+      "route": "documentManagement/folder-series-inactivation",
+      "operacion": "gestionar%series%subseries%inactivacion",
+      "icon": "fact_check",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Gestionar tipos documentales",
+      "route": "documentManagement/folder-type-documental",
+      "operacion": "gestionar%tipos%documentales%trd",
+      "icon": "fact_check",
+      "ruta_completa": 1
+    }
+  ],
+  "correspondenceManagement": [
+    {
+      "name": "Distribution Shipping",
+      "route": "correspondenceManagement/distribution-shipping-index",
+      "operacion": "radicacion%distribuciony-envio%index",
+      "icon": "dynamic_feed",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Mass reassignment",
+      "route": "correspondenceManagement/mass-reassignment-index",
+      "operacion": "radicacion%reasignacion-radicado%index",
+      "icon": "library_add_check",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Annulment",
+      "route": "correspondenceManagement/annulment-index",
+      "operacion": "radicacion%anulacion%index",
+      "icon": "pan_tool",
+      "ruta_completa": 1
+    }
+  ],
+  "filing": [
+    {
+      "name": "Standard filing",
+      "route": "filing/filing-index/false",
+      "operacion": "radicacion%radicados%index",
+      "icon": "description",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Email filing",
+      "route": "filing/filing-email-index",
+      "operacion": "radicacion%radicacion-email%login-email",
+      "icon": "contact_mail",
+      "ruta_completa": 1
+    }
+  ],
+  "setting": [
+    {
+      "name": "Configuration upload TRD",
+      "route": "filing/upload-trd-index",
+      "operacion": "configuracionApp%cg-trd%index",
+      "icon": "settings_applications",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Shipping providers",
+      "route": "filing/providers-index",
+      "operacion": "configuracionApp%cg-proveedores%index",
+      "icon": "local_shipping",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Filing types",
+      "route": "filing/filing-types-index",
+      "operacion": "configuracionApp%tipos-radicados%index",
+      "icon": "description",
+      "ruta_completa": 1
+    },
+    {
+      "name": "User groups",
+      "route": "filing/user-groups-index",
+      "operacion": "configuracionApp%grupos-usuarios%index",
+      "icon": "edit_location",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Working hours",
+      "route": "filing/times-response-index",
+      "operacion": "configuracionApp%cg-tiempos-respuesta%index",
+      "icon": "query_builder",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Non-working days",
+      "route": "filing/non-working-days-index",
+      "operacion": "configuracionApp%dias-no-laborados%index",
+      "icon": "alarm_off",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Template management",
+      "route": "filing/templates-index",
+      "operacion": "configuracionApp%cg-gestion-plantillas%index",
+      "icon": "widgets",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Template Variables",
+      "route": "filing/templates-variables-index",
+      "operacion": "configuracionApp%cg-plantilla-variables%index",
+      "icon": "mark_chat_read",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Interoperability users",
+      "route": "filing/providers-external-index",
+      "operacion": "configuracionApp%cg-proveedores-externos%index",
+      "icon": "read_more",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Satisfaction survey",
+      "route": "filing/poll-index",
+      "operacion": "configuracionApp%encuestas%index",
+      "icon": "rule",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Main and regional",
+      "route": "filing/region-index",
+      "operacion": "configuracionApp%regionales%index",
+      "icon": "add_business",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Filing setting",
+      "route": "filing/filing-setting-update",
+      "operacion": "configuracionApp%numero-radicado%index-one",
+      "icon": "settings_applications",
+      "ruta_completa": 1
+    },
+    {
+      "name": "General configuration",
+      "route": "filing/general-setting-update",
+      "operacion": "configuracionApp%configuracion-general%index-one",
+      "icon": "policy",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Filing label",
+      "route": "filing/filing-label-index",
+      "operacion": "configuracionApp%configuracion-general%index-label",
+      "icon": "point_of_sale",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Third party management",
+      "route": "filing/third-management-index",
+      "operacion": "configuracionApp%cg-gestion-terceros%index",
+      "icon": "person_search",
+      "ruta_completa": 1
+    }
+  ],
+  "archiveManagement": [
+    {
+      "name": "Allocation of physical space",
+      "route": "archiveManagement/physical-space-index",
+      "operacion": "gestionArchivo%espacio-fisico%index",
+      "icon": "business",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Archive folder",
+      "route": "archiveManagement/archive-filing-index",
+      "operacion": "gestionArchivo%gestion-archivo%index",
+      "icon": "batch_prediction",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Documentary transfers",
+      "route": "archiveManagement/documentary-transfer-index",
+      "operacion": "gestionDocumental%trd-transferencia%index",
+      "icon": "backup_table",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Mass transfer",
+      "route": "archiveManagement/upload-mass-transfer",
+      "operacion": "upload-mass-transfer%index",
+      "icon": "backup_table",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Bulk load",
+      "route": "archiveManagement/bulk-load",
+      "operacion": "gestionArchivo%gestion-archivo%index",
+      "icon": "backup_table",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Response times",
+      "route": "/time-request-index",
+      "operacion": "configuracionApp%cg-tiempos-request%index",
+      "icon": "query_builder"
+    }    
+  ],
+  "pqrs": [
+    {
+      "name": "Manage PQRS",
+      "route": "pqrs/log-pqrs-index",
+      "operation": "filemanagement%physical-space%index",
+      "icon": "backup_table",
+      "ruta_completa": 1
+    }
+  ],
+  "quality": [
+    {
+      "name": "Process Map",
+      "route": "quality/quality-process-map",
+      "operation": "filemanagement%physical-space%index",
+      "icon": "backup_table",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Create request",
+      "route": "quality/quality-create-request",
+      "operation": "filemanagement%physical-space%index",
+      "icon": "backup_table",
+      "ruta_completa": 1
+    }
+  ],
+  "documentaryLoans": [
+    {
+      "name": "Apply for loan",
+      "route": "documentaryLoans/apply-for-loan-index",
+      "operacion": "gestionArchivo%prestamo-documental%index",
+      "icon": "preview",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Manage loan",
+      "route": "documentaryLoans/manage-loan-index",
+      "operacion": "gestionArchivo%prestamo-documental%index-manage-loan",
+      "icon": "batch_prediction",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Loan of files",
+      "route": "documentaryLoans/loan-of-files",
+      "operacion": "gestionArchivo%prestamo-documental%index-loan-files",
+      "icon": "credit_score",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Manage loan of files",
+      "route": "documentaryLoans/manage-loan-of-files",
+      "operacion": "gestionArchivo%prestamo-documental%index-manage-loan-files",
+      "icon": "rule_folder",
+      "ruta_completa": 1
+    }
+  ],
+  "reports": [
+    {
+      "name": "Reports",
+      "route": "reports/reports-index",
+      "operacion": "reportes%index-list",
+      "icon": "api",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Custom reports",
+      "route": "reports/reports-custom",
+      "operacion": "reportes%reportes-personalizados%index",
+      "icon": "api",
+      "ruta_completa": 1
+    }
+  ],
+  "query": [
+    {
+      "name": "Advanced query",
+      "route": "query/advanced-index",
+      "operacion": "radicacion%consultas%index",
+      "icon": "sticky_note_2",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Query old orfeo",
+      "route": "query/query-old-orfeo",
+      "operacion": "radicacion%consultas-orfeo-antiguo%index",
+      "icon": "query_stats",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Query accumulated fund",
+      "route": "query/accumulated-fund",
+      "operacion": "radicacion%consultas-fondo-acumulado%index",
+      "icon": "query_builder",
+      "ruta_completa": 1
+    }
+  ],
+  "firmas": [
+    {
+      "name": "Firmas",
+      "route": "/signin",
+      "operacion": "firmas%index",
+      "icon": "timer",
+      "ruta_completa":1
+    },
+    {
+      "name": "Firmas",
+      "route": "/signin/home",
+      "operacion": "firmas%index",
+      "icon": "timer",
+      "ruta_completa":1
+    }
+  ],
+  "audit": [
+    {
+      "name": "Audit log",
+      "route": "query/log-audit-index",
+      "operacion": "configuracionApp%log%index",
+      "icon": "timer",
+      "ruta_completa": 1
+    }
+  ]
+}

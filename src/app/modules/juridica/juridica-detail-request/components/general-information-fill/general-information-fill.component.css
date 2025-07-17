@@ -1,0 +1,102 @@
+.title {
+    color: #000000;
+    font-weight: 844px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+    /* Añadido un margen inferior para separar los grupos de columnas */
+}
+
+.item-unit {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+    /* Añadido un margen inferior para separar los grupos de columnas */
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #6C6B76;
+    font-size: 16px;
+}
+
+.value {
+    color: #6C6B76;
+    font-size: 18px;
+}
+
+
+
+
+/* Estilos adjuntos y observaciones */
+.card {
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+}
+
+.card-body {
+    padding: 15px;
+    /* Adjusted padding to fit better in smaller containers */
+}
+
+.title {
+    margin-bottom: 15px;
+    /* Adjusted margin for better spacing */
+}
+
+.attachments-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    /* Reduced gap to prevent overflow */
+}
+
+.attachment {
+    flex: 1;
+    min-width: 150px;
+    /* Reduced min-width for better responsiveness */
+}
+
+mat-card {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+mat-icon {
+    margin-right: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .attachments-container {
+        flex-direction: column;
+    }
+}
+
+/* Observaciones form */
+
+.form {
+    min-width: 150px;
+    max-width: 1000px;
+    width: 100%;
+}
+
+.full-width {
+    width: 100%;
+}

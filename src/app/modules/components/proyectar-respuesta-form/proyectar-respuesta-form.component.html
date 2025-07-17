@@ -1,0 +1,338 @@
+<div class="content-main px-3 mb-4">
+    <ng-container *ngIf="allowSigninFlow == false">
+
+        <!--Usuarios para trabajo colaborativo-->
+        <div class="d-flex flex-row flex-wrap justify-content-end" style="gap: 15px 15px">
+
+
+            <button (click)="cancelar()" mat-stroked-button class="text-primary font-weight-bold border border-primary">
+                Cancelar
+            </button>
+
+            <button (click)="handleSaveProyectar()" [disabled]="!formGroupDatosDestinatario.disabled" mat-raised-button
+                class="{{ !formGroupDatosDestinatario.disabled ? 'text-black bg-disabled ' : 'text-white bg-primary'}}   px-4 "
+                aria-label="Example icon-button with a menu">
+                Guardar
+            </button>
+        </div>
+
+
+        <div class="border border-2 rounded px-5 mt-4">
+            <div class="d-flex flex-wrap align-items-center justify-content-between" style="gap: 5px 10px">
+                <h3 class="text-black font-weight-bold">Usuarios para trabajo colaborativo</h3>
+
+                <button *ngIf="canEdit" (click)="agregarRegistroTrabajoColaborativo()" mat-raised-button
+                    [matMenuTriggerFor]="menu" class="text-white bg-primary"
+                    aria-label="Example icon-button with a menu">
+                    <mat-icon>add_box</mat-icon> Agregar
+                </button>
+            </div>
+
+            <div *ngIf="canEdit" class="my-4">
+                <form action="" [formGroup]="formGroupTrabajoColaborativo">
+                    <div class="row" style="gap: 5px 0px">
+                        <mat-form-field appearance="outline" class="col-md-6">
+                            <mat-label>Área</mat-label>
+                            <mat-select formControlName="dependencia_id">
+                                <mat-option *ngFor="let area of areasOptions" [value]="area">
+                                    {{area.val}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="col-md-6">
+                            <mat-label>Usuario</mat-label>
+                            <input type="text" placeholder="Pick one" matInput formControlName="usuario_id"
+                                [matAutocomplete]="auto">
+                            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
+                                <mat-option *ngFor="let item of filteredUserOptions | async" [value]="item">
+                                    {{item.val}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                </form>
+            </div>
+
+
+
+            <!-- Tabla para mostrar registros -->
+            <div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="font-weight: 600;">#</th>
+                            <th scope="col" style="font-weight: 600;">Área</th>
+                            <th scope="col" style="font-weight: 600;">Usuario</th>
+                            <th scope="col" style="font-weight: 600;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="trabajoColaborativoRegistros.length > 0">
+                        <tr *ngFor="let registro of trabajoColaborativoRegistros; let i = index">
+                            <th scope="row">{{ i + 1 }}</th>
+                            <td>{{ registro.area?.val }}</td>
+                            <td>{{ registro.usuario?.val }}</td>
+                            <td>
+                                <button class="border-0 rounded text-primary"
+                                    (click)="borrarTrabajoColaborativoRegistro(i)">
+                                    <mat-icon class="pt-1">delete</mat-icon>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <!--Clasificación documental-->
+        <div class="border border-2 rounded px-5 mt-4">
+            <div class="d-flex flex-wrap align-items-center justify-content-between" style="gap: 5px 10px">
+                <h3 class="text-black font-weight-bold">Clasificación documental *</h3>
+            </div>
+
+            <div class="my-4">
+                <form action="" [formGroup]="formGroupTipoDocumental">
+                    <div class="row" style="gap: 5px 0px">
+                        <mat-form-field appearance="outline" class="col-md-6 w-100">
+                            <mat-label>Nombre del expediente</mat-label>
+                            <input type="text" matInput formControlName="expediente">
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="col-md-6">
+                            <mat-label>Serie</mat-label>
+                            <input type="text" matInput formControlName="serie_nombre">
+                            <!-- <p> {{responseItem?.serie?.nombreGdTrdSerie}} </p> -->
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="col-md-6">
+                            <mat-label>Subserie</mat-label>
+                            <input type="text" matInput formControlName="subserie_nombre">
+                            <!-- <p> {{responseItem?.sub_serie?.nombreGdTrdSubserie}} </p> -->
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="col-md-6">
+                            <mat-label>Tipo documental</mat-label>
+                            <mat-select formControlName="tipo_documental_id" [disabled]="!canEdit">
+                                <mat-option *ngFor="let tipo of tiposDocumentalesOptions" [value]="tipo.id">
+                                    {{ tipo.nombre }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error
+                                *ngIf="restService.isError(formGroupTipoDocumental, 'tipo_documental_id', 'required')">Este
+                                campo es obligatorio</mat-error>
+                        </mat-form-field>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+
+        <!--Clasificación correspondencia-->
+        <div class="border border-2 rounded px-5 mt-4">
+            <div class="d-flex flex-wrap align-items-center justify-content-between" style="gap: 5px 10px">
+                <h3 class="text-black font-weight-bold">Clasificación correspondencia *</h3>
+            </div>
+
+            <div class="my-4">
+                <form class="row" style="gap: 5px 0px" [formGroup]="formGroupCorrespondencia">
+                    <div class="col-md-12">
+                        <label class="d-block">Tipo de envío *</label>
+                        <mat-radio-group formControlName="tipo_envio" aria-label="Select an option"
+                            [disabled]="!canEdit">
+                            <mat-radio-button class="shippment-radio-option" [value]="1">Físico</mat-radio-button>
+                            <mat-radio-button class="shippment-radio-option" [value]="2">Electrónico</mat-radio-button>
+                        </mat-radio-group>
+                        <mat-error *ngIf="restService.isError(formGroupCorrespondencia, 'tipo_envio', 'required')"> Este
+                            campo es
+                            obligatorio </mat-error>
+
+                    </div>
+
+                    <mat-form-field appearance="outline" class="col-md-6">
+                        <mat-label>Tipo de comunicación </mat-label>
+                        <mat-select formControlName="correspondencia_id" [disabled]="!canEdit">
+                            <mat-option *ngFor="let tipo of tiposComunicacionOptions" [value]="tipo.id">
+                                {{ tipo.nombre }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error
+                            *ngIf="restService.isError(formGroupCorrespondencia, 'correspondencia_id', 'required')">
+                            Este
+                            campo es obligatorio </mat-error>
+
+                    </mat-form-field>
+                </form>
+            </div>
+        </div>
+
+        <div class="border border-2 rounded px-5 mt-4">
+            <div class="d-flex flex-wrap align-items-center justify-content-between" style="gap: 5px 10px">
+                <h3 class="text-black font-weight-bold">Datos del destinatario *</h3>
+
+
+                <div *ngIf="canEdit">
+                    <button mat-raised-button
+                        class="{{ !formGroupDatosDestinatario.disabled ? 'text-black bg-disabled ' : 'text-white bg-primary'}} mr-4"
+                        [disabled]="!formGroupDatosDestinatario.disabled" (click)="allowEdit()">
+                        <mat-icon>
+                            edit
+                        </mat-icon>
+                        Editar
+                    </button>
+                    <button mat-raised-button type="button"
+                        class="{{ formGroupDatosDestinatario.disabled ? 'text-black bg-disabled' : 'text-white bg-primary'}}"
+                        [disabled]="formGroupDatosDestinatario.disabled" (click)="disableEdit()">
+                        <mat-icon>
+                            save
+                        </mat-icon>
+                        Confirmar
+                    </button>
+                </div>
+            </div>
+
+            <div class="my-4">
+                <form class="row" style="gap: 5px 0px" [formGroup]="formGroupDatosDestinatario">
+                    <mat-form-field appearance="outline" class="col-md-4 mb-2">
+                        <mat-label>Nombre</mat-label>
+                        <input matInput formControlName="nombre">
+                        <mat-error *ngIf="restService.isError(formGroupDatosDestinatario, 'nombre', 'required')">
+                            Este campo es obligatorio
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="col-md-4 mb-2">
+                        <mat-label>Dirección de notificación fisica</mat-label>
+                        <input matInput formControlName="direccion_notificacion_fisica">
+                        <mat-error
+                            *ngIf="restService.isError(formGroupDatosDestinatario, 'direccion_notificacion_fisica', '')">
+                            Este campo es obligatorio
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="col-md-4 mb-2">
+                        <mat-label>Dirección electrónica</mat-label>
+                        <input matInput formControlName="direccion_electronica">
+                        <mat-error *ngIf="formGroupDatosDestinatario.get('direccion_electronica').errors?.emailInvalid">
+                            Dirección electrónica no es válida.
+                        </mat-error>
+                        <mat-error
+                            *ngIf="restService.isError(formGroupDatosDestinatario, 'direccion_electronica', '')">
+                            Este campo es obligatorio
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="col-md-4 mb-2">
+                        <mat-label>Dirección de residencia</mat-label>
+                        <input matInput formControlName="direccion_residencia">
+                        <mat-error *ngIf="restService.isError(formGroupDatosDestinatario, 'nombre', '')">
+                            Este campo es obligatorio
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="col-md-4 mb-2">
+                        <mat-label>Código postal</mat-label>
+                        <input matInput formControlName="codigo_postal">
+                        <mat-error *ngIf="formGroupDatosDestinatario.get('codigo_postal').errors?.numericInvalid">
+                            El código postal debe ser numérico.
+                        </mat-error>
+                        <mat-error *ngIf="restService.isError(formGroupDatosDestinatario, 'codigo_postal', 'required')">
+                            Este campo es obligatorio
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="col-md-4 mb-2">
+                        <mat-label>Télefono</mat-label>
+                        <input matInput formControlName="telefono">
+                        <mat-error *ngIf="formGroupDatosDestinatario.get('telefono').errors?.numericInvalid">
+                            El teléfono debe ser numérico.
+                        </mat-error>
+                        <mat-error *ngIf="restService.isError(formGroupDatosDestinatario, 'telefono', 'required')">
+                            Este campo es obligatorio
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="col-md-4 mb-2">
+                        <mat-label>Ciudad de destino</mat-label>
+                        <input matInput formControlName="ciudad_destino">
+                        <mat-error
+                            *ngIf="restService.isError(formGroupDatosDestinatario, 'ciudad_destino', 'required')">
+                            Este campo es obligatorio
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="col-md-6">
+                        <mat-label>Número de radicado de entrada</mat-label>
+                        <input matInput formControlName="numero_radicado_entrada">
+                    </mat-form-field>
+                </form>
+            </div>
+        </div>
+
+        <div class="border border-2 rounded px-5 mt-4">
+            <div>
+                <h3 class="text-black font-weight-bold mb-4"> Tipo de respuesta</h3>
+            </div>
+            <form [formGroup]="tiposRespuesta">
+                <mat-form-field appearance="outline">
+                    <mat-label> Seleccione el tipo de respuesta </mat-label>
+                    <mat-select formControlName="tipoRespuestaRegistros">
+                        <mat-option *ngFor="let tipo of tiposRespuestaOptions" [value]="tipo.id"> {{tipo.nombre}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="restService.isError(tiposRespuesta, 'tipoRespuestaRegistros', 'required')">Este
+                        campo es
+                        obligatorio</mat-error>
+
+                </mat-form-field>
+            </form>
+        </div>
+
+        <!--Plantilla-->
+        <div class="border border-2 rounded px-5 mt-4">
+            <div class="d-flex flex-wrap align-items-center justify-content-between" style="gap: 5px 10px">
+                <h3 class="text-black font-weight-bold">Plantilla *</h3>
+            </div>
+
+            <div class="my-4">
+                <form class="row" style="gap: 5px 0px" [formGroup]="formGroupPlantillas">
+                    <mat-form-field appearance="outline" class="col-md-12">
+                        <mat-label>Tipo documental</mat-label>
+                        <mat-select formControlName="plantilla" [disabled]="!canEdit">
+                            <mat-option *ngFor="let plantilla of plantillasOptions" [value]="plantilla">
+                                {{ plantilla.nombreCgPlantilla }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="restService.isError(formGroupPlantillas, 'plantilla', 'required')"> Este campo
+                            es
+                            obligatorio </mat-error>
+
+                    </mat-form-field>
+                </form>
+            </div>
+        </div>
+
+        <!--Adjuntos-->
+        <div class="border border-2 rounded px-5 mt-4">
+            <div class="d-flex flex-wrap align-items-center justify-content-between" style="gap: 5px 10px">
+                <h3 class="text-black font-weight-bold">Documentos adjuntos</h3>
+            </div>
+
+            <div class="upload-btn-wrapper mt-2 mb-4">
+                <button *ngIf="canEdit" mat-raised-button class="bg-primary text-white" (click)="fileInput.click()">
+                    Adjuntar Archivo (.PDF, .PNG, .JPG, .DOC) <mat-icon>attach_file</mat-icon>
+                </button>
+                <input type="file" multiple (change)="onFileSelected($event)" accept=".pdf,.png,.jpg,.doc,.docx" hidden #fileInput>
+                <div class="mt-2 d-flex align-items-center rounded border p-1 w-100" style="max-width: max-content;"
+                    *ngFor="let fileObj of fileObjects; let i = index">
+                    <p class="w-100 m-0 pl-2" style="word-break: break-all; font-size: 14px;">{{ fileObj.name }}</p>
+                    <button *ngIf="fileObj.url" class="border-0 text-body mt-1" style="background: none;"
+                        (click)="openPDF(fileObj.url)"><mat-icon>download</mat-icon></button>
+                    <button class="border-0 text-body mt-1" style="background: none;"
+                        (click)="removeSelectedFile(i)"><mat-icon>close</mat-icon></button>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</div>

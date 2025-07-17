@@ -1,0 +1,214 @@
+<div>
+  <app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+  <div class="container-gestionar-traslado content-main mb-4 px-3">
+    <div class="d-flex flex-column">
+      <button (click)="goBack()" mat-button style="width: 150px">
+        <mat-icon>chevron_left</mat-icon>Volver
+      </button>
+      <h2 class="text-black font-weight-bold">PQRS #{{ this.currentID }}</h2>
+    </div>
+  </div>
+
+  <!--Clasificación correspondencia-->
+  <div class="border border-2 rounded px-5 mt-4">
+    <div class="d-flex flex-wrap align-items-center justify-content-between" style="gap: 5px 10px">
+      <h3 class="text-black font-weight-bold">Clasificación correspondencia *</h3>
+    </div>
+
+    <div class="my-4">
+      <form class="row" style="gap: 5px 0px" [formGroup]="formGroupCorrespondencia">
+        <div class="col-md-12">
+          <label class="d-block">Tipo de envío *</label>
+          <mat-radio-group formControlName="tipo_envio" aria-label="Select an option">
+            <mat-radio-button class="shippment-radio-option" [value]="1">Físico</mat-radio-button>
+            <mat-radio-button class="shippment-radio-option" [value]="2">Electrónico</mat-radio-button>
+          </mat-radio-group>
+          <mat-error *ngIf="restService.isError(formGroupCorrespondencia, 'tipo_envio', 'required')">
+            Este campo es obligatorio
+          </mat-error>
+
+        </div>
+
+        <mat-form-field appearance="outline" class="col-md-6">
+          <mat-label>Tipo de comunicación </mat-label>
+          <mat-select formControlName="correspondencia_id">
+            <mat-option *ngFor="let tipo of tiposComunicacionOptions" [value]="tipo.id">
+              {{ tipo.nombre }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="restService.isError(formGroupCorrespondencia, 'correspondencia_id', 'required')"> Este
+            campo es obligatorio </mat-error>
+
+        </mat-form-field>
+      </form>
+    </div>
+  </div>
+
+  <div class="container-form">
+    <form class="row" [formGroup]="formTraslado">
+      <div class="container-input col-md-6">
+        <!-- input -->
+        <div class="border border-2 rounded px-5 m-4">
+          <div class="d-flex flex-wrap align-items-center">
+            <h3 class="text-black font-weight-bold">
+              Empresa a la que se traslada
+            </h3>
+          </div>
+          <mat-form-field appearance="outline" class="mt-4">
+            <mat-label class="label-form">Empresa</mat-label>
+            <input formControlName="empresa" matInput class="form-control form-control-sm"
+              [matAutocomplete]="autoempresa" #autoempresaInput />
+            <mat-error *ngIf="
+                formTraslado.get('empresa')?.hasError('required') &&
+                formTraslado.get('empresa')?.touched
+              ">Field required</mat-error>
+            <mat-autocomplete #autoempresa="matAutocomplete" (optionSelected)="getIdEmpresa(autoempresaInput.value)">
+              <mat-option *ngFor="let empresa of filteredEmpresa | async" [value]="empresa.nombre">
+                {{ empresa.nombre }}
+              </mat-option>
+              <mat-option value="Otro">Otro</mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          <mat-form-field *ngIf="
+              formTraslado.get('empresa')?.value !== 'Otro' &&
+              formTraslado.get('empresa')?.value
+            " appearance="outline">
+            <mat-label class="label-form">Destinatario</mat-label>
+            <input formControlName="destinatario" matInput class="form-control form-control-sm"
+              [matAutocomplete]="autodestinatario" (optionSelected)="onOptionSelected($event.option.value)" />
+
+            <mat-error *ngIf="
+            formTraslado.get('destinatario')?.hasError('required') &&
+            formTraslado.get('destinatario')?.touched
+            ">
+              Field required
+            </mat-error>
+
+            <mat-autocomplete #autodestinatario="matAutocomplete"
+              (optionSelected)="onOptionSelected($event.option.value)">
+              <mat-option *ngFor="let destinatario of filteredDestinatario | async" [value]="destinatario.nombre">
+                {{ destinatario.nombre }}
+              </mat-option>
+            </mat-autocomplete>
+
+          </mat-form-field>
+          <div *ngIf="
+              formTraslado.get('empresa')?.value === 'Otro' &&
+              formTraslado.get('empresa')?.value
+            " class="inputEmpresa">
+            <div class="input-doble row">
+              <div class="input col-md-6">
+                <mat-label>Nombres y apellidos*</mat-label>
+                <mat-form-field appearance="outline">
+                  <input type="text" formControlName="fullName" matInput placeholder="Escribe" />
+                </mat-form-field>
+              </div>
+              <div class="input col-md-6">
+                <mat-label>Nombre/Entidad*</mat-label>
+                <mat-form-field appearance="outline">
+                  <input type="text" placeholder="Escribe" formControlName="nombreEntidad"
+                    (blur)="validateEntidadExistente()" matInput />
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-doble row">
+              <div class="input col-md-6">
+                <mat-label>NIT*</mat-label>
+                <mat-form-field appearance="outline">
+                  <input type="text" placeholder="Escribe" formControlName="nit" matInput />
+                </mat-form-field>
+              </div>
+              <div class="input col-md-6">
+                <mat-label>Dirección*</mat-label>
+                <mat-form-field appearance="outline">
+                  <input type="text" placeholder="Escribe" formControlName="direccion" matInput />
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-doble row">
+              <div class="input col-md-6">
+                <mat-label>Correo electrónico*</mat-label>
+                <mat-form-field appearance="outline">
+                  <input type="email" id="email" name="email" placeholder="Escribe" formControlName="email" matInput>
+                </mat-form-field>
+              </div>
+              <div class="input col-md-6">
+                <mat-label>País*</mat-label>
+                <mat-form-field appearance="outline">
+                  <mat-select placeholder="Selecciona" (selectionChange)="getId('pais', 'nivelGeografico1')"
+                    formControlName="pais">
+                    <mat-option *ngFor="let pais of arrayPais" [value]="pais">
+                      {{ pais.nomNivelGeografico1 }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="input-doble row">
+              <div class="input col-md-6">
+                <mat-label>Departamento*</mat-label>
+                <mat-form-field appearance="outline">
+                  <mat-select placeholder="Selecciona" (selectionChange)="
+                      getId('departamento', 'nivelGeografico2')
+                    " formControlName="departamento">
+                    <mat-option *ngFor="let departamento of arrayDepartamento" [value]="departamento">
+                      {{ departamento.nomNivelGeografico2 }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="input col-md-6">
+                <mat-label>Ciudad/Municipio*</mat-label>
+                <mat-form-field appearance="outline">
+                  <mat-select formControlName="ciudad" placeholder="Selecciona">
+                    <mat-option *ngFor="let municipio of arrayMunicipio" [value]="municipio">
+                      {{ municipio.nomNivelGeografico3 }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-doble row">
+              <div class="input col-md-6">
+                <mat-label>Código postal*</mat-label>
+                <mat-form-field appearance="outline">
+                  <input type="text" formControlName="cpostal" placeholder="Escribe" matInput />
+                </mat-form-field>
+              </div>
+              <div class="input col-md-6">
+                <mat-label>Teléfono Celular*</mat-label>
+                <mat-form-field appearance="outline">
+                  <input type="text" formControlName="celular" placeholder="Escribe" matInput />
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input">
+              <mat-label>Teléfono fijo*</mat-label>
+              <mat-form-field appearance="outline">
+                <input type="text" formControlName="telefono" placeholder="Escribe" matInput />
+              </mat-form-field>
+            </div>
+            <div class="input d-flex justify-content-end mb-2">
+              <button (click)="crearEmpresa()" class="text-white bg-primary" mat-raised-button>
+                Crear
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="w-100 container-input col-md-6 d-flex flex-column">
+        <div class="w-100 d-flex justify-content-center align-items-center" style="overflow-x: auto;">
+          <ngx-doc-viewer *ngIf="urlDocs" [url]="urlDocs" viewer="google" style="width:100%;height:100vh;">
+          </ngx-doc-viewer>
+        </div>
+        <div *ngIf="urlDocs || this.formTraslado.get('destinatario')?.value" class=" container-button">
+          <button class="text-white bg-primary" mat-raised-button (click)="submitForm()">
+            Guardar
+          </button>
+          <button mat-raised-button (click)="goBack()">Cancelar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

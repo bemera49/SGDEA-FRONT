@@ -1,0 +1,35 @@
+  
+.button-diagrama{
+    border: none;
+    text-align: center;
+    width: 147px;
+    background-color: #2a8cdd;
+    color: #fff;
+    padding: .5em;
+    border-radius: 10px;
+}
+
+::ng-deep .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+    background-color: var(--my-light-blue) !important; /* Cambia el color del efecto de clic */
+}
+
+::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
+    background-color: var(--my-light-blue) !important; /* Cambia el color del círculo interno */
+}
+
+::ng-deep .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+    border-color: var(--my-light-blue) !important; /* Cambia el color del anil
+}
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+    border-color: var(--my-light-blue) !important; /* Cambia este valor por el color deseado */
+}
+
+.mat-radio-button.mat-accent .mat-radio-ripple {
+    background-color: var(--my-light-blue) !important; /* Cambia este valor por el color deseado */
+}
+
+
+textarea{
+    resize: none !important;
+}

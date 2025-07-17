@@ -1,0 +1,27 @@
+.container-show-date{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 65px;
+  max-width: 525px;
+  padding: 0px 10px;
+  border: 1px solid rgba(126, 126, 126, 0.33);
+  border-radius: 9px;
+  background-color: rgba(141, 141, 141, 0.09);
+
+
+} 
+
+
+.container-show-date strong{
+  font-size: 14px;
+  font-weight: 700;
+  color: rgb(160, 154, 154);
+
+}
+
+
+.container-date{
+  display: flex;
+  justify-content: space-between;
+}

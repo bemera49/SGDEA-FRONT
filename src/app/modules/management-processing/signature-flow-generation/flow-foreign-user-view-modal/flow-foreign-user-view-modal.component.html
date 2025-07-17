@@ -1,0 +1,100 @@
+
+
+<h4>Visualizacion de usuario externo</h4>
+<form class="width: 100%"     [formGroup]="form"
+(submit)="submitForm()">
+        <div style="
+        display: grid;
+        grid-template-columns: repeat(2, 1fr) auto;
+        gap: 20px
+    "
+
+    >
+
+    <span>
+        <button mat-raised-button type="button" class="bg-primary text-white" style="min-width: 120px;" (click)="switchEditing()" [disabled]="disabledButton">
+            <ng-container *ngIf="!allowEditing; else confirmButton">
+                <mat-icon>edit</mat-icon>Editar
+            </ng-container>
+
+            <ng-template #confirmButton>
+                <mat-icon>add</mat-icon>Confirmar
+            </ng-template>
+        </button>
+    </span>
+
+        <span style="grid-column: 0 / 2;">
+            <label>Nombres y apellidos *</label>
+            <mat-form-field appearance="outline">
+                <input type="text" matInput placeholder="Ingrese" formControlName="nombresApellidos">
+                <mat-error *ngIf="this.form.get('nombresApellidos').hasError('required')">
+                    Este campo es obligatorio
+                </mat-error>
+            </mat-form-field>
+      
+        
+        </span>
+
+        <span>
+            <label>Tipo de identificación *</label>
+            <mat-form-field appearance="outline">
+                <mat-select placeholder="Seleccione" formControlName="tipoIdentificacion">
+                    <mat-option *ngFor="let tipo of identificacionTipos" [value]="tipo.id">{{tipo.name}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="this.form.get('tipoIdentificacion').hasError('required')">
+                    Este campo es obligatorio
+                </mat-error>
+            </mat-form-field>
+      
+        </span>
+
+        
+
+        <span>
+            <label>Número de identificación *</label>
+            <mat-form-field appearance="outline">
+                <input type="text" matInput placeholder="Ingrese" formControlName="numeroIdentificacion">
+                <mat-error *ngIf="this.form.get('numeroIdentificacion').hasError('required')">
+                    Este campo es obligatorio
+                </mat-error>
+                <mat-error *ngIf="this.form.get('numeroIdentificacion').hasError('pattern') || this.form.get('numeroIdentificacion').hasError('minLength')">
+                    Ingrese un número de identificación válido
+                 </mat-error>
+            
+            </mat-form-field>
+        
+        </span>
+
+        
+
+        <span>
+            <label>Teléfono celular</label>
+            <mat-form-field appearance="outline">
+                <input type="text" matInput placeholder="Ingrese" formControlName="telefonoCelular">
+                <mat-error *ngIf="this.form.get('telefonoCelular').hasError('pattern')">
+                    Ingrese un número de celular válido
+                 </mat-error>
+            </mat-form-field>
+    
+        </span>
+
+        
+
+        <span>
+            <label>Correo electrónico *</label>
+            <mat-form-field appearance="outline">
+                <input type="text" matInput placeholder="Ingrese" formControlName="correoElectronico">
+                <mat-error *ngIf="this.form.get('correoElectronico').hasError('required')">
+                    Este campo es obligatorio
+                </mat-error>
+            </mat-form-field>
+        </span>
+    </div>
+
+    <div style="width: 100%; display: flex; gap: 16px">
+        <button mat-stroked-button style="width: 50%" type="button" (click)="close()">Cancelar</button>
+        <button mat-button class="{{ allowEditing ? 'bg-disabled text-black' : 'bg-primary text-white' }}" style="width: 50%" type="submit" [disabled]="allowEditing">
+          Agregar
+        </button>
+    </div>
+</form>

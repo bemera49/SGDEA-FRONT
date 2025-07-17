@@ -1,0 +1,138 @@
+button {
+    border: none;
+    background: none;
+}
+
+ul,
+li {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-align-items {
+    display: flex;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5vh;
+}
+
+.container-paginator {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1px;
+    margin-top: 2px;
+    overflow-x: auto; /* Permite el scroll horizontal */
+    overflow-y: hidden; /* Elimina el scroll vertical */
+    white-space: nowrap; /* Evita el salto de línea */
+    box-sizing: border-box; /* Incluye padding y border en el tamaño total */
+}
+
+.select-paginator {
+    border: none;
+    background: none;
+    padding: 0; /* Eliminar padding interno */
+    margin: 0; /* Eliminar margen interno */
+    display: flex;
+    align-items: center;
+    height: 20px; /* Ajustar la altura del input */
+}
+
+.input-paginator {
+    height: 20px;
+    /* Ajustar la altura del input */
+    box-sizing: border-box;
+    /* Incluye padding y border en el tamaño total */
+}
+
+.container-row {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    white-space: nowrap;
+    /* Evita el salto de línea */
+    padding: 0;
+    /* Eliminar padding interno */
+    margin: 0;
+    /* Eliminar margen interno */
+}
+
+.container-row p {
+    font-weight: 400;
+    color: #2c3948;
+    margin: 0;
+    /* Eliminar margen adicional */
+}
+
+.container-select {
+    display: flex;
+    align-items: center;
+    position: relative;
+    height: 36px;
+    /* Ajustar la altura del contenedor */
+    width: 120px;
+    padding: 0;
+    /* Eliminar padding interno */
+}
+
+.select-paginator {
+    width: 92px;
+    height: 60px;
+    border-radius: 8px;
+    padding: 5px 15px;
+    gap: 6px;
+}
+
+.container-pages {
+    display: flex;
+    justify-content: space-around;
+    height: 36px;
+    white-space: nowrap;
+    gap: 15px;
+}
+
+.row {
+    color: #ffffff;
+}
+
+.button-pagination {
+    --size: 36px;
+    height: var(--size);
+    width: var(--size);
+    border-radius: 5px;
+    line-height: 9px;
+    color: #2c3948;
+    background-color: transparent;
+    transition: background-color 1s ease, color 1s ease;
+}
+
+.button-pagination.button-pagination-active {
+    color: #fff;
+    background-color: #008ed6;
+    box-shadow: 8px 5px 25px #afc6ffa8;
+}
+
+.button-update {
+    --size: 36px;
+    height: var(--size);
+    width: var(--size);
+    border-radius: 5px;
+    line-height: 9px;
+    color: #fff;
+    background-color: #008ed6;
+}
+
+.container-items {
+    white-space: nowrap;
+    /* Evita el salto de línea */
+}

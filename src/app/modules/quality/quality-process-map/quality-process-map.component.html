@@ -1,0 +1,65 @@
+<app-sub-menu-quality [ItemsMenu]="items"></app-sub-menu-quality>
+<section class="px-3">
+    <div class="flex w-100 returnaq pt-1">
+        <button class="text-primary font-weight-bold px-lg-2 flex row botonvolver">
+            <a class="text-primary font-weight-bold px-lg-2 flex row botonvolver pt-1" href="#/quality">
+                <div class="rounded-md flex items-center justify-center ">
+                    <i class="material-icons returnaq-icon mr-2">{{ ChevronLeft }}</i>
+                </div>
+                Volver
+            </a>
+        </button>
+        </div>
+
+    <h2 class="font-weight-bold title">Mapa de procesos</h2>
+
+    <div class="flex  w-100">
+        <mat-card class="border border-2 rounded w-100">
+            <h3 class="font-weight-bold">Versión principal</h3>
+
+            <div class="d-flex flex-row">
+                <mat-icon>link</mat-icon>
+                <span class="px-2 w-100 text-secondary">Accede a los procesos haciendo clic en los hipervínculos de la imagen</span>
+            </div>
+            <article class="w-100% d-flex justify-content-center image-container">
+                <img src={{this.imageMap}} [alt]="nameMap" usemap="#Procesos">
+                <map name="Procesos">
+                    <ng-container *ngFor="let process of arrayProcess">
+                        <area [shape]="process.shape" [coords]="process.coords" [alt]="process.nombre"
+                            title="Ver proceso" [routerLink]="[process.nombre]"
+                            (click)="clickInMapForSendDataProcess(process.nombre)" />
+                    </ng-container>
+                </map>
+            </article>
+
+        </mat-card>
+    </div>
+
+    <mat-card class="border border-2 rounded mt-4">
+        <h3 class="font-weight-bold">Versiones anteriores</h3>
+
+        <div class="cards-container" id="cards">
+            <div class="container-fluid">
+                <div class="row" style="gap: 15px; justify-content: start; ">
+
+                    <app-card-quality
+                        [cardConfig]="{title: 'Mapa de proceso versión 1', color: '#008ED6', link: '/uno'}"></app-card-quality>
+
+                    <app-card-quality
+                        [cardConfig]="{title: 'Mapa de proceso versión 2', color: '#008ED6', link: '/dos'}"></app-card-quality>
+
+                    <app-card-quality
+                        [cardConfig]="{title: 'Mapa de proceso versión 3', color: '#008ED6', link: '/tres'}"></app-card-quality>
+
+                    <app-card-quality
+                        [cardConfig]="{title: 'Mapa de proceso versión 4', color: '#008ED6', link: '/cuatro'}"></app-card-quality>
+
+                    <app-card-quality
+                        [cardConfig]="{title: 'Mapa de proceso versión 5', color: '#008ED6', link: '/quinto'}"></app-card-quality>
+
+                </div>
+            </div>
+        </div>
+    </mat-card>
+
+</section>

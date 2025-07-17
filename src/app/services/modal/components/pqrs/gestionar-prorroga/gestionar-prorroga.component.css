@@ -1,0 +1,115 @@
+.modal-container {
+    width: 450px;
+    max-height: 80vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.modal-icon {
+    font-size: 50px;
+}
+
+.modal-message {
+    font-size: 18px;
+}
+
+.modal-description {
+font-size: 14px;
+}
+
+.modal-button {
+    width: 200px;
+}
+
+.btn-none {
+    background: none;
+    border: none;
+}
+
+.btn-styles {
+    font-weight: 500;
+    text-transform: none;
+    font-size: 14px;
+}
+
+.cap-icon {
+    background-color: #F2FBFF;
+    border-radius: 100%;
+    padding: 5px;
+}
+
+.text-pdf {
+    text-overflow: ellipsis; 
+    overflow: hidden; 
+    max-width: 160px;
+    font-size: 12px;
+}
+
+.form-select {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 1.75rem 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-label p {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.form-select {
+    background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='%23000' viewBox='0 0 16 16'><path d='M1.5 6.5L8 13l6.5-6.5H1.5z'/></svg>") no-repeat right 0.75rem center/16px 16px;
+}
+
+.button-pdf {
+    border: none;
+    background: none;
+    padding: 0;
+    color: #6C6B76;
+ }
+
+@media (max-width: 600px) {
+    .modal-container {
+        width: 100%;
+    }
+
+    .modal-button {
+        width: 80%;
+    }
+
+    .form-select,
+    .form-label p {
+        width: 100%;
+    }
+}
+  
+/*scroll*/
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #e0e0e0 transparent;
+  }
+  
+  *::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  *::-webkit-scrollbar-thumb {
+    background-color: #e0e0e0;
+    border-radius: 4px;
+  }
+  

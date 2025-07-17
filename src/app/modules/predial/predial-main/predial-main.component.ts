@@ -1,0 +1,198 @@
+import { Location } from '@angular/common';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+
+import { Subscription } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
+
+import { AdminTopNavBarComponent } from '@app/modules/admin-layout/admin-top-nav-bar/admin-top-nav-bar.component';
+import { NavItem } from '@app/modules/md/md.module';
+import { ActivateTranslateService } from '@app/services/activate-translate.service';
+import { ChangeChildrenService } from '@app/services/change-children.service';
+import { RestService } from '@app/services/rest.service';
+import { BnNgIdleService } from 'bn-ng-idle';
+import PerfectScrollbar from 'perfect-scrollbar';
+import { environment } from 'src/environments/environment';
+
+@Component({
+  selector: 'app-predial-main',
+  templateUrl: './predial-main.component.html',
+  styleUrls: ['./predial-main.component.css']
+})
+export class PredialMainComponent implements OnInit {
+  
+  /** Variables para el componente top-nav-bar */
+  topNavBarTitle: string = "Predial"; // i18n
+  topNavBarRouteActive: string = "";
+  topNavBarOn: string = "";
+  /** Fin Variables para el componente top-nav-bar */
+  
+  /** Variables para el componente sub-menú */
+  subMenuStatus: boolean = true;
+  subMenuTitle: string;
+  subMenuActive: string = "predial";
+  subMenuNotificationStatus: boolean = true;
+  subMenuNotificationClassAlert: string = "alert alert-info alert-with-icon";
+  subMenuNotificationMessage: string = "Seleccione el módulo que desea consultar."; // i18n
+  /** Fin Variables para el componente sub-menú */
+  
+  public navItems: NavItem[];
+  url: string;
+  location: Location;
+  
+  /** Variables de internacionalización */
+  activeLang: string;
+  languageReceive: any;
+  subscriptionTranslateService$: Subscription;
+
+  /** Variables para control de inactividad */
+  userTimeOutSessionMin: any;
+  subscriptionBnIdle$: Subscription;
+
+  @ViewChild("sidebar", { static: false }) sidebar: any;
+  @ViewChild(AdminTopNavBarComponent, { static: false }) navbar: AdminTopNavBarComponent;
+  
+  constructor(
+    location: Location,
+    private translate: TranslateService,
+    private activateTranslateService: ActivateTranslateService,
+    private changeChildrenService: ChangeChildrenService,
+    public restService: RestService,
+    private bnIdle: BnNgIdleService
+  ) {
+    this.location = location;
+    /**
+     * Idioma inical
+     */
+    this.detectLanguageInitial();
+  }
+  
+  ngOnInit() {
+    /**
+     * Detectando si se ejecuta cambio de idioma
+     */
+    this.detectLanguageChange();
+    this.calculateSessionInactivity("");
+  }
+  
+  ngAfterViewInit() {
+    this.runOnRouteChange();
+  }
+  
+  public isMap() {
+    if (this.location.prepareExternalUrl(this.location.path()) === "/maps/fullscreen") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
+  runOnRouteChange(): void {
+    if (window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {
+      const elemSidebar = <HTMLElement>document.querySelector(".sidebar .sidebar-wrapper");
+      const elemMainPanel = <HTMLElement>document.querySelector(".main-panel");
+      let ps = new PerfectScrollbar(elemMainPanel);
+      ps = new PerfectScrollbar(elemSidebar);
+      ps.update();
+    }
+  }
+  
+  isMac(): boolean {
+    let bool = false;
+    if (navigator.platform.toUpperCase().indexOf("MAC") >= 0 || navigator.platform.toUpperCase().indexOf("IPAD") >= 0) {
+      bool = true;
+    }
+    return bool;
+  }
+  
+  /** Métodos agregados */
+  onActivate() {
+    this.subMenuStatus = false;
+  }
+  
+  /** Método para consumir la función del servicio changeChildrenService que emite la variable para abrir el modal de filtros */
+  searchRecibe(event) {
+    this.changeChildrenService.onSearchFilter(event);
+  }
+  
+  /** Métodos para el uso de la internacionalización */
+  detectLanguageInitial() {
+    if (localStorage.getItem("language")) {
+      this.activeLang = localStorage.getItem("language");
+    } else {
+      this.activeLang = "es";
+    }
+    this.translate.setDefaultLang(this.activeLang);
+  }
+  
+  detectLanguageChange() {
+    this.subscriptionTranslateService$ = this.activateTranslateService.activateLanguageChange.subscribe((language) => {
+      this.languageReceive = language;
+      this.translate.setDefaultLang(this.languageReceive);
+    });
+  }
+  /** Fin Métodos para el uso de la internacionalización */
+  
+  /**
+   * Metodo para inicializar la funcionalidad de inactividad
+   * @params autho authorization
+   */
+  calculateSessionInactivity(autho) {
+    let minutes = environment.timeOutSessionMin;
+
+    this.callLocalStorageHashTimeOut().then((res) => {
+      this.userTimeOutSessionMin = res;
+      if (this.userTimeOutSessionMin) {
+        minutes = this.userTimeOutSessionMin;
+      }
+      let seconds = minutes * 60;
+
+      this.subscriptionBnIdle$ = this.bnIdle.startWatching(seconds).subscribe((res) => {
+        if (res) {
+          // Busca si hay un modal en el cuerpo
+          const body = document.getElementsByTagName("body")[0];
+          const modalBackdrop = document.getElementsByClassName("mat-dialog-container")[0];
+          // Valida ai hay un modal
+          if (modalBackdrop) {
+            // Elimina el modal
+            body.classList.remove("mat-dialog-container");
+            modalBackdrop.remove();
+          }
+          this.restService.logout(autho, "inactividad");
+        }
+      });
+    });
+  }
+  
+  /**
+   * Inicio Decoradores utilizados para conocer si se utiliza el mouse o el teclado
+   * Se debe cambiar la metodología en caso de que el sistema se ponga lento o aparezcan muchos logs de advertencias como el siguiente:
+   * [Violation] 'requestIdleCallback' handler took 62ms
+   */
+  @HostListener('click', ['$event.target']) onClick(btn) {
+    if (!!this.subscriptionBnIdle$) {
+      this.bnIdle.resetTimer();
+    }
+
+  }
+
+  @HostListener('window:keydown', ['$event']) handleKeyDown(event: KeyboardEvent) {
+    if (!!this.subscriptionBnIdle$) {
+      this.bnIdle.resetTimer();
+    }
+  }
+  /** Fin Decoradores utilizados para conocer si se utiliza el mouse o el teclado */
+
+  /** Función que obtiene el tiempo de sessión para inactividad en el local storage */
+  callLocalStorageHashTimeOut() {
+    return new Promise((resolve) => {
+      let timeOutLS = localStorage.getItem(environment.hashTimeOut);
+      resolve(timeOutLS);
+    });
+  }
+
+  ngOnDestroy() {
+    if (!!this.subscriptionBnIdle$) this.subscriptionBnIdle$.unsubscribe();
+    if (!!this.subscriptionTranslateService$) this.subscriptionTranslateService$.unsubscribe();
+  }
+
+}

@@ -1,0 +1,9 @@
+<div class="select-container">
+  <label id="select-table">
+    <select class="select-meeting" placeholder="Seleccionar" [(ngModel)]="model" [required]="required"
+      name="select-table" id="select-table" (change)="onInputChange($event)">
+      <option *ngFor="let item of data" [value]="item.id"> {{item.nombre}} </option>
+    </select>
+  </label>
+  <img class="icon" src="/assets/img/arrow-down.svg" alt="icon" />
+</div>

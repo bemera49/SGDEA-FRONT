@@ -1,0 +1,11 @@
+<div class="documents">
+  <h4>{{title}}</h4>
+  <div class="documents-container">
+    <img *ngIf="typeDocument.DOCX === typeDoc" src="/assets/img/word.svg" alt="word" />
+    <img *ngIf="typeDocument.XLSX === typeDoc" src="/assets/img/logos/excel-icon.svg" alt="excel" />
+    <img *ngIf="typeDocument.PXPT === typeDoc" src="/assets/img/logos/powerpoint-icon.svg" alt="powerpoint" />
+    <button (click)="downloadFile()" class="description">
+      {{nameDocument}}
+    </button>
+  </div>
+</div>

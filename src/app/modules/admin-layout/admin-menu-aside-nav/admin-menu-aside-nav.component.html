@@ -1,0 +1,62 @@
+<!--CONFIGURACION MOBILE-->
+  <button mat-button *ngIf="!isMenuVisible" class="navbar-toggler btn-no-ripple absolute-button" type="button" (click)="toggleMenuVisibility()">
+      <i class="material-icons">menu</i>
+  </button>
+    
+  <button class="navbar-toggler btn-no-ripple absolute-button" *ngIf="isMenuVisible" type="button" (click)="toggleMenuVisibility()">
+    <i class="material-icons">close</i>
+  </button>
+
+  <div class="overlay" [class.show]="isMenuVisible" (click)="toggleMenuVisibility()"></div>
+  
+  <div class="menu" [class.show]="isMenuVisible">
+  
+    <div class="content-menu">
+      <ul class="col-items ul-not-styles" style="">
+
+        <a class="logo-menu" href="#">
+            <img src="assets/img/logos/logo_acueducto.png">
+        </a>
+        
+        <div class="scroll-nav" style="overflow-y: auto; max-height: 100vh;">
+          <li *ngFor="let menuitem of menuItems; let i = index" 
+            [class.active-link]="isItemActive(menuitem)">
+            <a class="links-nav" href="javascript:void(0);" (click)="toggleSubMenu(i)">
+              {{ menuitem.nombre | translate }}
+              <!-- <span class="waiting">2</span> -->
+              <i class="material-icons chevron" [class.rotated]="openSubMenuIndex === i" [class.desrotated]="openSubMenuIndex !== i">arrow_drop_down</i>
+            </a>
+            <div *ngIf="openSubMenuIndex === i" class="sub-menu">
+              <a *ngFor="let subMenuCol of subMenuCols[i]" class="sub-menu-item" 
+                  [routerLink]="['/' + menuitem.ruta + '/' + subMenuCol.route]" 
+                  routerLinkActive="active-link"
+                  (click)="activeItem = menuitem.id">
+                {{ subMenuCol.name | translate }}
+              </a>
+            </div>
+          </li>
+
+          <li>
+            <a class="links-nav" [routerLink]="[rutaMiCuenta]">
+              {{ "adminAsside.myAcount" | translate }}
+            </a>
+          </li>
+
+          <!--
+            <li class="nav-item">
+              <a class="links-nav" (click)="logout()">
+                {{ "adminAsside.logout" | translate }}
+              </a>
+            </li>
+          -->
+
+        </div>
+      </ul>
+    </div>
+  </div>
+
+
+
+
+
+  

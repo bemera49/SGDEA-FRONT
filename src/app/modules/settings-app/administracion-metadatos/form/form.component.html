@@ -1,0 +1,106 @@
+<div class="border border-2 rounded px-5 d-flex-column justify-content-center align-items-center">
+    <h3 class="text-black font-weight-bold">{{data == null ? 'Crear metadato' : 'Editar metadato' }}</h3>
+    <section class="d-flex-column justify-content-center align-items-center w-100">
+        <form [formGroup]="form" class="row">
+
+            <mat-form-field class="col-md-4 col-lg-4" style="padding-top: 20px !important">
+                <mat-label>Tipo metadato</mat-label>
+                <mat-select formControlName="tipoMetadato">
+                    <mat-option *ngFor="let tipo of listTipoMetadatos" [value]="tipo.id">{{ tipo.nombre }}</mat-option>
+                </mat-select>
+                <mat-hint *ngIf="form.controls['tipoMetadato'].invalid && form.controls['tipoMetadato'].touched"
+                    class="text-danger">
+                    Este campo es requerido
+                </mat-hint>
+            </mat-form-field>
+
+            <mat-form-field class="col-md-4 col-lg-4" style="padding-top: 20px !important">
+                <mat-label>Título</mat-label>
+                <input matInput formControlName="titulo" type="text">
+                <mat-hint *ngIf="form.controls['titulo'].invalid && form.controls['titulo'].touched"
+                    class="text-danger">
+                    Este campo es requerido
+                </mat-hint>
+            </mat-form-field>
+
+            <mat-form-field class="col-md-4 col-lg-4" style="padding-top: 20px !important">
+                <mat-label>Descripción</mat-label>
+                <input matInput formControlName="descripcion" type="text" />
+                <mat-hint *ngIf="form.controls['descripcion'].invalid && form.controls['descripcion'].touched"
+                    class="text-danger">
+                    Este campo es requerido
+                </mat-hint>
+            </mat-form-field>
+
+            <mat-form-field class="col-md-4 col-lg-4" style="padding-top: 20px !important">
+                <mat-label>Obligatorio</mat-label>
+                <mat-select formControlName="obligatorio">
+                    <mat-option [value]="true">Si</mat-option>
+                    <mat-option [value]="false">No</mat-option>
+                </mat-select>
+                <mat-hint *ngIf="form.controls['obligatorio'].invalid && form.controls['obligatorio'].touched"
+                    class="text-danger">
+                    Este campo es requerido
+                </mat-hint>
+            </mat-form-field>
+
+            <mat-form-field class="col-md-4 col-lg-4" style="padding-top: 20px !important">
+                <mat-label>Tipo dato</mat-label>
+                <mat-select formControlName="tipoDato">
+                    <mat-option value="Numérico">Numérico</mat-option>
+                    <mat-option value="Alfanumérico">Alfanumérico</mat-option>
+                    <mat-option value="Texto">Texto</mat-option>
+                    <mat-option value="Fecha">Fecha</mat-option>
+                    <mat-option value="Hora">Hora</mat-option>
+                    <mat-option value="Si/No">Si/No</mat-option>
+                </mat-select>
+                <mat-hint *ngIf="form.controls['tipoDato'].invalid && form.controls['tipoDato'].touched"
+                    class="text-danger">
+                    Este campo es requerido
+                </mat-hint>
+            </mat-form-field>
+
+            <mat-form-field class="col-md-4 col-lg-4" style="padding-top: 20px !important">
+                <mat-label>¿Se requiere conservar metadatos?</mat-label>
+                <mat-select formControlName="conservarMetadato">
+                    <mat-option [value]="true">Si</mat-option>
+                    <mat-option [value]="false">No</mat-option>
+                </mat-select>
+                <mat-hint
+                    *ngIf="form.controls['conservarMetadato'].invalid && form.controls['conservarMetadato'].touched"
+                    class="text-danger">
+                    Este campo es requerido
+                </mat-hint>
+            </mat-form-field>
+
+            <mat-form-field class="col-md-4 col-lg-4" style="padding-top: 20px !important">
+                <mat-label>Embebido en el documento</mat-label>
+                <mat-select formControlName="enbebido">
+                    <mat-option [value]="true">Si</mat-option>
+                    <mat-option [value]="false">No</mat-option>
+                </mat-select>
+                <mat-hint *ngIf="form.controls['enbebido'].invalid && form.controls['enbebido'].touched"
+                    class="text-danger">
+                    Este campo es requerido
+                </mat-hint>
+            </mat-form-field>
+
+            <mat-form-field class="col-md-4 col-lg-4" style="padding-top: 20px !important">
+                <mat-label>Estado</mat-label>
+                <mat-select formControlName="estado">
+                    <mat-option value="Activo">Activo</mat-option>
+                    <mat-option value="Inactivo">Inactivo</mat-option>
+                </mat-select>
+                <mat-hint *ngIf="form.controls['estado'].invalid && form.controls['estado'].touched"
+                    class="text-danger">
+                    Este campo es requerido
+                </mat-hint>
+            </mat-form-field>
+
+            <div class="col-md-12 col-lg-12 d-flex justify-content-end">
+                <button mat-button class="btn btn-primary mr-2" (click)="save()">Guardar</button>
+                <button (click)="matDialog.close()" mat-button class="btn btn-danger">Cancelar</button>
+            </div>
+        </form>
+    </section>
+</div>

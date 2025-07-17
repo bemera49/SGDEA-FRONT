@@ -1,0 +1,24 @@
+<div class="table-responsive">
+  <table>
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Nombre del documento</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of data">
+        <td data-label="Code">{{ row.code }}</td>
+        <td data-label="Name">{{ row.name | cleanName:row.code}}</td>
+        <td data-label="Actions">
+          <i class="material-icons returnaq-icon iconos padding-icon" (click)="getStepDocuments(row.id)">{{
+            fullscreen }}</i>
+        </td>
+      </tr>
+    </tbody>
+
+  </table>
+
+
+</div>

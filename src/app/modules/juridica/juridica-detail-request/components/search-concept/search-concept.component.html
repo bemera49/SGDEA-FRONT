@@ -1,0 +1,270 @@
+<!-- Consultar ficha relatoría button (visible when booleanGetFicha is false) -->
+<div class="contentTitle" *ngIf="!this.booleanGetFicha">
+    <h3 class="title">Consultar ficha relatoría</h3>
+</div>
+
+<section class="sectionContent" *ngIf="!this.booleanGetFicha">
+
+    <!-- Divide el formulario en 2 columnas de 6 filas -->
+    <div class="grid-container">
+
+        <!-- Formulario de filtros -->
+        <form class="example-form" [formGroup]="formSearchConcepts">
+
+            <!-- Primera sección -->
+            <div class="row">
+                <div class="column">
+                    <div class="label">ID concepto</div>
+                    <mat-form-field appearance="outline" class="input-mata">
+
+                        <input type="text" matInput placeholder="Buscar por" formControlName="id_concepto">
+                    </mat-form-field>
+                </div>
+
+                <div class="column">
+                    <div class="label">Rango inicial</div>
+                    <mat-form-field appearance="outline" class="input-mata">
+                        <input matInput [matDatepicker]="startPicker" formControlName="rangoInicial"
+                            placeholder="dd / mm / aaaa">
+                        <mat-datepicker-toggle matSuffix [for]="startPicker">
+                            <mat-icon matDatepickerToggleIcon>calendar_month</mat-icon>
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #startPicker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <!-- Segunda sección -->
+            <div class="row">
+                <div class="column">
+                    <div class="label">Rango final</div>
+                    <mat-form-field appearance="outline" class="input-mata">
+                        <input matInput [matDatepicker]="endPicker" formControlName="rangoFinal"
+                            placeholder="dd / mm / aaaa">
+                        <mat-datepicker-toggle matSuffix [for]="endPicker">
+                            <mat-icon matDatepickerToggleIcon>calendar_month</mat-icon>
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #endPicker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="column">
+                    <div class="label">Abogado</div>
+                    <mat-form-field appearance="outline" class="input-mata">
+
+                        <input type="text" matInput placeholder="Buscar por" formControlName="abogado">
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <!-- Tercera sección -->
+            <div class="row">
+
+                <div class="column">
+                    <div class="label">Clasificación</div>
+                    <mat-form-field appearance="outline" class="input-mata">
+
+                        <mat-select placeholder="Buscar por" formControlName="clasificacion"
+                            (selectionChange)="getSubClasificacionRelatoria()">
+                            <mat-option *ngFor="let clasificacion of dataClasificacionRelatoria"
+                                [value]="clasificacion.id">
+                                {{clasificacion.descripcion}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="column">
+                    <div class="label">Subclasificación</div>
+                    <mat-form-field appearance="outline" class="input-mata">
+
+                        <mat-select placeholder="Buscar por" formControlName="subclasificacion"
+                            [disabled]="formSearchConcepts.get('clasificacion').invalid">
+                            <mat-option *ngFor="let subClasificacion of dataSubClasificacionRelatoria"
+                                [value]="subClasificacion.id">
+                                {{subClasificacion.descripcionSubClasificacion}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+            </div>
+
+            <!-- Cuarta sección -->
+            <div class="row">
+                <div class="column">
+                    <div class="label">Problema jurídico</div>
+                    <mat-form-field appearance="outline" class="input-mata">
+
+                        <input type="text" matInput placeholder="Buscar por" formControlName="problema_juridico">
+                    </mat-form-field>
+                </div>
+                <div class="column">
+                    <div class="label">Respuesta</div>
+                    <mat-form-field appearance="outline" class="input-mata">
+
+                        <input type="text" matInput placeholder="Buscar por" formControlName="respuesta">
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <!-- Quinta sección -->
+            <div class="row">
+                <div class="column">
+                    <div class="label">Descriptor</div>
+                    <mat-form-field appearance="outline" class="input-mata">
+
+                        <mat-select placeholder="Buscar por" formControlName="descriptor">
+                            <mat-option *ngFor="let descriptor of dataDescriptoresRelatoria" [value]="descriptor.id">
+                                {{descriptor.descripcion}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="column">
+                    <div class="label">Restrictor</div>
+                    <mat-form-field appearance="outline" class="input-mata">
+
+                        <mat-select placeholder="Buscar por" formControlName="restrictor">
+                            <mat-option *ngFor="let restrictor of dataRestrictoresRelatoria" [value]="restrictor.id">
+                                {{restrictor.descripcion}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <!-- Sexta sección -->
+            <div class="buttons">
+                <div class="d-flex justify-content-center align-items-center">
+                    <button class="btn btn-small bg-white border border-primary rounded text-primary py-2 px-3 me-3"
+                        (click)="resetForm()">Limpiar</button>
+
+                    <button class="btn btn-small bg-primary text-white rounded py-2 px-3" (click)="searchConcepts()"
+                        [disabled]="this.formSearchConcepts.invalid">Buscar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <ng-container>
+        <!-- Alerta numero de resultados -->
+        <span class="d-flex w-full justify-content-between align-items-center p-3"
+            style="background-color: #F4FBFF; border-radius: 6px; color: #023F5E; height: 18px; font: poppins;">
+            {{dataListConceptsLength?.length}} Resultados de búsqueda
+            <mat-icon style="cursor: pointer;">close</mat-icon>
+        </span>
+
+        <!-- Tabla horizontal -->
+        <div *ngFor="let concept of dataListConcepts">
+            <table class="horizontal-table">
+                <tbody>
+                    <tr>
+                        <td>ID concepto</td>
+                        <td>{{ concept.idConcepto }}</td>
+                    </tr>
+                    <tr>
+                        <td>Fecha</td>
+                        <td>{{ concept.fechaConcepto | date: 'yyyy/MM/dd' }}</td>
+                    </tr>
+                    <tr>
+                        <td>Abogado</td>
+                        <td>{{ concept.abogado}}</td>
+                    </tr>
+                    <tr>
+                        <td>Clasificación</td>
+                        <td>{{ concept?.nomClasificacion }}</td>
+                    </tr>
+                    <tr>
+                        <td>Subclasificación</td>
+                        <td>{{ concept?.nomSubClasificacion }}</td>
+                    </tr>
+                    <tr>
+                        <td>Descriptor</td>
+                        <td>{{ concept.nomDescriptor }}</td>
+                    </tr>
+                    <tr>
+                        <td>Restrictor</td>
+                        <td>{{ concept.nomRestrictor }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><a style="cursor: pointer;"
+                                (click)="consultaFicha(concept.idConcepto)">Consultar
+                                ficha<mat-icon matPrefix>chevron_right</mat-icon></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- paginador tabla horizontal -->
+        <div class="pagination-container">
+            <app-pagination (rechargeTable)="refreshTaskReceived()" [itemsDefault]="itemsPerDefault"></app-pagination>
+        </div>
+    </ng-container>
+
+</section>
+
+<!-- Volver al buscador button (visible when booleanGetFicha is true) -->
+<br id="detalleFicha">
+<a (click)="volverAlBuscador()" *ngIf="booleanGetFicha" class="btn-volver" style="cursor: pointer; color: #00A3E4;">
+    <span class="material-icons">arrow_back_ios</span>
+    <strong style="color: #00A3E4;">Volver al buscador</strong>
+</a>
+<br>
+
+<div *ngIf="booleanGetFicha">
+    <div class="contentTitle">
+        <h3 class="title">Detalle ficha</h3>
+    </div>
+
+    <section class="sectionContent">
+        <!-- CAMPOS: idconcepto, fecha, abogado, clasificación, subclasificación -->
+        <div class="grid-container">
+            <div class="column">
+                <div class="label">ID concepto</div>
+                <div class="value">{{ this.conceptsFichaReceived[0].idConcepto }}</div>
+            </div>
+            <div class="column">
+                <div class="label">Fecha</div>
+                <div class="value">{{ this.conceptsFichaReceived[0].fechaConcepto | date: 'yyyy/MM/dd'}}</div>
+            </div>
+            <div class="column">
+                <div class="label">Abogado</div>
+                <div class="value">{{ this.conceptsFichaReceived[0].abogado }}</div>
+            </div>
+            <div class="column">
+                <div class="label">Clasificación</div>
+                <div class="value">{{ this.conceptsFichaReceived[0]?.nomClasificacion }}</div>
+            </div>
+            <div class="column">
+                <div class="label">Subclasificación</div>
+                <div class="value">{{ this.conceptsFichaReceived[0]?.nomSubClasificacion}}</div>
+            </div>
+        </div>
+        <!-- CAMPOS: Problema juridico -->
+        <div class="grid-container">
+            <div class="column">
+                <div class="label">Problema jurídico</div>
+                <div class="value">{{ this.conceptsFichaReceived[0].problemaJuridico }}</div>
+            </div>
+        </div>
+        <!-- CAMPOS: respuesta -->
+        <div class="grid-container">
+            <div class="column">
+                <div class="label">Respuesta</div>
+                <div class="value">{{ this.conceptsFichaReceived[0].respuestaProblemaJuri }}</div>
+            </div>
+        </div>
+        <!-- CAMPOS: Descriptor, restrictor -->
+        <div class="grid-container">
+            <div class="column">
+                <div class="label">Descriptor</div>
+                <div class="value">{{ this.conceptsFichaReceived[0].nomDescriptor }}</div>
+            </div>
+            <div class="column">
+                <div class="label">Restrictor</div>
+                <div class="value">{{ this.conceptsFichaReceived[0].nomRestrictor }}</div>
+            </div>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,47 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th><strong>Analista DGCP</strong></th>
+      <th><strong>Estado SAP</strong></th>
+      <th><strong># Radicado</strong></th>
+      <th><strong>Tipo de solicitud</strong></th>
+      <th><strong>Nombre del documento</strong></th>
+      <th><strong>Fecha designación</strong></th>
+      <th><strong>Estado de la solicitud</strong></th>
+    </tr>
+  </thead>
+  <tbody *ngIf="itemsTable">
+    <ng-container *ngFor="let item of itemsTable; let i = index" >
+      <tr [ngClass]="{'gray-row': isNoEmptyObject(item.inactive)}">
+        <td>{{ item.name_analyst }}</td>
+        <td>{{ displayState(item.analyst_state) }}</td>
+        <td>{{ item?.filed }}</td>
+        <td>{{ item?.request_type }}</td>
+        <td>{{ item?.name }}</td>
+        <td>{{ item?.date | date: 'dd/MM/yyyy h:mm' }}</td>
+        <td>{{ item?.state }}</td>
+      </tr>
+      <!-- <ng-container *ngFor="let subItem of item.solicitude">
+      </ng-container> -->
+    <!--   <ng-container *ngIf="item.solicitude && item.solicitude.length > 0; else noSolicitudeTemplate">
+      </ng-container> -->
+      <!-- <ng-template #noSolicitudeTemplate>
+        <tr [ngClass]="{'gray-row': isNoEmptyObject(item.inactive)}">
+          <td>{{ item.name_analyst }}</td>
+          <td>{{ displayState(item.analyst_state) }}</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </ng-template> -->
+    </ng-container>
+  </tbody>
+</table>
+
+
+
+<div class="pagination-container">
+  <app-pagination (rechargeTable)="refreshTaskReceived()" [itemsDefault]="itemsPerDefault"></app-pagination>
+</div>

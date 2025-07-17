@@ -1,0 +1,22 @@
+<app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+
+<app-initial-list [initCardHeaderStatus]="initCardHeaderStatus" [initCardHeaderIcon]="initCardHeaderIcon" [initCardHeaderTitle]="initCardHeaderTitle" [dtTitles]="dtTitles" [routeLoadDataTablesService]="routeLoadDataTablesService" [initBotonCreateRoute]="initBotonCreateRoute"
+    (selectedRowsEmiter)="selectedRowsReceiveData($event)" [routeChangeStatus]="routeChangeStatus" [routeData]="route" [filterActive]="paramFilterActive" [viewColumStatus] = "viewColumStatus" [menu]="'SDQS'"></app-initial-list>
+
+<!-- <app-table #tableRef (refresh)="onRefresh()" [config]="configDataTable" (selectedRows)="onSelect($event)">
+
+    <div class="w-100 table-container">
+        <form class="w-100 table-form" [formGroup]="filterSearch">
+            <span class="col">
+                <label class="title m-0">Búsqueda rápida</label>
+                <mat-form-field appearance="outline" class="w-100" (input)="onSearch()">
+                    <input type="text" matInput placeholder="Buscar por número de radicado" formControlName="numRadicado">
+                    <mat-icon matPrefix class="mt-1 mr-2 p-1">search</mat-icon>
+                </mat-form-field>
+            </span>
+        </form>
+    </div>
+</app-table> -->
+
+<app-floating-button [menuButtons]="menuButtons" (menuEmiterData)="menuReceiveData($event)"></app-floating-button>
+

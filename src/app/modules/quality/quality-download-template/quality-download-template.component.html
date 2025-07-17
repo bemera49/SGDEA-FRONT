@@ -1,0 +1,42 @@
+<div class="flex w-5 mb-5">
+  <header class="flex pl-4">
+    <app-sub-menu-quality  [ItemsMenu]="items"></app-sub-menu-quality>
+  </header>
+  <div class="flex w-100 returnaq pl-4 pt-1">
+    <button  class="text-primary font-weight-bold px-lg-2 flex row botonvolver">
+       <a class="text-primary font-weight-bold px-lg-2 flex row botonvolver pt-1" href="#/quality">
+      <div class="rounded-md flex items-center justify-center ">
+          <i class="material-icons returnaq-icon mr-2">{{ ChevronLeft }}</i>
+      </div>
+      Volver
+      </a>
+    </button>
+
+  </div>
+  <section class="flex px-4 mx-2">
+    <main class="pl-3 pb-4">
+      <h2 class="font-weight-bold">Plantilla de documentos</h2>
+    </main>
+    <section class="pl-4 rounded border border-[#E2E2E2]">
+      <header>
+          <h3 class="font-weight-bold">Seleccione la plantilla a descargar</h3>
+      </header>
+  <!-- quality-download-template.component.html -->
+
+  <article class="pl-2 col">
+    <button *ngFor="let documento of getDatosShow()"  [disabled]="buttondowload" (click)="descargarDocumento(documento.id, documento.file.original_name)" class="flex row rounded border border-[#E2E2E2] w-100 bg-transparent p-2 pl-3 align-items-center mb-3">
+      <!-- Icono para archivo Word -->
+      <ng-container  *ngIf="documento.file.mime_type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'">
+        <img class="mr-4" src="assets/img/logos/word-icon.svg" alt="Word Icon"/>
+      </ng-container>
+      <!-- Icono para archivo Excel -->
+      <ng-container *ngIf="documento.file.mime_type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'">
+        <img  class="mr-4" src="assets/img/logos/excel-icon.svg" alt="Excel Icon">
+      </ng-container>
+      {{ documento.name }}
+    </button>
+  </article>
+
+    </section>
+  </section>
+</div>

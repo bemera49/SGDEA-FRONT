@@ -1,0 +1,17 @@
+<p class="subtitle">{{title}}</p>
+<div style="height: 250px; width: 100%;  overflow-y: scroll;">
+    <table style="width: 100%; overflow-y: scroll;">
+        <ng-container *ngIf="data.length > 0; else noContent">
+            <tr *ngFor="let item of data; let isEven = even;"  [ngClass]="{ 'even': isEven, 'odd': isOdd }" style="width: 100%;" >
+                <td style="text-align: center; font-size: 16px; padding: 8px">
+                    {{item.nombreUsuario}}
+                </td>
+            </tr>
+        </ng-container>
+        
+        <ng-template #noContent> 
+            No hay registros para este tipo de usuario
+        </ng-template>
+           
+    </table>
+</div>

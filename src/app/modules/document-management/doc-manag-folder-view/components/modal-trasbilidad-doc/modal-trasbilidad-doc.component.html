@@ -1,0 +1,73 @@
+<ng-container *ngIf="dataRowsHistorico.length === 0 else traza">
+  <p>Sin trazabilidad</p>
+</ng-container>
+
+<ng-template #traza>
+  <!-- Start history folder card -->
+  <div class="container-trazabilidad">
+    <div class="main-content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="overflow: auto;">
+            <div class="card">
+              <div class="card-header card-header-info card-header-icon">
+                <div class="card-icon">
+                  <i class="material-icons">date_range</i>
+                </div>
+                <h4 class="card-title">{{ "Trazabilidad de expediente" | translate }}</h4>
+              </div>
+              <div class="card-body">
+                <!-- Row 1 -->
+                <!-- let dataHist of dataRowsHistorico ? dataRowsHistorico.slice(0, numberLimitHistory) : [] -->
+                <div class="row" style="overflow: auto;">
+                  <div *ngFor="let dataHist of dataRowsHistorico" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <!-- Line component -->
+                    <div class="line text-muted"></div>
+                    <h5 class="card-title" style="color: #365c8a">
+                      <span class="material-icons">
+                        {{ dataHist.iconTrans }}
+                      </span>
+                      {{ dataHist.transaccion | translate }}
+
+                      <br class="style-none" />
+                      <small class="description margin-left">{{ dataHist.fecha }}</small>
+                    </h5>
+                    <p class="marginHistory">
+                      <small class="description">{{ "Usuario" | translate }}: </small> {{ dataHist.usuario }}
+                    </p>
+                    <p class="marginHistory">
+                      <small class="description">{{ "Dependencia" | translate }}: </small> {{ dataHist.dependencia }}
+                    </p>
+                    <!-- <p class="marginHistory"><small class="description">{{ 'Operación' | translate }}: </small> {{ dataHist.operacion }}</p> -->
+                    <p class="marginHistory">
+                      <small class="description">{{ "Observación" | translate }}: </small> {{ dataHist.observacion }}
+                    </p>
+                  </div>
+                  <!-- Start See more -->
+                  <!-- <div *ngIf="statusSeeMoreHistory" class="moreHistory col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <a *ngIf="statusSeeHistory" (click)="seeMoreAndLess(statusSeeHistory, 'History')">{{
+                  "Ver más" | translate
+                  }}</a>
+                <a *ngIf="!statusSeeHistory" (click)="seeMoreAndLess(statusSeeHistory, 'History')">{{
+                  "Ver menos" | translate
+                  }}</a>
+              </div> -->
+                  <!-- End See more -->
+                </div>
+                <!-- Row 1 -->
+                <div class="exportar">
+                  <button class="btn btn-small bg-primary text-white rounded" (click)="exportCVS()">CSV</button>
+                  <button class="btn btn-small bg-primary text-white rounded" (click)="exportExcel()">EXCEL</button>
+                  <button class="btn btn-small bg-primary text-white rounded" (click)="exportPDF()">PDF</button>
+                  <button class="btn btn-small bg-primary text-white rounde d" (click)="imprimirPDF()">IMPRIMIR</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</ng-template>

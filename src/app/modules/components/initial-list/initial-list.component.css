@@ -1,0 +1,15 @@
+table tbody tr {
+  cursor: pointer;
+}
+
+.marginNotification {
+  margin-top: 20px !important;
+}
+
+.maxHeightDataTable {
+  max-height: 500px;
+}
+
+p{
+  width: auto;
+}

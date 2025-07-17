@@ -1,0 +1,233 @@
+<ng-container *ngIf="currentStep === 1">
+  <header>
+    <!-- Header para Proceso -->
+    <ng-container *ngIf="mostrarDescripcion && datosProceso">
+      <app-header-process-map [Procedure]="document" [stepReturn]="false" [diagramView]="false"
+        (gostep)="gostep($event)" [data]="datosProceso" typeheader="Process"
+        (requestModification)="onRequestModification()">
+      </app-header-process-map>
+    </ng-container>
+    <!-- Header para Subproceso -->
+    <ng-container *ngIf="!mostrarDescripcion && !subprocesOrProcedure && subprocess">
+      <app-header-process-map [stepReturn]="false" [diagramView]="false" (gostep)="gostep($event)" [data]="subprocess"
+        typeheader="Subproces" (requestModification)="onRequestModification()">
+      </app-header-process-map>
+    </ng-container>
+    <!-- Header para Document -->
+    <ng-container *ngIf="!mostrarDescripcion && subprocesOrProcedure && document && filebyId">
+      <app-header-process-map [Procedure]="document" [filebyId]="filebyId" typeheader="documents" [stepReturn]="false"
+        [diagramData]="diagramdata" [diagramView]="DiagramView" (gostep)="gostep($event)"
+        (getreturnStep)="getreturnStep($event)" (descargarDocumento)="descargarDocumento($event)">
+      </app-header-process-map>
+    </ng-container>
+  </header>
+
+  <mat-tab-group class="w-100% border-top align-content-center" [(selectedIndex)]="selectedTab"
+    (selectedIndexChange)="selectedTab = $event" *ngIf="!subprocesOrProcedure">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <i *ngIf="selectedTab === 0" class="material-icons returnaq-icon iconosnav">{{ Info }}</i>
+        <span class="titlenav">
+          Información
+        </span>
+      </ng-template>
+      <section class="flex p-4" *ngIf="datosProceso || subprocess">
+        <!-- muestra subproceso -->
+        <ng-container *ngIf="!mostrarDescripcion">
+          <!-- Muestra Subproceso -->
+          <ng-container *ngIf="!subprocesOrProcedure">
+            <ng-container>
+              <div class="componenttable mb-1">
+                <header class="headertable">
+                  <div class=" mb-1 ml-3 mr-1" id='containerIcon'>
+                    <i class="material-icons returnaq-icon conteicon">{{ Info }}</i>
+                  </div>
+                  <div>
+                    <h6 class="titletable">Información general del subproceso</h6>
+                  </div>
+                </header>
+                <section>
+                  <ng-container>
+                    <app-reusable-table [data]="subprocess" tableType="subprocess"></app-reusable-table>
+                  </ng-container>
+                </section>
+              </div>
+            </ng-container>
+            <ng-container>
+              <header class="headertable">
+                <div class=" mb-1 ml-3 mr-1" id='containerIcon'>
+                  <i class="material-icons returnaq-icon conteicon">{{ Info }}</i>
+                </div>
+                <div>
+                  <h6 class="titletable">Área responsable del subproceso </h6>
+                </div>
+              </header>
+              <section>
+                <app-reusable-table *ngIf="datosProceso" [data]="this.datosProceso.procedure_lead_area"
+                  tableType="Arearesponsable"></app-reusable-table>
+              </section>
+            </ng-container>
+            <ng-container>
+              <header class="headertable">
+                <div class=" mb-1 ml-3 mr-1" id='containerIcon'>
+                  <i class="material-icons returnaq-icon conteicon">{{ Info }}</i>
+                </div>
+                <div>
+                  <h6 class="titletable">Documentos</h6>
+                </div>
+              </header>
+              <section>
+                <app-table-style3 [procedimento]="tablesub3" tableType="documents"></app-table-style3>
+              </section>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+
+
+
+        <!-- mostrar Proceso -->
+        <ng-container *ngIf="mostrarDescripcion">
+          <ng-container>
+            <div class="componenttable mb-1">
+              <header class="headertable">
+                <div class=" mb-1 ml-3 mr-1" id='containerIcon'>
+                  <i class="material-icons returnaq-icon conteicon">{{ Info }}</i>
+                </div>
+                <div>
+                  <h6 class="titletable">Información general del proceso</h6>
+                </div>
+              </header>
+              <section>
+                <app-reusable-table [data]="process" tableType="process"></app-reusable-table>
+              </section>
+            </div>
+          </ng-container>
+          <!-- Tabla Area responsable -->
+          <ng-container>
+            <div class="componenttable mb-1">
+              <header class="headertable">
+                <div class=" mb-1 ml-3 mr-1" id='containerIcon'>
+                  <i class="material-icons returnaq-icon conteicon">{{ Info }}</i>
+                </div>
+                <div>
+                  <h6 class="titletable">Área responsable <span *ngIf="!mostrarDescripcion"> del subproceso</span> </h6>
+                </div>
+              </header>
+              <section>
+                <app-reusable-table *ngIf="datosProceso" [data]="this.datosProceso.procedure_lead_area"
+                  tableType="Arearesponsable"></app-reusable-table>
+              </section>
+            </div>
+          </ng-container>
+          <!-- mostrar tabal caracterización -->
+          <ng-container>
+            <div class="componenttable mb-1">
+              <header class="headertable">
+                <div class=" mb-1 ml-3 mr-1" id='containerIcon'>
+                  <i class="material-icons returnaq-icon conteicon">{{ Info }}</i>
+                </div>
+                <div>
+                  <h6 class="titletable">Caracterización</h6>
+                </div>
+              </header>
+              <section>
+                <app-table-style2 (rowClicked)="onRowClicked($event)"
+                  [characterization]="this.datosProceso.characterizations"
+                  tableType="characterization"></app-table-style2>
+              </section>
+            </div>
+          </ng-container>
+          <!-- Tabla Subprocesos -->
+          <ng-container>
+            <div class="componenttable mb-1">
+              <header class="headertable">
+                <div class=" mb-1 ml-3 mr-1" id='containerIcon'>
+                  <i class="material-icons returnaq-icon conteicon">{{ Info }}</i>
+                </div>
+                <div>
+                  <h6 class="titletable">Subprocesos</h6>
+                </div>
+              </header>
+              <section>
+                <app-table-style3 [procedimento]="tablesub3" tableType="subproceso"></app-table-style3>
+              </section>
+            </div>
+          </ng-container>
+
+        </ng-container>
+      </section>
+    </mat-tab>
+
+  </mat-tab-group>
+
+  <section class="containermetadata">
+    <!-- Muestra metadatos del documento-->
+    <ng-container *ngIf="subprocesOrProcedure && !mostrarDescripcion">
+      <nav class="w-100% row py-2 justify-content-around border-top align-content-center">
+      </nav>
+      <ng-container>
+        <div class="componenttable mb-1">
+          <header class="headertable">
+            <div class=" mb-1 ml-3 mr-1" id='containerIcon'>
+              <i class="material-icons returnaq-icon conteicon">{{ Info }}</i>
+            </div>
+            <div>
+              <h6 class="titletable" *ngIf="subprocesOrProcedure">Ficha de identificación</h6>
+            </div>
+          </header>
+          <section>
+            <ng-container *ngIf="document">
+              <app-reusable-table [data]="document" tableType="file"></app-reusable-table>
+            </ng-container>
+          </section>
+        </div>
+      </ng-container>
+      <!-- tabla de  nivel de descripcion metadatos -->
+      <ng-container>
+        <div class="componenttable mb-1">
+          <header class="headertable">
+            <div class=" mb-1 ml-3 mr-1" id='containerIcon'>
+              <i class="material-icons returnaq-icon conteicon">{{ Info }}</i>
+            </div>
+            <div>
+              <h6 class="titletable">Nivel de descripción </h6>
+            </div>
+          </header>
+          <section>
+            <ng-container *ngIf="datoProces">
+              <app-reusable-table [nameProces]="datoProces" [data]="document"
+                tableType="LevelOfDescriptión"></app-reusable-table>
+            </ng-container>
+          </section>
+        </div>
+      </ng-container>
+      <!-- tabla de  descripcion metadatos -->
+      <ng-container>
+        <div class="componenttable mb-1">
+          <header class="headertable">
+            <div class=" mb-1 ml-3 mr-1" id='containerIcon'>
+              <i class="material-icons returnaq-icon conteicon">{{ Info }}</i>
+            </div>
+            <div>
+              <h6 class="titletable">descripción</h6>
+            </div>
+          </header>
+          <section>
+            <ng-container *ngIf="datoSubproces">
+              <app-reusable-table [datossubproces]="datoSubproces" [data]="document"
+                tableType="description"></app-reusable-table>
+            </ng-container>
+          </section>
+        </div>
+      </ng-container>
+    </ng-container>
+  </section>
+</ng-container>
+
+<ng-container *ngIf="currentStep === 2">
+  <app-alternate-data-viewer-step-one [ID]="selectedId"></app-alternate-data-viewer-step-one>
+</ng-container>
+<ng-container *ngIf="currentStep === 3">
+  <app-alternate-data-viewer-step-two [isCharacterizationSelected]="isCharacterizationSelected"
+    [ID]="selectedId"></app-alternate-data-viewer-step-two>
+</ng-container>

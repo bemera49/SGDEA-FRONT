@@ -1,0 +1,370 @@
+<div class="col-12">
+ <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <button routerLink="/external-pqrs-main" class="btn btn-link btn-sm">PQRSD</button>
+        </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            <button class="btn btn-link btn-sm" disabled>Formulario</button>
+          </li>
+        </ol>
+      </nav>
+
+  <form (submit)="submitFormReceive()" [formGroup]="pqrsForm" style="gap: 5px 0px">
+
+    <mat-card style="margin-top: 1%;" class="border border-2 rounded w-100">
+      <div class="row" style="gap: 5px 0px">
+        <div class="col-6">
+          <h3 class="font-weight-bold">{{title}}</h3>
+        </div>
+      </div>
+    </mat-card>
+
+
+    <mat-card class="mt-4 border-2 border w-100">
+      <h3 class="font-weight-bold">Datos solicitud</h3>
+      <div class="row">
+        <mat-form-field class="col-md-6 col-lg-6">
+          <mat-label>Tipo de solicitud</mat-label>
+          <mat-select formControlName="tipoSolicitudId">
+            <mat-option *ngFor="let sol of listTipoSolicitudes" [value]="sol.value">{{ sol.name }}</mat-option>
+          </mat-select>
+          <mat-hint *ngIf="pqrsForm.controls['tipoSolicitudId'].invalid && pqrsForm.controls['tipoSolicitudId'].touched"
+            class="text-danger">
+            Este campo es requerido
+          </mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-6 col-lg-6">
+          <mat-label>Número de cuenta contrato</mat-label>
+          <input matInput formControlName="numeroCuentaContrato" type="text" (keypress)="validateInput.isNumber($event)" maxlength="20">
+          <!--mat-hint
+            *ngIf="pqrsForm.controls['numeroCuentaContrato'].invalid && pqrsForm.controls['numeroCuentaContrato'].touched"
+            class="text-danger">
+            Este campo es requerido
+          </mat-hint-->
+        </mat-form-field>
+
+        <mat-form-field class="col-md-6 col-lg-6">
+          <mat-label>Tipo de persona</mat-label>
+          <mat-select formControlName="tipoPersona" (selectionChange)="onChangePersonType($event.value)">
+            <mat-option value="2">Natural</mat-option>
+            <mat-option value="1">Jurídica</mat-option>
+            <mat-option value="3">Anónimo</mat-option>
+          </mat-select>
+          <mat-hint *ngIf="pqrsForm.controls['tipoPersona'].invalid && pqrsForm.controls['tipoPersona'].touched"
+            class="text-danger">
+            Este campo es requerido
+          </mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-6 col-lg-6">
+          <mat-label>Tipo de identificación</mat-label>
+          <mat-select formControlName="tipoIdentificacion">
+            <mat-option value="1" *ngIf="pqrsForm.controls['tipoPersona'].value == 2">Cédula de Ciudadanía</mat-option>
+            <mat-option value="2" *ngIf="pqrsForm.controls['tipoPersona'].value == 2">Cédula de Extranjería</mat-option>
+            <mat-option value="3" *ngIf="pqrsForm.controls['tipoPersona'].value == 1">NIT</mat-option>
+          </mat-select>
+          <mat-hint
+            *ngIf="pqrsForm.controls['tipoIdentificacion'].invalid && pqrsForm.controls['tipoIdentificacion'].touched"
+            class="text-danger">
+            Este campo es requerido
+          </mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-6 col-lg-6">
+          <mat-label>Número de documento</mat-label>
+          <input matInput formControlName="numeroDocumento" type="text" maxlength="12">
+          <mat-hint *ngIf="pqrsForm.controls['numeroDocumento'].invalid && pqrsForm.controls['numeroDocumento'].touched"
+            class="text-danger">
+            Este campo es requerido
+          </mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-6 col-lg-6">
+          <mat-label>{{ titleName }}</mat-label>
+          <input matInput formControlName="nombresApellidos">
+          <mat-hint
+            *ngIf="pqrsForm.controls['nombresApellidos'].invalid && pqrsForm.controls['nombresApellidos'].touched"
+            class="text-danger">
+            Este campo es requerido
+          </mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-6 col-lg-6">
+          <mat-label>Teléfono celular</mat-label>
+          <input matInput formControlName="telefonoCelular" type="text" (keypress)="validateInput.isNumber($event)" maxlength="10">
+          <mat-hint *ngIf="pqrsForm.controls['telefonoCelular'].invalid && pqrsForm.controls['telefonoCelular'].touched"
+            class="text-danger">
+            Este campo es requerido
+          </mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-6 col-lg-6">
+          <mat-label>Teléfono fijo</mat-label>
+          <input matInput formControlName="telefonoFijo" type="text" maxlength="10">
+          <mat-hint *ngIf="pqrsForm.controls['telefonoFijo'].invalid && pqrsForm.controls['telefonoFijo'].touched"
+            class="text-danger">
+            Este campo es requerido
+          </mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-6 col-lg-6">
+          <mat-label>Dirección de Residencia</mat-label>
+          <input matInput readonly formControlName="direccionResidencia"
+            (click)="openModalForDireccion('direccionResidencia')">
+          <!--mat-hint
+            *ngIf="pqrsForm.controls['direccionResidencia'].invalid && pqrsForm.controls['direccionResidencia'].touched"
+            class="text-danger">
+            Este campo es requerido
+          </mat-hint-->
+        </mat-form-field>
+
+        <mat-form-field class="col-md-6 col-lg-6">
+          <mat-label>País</mat-label>
+          <mat-select formControlName="paisResidencia" (selectionChange)="getDepartamentos($event.value,false)">
+            <mat-option *ngFor="let pais of listPaises" [value]="pais.value">{{pais.name}}</mat-option>
+          </mat-select>
+          <mat-hint
+            *ngIf="pqrsForm.controls['paisResidencia'].invalid && pqrsForm.controls['paisResidencia'].touched"
+            class="text-danger">
+            Este campo es requerido
+          </mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-6 col-lg-6">
+          <mat-label>Departamento</mat-label>
+          <mat-select formControlName="departamentoResidencia" (selectionChange)="getCiudades($event.value,false)">
+            <mat-option *ngFor="let dep of listDepartamentos" [value]="dep.value">{{dep.name}}</mat-option>
+          </mat-select>
+          <mat-hint
+            *ngIf="pqrsForm.controls['departamentoResidencia'].invalid && pqrsForm.controls['departamentoResidencia'].touched"
+            class="text-danger">
+            Este campo es requerido
+          </mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-6 col-lg-6">
+          <mat-label>Municipio / Ciudad</mat-label>
+          <mat-select formControlName="ciudadResidencia">
+            <mat-option *ngFor="let ciu of listCiudades" [value]="ciu.value">{{ciu.name}}</mat-option>
+          </mat-select>
+          <mat-hint
+            *ngIf="pqrsForm.controls['ciudadResidencia'].invalid && pqrsForm.controls['ciudadResidencia'].touched"
+            class="text-danger">
+            Este campo es requerido
+          </mat-hint>
+        </mat-form-field>
+      </div>
+    </mat-card>
+
+    <mat-card class="border border-2 mt-4">
+      <h3 class="font-weight-bold">Datos de Notificación</h3>
+      <div class="row">
+        <mat-card-content class="col-md-3 col-lg-3">
+          <label class="text-dark">
+              {{ 'Autoriza el envío de información por medios electrónicos' | translate }}</label>
+          <section class="example-section">
+              <mat-slide-toggle (change)="autorizaChange($event)" formControlName="autorizacionnotificacion" [color]="colorAu">
+                  {{ messageAutoriza | translate }}
+              </mat-slide-toggle>
+          </section>
+      </mat-card-content>
+      <div class="col-md-9 col-lg-9"></div>
+        <mat-form-field class="col-md-6 col-lg-6">
+          <mat-label>Tipo de notificación</mat-label>
+          <mat-select formControlName="tipoNotificacion">
+            <mat-option value="1">Email</mat-option>
+            <mat-option value="2">Físico</mat-option>
+          </mat-select>
+          <mat-hint
+            *ngIf="pqrsForm.controls['tipoNotificacion'].invalid && pqrsForm.controls['tipoNotificacion'].touched"
+            class="text-danger">
+            Este campo es requerido
+          </mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-6 col-lg-6">
+          <mat-label>Dirección de notificación</mat-label>
+          <input matInput readonly formControlName="direccionNotificacion"
+            (click)="openModalForDireccion('direccionNotificacion')" [required]="!pqrsForm.controls['autorizacionnotificacion'].value">
+          <mat-hint
+            *ngIf="pqrsForm.controls['direccionNotificacion'].invalid && pqrsForm.controls['direccionNotificacion'].touched"
+            class="text-danger">
+            Este campo es requerido
+          </mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-6 col-lg-6">
+          <mat-label>Correo de notificación</mat-label>
+          <input matInput formControlName="email" [required]="pqrsForm.controls['autorizacionnotificacion'].value">
+          <mat-hint
+            *ngIf="pqrsForm.controls['email'].invalid && pqrsForm.controls['email'].touched"
+            class="text-danger">
+            Este campo es requerido
+          </mat-hint>
+          <mat-error *ngIf="pqrsForm.touched && pqrsForm.controls['email'].invalid">
+            El correo debe ser valido
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-6 col-lg-6">
+          <mat-label>Confirmación correo de notificación</mat-label>
+          <input matInput formControlName="confirmEmail" [required]="pqrsForm.controls['autorizacionnotificacion'].value">
+          <mat-hint
+            *ngIf="pqrsForm.controls['confirmEmail'].invalid && pqrsForm.controls['confirmEmail'].touched"
+            class="text-danger">
+            Este campo es requerido
+          </mat-hint>
+          <mat-hint *ngIf="pqrsForm.controls['confirmEmail'].touched && pqrsForm.hasError('areEquals') && !pqrsForm.controls['confirmEmail'].hasError('required')" class="text-danger">
+          Los campos de correo y confirmación correo no coninciden
+          </mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-6 col-lg-4">
+          <mat-label>{{ 'País' | translate }}</mat-label>
+          <mat-select formControlName="paisNotificacion"
+            (selectionChange)="getDepartamentos($event.value,true)">
+            <mat-option *ngFor="let pais of listPaisesNoti" [value]="pais.value">{{pais.name}}</mat-option>
+          </mat-select>
+          <mat-hint
+            *ngIf="pqrsForm.controls['paisNotificacion'].invalid && pqrsForm.controls['paisNotificacion'].touched"
+            class="text-danger">
+            Este campo es requerido
+          </mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-6 col-lg-4">
+          <mat-label>{{ 'Departamento' | translate }}</mat-label>
+          <mat-select formControlName="departamentoNotificacion"
+            (selectionChange)="getCiudades($event.value,true)">
+            <mat-option *ngFor="let dep of listDepartamentosNoti" [value]="dep.value">{{dep.name}}</mat-option>
+          </mat-select>
+          <mat-hint
+            *ngIf="pqrsForm.controls['departamentoNotificacion'].invalid && pqrsForm.controls['departamentoNotificacion'].touched"
+            class="text-danger">
+            Este campo es requerido
+          </mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-6 col-lg-4">
+          <mat-label>{{ 'Municipio' | translate }}</mat-label>
+          <mat-select formControlName="ciudadNotificacion">
+            <mat-option *ngFor="let ciu of listCiudadesNoti" [value]="ciu.value">{{ciu.name}}</mat-option>
+          </mat-select>
+          <mat-hint
+            *ngIf="pqrsForm.controls['ciudadNotificacion'].invalid && pqrsForm.controls['ciudadNotificacion'].touched"
+            class="text-danger">
+            Este campo es requerido
+          </mat-hint>
+        </mat-form-field>
+      </div>
+    </mat-card>
+
+    <mat-card class="border border-2 mt-4">
+      <h3 class="font-weight-bold">Solicitud</h3>
+      <div class="row">
+        <div class="col-md-12 mb-10">
+          <mat-form-field >
+            <mat-label>Hechos</mat-label>
+            <textarea matInput formControlName="hechos" [maxlength]="maxChars"></textarea>
+            <mat-hint *ngIf="pqrsForm.controls['hechos'].invalid && pqrsForm.controls['hechos'].touched"
+              class="text-danger">
+              Este campo es requerido
+            </mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="col-md-12">
+          <label class="float-right">
+            Caracteres restantes: {{maxChars - pqrsForm.controls['hechos'].value.length}}/{{maxChars}}
+          </label>
+        </div>
+
+        <div class="col-md-12">
+          <mat-form-field>
+            <mat-label>Pretensiones</mat-label>
+            <textarea matInput formControlName="pretensiones" [maxlength]="maxChars"></textarea>
+            <mat-hint *ngIf="pqrsForm.controls['pretensiones'].invalid && pqrsForm.controls['pretensiones'].touched"
+              class="text-danger">
+              Este campo es requerido
+            </mat-hint>
+          </mat-form-field>
+        </div>
+        
+        <div class="col-md-12">
+          <label class="float-right">
+            Caracteres restantes: {{maxChars - pqrsForm.controls['pretensiones'].value.length}}/{{maxChars}}
+          </label>
+        </div>
+
+      </div>
+    </mat-card>
+
+    <mat-card class="border border-2 mt-4">
+      <h3 class="font-weight-bold">Anexos</h3>
+      <div class="col-md-6 col-lg-6">
+        <mat-checkbox formControlName="cuentaConAnexos">¿Cuenta con anexos?</mat-checkbox>
+      </div>
+
+      <div *ngIf="pqrsForm.get('cuentaConAnexos').value" class="col-md-12 col-lg-12 mt-2">
+        <!-- Input de archivo oculto -->
+        <input type="file" #fileInput (change)="onFileSelected($event)" multiple accept=".png, .jpg, .jpeg, .pdf"
+          style="display: none;">
+
+        <!-- Botón visible para el usuario con estilos de Bootstrap -->
+        <button type="button" (click)="fileInput.click()" class="btn btn-primary">Subir Anexos</button>
+
+        <ul class="mt-2">
+          <li *ngFor="let archivo of archivosSubidos; let i = index" class="mt-1">
+            {{ archivo.name }}
+            <button type="button" (click)="eliminarArchivo(i)" class="btn btn-danger btn-sm">Eliminar</button>
+          </li>
+        </ul>
+      </div>
+
+
+
+    </mat-card>
+
+    <!--Intentar pasar esto a Mat-->
+    <mat-card class="mt-5 border border-2">
+
+      <div class="text-primary font-weight-bold mb-3" style="font-size: 14px ;height: 10rem;overflow-y: auto;">
+        En mi calidad de titular de los datos personales obtenidos a través del diligenciamiento del presente
+        formulario, declaro que he sido informado y he leído la Política de Tratamiento de Datos Personales de la
+        Empresa de Acueducto y Alcantarillado de Bogotá-EAAB-ESP, la cual se encuentra disponible aquí.
+        Por ello, autorizo de manera previa, expresa e inequívoca que mis datos personales, sean tratados por la
+        EAAB-ESP, como responsable de tratamiento, con sujeción a lo establecido en la mencionada Política,
+        atendiendo
+        a las finalidades en ellas señaladas, especialmente, para: i) atender, gestionar y responder las PQRSD
+        (Peticiones, Quejas y Reclamos, Sugerencias y Denuncias) presentadas por mí, ii) enviar comunicaciones a
+        través de cualquier medio o canal de atención, con el fin de brindar información sobre los servicios
+        públicos
+        domiciliarios ofrecidos por la Empresa, iii) realizar campañas de divulgación, referentes a los servicios
+        que
+        ofrece la EAAB-ESP, iv) realizar encuestas de satisfacción sobre la calidad de los servicios prestados, v)
+        enviar estados e información relacionada con las obligaciones derivadas del contrato de servicios públicos,
+        vi) caracterizar los usuarios y grupos de interés para desarrollar estrategias de mejoramiento en la
+        prestación de los servicios.
+        Así mismo, autorizo la circulación de mis datos personales con los encargados de tratamiento que la EAAB-ESP
+        designe para llevar a cabo las finalidades mencionadas anteriormente.
+        Entiendo que tengo derecho de revocar o modificar esta autorización y de consultar los datos almacenados,
+        para
+        lo cual debo dirigirme a los canales de atención establecidos en la Política mencionada.
+      </div>
+
+      <mat-radio-group formControlName="tratamientoDatos" color="primary">
+        <mat-radio-button class="mr-2" [value]="true">Si</mat-radio-button>
+        <mat-radio-button class="mr-2" [value]="false">No</mat-radio-button>
+      </mat-radio-group>
+      <mat-hint *ngIf="pqrsForm.get('tratamientoDatos').value == false" class="text-danger text-error d-block">
+        *Debes aceptar la politica de tratamiento de datos
+      </mat-hint>
+    </mat-card>
+
+
+    <button type="submit"
+      class="btn px-5 py-3 mt-4 d-flex justify-content-center mx-auto mat-raised-button bg-primary">Generar</button>
+    <!-- [disabled]="pqrsForm.invalid || pqrsForm.get('tratamientoDatos').value == false" -->
+  </form>
+</div>

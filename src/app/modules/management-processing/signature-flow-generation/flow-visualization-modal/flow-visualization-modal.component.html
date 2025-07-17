@@ -1,0 +1,30 @@
+<button mat-stroked-button class="m-4" (click)="close()">
+    <mat-icon>close</mat-icon>
+</button>
+
+<div *ngIf="this.registros.length > 0;">
+    <span class="mb-4">
+        <app-tablecopy
+        [config]="dataConfig">
+
+        </app-tablecopy>
+    </span>
+    
+    
+    <span class="mb-4">
+        <h4>Aprobadores</h4>
+    
+    </span>
+    
+    <span class="mb-4">
+        <h4>Aprobadores y firmantes</h4>
+    
+    </span>
+    
+</div>
+
+<h4 class="m-4" *ngIf="this.registros.length == 0 ">
+    No has registrado ningun usuario
+</h4>
+
+

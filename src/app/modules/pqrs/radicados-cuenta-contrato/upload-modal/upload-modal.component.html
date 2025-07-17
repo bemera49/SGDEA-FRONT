@@ -1,0 +1,42 @@
+<mat-dialog-content class="mat-typography custom-dialog-content">
+    <div class="header">
+        <div class="icon-container">
+            <span class="material-icons">folder</span>
+        </div>
+        <h2>Añadir documentos</h2>
+        <button mat-icon-button mat-dialog-close class="close-button">
+            <span class="material-icons">close</span>
+        </button>
+    </div>
+    <p>Arrastra los archivos en el siguiente recuadro.</p>
+    <div class="upload-container" 
+         (dragover)="onDragOver($event)" 
+         (dragleave)="onDragLeave($event)" 
+         (drop)="onDrop($event)">
+        <ng-container *ngIf="uploadedFile; else uploadPrompt">
+            <div class="uploaded-file">
+                <span class="material-icons">insert_drive_file</span>
+                <span>{{ uploadedFile.name }}</span>
+                <button mat-icon-button (click)="removeFile()">
+                    <span class="material-icons">delete</span>
+                </button>
+            </div>
+        </ng-container>
+        <ng-template #uploadPrompt>
+            <div class="upload-icon">
+                <span class="material-icons">cloud_upload</span>
+            </div>
+            <div class="file-types">
+                <span>.XLS .XLSX</span>
+            </div>
+            <p>También puedes subir tus archivos</p>
+            <a class="upload-link" (click)="fileInput.click()">Haciendo click aquí</a>
+            <input type="file" accept=".xls, .xlsx" (change)="onFileSelected($event)" #fileInput style="display: none;">
+        </ng-template>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="center" class="custom-dialog-actions">
+    <button mat-button mat-dialog-close class="cancel-button">Cancelar</button>
+    <button mat-button [mat-dialog-close]="true" class="accept-button" [disabled]="!uploadedFile">Aceptar</button>
+</mat-dialog-actions>

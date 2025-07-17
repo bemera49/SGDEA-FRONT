@@ -1,0 +1,13 @@
+<div class="d-flex flex-column align-items-center modal-container">
+  <span class="material-icons  modal-icon" style="color: red;">
+    error
+  </span>
+
+  <p class="text-center my-3 w-100 modal-message">{{ data.title }}</p>
+
+  <div class="d-flex flex-wrap align-items-center" style="gap: 10px">
+    <button class="btn bg-white border border-primary rounded py-3 px-5 text-primary"
+      [mat-dialog-close]="false">Cancelar</button>
+    <button class="btn bg-primary text-white rounded border-0 py-3 px-5" [mat-dialog-close]="true">Aceptar</button>
+  </div>
+</div>

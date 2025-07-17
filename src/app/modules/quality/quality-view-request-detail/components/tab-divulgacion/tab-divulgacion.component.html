@@ -1,0 +1,100 @@
+<app-layout-section [title]="'Divulgación '">
+  <div class="container-content">
+    <form [formGroup]="formDivulgacion">
+      <div formArrayName="divulgaciones">
+        <div
+          *ngFor="let divulgacion of divulgaciones.controls; let i = index"
+          [formGroupName]="i"
+          class="inputs"
+        >
+          <div class="input">
+            <mat-label>Fecha de Divulgación*</mat-label>
+            <div class="input-date">
+              <mat-form-field appearance="outline">
+                <input
+                  matInput
+                  [matDatepicker]="picker2"
+                  formControlName="file_date"
+                  placeholder="Seleccione"
+                />
+                <mat-datepicker #picker2></mat-datepicker>
+              </mat-form-field>
+              <button (click)="picker2.open()">
+                <mat-datepicker-toggle
+                  matIconSuffix
+                  [for]="picker2"
+                ></mat-datepicker-toggle>
+              </button>
+            </div>
+          </div>
+
+          <div class="input">
+            <div class="file-input-container">
+              <input
+                type="file"
+                (change)="onFileChange($event, i)"
+                #fileInput
+                style="display: none"
+              />
+              <button
+                (click)="
+                  formDivulgacion.disabled || divulgaciones.at(i).disabled
+                    ? null
+                    : fileInput.click()
+                "
+                class="btn-file"
+              >
+                <span>Adjunte archivo</span>
+                <mat-icon>attach_file</mat-icon>
+              </button>
+              <span *ngIf="divulgaciones.at(i).get('file_file').value">{{
+                divulgaciones.at(i).get("file_file").value.name
+              }}</span>
+            </div>
+          </div>
+
+          <div class="input">
+            <mat-label>Observaciones</mat-label>
+            <mat-form-field appearance="outline">
+              <textarea
+                matInput
+                formControlName="file_observation"
+                placeholder="Observaciones"
+              ></textarea>
+            </mat-form-field>
+          </div>
+
+          <button
+            class="button-table remove-items"
+            (click)="
+              !formDivulgacion.disabled && !divulgaciones.at(i).disabled
+                ? removeDivulgacion(i)
+                : null
+            "
+          >
+          -
+          </button>
+        </div>
+      </div>
+      <div class="container-buttons">
+        <!-- Botón "Agregar Divulgación" -->
+        <button
+          class="buttonShow"
+          (click)="!formDivulgacion.disabled ? addDivulgacion() : null"
+          [disabled]="formDivulgacion.disabled"
+        >
+          Agregar Divulgación
+        </button>
+
+        <!-- Botón "Guardar" -->
+        <button
+          class="buttonShow"
+          (click)="!formDivulgacion.disabled ? save() : null"
+          [disabled]="formDivulgacion.disabled"
+        >
+          Guardar
+        </button>
+      </div>
+    </form>
+  </div>
+</app-layout-section>

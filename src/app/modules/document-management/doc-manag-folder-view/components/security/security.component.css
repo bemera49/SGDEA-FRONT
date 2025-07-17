@@ -1,0 +1,11 @@
+.container-tables{
+  display: flex;
+  justify-content: space-between;
+}
+
+.container{
+  display:flex;
+  justify-items: center;
+  gap:12px;
+  margin: 20px  0px;
+}

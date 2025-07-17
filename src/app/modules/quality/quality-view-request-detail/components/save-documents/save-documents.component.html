@@ -1,0 +1,32 @@
+<form (ngSubmit)="onSubmit()" class="documents-form">
+  <div class="flex-between">
+    <app-document-modifiable
+      [idTask]="idTypeTask"
+      [document]="documentoOffice"
+      [title]="'Documento propuesto*'"
+      [acceptFile]="'office'"
+      [(valueFile)]="fileOffice"
+      [(stateDownload)]="stateOffice"
+      (stateUpdateChange)="onStateUpdateChange($event)"
+      [isModifiable]="isModifiable"
+      ></app-document-modifiable>
+
+    <ng-container *ngIf="documentoDiagram">
+      <app-document-modifiable
+        [idTask]="idTypeTask"
+        [document]="documentoDiagram"
+        [title]="'Diagrama*'"
+        [acceptFile]="'vx'"
+        [(valueFile)]="fileDiagram"
+        [(stateDownload)]="stateDiagrama"
+        (stateUpdateChange)="onStateUpdateChange($event)"
+        [isModifiable]="isModifiable"
+      ></app-document-modifiable>
+    </ng-container>
+  </div>
+  <div class="flex-center"   *ngIf="isModifiable" >
+    <app-button-continue
+      [text]="'Guardar cambios'"
+      [onDisabled]="stateOffice || stateDiagrama || stateUpdate"></app-button-continue>
+  </div>
+</form>

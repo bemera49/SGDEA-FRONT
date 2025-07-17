@@ -1,0 +1,79 @@
+<ng-container *ngIf="currentStep === 1">
+  <section class="pl-5">
+    <app-sub-menu-quality [ItemsMenu]="items"></app-sub-menu-quality>
+    <header id="headerContainer">
+      <div class="flex pl-2 h-max-68 row mx-2 mb-0">
+        <div class="justify-content-center align-items-center mt-3 mx-3" id='containerheader'>
+          <img class="imagenheader" src="assets/img/logos/detailProcesstitle.svg" alt="Título del proceso" />
+        </div>
+        <div class="flex col justify-content-start">
+          <span class="mb-0 subtituloPAB">Proceso</span>
+          <h3 class="mt-0 titulo-pa titlecomponent font-weight-bold font-size-2" *ngIf="datosProceso">
+            {{ datosProceso.code }} - {{ datosProceso.name }}
+          </h3>
+        </div>
+      </div>
+    </header>
+
+    <article>
+
+      <div class="pt-2 pl-3 flex row">
+        <div class="mt-4 ml-3 mr-2" id='containerIcon'>
+          <i class="material-icons returnaq-icon conteicon">{{ Info }}</i>
+        </div>
+        <h3 class="align-content-center titlecomponent font-weight-bold">Información general</h3>
+      </div>
+
+      <div class="p-2 flex row containerselect">
+        <div class="d-flex  mt-3 mx-1" id='containerIcon'>
+          <i class='material-icons returnaq-icon conteicon'>{{ article }}</i>
+        </div>
+
+        <div class="flex justify-content-start contencenter">
+          <span class="flex mb-0 titlecomponent font-weight-bold textspanDescription">Descripción</span>
+          <button (click)="toggleButtonDescription()" class="flex row bg-transparent pb-0 mt-0 containerdes">
+            <div class="btn-circle-custom mx-1" [style.backgroundColor]="showDescription ? '#008ED6' : '#E2E2E2'">
+              <i class="material-icons returnaq-icon" style="color:#F2FBFF; font-size: 1rem;" *ngIf="showIcon"> {{
+                circle }}</i>
+            </div>
+            <span class="mt-1 textdescription" *ngIf="datosProceso">{{
+              datosProceso.name }}</span>
+          </button>
+        </div>
+
+        <div class="d-flex row justify-content-start">
+          <div class="d-flex justify-content-center align-items-center mt-3 mx-3" id='containerIcon'>
+            <i class="material-icons returnaq-icon conteicon">{{ calendar }}</i>
+          </div>
+          <div class="flex col justify-content-start color-black font-weight-bold">
+            <span class="flex mb-0 titlecomponent font-weight-bold textspanDescription">Vigente desde</span>
+            <div>
+              <span class="mt-1 dateDescription " *ngIf="datosProceso">{{datosProceso.until}}</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </article>
+
+    <section>
+      <header>
+        <div class="pt-2 pl-3 flex row align-items-center">
+          <div class="d-flex justify-content-center align-items-center mt-1 mx-3" id="containerIcon">
+            <i class="material-icons returnaq-icon conteicon">{{ account_tree }}</i>
+          </div>
+          <h3 class="align-content-center titlecomponent font-weight-bold font-size-2">Subprocesos</h3>
+        </div>
+      </header>
+    </section>
+    <app-tree-process *ngIf="datosProceso" [datosTree]="datosTree" [canExpand]="canExpandTree"
+      (subprocesoExpandio)="onSubprocesoExpandio($event)"></app-tree-process>
+  </section>
+
+</ng-container>
+<ng-container *ngIf="currentStep === 2">
+  <app-step2 [ID]="selectedId"></app-step2>
+</ng-container>
+<ng-container *ngIf="currentStep === 3">
+  <app-step3 [ID]="selectedId" [isCharacterizationSelected]="isCharacterizationSelected"></app-step3>
+</ng-container>

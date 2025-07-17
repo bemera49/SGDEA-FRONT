@@ -1,0 +1,16 @@
+.button-clear{
+  display: flex;
+  align-items: center;
+  height: 44px;
+  width: fit-content;
+  padding: 12px 20px;
+  border-radius: 12px;
+  gap: 5px;
+  border: none;
+  color: #00A3E4;
+  background-color: transparent;
+}
+
+.icon-clear{
+  color: #00A3E4;
+}

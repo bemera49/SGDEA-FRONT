@@ -1,0 +1,43 @@
+<h2 mat-dialog-title>Agregar dependencia</h2>
+
+<form [formGroup]="formDependency" (ngSubmit)="onSubmit()">
+
+  <mat-dialog-content class="mat-typography">
+    <p>Seleccione la dependencia y los permisos de gestión en el expediente seleccionado</p>
+    <!--     formControlName="" -->
+    <mat-form-field class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <mat-label>{{ "Dependencia" }}</mat-label>
+      <mat-select id="idDependencia" name="idDependencia" formControlName="idDependencia" required>
+        <mat-option *ngFor="let dep of dependencias"
+          [value]="dep.idGdTrdDependencia">{{dep.nombreGdTrdDependencia}}</mat-option>
+      </mat-select>
+      <!--                     <mat-error
+          *ngIf="!moduleForm.get('estadoGdExpediente').valid && moduleForm.get('estadoGdExpediente').touched">{{
+          "El campo es obligatorio" | translate }}</mat-error> -->
+    </mat-form-field>
+
+
+    <section>
+      <h4>Permisos</h4>
+      <p *ngFor="let per of permisos"><mat-checkbox
+          (change)="onChecked($event.checked,per.id)">{{per.nombre}}</mat-checkbox></p>
+    </section>
+
+    <section>
+      <mat-form-field class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <mat-label>Justificación</mat-label>
+        <textarea matInput name="justificacion" formControlName="justificacion" id="justificacion"
+          placeholder="Justificación..."></textarea>
+      </mat-form-field>
+    </section>
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button [disabled]="!formDependency.valid" class="btn btn-primary" type="submit" color="warn"
+      [mat-dialog-close]="true">Aceptar</button>
+    <button mat-button class="btn bg-white text-primary border border-primary" mat-dialog-close>Cancelar</button>
+  </mat-dialog-actions>
+
+
+</form>

@@ -1,0 +1,173 @@
+<button mat-icon-button (click)="goBack()" style="width: 150px; margin: 20px">
+    <mat-icon>chevron_left</mat-icon>Volver
+</button>
+
+<div style="width: 90%; margin: 0 auto; display: flex; justify-content: center; align-items: center; padding: 20px">
+    <h3 class="title-page">Flujos de firma de documentos</h3>
+    <span class="d-flex flex-row" style="gap: 12px">
+        <button mat-raised-button color="primary" (click)="visualize()" style="margin-right: 24px">
+            <mat-icon>visibility</mat-icon>
+            Visualizar
+        </button>
+        <button (click)="submitForm()" mat-raised-button class="bg-primary text-white">
+            <mat-icon>save</mat-icon>
+            Guardar
+        </button>
+        <button mat-raised-button (click)="goBack()" class="bg-primary text-white">
+            <mat-icon>close</mat-icon>
+            Cancelar
+        </button>
+    </span>
+</div>
+
+<div class="mx-3" >
+    <form [formGroup]="form" (submit)="submit(selectedTabIndex.value)">
+
+        <form [formGroup]="formFecha"  style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; padding: 16px;  width: 100%; border: 1px solid #E2E2E2; border-radius: 20px; margin: 0 auto; background: white; margin-bottom: 40px;">
+            <span style="grid-column: 0 / 3;">
+                <label>Asunto </label>
+                <mat-form-field appearance="outline">
+                    <input type="text" matInput placeholder="Ingrese" formControlName="asunto">
+                    <mat-error *ngIf="isError(formFecha, 'asunto', 'required')">
+                        Este campo es requerido
+                    </mat-error>
+                </mat-form-field>
+            </span>
+    
+            <span>
+                <label>Proyector </label>
+                <mat-form-field appearance="outline">
+                    <input type="text" matInput placeholder="Ingrese" formControlName="proyector">
+                    <mat-error *ngIf="isError(formFecha, 'proyector', 'required')">
+                        Este campo es requerido
+                    </mat-error>
+                </mat-form-field>
+
+               
+            </span>
+    
+            <span>
+                <label>Fecha límite *</label>
+                <mat-form-field appearance="outline">
+                    <input matInput type="datetime-local" [min]="minimunDate" placeholder="start date" formControlName="fechaLimite">
+                    <mat-error *ngIf="isError(formFecha, 'fechaLimite', 'required')">
+                        Este campo es requerido
+                    </mat-error>
+                  </mat-form-field>
+            </span> 
+    
+        </form>
+
+            <div class="gap-2" style="display: grid;  padding: 16px;  width: 100%; border: 1px solid #E2E2E2; border-radius: 20px; margin: 0 auto; background: white; margin-bottom: 40px;">
+
+                <h5 style="width: 100%">Seleccione usuario para flujo de firma</h5>
+
+                <div style=" display: grid; grid-template-columns: repeat(5, 1fr) auto; gap: 8px; align-items: center; ">
+                    <span>
+                        <label>Tipo de usuario*</label>
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-select formControlName="tipoUsuario" placeholder="Seleccione">
+                                <mat-option *ngFor="let us of listTypeUs" [value]="us">{{ us.nombre }}</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="isError(form, 'tipoUsuario', 'required')">
+                                Este campo es requerido
+                            </mat-error>
+                        </mat-form-field>
+                    </span>
+            
+                    <span >
+                        <label>Tipo de firma*</label>
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-select formControlName="tipoFirma" placeholder="Seleccione">
+                                <mat-option *ngFor="let fir of lisTypeFirma" [value]="fir">{{ fir.nombre }}</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="isError(form, 'tipoFirma', 'required')">
+                                Este campo es requerido
+                            </mat-error>
+                        </mat-form-field>
+                    </span>
+            
+                    <span >
+                        <label>Rol*</label>
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-select formControlName="rol" placeholder="Seleccione">
+                                <mat-option *ngFor="let role of listRoles" [value]="role">{{ role.nombre }}</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="isError(form, 'rol', 'required')">
+                                Este campo es requerido
+                            </mat-error>
+                        </mat-form-field>
+                    </span>
+            
+                    <span>
+                        <label>Usuario*</label>
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-select formControlName="usuario" placeholder="Seleccione">
+                                <mat-option *ngFor="let uss of listUsers" [value]="uss">{{ uss.user_detalle.full_name }}</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="isError(form, 'usuario', 'required')">
+                                Este campo es requerido
+                            </mat-error>
+                        </mat-form-field>
+                    </span>
+            
+                    <button mat-mini-fab [disabled]="addValidation"  matTooltip="Agregar usuario" class="bg-primary" aria-label="Example icon button with a menu icon">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </div>
+
+             
+            </div>
+
+          
+
+            <div *ngIf="isUsuarioExterno" style="width: 100%;     border: 1px solid #E2E2E2; border-radius: 20px; background: white; padding: 20px">
+                <h5>Usuario externo</h5>
+                <form [formGroup]="formUsuarioExterno" (submit)="submitUsuarioExterno()">
+                    <div style="display: grid; align-items: center; grid-template-columns: repeat(4, 1fr); ">
+                        <span>
+                            <label>Número de identificación</label>
+                            <mat-form-field appearance="outline">
+                                <input type="text" matInput placeholder="Ingrese" formControlName="identificacionUsuarioExterno">
+                                <mat-error *ngIf="this.formUsuarioExterno.get('identificacionUsuarioExterno').hasError('pattern')">
+                                    Ingrese un número de identificación válido
+                                </mat-error>
+
+                      
+                                <mat-error *ngIf="this.formUsuarioExterno.get('identificacionUsuarioExterno').hasError('required')">
+                                    Este campo es obligatorio
+                                </mat-error>
+
+                                <mat-error *ngIf="this.formUsuarioExterno.get('identificacionUsuarioExterno').hasError('minlength')">
+                                    Mínimo 8 caracteres
+                                </mat-error>
+
+                            </mat-form-field>
+                        </span>
+    
+                        <button  mat-button type="submit" class="bg-primary text-white" style="grid-column: 4 / 5;">
+                            Buscar
+                        </button>
+                    </div>
+                </form>
+            </div>
+           
+    </form>
+
+
+    <div class="d-flex flex-column" style="border: 1px solid #E2E2E2; border-radius: 20px; margin: 0 auto; background: white;">
+        <h5 class="p-4">Usuarios</h5>
+        <mat-tab-group [disableRipple]="false" (selectedTabChange)="onTabChanged($event)" [(selectedIndex)]="selectedIndex">
+            <mat-tab label="Revisor">
+                <app-draggable-table [headers]="headers"></app-draggable-table>
+            </mat-tab>
+            <mat-tab label="Aprobador">
+                <app-draggable-table [headers]="headers"></app-draggable-table>
+            </mat-tab>
+            <mat-tab label="Aprobador y Firma">
+                <app-draggable-table [headers]="headers"></app-draggable-table>
+            </mat-tab>
+        </mat-tab-group>
+
+    </div>
+</div>

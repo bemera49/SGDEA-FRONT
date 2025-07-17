@@ -1,0 +1,202 @@
+<form [formGroup]="analysisForm">
+
+  <app-layout-section [title]="'Plan de análisis'">
+
+    <div class="container-inputs">
+
+      <app-container-radio [label]="'¿La propuesta podría incluirse en algunos de los documentos existentes?'"
+        [control]="analysisForm.get('question_i')">
+      </app-container-radio>
+
+      <app-container-radio [label]="'¿El documento propuesto afecta o involucra a otras áreas?'"
+        [control]="analysisForm.get('question_ii')">
+      </app-container-radio>
+
+
+      <mat-form-field appearance="outline" class="input">
+        <mat-label>Cual</mat-label>
+        <input type="text" placeholder="Indique el nombre del documento" matInput [matAutocomplete]="autow"
+          (focus)="searchPredictiveWhich()" [formControl]="analysisForm.get('which')" maxlength="50">
+        <mat-autocomplete #autow="matAutocomplete">
+          <mat-option *ngFor="let option of predictiveWhich" [value]="option">
+            {{ option }}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="analysisForm.get('which').invalid">
+          El campo es requerido.
+        </mat-error>
+      </mat-form-field>
+
+
+      <app-show-date [typeDate]="'Fecha y hora del plan'" [requestDate]="dateCreate"></app-show-date>
+      <app-show-date *ngIf="dateUpdate" [typeDate]="'Fecha y hora de edición'"
+        [requestDate]="dateUpdate"></app-show-date>
+    </div>
+
+  </app-layout-section>
+
+  <app-layout-section [title]="'Ficha de reuniones'">
+    <div class="content-button mb-4">
+      <app-search-document *ngIf="idTipeTask == 4"></app-search-document>
+    </div>
+    <app-table-ar-items [headersItems]="headerTablaItems" (addItems)="onAddItems()">
+      <tbody formArrayName="meetings">
+        <tr *ngFor="let items of meeting.controls; let i = index" [formGroupName]="i">
+
+          <td>
+            <button type="button" class="button-table remove-items" (click)="onRemoveItem(i)">-</button>
+          </td>
+
+          <td>
+            <mat-form-field appearance="outline" class="inputs">
+              <mat-label>Seleccione area</mat-label>
+              <mat-select formControlName="area">
+                <mat-option *ngFor="let item of dependence |sortAlphabetical"
+                  [value]="item.id">{{item.nombre}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="analysisForm.get('meetings').get(i.toString()).get('area').invalid">
+                El campo es requerido.
+              </mat-error>
+            </mat-form-field>
+          </td>
+          <td>
+            <!-- Input para el código -->
+            <mat-form-field appearance="outline" class="inputs">
+              <mat-label>Código</mat-label>
+              <input type="text" matInput [matAutocomplete]="auto1" (focus)="searchPredictiveCode(i)"
+                [formControl]="analysisForm.get('meetings').get(i.toString()).get('code')" maxlength="20">
+              <mat-autocomplete #auto1="matAutocomplete">
+                <mat-option *ngFor="let option of predictiveCode[i]" [value]="option">
+                  {{ option }}
+                </mat-option>
+              </mat-autocomplete>
+              <mat-error *ngIf="analysisForm.get('meetings').get(i.toString()).get('code').invalid">
+                El campo es requerido.
+              </mat-error>
+            </mat-form-field>
+          </td>
+          <td>
+            <!-- Input para el nombre del documento -->
+            <mat-form-field appearance="outline" class="inputs">
+              <mat-label>Documentos relacionados</mat-label>
+              <input type="text" matInput [matAutocomplete]="auto2" (focus)="searchPredictiveText(i)"
+                [formControl]="analysisForm.get('meetings').get(i.toString()).get('document_name')" maxlength="200">
+              <mat-autocomplete #auto2="matAutocomplete">
+                <mat-option *ngFor="let option of predictiveText[i]" [value]="option">
+                  {{ option }}
+                </mat-option>
+              </mat-autocomplete>
+              <mat-error *ngIf="analysisForm.get('meetings').get(i.toString()).get('document_name').invalid">
+                El campo es requerido.
+              </mat-error>
+            </mat-form-field>
+          </td>
+
+
+          <td>
+            <mat-form-field appearance="outline" class="inputs ">
+              <mat-chip-list #chipList requerid class="custom-height"
+                [formControl]="analysisForm.get('meetings').at(i).get('email')">
+                <mat-chip *ngFor="let email of analysisForm.get('meetings').at(i).get('email').value"
+                  [selectable]="true" [removable]="true" (removed)="remove(email,i)">
+                  {{email}}
+                  <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+                <input placeholder="Inserte..." [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="[13, 188]"
+                  [matChipInputAddOnBlur]="true" maxlength="200" (matChipInputTokenEnd)="add($event,i)" required />
+              </mat-chip-list>
+              <mat-error *ngIf="analysisForm.get('meetings').at(i).get('email').invalid">
+                El campo es requerido.
+              </mat-error>
+            </mat-form-field>
+
+          </td>
+
+          <td>
+            <mat-form-field appearance="outline" class="inputs">
+              <input type="datetime-local" matInput formControlName="date_hrs" maxlength="200"
+                (change)="onDateChange($event,i)">
+              <mat-error *ngIf="analysisForm.get('meetings').get(i.toString()).get('date_hrs').invalid">
+                El campo es requerido.
+              </mat-error>
+            </mat-form-field>
+          </td>
+
+
+          <td>
+
+            <mat-form-field appearance="fill" class="inputs" style="cursor: pointer;">
+              <mat-label>Ayuda de memoria</mat-label>
+              <div (click)="downloadFile(fileId[i],i)">
+                <input matInput class="input-download"
+                  type="text" disabled
+                  [value]="fileNameInput[i]?fileNameInput[i]:''">
+              </div>
+              <input matInput
+                hidden
+                placeholder="Seleccione un archivo" readonly
+                style="cursor: pointer;"
+                [formControl]="analysisForm.get('meetings').get(i.toString()).get('help_file')"
+                [value]="fileNameInput[i]?fileNameInput[i]:''">
+
+              <input #inputFile type="file" hidden (change)="onFileSelected($event, i)">
+              <mat-icon matSuffix *ngIf="idTipeTask == 18" (click)="inputFile.click()">attach_file</mat-icon>
+
+            </mat-form-field>
+
+          </td>
+
+          <td class="td-confirm" *ngIf="idTipeTask == 20">
+            <mat-radio-button name="radio-{{i}}" (change)="onSelectItem(i, 1)"
+              [value]="1"
+              [checked]="selectedValuesConfirm[i] === 1" (click)="!enableCheck?'':updateConfirm(false)"
+              [disabled]="!enableCheck"></mat-radio-button>
+          </td>
+          <td class="td-confirm" *ngIf="idTipeTask == 20">
+            <mat-radio-button name="radio-{{i}}" (change)="onSelectItem(i, 0)"
+              [value]="0"
+              [checked]="selectedValuesConfirm[i] === 0" (click)="!enableCheck?'':updateConfirm(false)"
+              [disabled]="!enableCheck"></mat-radio-button>
+          </td>
+        </tr>
+      </tbody>
+    </app-table-ar-items>
+
+  </app-layout-section>
+
+
+
+  <app-layout-section [title]="'Observaciones'">
+
+    <app-visualization-conversation [observations]="dataObservation"></app-visualization-conversation>
+
+    <mat-form-field appearance="outline" class="observations">
+      <mat-label>Cual</mat-label>
+      <input matInput formControlName="observation" maxlength="2000" />
+      <mat-error *ngIf="analysisForm.get('observation').invalid">
+        El campo es requerido.
+      </mat-error>
+    </mat-form-field>
+  </app-layout-section>
+
+  <div class="w-100 d-flex justify-content-center mt-5 gap-5">
+    <ng-container *ngIf="!enableFunctions && idTipeTask !=20">
+      <button class="butoneditar" *ngIf="idTipeTask != 4" (click)="enableForm()" type="button">Editar</button>
+    </ng-container>
+
+    <ng-container *ngIf="idTipeTask == 4">
+      <app-button-continue (click)="updateMeet(false)" [text]="'Devolver'"
+        [onDisabled]="analysisForm.valid && meetingLength !== 0"></app-button-continue>
+      <app-button-continue (click)="updateMeet(true)" [text]="'Guardar y enviar'"
+        [onDisabled]="analysisForm.valid && meetingLength !== 0"></app-button-continue>
+    </ng-container>
+    <ng-container *ngIf="enableFunctions || idTipeTask==20">
+      <app-button-continue (click)="idTipeTask==20 && enableCheck ?updateConfirm(true):enableFunctions?onSubmit():''"
+        *ngIf="idTipeTask != 4"
+        [text]="'Guardar'"
+        [onDisabled]="analysisForm.valid && meetingLength !== 0 || idTipeTask==20 && enableCheck"></app-button-continue>
+    </ng-container>
+
+  </div>
+
+</form>

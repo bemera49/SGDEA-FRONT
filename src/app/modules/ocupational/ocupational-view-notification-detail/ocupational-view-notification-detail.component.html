@@ -1,0 +1,205 @@
+<div *ngIf="!isMap()">
+
+  <app-sub-menu-ocupational [ItemsMenu]="itemsMenu"></app-sub-menu-ocupational>
+
+  <app-button-back-arrow [href]="exit"></app-button-back-arrow>
+
+  <div class="content-main px-3 mb-4">
+    <div class="d-flex flex-row flex-wrap justify-content-between align-items-center mb-3" style="gap: 15px">
+      <div class="d-flex flex-column">
+        <h2 class="text-black font-weight-bold">Solicitud {{dataView.filed}}</h2>
+        <b>{{dataView.state}}</b>
+      </div>
+      <div class="d-flex flex-row align-items-center flex-wrap justify-content-end" style="gap: 15px 15px">
+      </div>
+    </div>
+
+    <mat-tab-group #stepper *ngIf="tipoTareaId != 0">
+      <!--TAB 1-->
+      <mat-tab label="Solicitud">
+        <form [formGroup]="solicitudForm">
+          <app-layout-section>
+            <h3>Solicitud</h3>
+            <h4>Información general</h4>
+            <h4></h4>
+            <div class="row" *ngIf="dataInformation && dataInformation.length">
+              <div class="col-md-6" *ngFor="let data of dataInformation">
+                <app-row-information [label]="data.label" [info]="data.value"></app-row-information>
+              </div>
+            </div>
+          </app-layout-section>
+
+        </form>
+      </mat-tab>
+      <!--TAB 2-->
+      <mat-tab label="Anexos" *ngIf="tipoTareaId != 0 && tipoTareaId != 1 && tipoTareaId != 6 && tipoTareaId != 3">
+        <app-list-file-req [idRequest]="idRequest"></app-list-file-req>
+      </mat-tab>
+      <!--TAB 3-->
+      <mat-tab label="Tipo Solicitud" *ngIf="tipoTareaId == 2">
+        <app-type-request [idRequest]="idRequest"></app-type-request>
+      </mat-tab>
+      <!--TAB 4-->
+      <mat-tab label="Observaciones" *ngIf="tipoTareaId == 2">
+        <app-observation-request [idRequest]="idRequest"></app-observation-request>
+      </mat-tab>
+      <mat-tab label="Aclaraciones" *ngIf="tipoTareaId == 2">
+        <app-list-aclaration [idRequest]="idRequest"></app-list-aclaration>
+      </mat-tab>
+
+      <mat-tab label="Confirmar Tarea" *ngIf="tipoTareaId == 4">
+        <app-confirmation-request [idRequest]="idRequest"></app-confirmation-request>
+      </mat-tab>
+
+      <mat-tab label="Plantilla Carta" *ngIf="tipoTareaId == 6" >
+
+          <div class="card" *ngIf="editorActivo">
+            <div class="card-header card-header-info card-header-icon">
+                <div class="card-icon">
+                    <i class="material-icons">{{ initCardHeaderIcon }}</i>
+                </div>
+                <h4 class="card-title">{{ 'Plantilla' | translate }}</h4>
+            </div>
+
+            <div class="card-body">
+                <sgda-editor [initialData]="editorContent" (ckDocument)="changeDocument($event)"></sgda-editor>
+            </div>
+          </div>
+
+          <div class="text-center">
+            <button (click)="insertarPlantilla()" class="btn btn-primary">Usar Plantilla</button>
+            <button (click)="guardarPlantilla()" class="btn btn-primary">Guardar</button>
+          </div>
+    
+          
+      </mat-tab>
+
+      <mat-tab label="Examenes" *ngIf="tipoTareaId == 6">
+        <app-list-file [idRequest]="idRequest"></app-list-file>
+      </mat-tab>
+
+      <mat-tab label="Visualizador" *ngIf="tipoTareaId == 61">
+        <app-viewer-file [idRequest]="idRequest"></app-viewer-file>
+
+      </mat-tab>
+
+      <mat-tab label="Asignaciones" *ngIf="tipoTareaId == 7">
+        <app-table-analysts [idRequest]="idRequest"></app-table-analysts>
+      </mat-tab>
+
+      <mat-tab label="Anexos" *ngIf="tipoTareaId == 3">
+
+        <form (submit)="submitFormReceive()" [formGroup]="aclarationForm" enctype="multipart/form-data" style="gap: 5px 0px">
+
+          <div class="row">
+            <div class="col-md-6">
+              <mat-card class="border border-2 mt-4">
+                <h3 class="font-weight-bold">Anexos</h3>
+                <div class="col-md-6 col-lg-6">
+                </div>
+                <div  class="col-md-12 col-lg-12 mt-2">
+                  <!-- Input de archivo oculto -->
+                  <div class="row"  >
+                    <div class="col-md-6">
+                      <input type="file" #fileInput (change)="onFileSelected($event)" multiple accept=".png, .jpg, .jpeg, .pdf, .docx, .doc"
+                      style="display: none;">
+            
+                      <button type="button" (click)="fileInput.click()" class="btn btn-primary">Subir Anexos</button>
+                    </div>
+                    <div class="col-md-2">
+                    </div>
+                  </div>
+
+                  <div class="row" *ngFor="let archivo of archivosGuardados" >
+                    <div class="col-md-6">
+                      <a [href]="archivo.url" target="_blank">{{ archivo.name }}</a>
+                    </div>
+                    <div class="col-md-6 text-center">
+                      <button type="button" (click)="eliminarArchivoGuardado(archivo.id)" class="btn btn-danger btn-sm">Eliminar</button>
+                    </div>
+                  </div>
+          
+                  <div class="row" *ngFor="let archivo of archivosSubidos; let i = index" >
+                    <div class="col-md-6">
+                      {{ archivo.name }}
+                    </div>
+                    <div class="col-md-6 text-center">
+                      <button type="button" (click)="eliminarArchivo(i)" class="btn btn-danger btn-sm">Eliminar</button>
+                    </div>
+                  </div>
+                </div>
+          
+              </mat-card>
+            </div>
+  
+            <div class="col-md-6">
+            </div>
+        
+          </div>
+  
+              <mat-card class="border border-2 mt-4">
+                <div class="row">
+                  <div class="col-md-12">
+                      <mat-form-field appearance="outline" class="observations">
+                        <mat-label>Aclaraciones</mat-label>
+                        <textarea matInput formControlName="aclaracion" maxlength="2000" rows="4"></textarea>
+                      </mat-form-field>
+                  </div>
+                </div>
+        
+              </mat-card>
+  
+  
+  
+  
+  
+        
+              <button type="submit"
+            class="btn px-5 py-3 mt-4 d-flex justify-content-center mx-auto mat-raised-button bg-primary">Guardar</button>
+        </form>
+          
+      </mat-tab>
+
+
+      <mat-tab label="Observaciones" *ngIf="tipoTareaId == 3">
+
+        <app-list-observation [idRequest]="idRequest"></app-list-observation>
+
+      </mat-tab>
+
+      <mat-tab label="Respuesta" *ngIf="tipoTareaId == 9 || tipoTareaId == 11">
+
+        <app-view-pdf-file [idRequest]="idRequest" *ngIf="tipoVerificacion_id == 2"></app-view-pdf-file>
+
+        <mat-card class="border border-2 mt-4" *ngIf="tipoVerificacion_id == 1">
+          <div class="row">
+            <div class="col-md-12">
+                <mat-form-field appearance="outline" class="observations">
+                  <mat-label>Respuesta</mat-label>
+                  <textarea matInput maxlength="2000" rows="4" disabled>{{respuesta_interna}}</textarea>
+                </mat-form-field>
+            </div>
+          </div>
+        </mat-card>
+
+        <!--  
+        -->
+      
+      </mat-tab>
+
+    </mat-tab-group>
+    
+    <mat-tab-group #stepper *ngIf="tipoTareaId == 0">
+      <mat-tab label="Asignaciones" *ngIf="tipoTareaId == 0">
+        <app-table-tasksv2 [idUsuario]="idUsuario" [idRequest]="idRequest"></app-table-tasksv2>
+      </mat-tab>
+    </mat-tab-group>
+
+
+  </div>
+</div>
+
+
+
+
+

@@ -1,0 +1,35 @@
+{
+    "status": true,
+    "data": [
+        {
+            "name": "ACUEDUCTO - Aut voluptatibus ab quis.",
+            "version": "2.1",
+            "img": "https://via.placeholder.com/640x480.png/00cc33?text=vitae",
+            "description": "Est dignissimos eum ea neque illum. Non iure rerum...",
+            "status": 0
+        },
+        {
+            "name": "ACUEDUCTO - A dolorum aliquam vitae.",
+            "version": "1.0",
+            "img": "https://via.placeholder.com/640x480.png/006677?text=voluptatem",
+            "description": "Sit velit totam qui eum. Unde ut nostrum quaerat n...",
+            "status": 0
+        },
+        {
+            "name": "ACUEDUCTO - Est et velit est.",
+            "version": "1.0",
+            "img": "https://via.placeholder.com/640x480.png/0033aa?text=accusantium",
+            "description": "Consequatur ut repudiandae veritatis voluptatibus...",
+            "status": 0
+        },
+        {
+            "name": "ACUEDUCTO",
+            "version": "3.0",
+            "img": "calidad/images/mapas//default.png",
+            "description": "Mapa de procesos actual de 18 procesos",
+            "status": 1
+        }
+    ],
+    "message": "success",
+    "token": "Rvn7YIZwhdGCW0SjhF-1fy6o4IAFzC8q_1712515675"
+}

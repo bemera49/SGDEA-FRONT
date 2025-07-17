@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>
+    <span class="material-icons" style="float: left;">
+        handshake
+    </span>
+    Trabajo colaborativo
+    <button mat-icon-button (click)="closeModal()" style="float: right;">
+        <span class="material-icons">close</span>
+    </button>
+</h2>
+
+<h3> {{this.data.dataSend[0]?this.data.dataSend[0].TipoRadicado +' '+this.data.dataSend[0].numeroRadiRadicado:''}}</h3>
+<hr>
+<mat-dialog-content>
+    <sgda-editor [initialData]="editorContent" (ckDocument)="changeDocument($event)"></sgda-editor>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button class="btn btn-success" style="margin-right: 10px;" (click)="savePlantillaHtml()">
+        Guardar
+    </button>
+    <button class="btn btn-danger" (click)="moveTrabajoColaborativo()">
+        Finalizar
+    </button>
+</mat-dialog-actions>

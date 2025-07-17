@@ -1,0 +1,50 @@
+<div class="card">
+  <div class="card-body">
+    <h3 class="title"><strong>Adjuntos</strong></h3>
+    <div class="table-responsive">
+      <table class="table">
+        <!-- Cabeceros -->
+        <thead>
+          <tr>
+            <th (click)="addAttachment()" style="cursor: pointer; text-align: center;">
+              <span class="material-icons" style="color: #008ED6;">add_circle_outline</span>
+            </th>
+            <th>Nombre documento</th>
+            <th style="text-align: center;">Cargue archivo</th>
+          </tr>
+        </thead>
+
+        <!-- Cuerpo -->
+        <tbody>
+          <tr *ngFor="let attachment of attachments; let i = index">
+
+            <!-- Agregar fila para cargar archivo  -->
+            <td (click)="removeAttachment(i)" style="cursor: pointer; text-align: center;">
+              <span class="material-icons" style="color: #6C6B76;">remove</span>
+            </td>
+
+            <!-- Input asignar nombre -->
+            <td>
+              <input type="text" [(ngModel)]="attachment.nameFile" placeholder="Inserte" />
+            </td>
+
+            <!-- Cargar archivo -->
+            <td style="text-align: center;">
+              <label class="file-upload">
+                <input *ngIf="!attachment.nomArchivo" type="file" (change)="onFileSelected($event, i)" />
+                <span *ngIf="!attachment.nomArchivo" class="file-select-text">
+                  Seleccione un archivo
+                  <i class="material-icons">attach_file</i>
+                </span>
+                <span *ngIf="attachment.nomArchivo">{{ attachment.nomArchivo }}</span>
+              </label>
+            </td>
+
+          </tr>
+        </tbody>
+
+        <!-- Fin tabla -->
+      </table>
+    </div>
+  </div>
+</div>

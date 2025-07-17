@@ -1,0 +1,14 @@
+<ng-container *ngIf="type !== 'file';else file">
+  <label [for]="nameFR">
+    <input class="input-meeting" [type]="type" [formControlName]="nameFR" />
+  </label>
+</ng-container>
+
+<ng-template #file>
+  <div class="input-meeting container-file">
+    <label #label class="label-file" for="file-documents"> <img src="/assets/img/paperclip.svg" alt="paperclip"
+        class="clip">
+      Adjunte</label>
+    <input class="file" [type]="type" [formControlName]="nameFR" />
+  </div>
+</ng-template>

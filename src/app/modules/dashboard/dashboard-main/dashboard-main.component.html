@@ -1,0 +1,46 @@
+<div class="wrapper">
+    <app-admin-top-nav-alfresco></app-admin-top-nav-alfresco>
+
+    <!--     
+    <app-admin-top-nav-alfresco></app-admin-top-nav-alfresco> -->
+    
+    <!--<div class="sidebar" data-color="white" data-background-color="rgb(255,255,255)" >
+        <app-admin-aside-nav-bar></app-admin-aside-nav-bar>
+         <div class="sidebar-background"></div>
+    </div>-->
+    <div class="main-panel">
+        <!--
+        <app-admin-top-nav-bar [topNavBarTitle]="topNavBarTitle" [topNavBarOn]="topNavBarOn" [topNavBarRouteActive]="topNavBarRouteActive"></app-admin-top-nav-bar>
+    -->
+        <!-- Data Tables -->
+        <div class="main-content">
+            <div class="container-fluid">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                   
+                </div>
+            </div>
+        </div>
+        <!-- /Data Tables -->
+        <!-- Floating Button -->
+        <!--
+        <app-floating-button [menuButtons]="menuButtons" (menuEmiterData)="menuReceiveData($event)"></app-floating-button>
+        -->
+        <!-- <div class="main-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card ">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div> -->
+        <!--  -->
+        <div *ngIf="!isMap()">
+            <app-admin-footer-nav-bar></app-admin-footer-nav-bar>
+        </div>
+    </div>
+    <!-- <app-fixedplugin></app-fixedplugin> -->
+</div>

@@ -1,0 +1,61 @@
+<mat-dialog-content class="modal-container">
+  <div class="d-flex flex-row align-items-center justify-content-between">
+    <mat-icon class="text-primary">refresh</mat-icon>
+    <button mat-icon-button (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <h2 mat-dialog-title class="w-100 mt-2 text-body">{{ dataModal.title }}</h2>
+  <form [formGroup]="formProrroga">
+    <mat-label>Tiempo de ampliación de términos en días*</mat-label>
+    <mat-form-field appearance="outline" class="example-full-width">
+      <input
+        (input)="validateProrroga()"
+        matInput
+        placeholder="Escriba"
+        formControlName="ampliacion"
+        type="number"
+      />
+      <mat-error *ngIf="formProrroga.get('ampliacion').hasError('required') && formProrroga.get('ampliacion').touched">
+        Este campo es obligatorio.
+    </mat-error>
+    </mat-form-field>
+    <mat-label>Justificación*</mat-label>
+    <mat-form-field appearance="outline" class="w-100">
+      <textarea
+        matInput
+        placeholder="Escriba"
+        formControlName="justification"
+        maxlength="100"
+        rows="4"
+      ></textarea>
+      <mat-error *ngIf="formProrroga.get('justification').hasError('required') && formProrroga.get('justification').touched">
+        Este campo es obligatorio.
+    </mat-error>
+    </mat-form-field>
+  </form>
+
+  <div
+    class="d-flex flex-wrap flex-md-nowrap justify-content-center"
+    style="gap: 10px"
+  >
+    <button
+      type="button"
+      mat-stroked-button
+      class="border border-primary text-primary bg-white w-100"
+      (click)="close()"
+    >
+      Cancelar
+    </button>
+    
+    <button
+      [disabled]="!formProrroga.valid || btnAceptar"
+      mat-flat-button
+      class="bg-primary text-white w-100"
+      (click)="submit()"
+    >
+      Aceptar
+    </button>
+  </div>
+</mat-dialog-content>

@@ -1,0 +1,20 @@
+<!-- <h2 mat-dialog-title>Install Angular</h2> -->
+
+<form [formGroup]="formTextAre">
+  <div class="container-modal">
+    <mat-dialog-content class="mat-typography">
+      <h3>Usted esta modificando los niveles de seguridad del expediente, por favor especifique el motivo.</h3>
+
+      <textarea matInput name="justificacion" id="justificacion" placeholder="Justificación..."
+        formControlName="justificacion" form required maxlength="100">
+        </textarea>
+
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button class="btn btn-primary" color="warn" [mat-dialog-close]="true"
+        [disabled]="!formTextAre.valid">Aceptar</button>
+      <button mat-button class="btn bg-white text-primary border border-primary" mat-dialog-close>Cancelar</button>
+    </mat-dialog-actions>
+
+  </div>
+</form>

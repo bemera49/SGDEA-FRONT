@@ -1,0 +1,137 @@
+<ng-container *ngIf="dataIntercept">
+
+  <ng-container [ngSwitch]="1">
+
+    <ng-container *ngSwitchCase="1">
+
+      <app-header-process [dataIntercept]="dataIntercept"></app-header-process>
+
+      <mat-tab-group class="w-100% border-top align-content-center" [(selectedIndex)]="selectedTab"
+        (selectedIndexChange)="selectedTab = $event">
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <i *ngIf="selectedTab === 0" class="material-icons returnaq-icon iconosnav">{{ Info }}</i>
+            <span class="titlenav">
+              Información
+            </span>
+          </ng-template>
+
+          <section class="flex p-4" *ngIf="dataIntercept.type === 'sub-process' ||dataIntercept.type === 'process'">
+            <div *ngIf="dataIntercept.type === 'sub-process'" class="componenttable mb-1">
+              <header class="headertable">
+                <div class=" mb-1 ml-3 mr-1" id='containerIcon'>
+                  <i class="material-icons returnaq-icon conteicon">{{ Info }}</i>
+                </div>
+                <div>
+                  <h6 class="titletable">Información general del subproceso</h6>
+                </div>
+              </header>
+              <section>
+                <app-reusable-table [data]="dataIntercept.data" tableType="subprocess"></app-reusable-table>
+              </section>
+            </div>
+
+            <ng-container *ngIf="dataIntercept.type === 'sub-process'">
+              <header class="headertable">
+                <div class=" mb-1 ml-3 mr-1" id='containerIcon'>
+                  <i class="material-icons returnaq-icon conteicon">{{ Info }}</i>
+                </div>
+                <div>
+                  <h6 class="titletable">Área responsable del subproceso </h6>
+                </div>
+              </header>
+
+              <section>
+                <!-- <app-reusable-table *ngIf="dataIntercept.type === 'sub-process'"
+                [data]="dataIntercept.data.procedure_lead_area" tableType="Arearesponsable"></app-reusable-table> -->
+              </section>
+            </ng-container>
+
+            <ng-container *ngIf="dataIntercept.type === 'sub-process'">
+              <header class="headertable">
+                <div class=" mb-1 ml-3 mr-1" id='containerIcon'>
+                  <i class="material-icons returnaq-icon conteicon">{{ Info }}</i>
+                </div>
+                <div>
+                  <h6 class="titletable">Documentos</h6>
+                </div>
+              </header>
+
+              <section>
+                <app-table-documents [data]="modifiedDocument"> </app-table-documents>
+              </section>
+            </ng-container>
+
+            <ng-container *ngIf="dataIntercept.type === 'process'">
+              <div class="componenttable mb-1">
+                <header class="headertable">
+                  <div class=" mb-1 ml-3 mr-1" id='containerIcon'>
+                    <i class="material-icons returnaq-icon conteicon">{{ Info }}</i>
+                  </div>
+                  <div>
+                    <h6 class="titletable">Información general del proceso</h6>
+                  </div>
+                </header>
+                <section>
+                  <app-reusable-table [data]="dataIntercept.data" tableType="process"></app-reusable-table>
+                </section>
+              </div>
+
+              <!-- tabla area resposable -->
+              <div class="componenttable mb-1">
+                <header class="headertable">
+                  <div class=" mb-1 ml-3 mr-1" id='containerIcon'>
+                    <i class="material-icons returnaq-icon conteicon">{{ Info }}</i>
+                  </div>
+                  <div>
+                    <h6 class="titletable">Área responsable </h6>
+                  </div>
+                </header>
+                <section>
+                  <app-reusable-table [data]="dataIntercept.data.procedure_lead_area"
+                    tableType="Arearesponsable"></app-reusable-table>
+                </section>
+              </div>
+
+              <!-- mostrar tabal caracterización -->
+              <div class="componenttable mb-1">
+                <header class="headertable">
+                  <div class=" mb-1 ml-3 mr-1" id='containerIcon'>
+                    <i class="material-icons returnaq-icon conteicon">{{ Info }}</i>
+                  </div>
+                  <div>
+                    <h6 class="titletable">Caracterización</h6>
+                  </div>
+                </header>
+                <section>
+                  <app-table-style2 (rowClicked)="onRowClicked($event)"
+                    [characterization]="dataIntercept.data.characterizations"
+                    tableType="characterization"></app-table-style2>
+                </section>
+              </div>
+
+              <div class="componenttable mb-1">
+                <header class="headertable">
+                  <div class=" mb-1 ml-3 mr-1" id='containerIcon'>
+                    <i class="material-icons returnaq-icon conteicon">{{ Info }}</i>
+                  </div>
+                  <div>
+                    <h6 class="titletable">Subprocesos</h6>
+                  </div>
+                </header>
+                <section>
+                  <app-table-process-tree [data]="modifiedSubProcess" tableType="subproceso"></app-table-process-tree>
+                </section>
+              </div>
+
+            </ng-container>
+          </section>
+        </mat-tab>
+
+      </mat-tab-group>
+
+    </ng-container>
+
+  </ng-container>
+
+</ng-container>

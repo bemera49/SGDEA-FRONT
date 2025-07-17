@@ -1,0 +1,201 @@
+<!-- <h1>
+
+  Metadata document
+</h1> -->
+<mat-dialog-content class="mat-typography">
+
+  <form [formGroup]="metadataForm" (ngSubmit)="onSubmit()" *ngIf="dataSource">
+
+    <app-layout-section [title]="'Informacion general'">
+
+      <div class="container-inputs-3">
+        <mat-form-field appearance="outline" class="inputs">
+          <mat-label>Nivel</mat-label>
+          <mat-select formControlName="level">
+            <mat-option *ngFor="let item of dataSource?.data.levels |sortAlphabetical"
+              [value]="item.id">{{item.nombre}}</mat-option>
+          </mat-select>
+
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="inputs">
+          <mat-label>Proceso</mat-label>
+          <mat-select formControlName="process">
+            <mat-option *ngFor="let item of dataSource?.data.process |sortAlphabetical"
+              [value]="item.id">{{item.nombre}}</mat-option>
+          </mat-select>
+
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="inputs">
+          <mat-label>Subproceso</mat-label>
+          <mat-select formControlName="subprocess">
+            <mat-option *ngFor="let item of dataSource?.data.subprocess|sortAlphabetical"
+              [value]="item.id">{{item.nombre}}</mat-option>
+          </mat-select>
+
+        </mat-form-field>
+
+      </div>
+      <div class="container-inputs-2">
+
+
+
+
+        <mat-form-field appearance="outline" class="input">
+          <mat-label>Procediemiento</mat-label>
+          <input type="text" matInput formControlName="procedure">
+
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="input">
+          <mat-label>Nombre del documento</mat-label>
+          <input type="text" matInput formControlName="documentName">
+
+        </mat-form-field>
+
+
+
+      </div>
+      <div class="container-inputs-2-half">
+
+
+
+
+        <mat-form-field appearance="outline" class="inputs">
+          <mat-label>Gerencia</mat-label>
+          <mat-select formControlName="management">
+            <mat-option *ngFor="let item of dataSource?.data.managements|sortAlphabetical"
+              [value]="item.id">{{item.nombre}}</mat-option>
+          </mat-select>
+
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="input">
+          <mat-label>Dirección/Division/Oficina</mat-label>
+          <input type="text" matInput formControlName="direction">
+        </mat-form-field>
+
+
+
+      </div>
+      <div class="container-inputs-3">
+
+
+
+        <mat-form-field appearance="outline" class="inputs">
+          <mat-label>Centro de costos</mat-label>
+          <mat-select formControlName="costCenter">
+            <mat-option *ngFor="let item of dataSource?.data.cost_centers|sortAlphabetical"
+              [value]="item.id">{{item.nombre}}</mat-option>
+          </mat-select>
+
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="inputs">
+          <mat-label>Tipo documental</mat-label>
+          <mat-select formControlName="typeDocumentary">
+            <mat-option *ngFor="let item of dataSource?.data.type_documentarys|sortAlphabetical"
+              [value]="item.id">{{item.nombre}}</mat-option>
+          </mat-select>
+
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="inputs">
+          <mat-label>Tipo de solicitud</mat-label>
+          <mat-select formControlName="typeRequest">
+            <mat-option *ngFor="let item of dataSource?.data.type_requests|sortAlphabetical"
+              [value]="item.id">{{item.nombre}}</mat-option>
+          </mat-select>
+
+        </mat-form-field>
+
+
+
+
+      </div>
+      <div class="container-inputs-2-half">
+        <mat-form-field appearance="outline" class="inputs">
+          <mat-label>Visualización privacidad</mat-label>
+          <mat-select formControlName="privacy">
+            <mat-option *ngFor="let item of dataSource?.data.privacys|sortAlphabetical"
+              [value]="item.id">{{item.nombre}}</mat-option>
+          </mat-select>
+
+        </mat-form-field>
+
+        <app-show-date [typeDate]="'Fecha de aprovación'" [requestDate]="aprovalDate"></app-show-date>
+
+
+
+
+
+
+
+      </div>
+
+    </app-layout-section>
+
+
+
+
+
+    <app-layout-section [title]="'Diligencie los campos'">
+
+
+      <div class="container-inputs-3">
+
+
+
+        <mat-form-field appearance="outline" class="input">
+          <mat-label>Código</mat-label>
+          <input type="text" matInput formControlName="code">
+
+          <mat-error *ngIf="metadataForm.get('code').invalid">
+            El campo es requerido.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="input">
+          <mat-label>Número de folios</mat-label>
+          <input type="number" matInput formControlName="folio">
+
+          <mat-error *ngIf="metadataForm.get('folio').invalid">
+            El campo es requerido.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="input">
+          <mat-label>Versión</mat-label>
+          <input type="text" matInput formControlName="version">
+
+        </mat-form-field>
+
+
+      </div>
+      <div class="container-inputs-2-half">
+
+
+        <app-show-date [typeDate]="'Vigencia desde'" [requestDate]="startdate"></app-show-date>
+        <app-show-date [typeDate]="'Vigencia hasta'" [requestDate]="endDate"></app-show-date>
+
+
+      </div>
+      <div class="w-100 mt-5">
+
+
+        <mat-form-field appearance="outline" class="observation">
+          <mat-label>Descripción del cambio</mat-label>
+          <input matInput maxlength="2000" formControlName="observation" />
+          <mat-error *ngIf="metadataForm.get('observation').invalid">
+            El campo es requerido.
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </app-layout-section>
+
+    <div class="w-100 d-flex justify-content-center mt-5 gap-5">
+      <ng-container>
+        <button class="butoneditar mr-3" type="button" (click)="close()">Cancelar</button>
+      </ng-container>
+      <ng-container>
+        <app-button-continue [text]="'Guardar cambios'"
+          [onDisabled]="metadataForm.valid"></app-button-continue>
+      </ng-container>
+
+    </div>
+
+  </form>
+</mat-dialog-content>

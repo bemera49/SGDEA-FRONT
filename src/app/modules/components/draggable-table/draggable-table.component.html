@@ -1,0 +1,55 @@
+<table  *ngIf="data !== null || data !== undefined">
+    <thead>
+      <tr>
+        <div>
+          <th class="table-header-column" style="padding: 12px ">
+            Acciones
+          </th>
+          <th *ngFor="let header of headers" class="table-header-column" style="padding: 12px ">
+            {{ header.label }}
+          </th>
+        </div>
+      </tr>
+    </thead>
+    <tbody cdkDropList (cdkDropListDropped)="drop($event)">
+          <tr cdkDrag *ngFor="let group of data; index as groupIndex"> 
+            <div *ngFor="let row of group; index as rowIndex">
+              <td class="table-row" >
+                <button mat-icon-button [matMenuTriggerFor]="menu" (click)="extractOrdenFirma(row.ordenFirma)"  aria-label="Example icon-button with a menu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item (click)="removeRow(row)">
+                    <mat-icon>delete</mat-icon>
+                    <span>Eliminar</span>
+                  </button>
+                  <ng-container *ngIf="group.length == 1">
+                    <button mat-menu-item *ngFor="let item of filteredOrdenFirmas; index as i" (click)="mergeRows(rowIndex, groupIndex, item)">
+                      <mat-icon>add</mat-icon>
+                      <span> Añadir a grupo de firma {{item}}</span>
+                    </button>
+                  </ng-container>
+                  <button mat-menu-item *ngIf="group.length > 1" (click)="disassociate(row, group.length)">
+                    <mat-icon>remove</mat-icon>
+                    <span>Desagrupar</span>
+                  </button>
+                </mat-menu>
+              </td>
+  
+         
+              <td class="table-row" *ngFor="let header of headers">
+                {{ row[header.name] }}
+              </td>
+            </div>
+          </tr>
+    </tbody>
+  </table>
+
+  <ng-container *ngIf="data !== null || data !== undefined">
+    <div *ngIf="data.length == 0" style="width: 100%; display: flex; justify-content: center; align-items: center; min-height: 100px;">   
+        <p>No has registrado usuarios</p>
+
+    </div>
+</ng-container>
+
+

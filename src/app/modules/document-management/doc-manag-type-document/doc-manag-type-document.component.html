@@ -1,0 +1,122 @@
+<div class="contenedorCard">
+    <h2 style="color: #000000; font-weight: 300; font-family: 'Poppins', sans-serif;">
+        <strong>Gestionar tipo documental</strong>
+    </h2>
+
+    <div class="card">
+        <div class="card-body">
+
+            <div class="row">
+                <div class="column">
+                    <h3 class="title" style="color: #000000; font-weight: 300; font-family: 'Poppins', sans-serif;">
+                        <strong>Filtros</strong>
+                    </h3><br>
+                </div>
+            </div>
+
+            <!-- Divide el formulario en 2 columnas de 6 filas -->
+            <div class="grid-container">
+                <!-- Formulario de filtros -->
+                <form class="example-form" [formGroup]="filterTiposDocumentales"
+                    (ngSubmit)="getTypeDocumentalByFilters()">
+
+                    <!-- Primera sección -->
+                    <div class="row">
+                        <div class="column">
+                            <div class="label">Código documento de calidad</div>
+                            <mat-form-field appearance="outline" class="input-mata">
+                                <input type="text" matInput formControlName="codigo_documento_calidad">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="column">
+                            <div class="label">Nombre del tipo documental</div>
+                            <mat-form-field appearance="outline" class="input-mata">
+                                <input type="text" matInput formControlName="nombreTipoDocumental">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="column">
+                            <div class="label">Estado</div>
+                            <mat-form-field appearance="outline" class="input-mata">
+                                <mat-select formControlName="estadoTipoDocumental">
+                                    <mat-option *ngFor="let estado of estados" [value]="estado.value">
+                                        {{estado.label}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+
+                    <div class="buttons">
+                        <div class="d-flex justify-content-end align-items-center">
+                            <button type="submit"
+                                class="btn btn-small bg-primary text-white rounded py-3 px-5">Consultar</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h3 style="color: #000000; font-weight: 300; font-family: 'Poppins', sans-serif;">
+                <strong>Resultados</strong>
+            </h3><br>
+
+            <div class="table-responsive-wrapper">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th><strong>#</strong></th>
+                                <th><strong>Nombre del tipo documental</strong></th>
+                                <th><strong>Nombre corto</strong></th>
+                                <th><strong>Código documento de calidad</strong></th>
+                                <th><strong>Estado</strong></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of this.registrosTiposDocumentales; let i = index"
+                                [class.selected]="selectedIndex === i" (click)="selectItem(item, i)">
+                                <td>{{ item?.consecutivo }}</td>
+                                <td>{{ item?.nombreTipoDocumental }}</td>
+                                <td>{{ item?.nombre_corto }}</td>
+                                <td>{{ item?.codigo_documento_calidad }}</td>
+                                <td>{{ item?.estadoTipoDocumental }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="buttons-exportar">
+                <!-- BOTONES EXPORTAR -->
+                <div class="exportar d-flex justify-content-start align-items-center">
+                    <button class="btn btn-small bg-primary text-white rounded" (click)="exportCVS()">CSV</button>
+                    <button class="btn btn-small bg-primary text-white rounded" (click)="exportExcel()">EXCEL</button>
+                    <button class="btn btn-small bg-primary text-white rounded" (click)="exportPDF()">PDF</button>
+                    <button class="btn btn-small bg-primary text-white rounded"
+                        (click)="imprimirPDF()">IMPRIMIR</button>
+                </div>
+
+                <!-- BOTONES ACCIONES -->
+                <div class="agregarSerie d-flex justify-content-start align-items-center">
+                    <button class="btn btn-small bg-primary text-white rounded"
+                        (click)="openDialogCrearTypeDocumental()">Agregar nuevo tipo documental
+                    </button>
+                    <button *ngIf="selectedItemBoolean" class="btn btn-small bg-primary text-white rounded"
+                        (click)="openDialogEditar()">Actualizar</button>
+                    <button *ngIf="selectedItemBoolean" class="btn btn-small bg-primary text-white rounded"
+                        (click)="actionDeleteRegistro()">Eliminar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

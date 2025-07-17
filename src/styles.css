@@ -1,0 +1,103 @@
+@import "animate.css";
+
+/* You can add global styles to this file, and also import other style files */
+:root {
+  --my-light-blue: #64b5f6;
+}
+
+.ck-editor__editable_inline {
+  height: 400px;
+}
+
+.card {
+  background: white;
+  border: 1px solid #dee2e6;
+}
+
+.mat-snack-bar-container {
+  background: white !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+.mat-mdc-snack-bar-container {
+  padding: 0 !important;
+  background-color: white;
+}
+
+.cdk-overlay-connected-position-bounding-box {
+  z-index: 99999 !important;
+}
+
+.mat-form-field-infix {
+  border: 0 !important;
+}
+
+.title-color {
+  color: #6b737c;
+  font-weight: 700;
+}
+
+.title-page {
+  width: 90%;
+  margin: 0 auto;
+  padding-bottom: 20px;
+  font-weight: 500;
+}
+
+/* Estilo general para el mat-tab-group */
+.custom-tab-group {
+  border-bottom: none;
+  /* Elimina el borde inferior predeterminado */
+}
+
+/* Estilos para las etiquetas de las pestañas dentro del grupo personalizado */
+.custom-tab-group .mat-tab-label {
+  color: #555;
+  /* Color del texto inactivo */
+  font-weight: normal;
+  border-bottom: none;
+  /* Elimina el borde inferior para que no se superponga con el contenido */
+  border-radius: 4px 4px 0 0;
+  /* Bordes redondeados en la parte superior */
+  background-color: #f5f5f5;
+  /* Fondo de la pestaña inactiva */
+  margin-right: 2px;
+  /* Espacio entre las pestañas */
+  padding: 10px 20px;
+  /* Espaciado interno para dar forma a las pestañas */
+}
+
+/* Estilo para la pestaña activa dentro del grupo personalizado */
+.custom-tab-group .mat-tab-label-active {
+  color: #000;
+  /* Color del texto activo */
+  font-weight: bold;
+  background-color: #fff;
+  /* Fondo de la pestaña activa */
+  border-bottom: 1px solid transparent;
+  /* Hace que el borde inferior desaparezca */
+  position: relative;
+  top: 1px;
+  /* Ajusta la posición para que se vea alineada con el contenido */
+}
+
+/* Contenedor del contenido de las pestañas dentro del grupo personalizado */
+.custom-tab-group .mat-tab-body-wrapper {
+  border-radius: 0 4px 4px 4px;
+  /* Bordes redondeados en la parte inferior */
+  background-color: #fff;
+  /* Fondo del contenido */
+  margin-top: -1px;
+  /* Ajuste para alinear el borde superior con la pestaña activa */
+}
+
+.mat-datetimepicker-calendar-header {
+  background-color: #0d3c61;
+  color: unset;
+}
+
+
+.mat-checkbox-checked.mat-accent .mat-checkbox-background,.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+  background-color: #3967e7;
+}

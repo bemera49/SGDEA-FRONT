@@ -1,0 +1,37 @@
+<h1 mat-dialog-title class="text-primary">Novedades identificadas</h1>
+<p>Se encontrarón los siguientes errores en el archivo seleccionado</p>
+<div mat-dialog-content>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col fw-bold">Número de Linea</th>
+        <th scope="col fw-bold">Hoja</th>
+        <th scope="col fw-bold">Oficina</th>
+        <th scope="col fw-bold">Error</th>
+        <th scope="col fw-bold">Sugerencia</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of dataSource">
+        <th scope="row">{{data.fila}} </th>
+        <td>{{data.hoja}}</td>
+        <td>{{data.oficina}}</td>
+        <td>{{data.error}} </td>
+        <td>{{data.verifique}} </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+<div mat-dialog-actions>
+  <div class="d-flex justify-content-between mt-3 w-100">
+    <button class="btn bg-primary" type="button" id="exportToExcelButton"
+      style="background-color: #00A3E4;  margin-right: 10px;" (click)="downloadFileExcel()">
+      Exportar a Excel
+    </button>
+    <button mat-button mat-dialog-close class="btn bg-primary" type="button" id="exportToExcelButton"
+      style="background-color: #00A3E4;  margin-right: 10px;">
+        Cerrar
+    </button>
+  </div>
+</div>

@@ -1,0 +1,139 @@
+<div class="contenedorCard">
+  <h2 style="color: #000000; font-weight: 300; font-family: 'Poppins', sans-serif;">
+    <strong>Gestionar Series / Subseries</strong>
+  </h2>
+
+  <!-- Card Filtros -->
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="column">
+          <h3 class="title" style="color: #000000; font-weight: 300; font-family: 'Poppins', sans-serif;">
+            <strong>Filtros</strong>
+          </h3><br>
+        </div>
+      </div>
+
+      <div class="grid-container">
+        <!-- Formulario de filtros -->
+        <form class="example-form" [formGroup]="filterRegistrosSeries" (ngSubmit)="getSubSeriesOrSeriesByFilters()">
+
+          <!-- Primera sección -->
+          <div class="row">
+            <div class="column">
+              <div class="label">Código de la serie</div>
+              <mat-form-field appearance="outline" class="input-mata">
+                <input type="text" matInput formControlName="codigoGdTrdSerie">
+              </mat-form-field>
+            </div>
+
+            <div class="column">
+              <div class="label">Nombre de la serie</div>
+              <mat-form-field appearance="outline" class="input-mata">
+                <input type="text" matInput formControlName="nombreGdTrdSerie">
+              </mat-form-field>
+            </div>
+
+            <div class="column">
+              <div class="label">Estado</div>
+              <mat-form-field appearance="outline" class="input-mata">
+                <mat-select formControlName="estadoGdTrdSubserie">
+                  <mat-option *ngFor="let estado of estados" [value]="estado?.value">
+                    {{estado.label}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- Segunda sección -->
+          <div class="row">
+            <div class="column">
+              <div class="label">Código de la Subserie</div>
+              <mat-form-field appearance="outline" class="input-mata">
+                <input type="text" matInput formControlName="codigoGdTrdSubserie">
+              </mat-form-field>
+            </div>
+
+            <div class="column">
+              <div class="label">Nombre de la Subserie</div>
+              <mat-form-field appearance="outline" class="input-mata">
+                <input type="text" matInput formControlName="nombreGdTrdSubserie">
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="buttons">
+            <div class="d-flex justify-content-end align-items-center">
+              <button type="submit" class="btn btn-small bg-primary text-white rounded py-3 px-5">Consultar</button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Card Tabla -->
+  <div class="card">
+    <div class="card-body">
+      <h3 style="color: #000000; font-weight: 300; font-family: 'Poppins', sans-serif;">
+        <strong>Resultados</strong>
+      </h3><br>
+
+      <div class="table-responsive-wrapper">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th><strong>#</strong></th>
+                <th><strong>Código de la serie</strong></th>
+                <th><strong>Nombre de la serie</strong></th>
+                <th><strong>Código de la subserie</strong></th>
+                <th><strong>Nombre de la subserie</strong></th>
+                <th><strong>Estado</strong></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of this.registrosSeriesSubseries; let i = index"
+                [class.selected]="selectedIndex === i" (click)="selectItem(item, i)">
+                <td>{{ item?.idGdTrdSerie }}</td>
+                <td>{{ item?.codigoGdTrdSerie }}</td>
+                <td>{{ item?.nombreGdTrdSerie }}</td>
+                <td>{{ item?.codigoGdTrdSubserie }}</td>
+                <td>{{ item.nombreGdTrdSubserie }}</td>
+                <td>{{ item?.estadoGdTrdSubserie }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="buttons-exportar">
+        <!-- BOTONES EXPORTAR -->
+        <div class="exportar d-flex justify-content-start align-items-center">
+          <button class="btn btn-small bg-primary text-white rounded" (click)="exportCVS()">CSV</button>
+          <button class="btn btn-small bg-primary text-white rounded" (click)="exportExcel()">EXCEL</button>
+          <button class="btn btn-small bg-primary text-white rounded" (click)="exportPDF()">PDF</button>
+          <button class="btn btn-small bg-primary text-white rounded" (click)="imprimirPDF()">IMPRIMIR</button>
+        </div>
+
+        <!-- BOTONES ACCIONES -->
+        <div class="agregarSerie d-flex justify-content-start align-items-center">
+          <button class="btn btn-small bg-primary text-white rounded" (click)="openDialogCrearSerie()">Agregar nueva
+            serie
+          </button>
+          <button *ngIf="selectedItemBoolean" class="btn btn-small bg-primary text-white rounded"
+            (click)="openDialogCrearSubSerie()">Agregar nueva subserie</button>
+          <button *ngIf="selectedItemBoolean" class="btn btn-small bg-primary text-white rounded"
+            (click)="actionDeleteRegistro()">Eliminar</button>
+          <button *ngIf="selectedItemBoolean" class="btn btn-small bg-primary text-white rounded"
+            (click)="openDialogEditar()">Actualizar</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>

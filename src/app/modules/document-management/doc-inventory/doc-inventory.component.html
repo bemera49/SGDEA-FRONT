@@ -1,0 +1,126 @@
+<div>
+  <app-breadcrumb
+    [breadcrumbOn]="breadcrumbOn"
+    [breadcrumbRouteActive]="breadcrumbRouteActive"
+  ></app-breadcrumb>
+</div>
+<div class="container-gestionar-traslado content-main mb-4 px-3">
+  <div class="d-flex flex-column">
+    <button (click)="goBack()" mat-button style="width: 150px">
+      <mat-icon>chevron_left</mat-icon>Volver
+    </button>
+    <h3 class="text-black font-weight-bold">Consultar inventario documental</h3>
+  </div>
+</div>
+<div class="container-form">
+  <form [formGroup]="formInventory">
+    <div class="input">
+      <mat-label>ENTIDAD REMITENTE</mat-label>
+      <mat-form-field style="padding: 0 !important" appearance="outline">
+        <input type="text" matInput formControlName="entidadRemitente" />
+      </mat-form-field>
+    </div>
+    <div class="input">
+      <mat-label>ENTIDAD PRODUCTORA</mat-label>
+      <mat-form-field appearance="outline">
+        <input type="text" matInput formControlName="EntidadProductora" />
+      </mat-form-field>
+    </div>
+    <div class="input">
+      <mat-label>UNIDAD ADMINISTRATIVA</mat-label>
+      <mat-form-field appearance="outline">
+        <input type="text" matInput formControlName="unidadAdmin" />
+      </mat-form-field>
+    </div>
+    <div class="input">
+      <mat-label>OFICINA PRODUCTORA</mat-label>
+      <mat-form-field appearance="outline">
+        <input type="text" matInput formControlName="ofiProductora" />
+      </mat-form-field>
+    </div>
+    <div class="input">
+      <mat-label>OBJETO</mat-label>
+      <mat-form-field appearance="outline">
+        <input type="text" matInput formControlName="objeto" />
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+<div
+  *ngIf="arrayinventory && arrayinventory.length > 0"
+  class="container-table"
+>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">CÓDIGO</th>
+        <th scope="col">OFICINA PRODUCTORA</th>
+        <th scope="col">SERIE</th>
+        <th scope="col">SUBSERIE</th>
+        <th scope="col">ASUNTO/EXPEDIENTE</th>
+        <th scope="col">FECHA INICIAL</th>
+        <th scope="col">FECHA FINAL</th>
+        <th scope="col">CAJA</th>
+        <th scope="col">CARPETA</th>
+        <th scope="col">TOMO</th>
+        <th scope="col">OTRO</th>
+        <th scope="col">NUMERO DE DOCUMENTOS</th>
+        <th scope="col">No. FOLIOS</th>
+        <th scope="col">SOPORTE</th>
+        <th scope="col">ESTADO</th>
+        <th scope="col">ETAPA DE ARCHIVO</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of arrayinventory; index as i">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ item.numeroRadiRadicado }}</td>
+        <td>{{ item.oficinaProductora }}</td>
+        <td>{{ item.serie }}</td>
+        <td>{{ item.subserie }}</td>
+        <td>{{ item.asuntoExpediente }}</td>
+        <td>{{ item.fechaInicio }}</td>
+        <td>{{ item.fechaFin }}</td>
+        <td>{{ item.caja }}</td>
+        <td>{{ item.carpeta }}</td>
+        <td>{{ item.tomo }}</td>
+        <td>{{ item.otro }}</td>
+        <td>{{ item.numeroDocumentos }}</td>
+        <td>{{ item.numeroFolios }}</td>
+        <td>{{ item.soporte }}</td>
+        <td>{{ item.estado }}</td>
+        <td>{{ item.etapa }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="buttons-exportar">
+  <!-- BOTONES EXPORTAR -->
+  <div class="exportar d-flex justify-content-start align-items-center">
+    <button
+      class="btn btn-small bg-primary text-white rounded"
+      (click)="exportCVS()"
+    >
+      CSV
+    </button>
+    <button
+      class="btn btn-small bg-primary text-white rounded"
+      (click)="exportExcel()"
+    >
+      EXCEL
+    </button>
+    <button
+      class="btn btn-small bg-primary text-white rounded"
+      (click)="exportPDF()"
+    >
+      PDF
+    </button>
+    <button
+      class="btn btn-small bg-primary text-white rounded"
+      (click)="imprimirPDF()"
+    >
+      IMPRIMIR
+    </button>
+  </div>
+</div>

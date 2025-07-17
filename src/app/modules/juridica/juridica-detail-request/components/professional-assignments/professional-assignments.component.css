@@ -1,0 +1,35 @@
+/* Inicio estilos semaforo */
+.verde {
+    background-color: #30dd20;
+    border-radius: 50%;
+    display: inline-block;
+    height: 18px;
+    width: 18px;
+
+}
+
+.rojo {
+    background-color: #DD2025;
+    border-radius: 50%;
+    display: inline-block;
+    height: 18px;
+    width: 18px;
+}
+
+.amarillo {
+    background-color: #FFD335;
+    border-radius: 50%;
+    display: inline-block;
+    height: 18px;
+    width: 18px;
+}
+
+.green {
+    background-color: #30dd20;
+    border-radius: 50%;
+    display: inline-block;
+    height: 18px;
+    width: 18px;
+}
+  
+  /* Fin estilos semaforo */

@@ -1,0 +1,121 @@
+<app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+<div class="main-content overflow-hidden">
+  <button [disabled]="modalOpen" mat-button style="width: 150px" [routerLink]="['/documentManagement/version-trd-index']"   >
+    <mat-icon>chevron_left</mat-icon>Volver
+  </button>
+  <div class="container-fluid">
+    <mat-tab-group animationDuration="1000ms">
+      <mat-tab label="Información básica">
+        <form  [formGroup]="form" class="row w-100 p-4  overflow-hidden">
+          <div class="mb-1 col-md-9">
+            <mat-form-field appearance="outline" >
+              <mat-label>Nombre versión TRD</mat-label>
+              <input formControlName="nameVersion"   matInput>
+              <mat-error *ngIf="form.controls['nameVersion'].invalid && form.controls['nameVersion'].touched" >
+                  Este campo es requerido
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="mb-1 col-md-3">
+            <mat-form-field appearance="outline" >
+              <mat-label>Estado</mat-label>
+              <mat-select (selectionChange)="updateValidators()" formControlName="status">
+                <mat-option value="Activa">Activo</mat-option>
+                <mat-option value="Inactiva">Inactivo</mat-option>
+                <mat-option value="Borrador">Borrador</mat-option>
+              </mat-select>
+              <mat-error *ngIf="!form.get( 'status').valid && form.get( 'status').touched " >
+                  Este campo es requerido
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="mb-1 col-md-5">
+            <mat-form-field appearance="outline">
+              <mat-label>Tipo de instrumento</mat-label>
+              <mat-select formControlName="instrumentType">
+                <mat-option value="Tabla de Retención Documental">Tabla de Retención Documental</mat-option>
+                <mat-option value="Tabla de Valoración Documental">Tabla de Valoración Documental</mat-option>
+              </mat-select>
+              <mat-error *ngIf="!form.get( 'instrumentType').valid && form.get( 'instrumentType').touched " >
+                  Este campo es requerido
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="mb-1 col-md-12 row">
+            <div class="col-md-4">
+                <mat-form-field appearance="outline" class="w-100">
+                  <input formControlName="applicationInitDate"  placeholder="Fecha inicio aplicación" matInput [matDatepicker]="picker">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                  <mat-error *ngIf="!form.get( 'applicationInitDate').valid && form.get( 'applicationInitDate').touched " >
+                      Este campo es requerido
+                  </mat-error>
+                </mat-form-field>
+            </div>
+            <div class=" col-md-4">
+              <mat-form-field appearance="outline" class="w-100">
+                <input placeholder="Fecha final aplicación"  formControlName="applicationFinalDate" matInput [matDatepicker]="picker2">
+                <mat-datepicker-toggle matSuffix [for]="picker2" ></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+                <mat-error *ngIf="!form.get('applicationFinalDate').valid && form.get('applicationFinalDate').touched " >
+                    Este campo es requerido
+                </mat-error>
+              </mat-form-field>
+
+            </div>
+          </div>
+          <div class="mb-1 col-md-3">
+            <mat-form-field appearance="outline" class="w-100" >
+              <input  formControlName="approvementDate" placeholder="Fecha aprobación" matInput [matDatepicker]="picker3">
+              <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+              <mat-datepicker #picker3></mat-datepicker>
+              <mat-error *ngIf="!form.get( 'approvementDate').valid && form.get( 'approvementDate').touched " >
+                  Este campo es requerido
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="mb-1 col-md-9">
+            <mat-form-field  appearance="outline">
+              <mat-label>Acto de aprobación</mat-label>
+              <input  formControlName="approvementAct" matInput>
+              <mat-error *ngIf="!form.get( 'approvementAct').valid && form.get( 'approvementAct').touched " >
+                Este campo es requerido
+            </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="mb-1 col-md-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <input  formControlName="adoptionDate" placeholder="Fecha adopción"  matInput [matDatepicker]="picker4">
+              <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+              <mat-datepicker #picker4></mat-datepicker>
+              <mat-error *ngIf="!form.get( 'adoptionDate').valid && form.get( 'adoptionDate').touched " >
+                  Este campo es requerido
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="mb-1 col-md-9">
+            <mat-form-field appearance="outline" >
+              <mat-label>Acto de adopción</mat-label>
+              <input formControlName="adoptionAct" matInput>
+              <mat-error *ngIf="!form.get( 'adoptionAct').valid && form.get( 'adoptionAct').touched " >
+                Este campo es requerido
+            </mat-error>
+            </mat-form-field>
+          </div>
+        </form>
+        <div class="col-12 d-flex justify-content-end">
+          <button type="button" (click)="save()" [disabled]="modalOpen"  class="btn btn-primary mx-2">
+            {{versionId == undefined ? 'Crear' : 'Actualizar'  }}
+          </button>
+          <!-- <button [disabled]="modalOpen" type="button" [routerLink]="['/documentManagement/version-trd-index']"   class="btn btn-light">Cancelar</button> -->
+          <button [disabled]="modalOpen"  *ngIf="form.get('status').value === 'Borrador' &&  versionId" type="button"  (click)="confirmDelete()"   class="btn btn-light">Eliminar</button>
+        </div>
+      </mat-tab>
+      <mat-tab label="Ver Tabla de Retención Documental">Ver Tabla de Retención Documental</mat-tab>
+      <mat-tab label="Migración de Tablas de Retención Documental">
+        <app-doc-manag-trd-migrations (reload)="reloadData($event)" [trdId]="versionId" [trdMigrations]="migrations" [nameTrdVersion]="this.form.controls['nameVersion'].value" ></app-doc-manag-trd-migrations>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+
+</div>

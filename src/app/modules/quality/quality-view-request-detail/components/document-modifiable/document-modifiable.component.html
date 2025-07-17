@@ -1,0 +1,21 @@
+<div *ngIf="document" class="container-documents">
+  <h5 class="documento-title">{{title}}</h5>
+  <div class="documents-container">
+    <img *ngIf="typeDocument.DOCX === document.mime_type" src="/assets/img/word.svg" alt="word" />
+    <img *ngIf="typeDocument.XLSX === document.mime_type" src="/assets/img/logos/excel-icon.svg" alt="excel" />
+    <img *ngIf="typeDocument.PXPT === document.mime_type" src="/assets/img/logos/powerpoint-icon.svg"
+      alt="powerpoint" />
+    <div *ngIf="isModifiable">
+      <button (click)="downloadFile()" class="description">
+        {{document.original_name}}
+      </button>
+      <input #inputDiagrama type="file" hidden [disabled]="!view_atachment" (change)="uploadFile($event)">
+      <mat-icon *ngIf="idTask != 4" (click)="stateDownload?inputDiagrama.click():''">attach_file</mat-icon>
+    </div>
+    <div *ngIf="!isModifiable">
+      <span class="description">
+        {{document.original_name}}
+      </span>
+    </div>
+  </div>
+</div>

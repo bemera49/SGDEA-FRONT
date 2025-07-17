@@ -1,0 +1,7 @@
+<div *ngIf="requestDate" class="container-show-date">
+  <strong>{{typeDate}}</strong>
+  <div class="container-date">
+    <p>{{requestDate| date:'dd/MM/yyyy hh:mm:ss a' }}</p>
+    <mat-icon>calendar_month</mat-icon>
+  </div>
+</div>

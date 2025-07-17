@@ -1,0 +1,63 @@
+.modal-container {
+  width: 78vw;
+  height: 88vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.btn-none {
+  background: none;
+  border: 1px solid #000;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2%;
+}
+
+@media (width <=1250px) {
+  form {
+    display: flex;
+    flex-direction: column;
+
+    .container-input {
+      max-width: 100% !important;
+    }
+  }
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #e0e0e0;
+  border-radius: 4px;
+}
+
+@media (max-width: 600px) {
+  .modal-container {
+    width: 100%;
+  }
+
+  .modal-button {
+    width: 80%;
+  }
+
+  .form-select,
+  .form-label p {
+    width: 100%;
+  }
+}
+
+.container-button {
+  gap: 16px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}

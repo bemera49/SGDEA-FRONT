@@ -1,0 +1,41 @@
+<!-- HU 010 - Reclasificación o retipificacion interna de la PQRS o solicitud -->
+
+<mat-dialog-content class="modal-container">
+    <div  class="d-flex flex-row align-items-center justify-content-between">
+      <mat-icon class="text-primary">account_tree</mat-icon>
+      <button  mat-icon-button (click)="onConfirmClose()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <h2 mat-dialog-title class="w-100 mt-2 text-body">{{ data.title }}</h2>
+    <p class="w-100">Completa los campos para realizar el proceso.</p>
+
+    <form [formGroup]="form">
+      <mat-form-field appearance="outline" class="w-100 mb-4">
+        <mat-label>Clasificación interna</mat-label>
+        <mat-select   formControlName="internalClassification" required="true">
+          <mat-option [value]="ic.id" *ngFor="let ic of internalClassifications">{{ic.detalle}}</mat-option>
+        </mat-select>
+        <mat-error  *ngIf="form.controls['internalClassification'].invalid || form.controls['internalClassification'].touched">
+          Señor usuario, debe escoger una clasificación interna para la solicitud
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-100 mb-4">
+        <mat-label>¿Requiere cambio de contacto SAP?</mat-label>
+        <mat-select  formControlName="sapContact" required="true">
+          <mat-option value="Sí">Sí</mat-option>
+          <mat-option value="No">No</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.controls['sapContact'].invalid || form.controls['sapContact'].touched">
+          Debe ACTUALIZAR CONTACTO SAP, de lo contrario no se realizará la retipificación de la solicitud
+        </mat-error>
+      </mat-form-field>
+
+      <div class="d-flex flex-wrap flex-md-nowrap justify-content-center" style="gap: 10px">
+        <button type="button" [disabled]="modalOpen" mat-stroked-button class="border border-primary text-primary bg-white w-100" (click)="onConfirmClose()">Cancelar</button>
+        <button mat-flat-button [disabled]="modalOpen"  class="bg-primary text-white w-100" (click)="onConfirm()">Actualizar</button>
+      </div>
+    </form>
+</mat-dialog-content>

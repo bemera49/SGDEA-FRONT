@@ -1,0 +1,125 @@
+<app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Notification -->
+                <!--div class="alert alert-info alert-with-icon marginNotification" data-notify="container">
+                    <i class="material-icons" data-notify="icon">notifications</i>
+                    <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <i class="material-icons">close</i>
+                    </button>
+                    <span data-notify="icon" class="now-ui-icons ui-1_bell-53"></span>
+                    <span data-notify="message">{{ "textFormGeneralConfiguration" | translate }}</span>
+                </div-->
+                <form [formGroup]="moduleForm" (ngSubmit)="openDialog()">
+                    <mat-card appearance="outlined" class="card-margin-button">
+                        <mat-card-content>
+                            <h3>Tiempo de respuesta</h3>
+                            <div class="efiling-container">
+                                <div class="efiling-form-fields">
+                                    <mat-form-field>
+                                        <mat-label>Tipo de solicitud</mat-label>
+                                        <input matInput placeholder="Escriba" formControlName="nombre" required class="efiling-input" />
+                                        <mat-error *ngIf="!moduleForm.get( 'nombre').valid || moduleForm.get( 'nombre').touched ">
+                                            {{ 'El campo es obligatorio' | translate }}.
+                                        </mat-error>
+                                    </mat-form-field>
+                                    <mat-form-field>
+                                        <mat-label>Tiempo de respuesta</mat-label>
+                                        <input matInput placeholder="Escriba" formControlName="dias_vencimiento" required class="efiling-input" (keypress)="validateInput.isInteger($event)"/>
+                                        <mat-error *ngIf="!moduleForm.get( 'dias_vencimiento').valid || moduleForm.get( 'dias_vencimiento').touched ">
+                                            {{ 'El campo es obligatorio' | translate }}.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="efiling-form-fields">
+                                    <mat-form-field>
+                                        <span>Fecha de parametrización</span>
+                                        <input matInput [value]="fecha" class="efiling-input" disabled/>
+                                    </mat-form-field>
+                                    <mat-form-field>
+                                        <span>Usuario</span>
+                                        <input matInput [value]="usuario" class="efiling-input" disabled/>
+
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="efiling-form-fields">
+                                    <mat-form-field>
+                                        <mat-label>Descripción</mat-label>
+                                        <textarea matInput placeholder="Inserte" formControlName="observacion"></textarea>
+                                        <mat-error *ngIf="!moduleForm.get( 'observacion').valid || moduleForm.get( 'observacion').touched ">
+                                            {{ 'El campo es obligatorio' | translate }}.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <mat-card appearance="outlined" class="card-margin-button">
+                                    <mat-card-content>
+                                        <h4>Semáforo</h4>
+                                        <div class="efiling-form-fields">
+                                            <mat-icon class="alarm-green col-1">alarm</mat-icon >
+                                            <div class="col-1">Verde</div>
+                                            <mat-form-field class="col-6">
+                                                <mat-label>Días para trámite</mat-label>
+                                                <input matInput placeholder="Escriba" formControlName="dias_verde" required class="efiling-input" (keypress)="validateInput.isNumber($event)"/>
+                                                <mat-error *ngIf="!moduleForm.get( 'dias_verde').valid || moduleForm.get( 'dias_verde').touched ">
+                                                    {{ 'El campo es obligatorio' | translate }}.
+                                                </mat-error>
+                                            </mat-form-field>  
+                                            <div>Días para trámite</div>                                  
+                                        </div>
+                                        <div class="efiling-form-fields">
+                                            <mat-icon class="alarm-yellow col-1">alarm</mat-icon>
+                                            <div class="col-1">Amarillo</div>
+                                            <mat-form-field class="col-6">
+                                                <mat-label>% tiempo primera alerta</mat-label>
+                                                <input matInput placeholder="Escriba" formControlName="porcentaje_primera_alerta" required class="efiling-input" (keypress)="validateInput.isNumber($event)"/>
+                                                <mat-error *ngIf="!moduleForm.get( 'porcentaje_primera_alerta').valid || moduleForm.get( 'porcentaje_primera_alerta').touched ">
+                                                    {{ 'El campo es obligatorio' | translate }}.
+                                                </mat-error>
+                                            </mat-form-field>
+                                            <div>% tiempo primera alerta</div>
+                                        </div>
+                                        <div class="efiling-form-fields">
+                                            <mat-icon class="alarm-red col-1">alarm</mat-icon>
+                                            <div class="col-1">Rojo</div>
+                                            <mat-form-field class="col-6">
+                                                <mat-label>% tiempo segunda alerta</mat-label>
+                                                <input matInput placeholder="Escriba" formControlName="porcentaje_segunda_alerta" required class="efiling-input" (keypress)="validateInput.isNumber($event)"/>
+                                                <mat-error *ngIf="!moduleForm.get( 'porcentaje_segunda_alerta').valid || moduleForm.get( 'porcentaje_segunda_alerta').touched ">
+                                                    {{ 'El campo es obligatorio' | translate }}.
+                                                </mat-error>
+                                            </mat-form-field>
+                                            <div>% tiempo segunda alerta</div>
+                                        </div>
+                                    </mat-card-content>
+                                </mat-card>
+
+                                
+                                <div class="efiling-form-fields">
+                                    <mat-checkbox formControlName="estado" [checked]="true">Activo
+                                    </mat-checkbox>     
+                                </div>
+
+                                <div class="efiling-form-fields">
+                                    <div class="efiling-button-row" style="float: right;">
+                                        <button class="btn btn-secondary" type="button" (click)="returnIndex()">Cancelar</button>
+                                        <button class="btn btn-primary" type="submit">{{textSubmitButton}}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                    
+                    
+                    
+                    
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</div>

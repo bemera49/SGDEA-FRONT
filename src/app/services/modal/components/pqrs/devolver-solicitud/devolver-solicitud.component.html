@@ -1,0 +1,73 @@
+<!-- HU 003 - Devolver PQRS o solicitud -->
+
+<mat-dialog-content class="modal-container">
+  <div class="d-flex flex-row align-items-center justify-content-between">
+    <mat-icon class="text-primary">refresh</mat-icon>
+    <button mat-icon-button (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <h2 mat-dialog-title class="w-100 mt-2 text-body">{{ data.title }}</h2>
+  <p class="w-100">Completa los campos para realizar el proceso.</p>
+
+  <form [formGroup]="form" class="row">
+    <!-- causales de rechazo -->
+    <span class="d-flex flex-column col-md-12 col-lg-12">
+      <label>Causales de rechazo*</label>
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-select placeholder="Causales de rechazo" formControlName="causales"
+          (selectionChange)="changeCausales($event)">
+          <mat-option *ngFor="let us of listCausales" [value]="us.value">{{us.name}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.controls['causales'].invalid && form.controls['causales'].touched">
+          Este campo es requerido
+        </mat-error>
+      </mat-form-field>
+    </span>
+    <!-- causales de rechazo -->
+    <!-- causal otro -->
+    <span *ngIf="isCausalOtro" class="d-flex flex-column col-md-12 col-lg-12">
+      <label>Causal otro*</label>
+      <mat-form-field appearance="outline" class="w-100">
+        <input placeholder="especifique la causal" matInput formControlName="causal_otro">
+        <mat-error *ngIf="form.controls['causal_otro'].invalid && form.controls['causal_otro'].touched">
+          Este campo es requerido
+        </mat-error>
+      </mat-form-field>
+    </span>
+    <!-- causal otro -->
+    <!-- area redireccionamiento -->
+    <span *ngIf="isNoCorresponde" class="d-flex flex-column col-md-12 col-lg-12">
+      <label>Area sugerida para redireccionamiento*</label>
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-select placeholder="Area" formControlName="area">
+          <mat-option *ngFor="let us of listAreas" [value]="us.value">{{us.name}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.controls['area'].invalid && form.controls['area'].touched">
+          Este campo es requerido
+        </mat-error>
+      </mat-form-field>
+    </span>
+    <!-- area redireccionamiento -->
+    <!-- Observaciones -->
+    <span class="d-flex flex-column col-md-12 col-lg-12">
+      <label>Observaciones</label>
+      <mat-form-field appearance="outline" class="w-100">
+        <textarea matInput placeholder="Area" formControlName="observaciones" placeholder=""></textarea>
+        <mat-error *ngIf="form.controls['observaciones'].invalid && form.controls['observaciones'].touched">
+          Este campo es requerido
+        </mat-error>
+      </mat-form-field>
+    </span>
+    <!-- Observaciones -->
+  </form>
+
+
+  <div class="d-flex flex-wrap flex-md-nowrap justify-content-center" style="gap: 10px">
+    <button type="button" mat-stroked-button class="border border-primary text-primary bg-white w-100"
+      (click)="close()">Cancelar</button>
+    <button mat-flat-button class="bg-primary text-white w-100" [disabled]="form.invalid"
+      (click)="submit()">Aceptar</button>
+  </div>
+</mat-dialog-content>

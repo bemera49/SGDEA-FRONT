@@ -1,0 +1,120 @@
+<div class="d-flex flex-column p-4" style="width: 90%; border: 1px solid #E2E2E2; border-radius: 20px; margin: 0 auto; min-height: 60vh; background: white;">
+  <section class="d-flex w-full justify-content-between">
+    <h3 class="" style="color: #222222; font-weight: 500; font-size: 23px;">{{config?.texts?.title}}</h3>
+    <div>
+      <button *ngIf="config.FormGroup" mat-raised-button class="bg-primary" style="color: white; margin-right: 30px;" (click)="clearFilters()">
+        Limpiar filtros
+        <mat-icon>
+          close
+        </mat-icon>
+      </button>
+      <button mat-raised-button *ngIf="config.TableMenuOptions" [matMenuTriggerFor]="menu" id="menu-acciones"
+        [disabled]="!actionsButtonValidation()" ngClass="{{actionsButtonValidation() ? '' : 'disabled'}}"
+        class="text-white bg-primary" aria-label="Example icon-button with a menu">
+        Acciones <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu" xPosition="before">
+        <ng-container *ngFor="let item of config.TableMenuOptions">
+          <button  *can="item.permission"  mat-menu-item (click)="item.action ? item.action() : null">
+            <mat-icon>{{item.icon}}</mat-icon>
+            <span>{{item.title}}</span>
+          </button>
+        </ng-container>
+      </mat-menu>
+    </div>
+
+  </section>
+
+  <ng-container *ngIf="config.searchLength">
+    <p *ngIf="canSeeLenght" class="d-flex w-full justify-content-between align-items-center p-3"
+    style="background-color: #F4FBFF; border-radius: 6px; color: #023F5E;">
+    {{data?.length}} Resultados de busqueda
+    <mat-icon style="cursor: pointer;" (click)="canSeeLenght=!canSeeLenght">close</mat-icon>
+  </p>
+  </ng-container>
+
+
+  <ng-container>
+    <ng-content>
+    </ng-content>
+  </ng-container>
+
+ 
+
+  <div style="overflow: scroll; height: 100%;">
+    <table *ngIf="data !== null;" style="background-color: white; min-height: 100%;">
+        <thead style="min-width: 200px;">
+          <tr style="border-bottom: 1px solid #E2E2E2; ">
+            <th *ngIf="!config?.hideSelectColumn">
+              <mat-checkbox class="ml-4" [checked]="this.selectedRows$?.length > 0" (change)="toggleAllRows($event)"></mat-checkbox>
+            </th>
+            <ng-container *ngFor="let header of config.headers" class="table-header-column">
+  
+              <th *can="header.allowed" class="text-center table-header-column">
+                {{ header.label }}
+              </th>
+  
+            </ng-container>
+  
+            <th *ngIf="config.actions" class="table-header-column">
+              Detalle
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr *ngFor="let item of data " class="body-tr">
+  
+  
+            <td *ngIf="!config?.hideSelectColumn">
+              <mat-checkbox [value]="item.id" [checked]="isRowSelected(item)" (change)="toggleRowSelection(item, $event.checked)" class="ml-4"></mat-checkbox>
+            </td>
+  
+  
+            <ng-container *ngFor="let header of config.headers" class="table-row">
+  
+              <td *can="header.allowed" class="table-row">
+                <ng-container *ngIf="isNotObject(item, header.name)">
+                  {{ item[header.name] }}
+                </ng-container>
+                <!-- Validamos si header.name es un objeto -->
+                <ng-container *ngIf="isObjectAndHasNombre(item, header.name)">
+                  <span>
+                    {{ item[header.name].nombre }}
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="isObjectAndHasNombreCgMedioRecepcion(item, header.name)">
+                  <span *ngIf="item[header.name]?.nombreCgMedioRecepcion">
+                    {{ item[header.name]?.nombreCgMedioRecepcion }}
+                  </span>
+                </ng-container>
+                <!-- Estado -->
+                <ng-container *ngIf="isObjectAndHasEstado(item, header.name)">
+                  <span *ngIf="item[header.name]?.estado">
+                    {{ item[header.name]?.estado }}
+                  </span>
+                </ng-container>
+              </td>
+  
+            </ng-container>
+  
+  
+            <td class="table-row" *ngIf="config.actions">
+  
+              <button mat-icon-button tooltip="matTooltip" *ngFor="let itemAction of config.actions"
+                (click)="navigateTo(itemAction.routerLink + '/' + item[config.idTracker], item[config.idTracker], config?.encrypParams)" 
+                [matTooltip]="itemAction.label"
+                matTooltipPosition="above" matTooltipHideDelay="100">
+                <mat-icon>{{itemAction.icon}}</mat-icon>
+              </button>
+  
+            </td>
+  
+          </tr>
+        </tbody>
+     
+     
+    </table>
+  </div>
+  <!-- <app-pagination (refresh)="refresh.emit()" class=""></app-pagination> -->
+</div>

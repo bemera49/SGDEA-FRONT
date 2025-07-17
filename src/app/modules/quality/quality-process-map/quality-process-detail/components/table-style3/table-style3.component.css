@@ -1,0 +1,122 @@
+
+
+:host {
+  box-sizing: border-box;
+  display: flex;
+  padding: 12px;
+  width: 100%;
+  height: auto;
+  border: 1px solid #E2E2E2;
+  border-radius: 8px;
+}
+
+.container-pag{
+  margin-top: 67px;
+}
+.table-responsive {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.tableicon {
+  width: 0.875rem;
+}
+.codecolumn {
+  flex-direction: row;
+  width: 13%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.codecolumn span {
+  display: inline-block;
+  max-width: 100%;
+  /* Asegura que el contenido no exceda el ancho de la celda */
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.75rem;
+  line-height: 0.85em;
+}
+
+thead {
+  background-color: transparent;
+}
+
+th,
+td {
+  text-align: left;
+}
+
+th {
+  font-weight: bold;
+  padding-left: 0.500rem;
+  padding-right: 0.500rem;
+}
+
+tr:nth-child(even) {
+  background-color: transparent;
+}
+
+td {
+  border-bottom: 1px solid #E2E2E2;
+  padding-left:0.500rem ;
+  padding-right: 0.500rem;
+}
+
+.column-1 {
+  width: 20%;
+}
+
+.padding-icon {
+  display: inline-block;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.selected-row {
+  background-color: transparent;
+}
+
+.selected-row td span {
+  color: #008ED6;
+}
+
+.selected-row td {
+  border-bottom: 0.5px solid #008ED6;
+}
+
+@media screen and (max-width: 768px) {
+  thead {
+    display: none;
+  }
+
+  tr {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #E2E2E2;
+    margin-bottom: 10px;
+    background-color: white;
+  }
+
+  td {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #E2E2E2;
+  }
+
+  td:before {
+    content: attr(data-label);
+    font-weight: bold;
+    width: 50%;
+  }
+
+  .w-auto {
+    width: 100%;
+  }
+}

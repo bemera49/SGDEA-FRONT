@@ -1,0 +1,119 @@
+.test {
+  margin: 20px auto;
+  padding: 0 2%;
+  /* Ajuste para mantener el espacio en los lados */
+  max-width: 100%;
+  /* Evita que el contenido se desborde en pantallas pequeñas */
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  color: #2c3948;
+}
+
+.h3 {
+  font: 2.25rem;
+}
+
+.h4 {
+  font: 1.5625rem;
+}
+
+.table th,
+.table td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+.pagination-container {
+  overflow-x: auto;
+}
+
+.card-title {
+  margin-bottom: 10px;
+  /* Espaciado entre títulos */
+}
+
+.table-responsive {
+  overflow-x: auto;
+  /* Asegura que la tabla sea desplazable en pantallas pequeñas */
+}
+
+.estado-solicitud {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 8px;
+  white-space: nowrap;
+  /* Evita que el texto se desborde */
+}
+
+/* Ajustes para tamaños de semáforo responsivos */
+.semaforo {
+  --size: 18px;
+  display: inline-block;
+  height: var(--size);
+  width: var(--size);
+  border-radius: 50%;
+}
+
+/* Ajuste para tamaños de semáforo en dispositivos pequeños */
+@media (max-width: 576px) {
+  .semaforo {
+    --size: 14px;
+  }
+}
+
+
+.verde {
+  background-color: #30dd20;
+}
+
+.rojo {
+  background-color: #DD2025;
+}
+
+.amarillo {
+  background-color: #FFD335;
+}
+
+/* Fin estilos semaforo */
+
+
+/* Inicio estilos solicitud */
+.estado-solicitud {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 8px;
+}
+
+.en-elaboracion {
+  border: 0.5px solid #0049FF;
+  background-color: #E5EDFF;
+}
+
+.espera-aprobacion {
+  border: 0.5px solid #FFB800;
+  background-color: #FFF8E7;
+}
+
+.aprobado {
+  border: 0.5px solid #39BA2E;
+  background-color: #EBF8EA;
+}
+
+.en-tramite {
+  border: 0.5px solid #8500D7;
+  background-color: #F7EAFF;
+}
+
+.gray-row {
+  background-color: #d3d3d3;
+}
+
+/* Fin estilos solicitud */

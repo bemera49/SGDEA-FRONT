@@ -1,0 +1,92 @@
+
+<div class="test">
+  <h2 style="color: #000000; font-weight: 300; font-family: 'Poppins', sans-serif;">
+    <strong>Desactivar Analistas</strong>
+  </h2>
+  <div class="card">
+    <div class="card-body">
+      <div class="table-responsive">
+        <h3 style="color: #000000; font-weight: 300; font-family: 'Poppins', sans-serif;">
+          <strong>Listado de Colaboradores</strong>
+        </h3><br>
+        <table class="table">
+          <thead>
+            <tr>
+              <th style="visibility: hidden;"></th>
+              <th><strong>Analista DGCP</strong></th>
+              <th><strong>Estado Sap</strong></th>
+              <th>DesActivar</th>
+              <th>1 Dia</th>
+              <th>2 Dias</th>                            
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of this.AnalystReceived">
+              <td style="visibility: hidden;">
+                <span class="semaforo" [ngClass]="">{{ item.id }}</span>
+              </td>
+              <td>
+                <span class="estado-solicitud">
+                  {{ item.name_analyst }}
+                </span>
+
+              </td>
+              <td>
+                <span class="estado-solicitud" *ngIf="item.inactivo === null">
+                  Activo
+                </span>
+                <span class="estado-solicitud" *ngIf="item.inactivo !== null">
+                  Inactivo
+                </span>
+              </td>
+
+
+              <td *ngIf="item.inactivo === null">
+                <input type="checkbox" [(ngModel)]="item.checkbox1" (change)="onCheckboxChange(item)">
+              </td>
+              
+              <td *ngIf="item.inactivo !== null">
+                <span>
+                  <input type="checkbox" [checked]="item.inactivo?.dias > 0" disabled>
+                </span>
+              </td>
+
+              <td *ngIf="item.inactivo === null">
+                <input type="checkbox" [(ngModel)]="item.checkbox2" [disabled]="!item.checkbox1 || item.checkbox3" (change)="onCheckboxChange(item)">
+              </td>              
+
+              <td *ngIf="item.inactivo !== null">
+                <input type="checkbox" [checked]="item.inactivo?.dias == 1" disabled>
+              </td>              
+
+              <td *ngIf="item.inactivo === null">
+                <input type="checkbox" [(ngModel)]="item.checkbox3" [disabled]="!item.checkbox1 || item.checkbox2" (change)="onCheckboxChange(item)">
+              </td>
+
+              <td *ngIf="item.inactivo !== null">
+                <input type="checkbox" [checked]="item.inactivo?.dias == 2" disabled>
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Importación paginator -->
+       <!--
+        <div class="pagination-container">
+          <app-pagination (rechargeTable)="refreshAnalystReceived()" [itemsDefault]="itemsPerDefault"></app-pagination>
+        </div>
+      -->
+
+
+      <div class="text-center">
+        <button (click)="guardarSeleccionados()" class="btn btn-primary">Guardar</button>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+

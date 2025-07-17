@@ -1,0 +1,48 @@
+<div class="col-12">
+    <mat-card style="margin-top: 1%;" class="border border-2 rounded w-100">
+        <div class="row" style="gap: 5px 0px">
+            <div class="col-12 ">
+                <h2 class="font-weight-bold">{{title}}</h2>
+                <div class="d-flex justify-content-center">
+                    <h3 class="font-weight-bold">Bienvenido</h3>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <p>Aquí podrás registrar peticiones, quejas, reclamos o recursos.</p>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <p>Para continuar, selecciona qué deseas hacer:</p>
+                </div>
+            </div>
+        </div>
+    </mat-card>
+    <div class="row">
+        <div class="col-6">
+            <mat-card style="margin-top: 1%;" class="border border-2 rounded w-100 card-height">   
+                    <div class="row" style="gap: 5px 0px">
+                        <div class="col-12">
+                            <h3 class="font-weight-bold">Registra tu Petición</h3>
+                        </div>
+                        <div class="col-12">
+                            <p class="font-weight-bold">Si ya tienes servicios de la EAAB y necesitas algo de ellos.</p>
+                        </div>
+                        <button routerLink="/external-pqrs" class="btn btn-outline-primary">Seleccionar <mat-icon>arrow_forward_ios</mat-icon></button>
+                    </div>
+            </mat-card>
+        </div>
+        <div class="col-6">
+            <mat-card style="margin-top: 1%;" class="border border-2 rounded w-100 card-height">
+                
+                    <div class="row" style="gap: 5px 0px">
+                        <div class="col-12">
+                            <h3 class="font-weight-bold">Consulta el estado de tu solicitud</h3>
+                        </div>
+                        <div class="col-12">
+                            <p class="font-weight-bold">Mantenerse enterado de las novedades de tu solicitud</p>
+                        </div>
+                        <button routerLink="/external-pqrs-consult" class="btn btn-outline-primary">Seleccionar <mat-icon>arrow_forward_ios</mat-icon></button>
+                    </div>
+            </mat-card>
+        </div>
+    </div>
+</div>
+

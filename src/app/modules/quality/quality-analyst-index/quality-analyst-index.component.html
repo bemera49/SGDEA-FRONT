@@ -1,0 +1,22 @@
+<!-- Componente de ruta de navegación -->
+<app-sub-menu-quality [ItemsMenu]="items"></app-sub-menu-quality>
+
+<mat-tab-group #stepper>
+    <!-- Primera pestaña -->
+    <mat-tab label="Desactivar Analistas">
+  
+        <!-- Componente de la tabla -->
+         
+        <app-table-analysts></app-table-analysts>
+
+    </mat-tab>
+    <mat-tab label="Trazabilidad">
+          <app-table-traceabilitys></app-table-traceabilitys>
+
+    </mat-tab>
+
+
+</mat-tab-group>
+
+
+<!-- <app-pagination></app-pagination> -->

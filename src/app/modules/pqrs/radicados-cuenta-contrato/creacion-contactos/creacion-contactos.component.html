@@ -1,0 +1,185 @@
+<mat-dialog-content class="mat-typography">
+    <section class="containerQDetail">
+
+
+
+        <!-- Card datos de contáctos -->
+        <div class="contenedorCard">
+            <!-- Botón de cierre -->
+             <section class="close">
+                <button mat-icon-button class="close-button" (click)="onClose()">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </section><br><br>
+            
+
+            <div class="card">
+                <div class="card-body">
+
+                    <h3 class="title">
+                        Datos de contáctos
+                    </h3>
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <!-- Cabeceros -->
+                            <thead>
+                                <tr>
+                                    <th *ngIf="checkboxBoolean"></th>
+                                    <th>Cuenta contrato actual</th>
+                                    <th>Contácto SAP</th>
+                                    <th>Cuenta interna</th>
+                                    <th>Zona</th>
+                                </tr>
+                            </thead>
+
+                            <!-- Cuerpo -->
+                            <tbody>
+                                <tr *ngFor="let cuenta of dataListCuentasContratos">
+                                    <!-- Checkbox  -->
+                                    <td *ngIf="checkboxBoolean">
+                                        <mat-checkbox class="example-margin" [checked]="isSelected(cuenta.id)"
+                                            (change)="onCheckboxChange($event, cuenta.id)">
+                                        </mat-checkbox>
+                                    </td>
+
+                                    <!-- Cuenta contrato actual -->
+                                    <td>{{ cuenta?.numeroCuentaContrato }}</td>
+
+                                    <!-- Contácto SAP -->
+                                    <td>{{ cuenta?.contactoSap }}</td>
+
+                                    <!-- Cuenta interna  -->
+                                    <td>{{ cuenta?.cuentaInterna }}</td>
+
+                                    <!-- Zona -->
+                                    <td>{{ cuenta?.zona }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Fin tabla -->
+                    <br>
+
+                    <div class="button-container">
+                        <button class="custom-add-button" (click)="clickAdd()">
+                            Adicionar
+                        </button>
+                        <button class="custom-add-button" (click)="clickEdit()">
+                            Reemplazar
+                        </button>
+                        <button class="custom-add-button" (click)="clickDelete()">
+                            Eliminar
+                        </button>
+                    </div>
+                    <br>
+
+
+                    <!-- INICIO SECCIÓN DOS -->
+                    <h3 class="title" *ngIf="flujoDato">
+                        Cuentas contrato
+                    </h3>
+
+                    <div class="item-unit" *ngIf="flujoDato">
+                        <div class="column">
+                            <div class="label">Nueva cuenta contrato o interlocutor comercial</div>
+                            <mat-form-field appearance="outline" class="input-mata">
+                                <input type="text" matInput placeholder="Buscar por" [formControl]="newContract">
+                                <mat-error>
+                                    Campo obligatorio
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <!-- Tabla  -->
+                    <div class="table-responsive" *ngIf="flujoDato">
+                        <table class="table">
+                            <!-- Cabeceros -->
+                            <thead>
+                                <tr>
+                                    <th>Nueva Cuenta Contrato</th>
+                                    <th>Nuevo Contacto SAP</th>
+                                    <th>Cuenta interna</th>
+                                    <th>Zona</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+
+                            <!-- Cuerpo -->
+                            <tbody>
+                                <tr *ngFor="let cuenta of cuentasContrato">
+
+                                    <!-- Cuenta contrato actual -->
+                                    <td>{{ cuenta?.numeroCuentaContrato }}</td>
+
+                                    <!-- Contácto SAP -->
+                                    <td>{{ cuenta?.contactoSap }}</td>
+
+
+                                    <!-- Cuenta interna  -->
+                                    <td>{{ cuenta?.cuentaInterna }}</td>
+
+                                    <!-- Zona -->
+                                    <td>{{ cuenta?.zona }}</td>
+
+                                    <!-- Acciones -->
+                                    <td>
+                                        <button mat-button style="color: #00A3E4;"
+                                            (click)="deleteCuentaContratoById(cuenta.id)">
+                                            <span class="material-icons" style="color: #00A3E4;">delete</span>
+                                        </button>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+                    <!-- Botones cargar archivo & agregar  -->
+                    <div class="buttons" *ngIf="flujoDato">
+                        <div class="d-flex justify-content-center align-items-center">
+                            <button mat-button style="color: #00A3E4;" (click)="downloadExcel()">
+                                <span class="material-icons" style="color: #00A3E4;">download</span>
+                                <strong> Descargar formato plantilla</strong>
+                            </button>
+
+                            <button mat-button style="color: #00A3E4;" (click)="dialogUploadFile()">
+                                <span class="material-icons" style="color: #00A3E4;">upload</span>
+                                <strong>Cargar archivo</strong>
+                            </button>
+
+                            <button class="custom-add-button" (click)="searchTableContractNew()">
+                                <span class="material-icons">add</span>Agregar
+                            </button>
+                        </div>
+                    </div>
+                    <br>
+
+                    <mat-card class="cuenta-card">
+                        <div class="column-description">
+                            <div class="label">Observaciones *</div>
+                            <textarea rows="5" cols="70" matInput placeholder="Inserte"
+                                [formControl]="observacion"></textarea>
+                            <mat-error *ngIf="observacion.invalid && (observacion.dirty || observacion.touched)">
+                                Campo obligatorio
+                            </mat-error>
+                        </div>
+                    </mat-card>
+                </div>
+            </div>
+
+            <!-- Buttons Guardar/Cancelar -->
+            <div class="buttons" class="d-flex justify-content-center align-items-center" *ngIf="buttonsSave != 0">
+                <button mat-button style="color: #00A3E4;" (click)="onCancel()">
+                    <strong>Cancelar</strong>
+                </button>
+                <button class="custom-add-button" [disabled]="observacion.invalid" (click)="validateAndSubmit()">
+                    Guardar
+                </button>
+            </div>
+
+        </div>
+    </section>
+</mat-dialog-content>

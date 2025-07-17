@@ -1,0 +1,94 @@
+.columna-1 {
+  width: 220px;
+  font-weight: 500;
+  color: #A4A4AD;
+}
+.table {
+  table-layout: auto;
+  margin: 0 !important;
+}
+
+.table td {
+  border-top: none;
+  padding: 8px 1px !important;
+}
+
+.table th {
+  padding: 8px 1px !important;
+  border-top: none;
+}
+
+.table tr {
+  max-width: 34rem;
+  align-items: center;
+  text-align: left;
+  border-bottom: 1px solid #E1E8EF !important;
+}
+
+
+
+.columna {
+  padding: 8px 1px !important;
+  line-height: 1.0em;
+}
+
+:host {
+  box-sizing: border-box;
+  align-items: flex-start;
+  height: auto;
+  justify-content: flex-start;
+}
+
+/* texto de salida */
+.containertable {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.75rem;
+  border: 1px solid #E1E8EF;
+  border-radius: 8px !important;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.FirtsRow {
+  border-top: transparent !important;
+}
+
+
+
+td {
+  align-items: center;
+  text-align: left;
+}
+
+th {
+  background-color: transparent;
+  align-items: center;
+  text-align: left;
+}
+
+@media only screen and (max-width: 1240px) {
+  .columna-1 {
+
+    font-weight: 500;
+    color: #A4A4AD;
+  }
+
+  .table {
+    width: 100%;
+  }
+
+
+  .columna-2 {
+    max-width: 25rem;
+  }
+
+  .tableint {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+  }
+
+
+}

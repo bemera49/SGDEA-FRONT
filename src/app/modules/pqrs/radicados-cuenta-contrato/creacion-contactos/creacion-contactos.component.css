@@ -1,0 +1,200 @@
+/* Inicio estilos generales */
+.containerQDetail {
+    display: flex;
+    align-items: stretch;
+    height: 100%;
+    width: 100%;
+}
+
+.contenedorCard {
+    margin: 20px auto;
+    padding: 0 2%;
+    max-width: 100%;
+    width: 90%;
+}
+
+
+
+/* generales cards*/
+.card {
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.title {
+    margin-bottom: 15px;
+    color: #000000;
+    font-weight: 844px;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* ESTILOS INPUT DE BUSQUEDA*/
+.column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #6C6B76;
+    font-size: 16px;
+}
+
+/* ESTILOS TABLA*/
+.table-responsive {
+    overflow-x: auto;
+}
+
+.table th,
+.table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th {
+    color: #2c3948;
+}
+
+.cuenta-card {
+    display: block;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 2px solid #e0e0e0;
+    margin-top: 10px;
+    border-radius: 10px;
+    width: 100%;
+}
+
+/* mat-card  Nueva cuenta contrato o interlocutor comercial */
+.item-unit {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #6C6B76;
+    font-size: 16px;
+}
+
+
+/* inicio botones cargar archivo & agregar / Cancelar & guardar */
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+
+.button-search {
+    background-color: #00A3E4;
+    border: 2px solid #00A3E4;
+    border-radius: 8px;
+    color: white;
+    padding: 5px 10px;
+    font-size: 16px;
+}
+
+.custom-add-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #00A3E4;
+    border: 2px solid #00A3E4;
+    /* Aumenta el grosor del borde */
+    border-radius: 8px;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.custom-add-button .material-icons {
+    margin-right: 8px;
+}
+
+.custom-add-button:hover {
+    background-color: #00A3E4;
+    border-color: #00A3E4;
+}
+
+.accept-button {
+    background-color: #009fe3;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 20px;
+    width: 200px;
+    height: 50px;
+}
+
+
+.close{
+    justify-content: right;
+}
+
+
+/* inicio botones cargar archivo & agregar */
+.column-description {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 30%;
+}
+
+
+/* Aumentar la altura del mat-form-field */
+.custom-mat-form-field {
+    height: 100px;
+    /* Ajusta esta altura según sea necesario */
+}
+
+/* Aumentar la altura del input dentro del mat-form-field */
+.custom-input {
+    height: 100%;
+    /* Ocupa toda la altura del mat-form-field */
+    padding: 16px;
+    /* Ajusta el relleno para un mejor aspecto */
+}
+
+/* Opcional: Ajustar la altura del contenedor del mat-form-field para que coincida */
+.mat-form-field-flex {
+    height: 100%;
+    /* Ocupa toda la altura del mat-form-field */
+}
+
+.mat-form-field-infix {
+    padding: 0;
+    /* Remover padding extra */
+}

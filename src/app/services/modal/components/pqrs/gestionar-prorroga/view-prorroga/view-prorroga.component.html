@@ -1,0 +1,82 @@
+<div>
+  <app-breadcrumb
+    [breadcrumbOn]="breadcrumbOn"
+    [breadcrumbRouteActive]="breadcrumbRouteActive"
+  ></app-breadcrumb>
+
+  <div class="container-gestionar-traslado content-main mb-4 px-3">
+    <div class="d-flex flex-column">
+      <button (click)="goBack()" mat-button style="width: 150px">
+        <mat-icon>chevron_left</mat-icon>Volver
+      </button>
+      <h2 class="text-black font-weight-bold">PQRS #{{objInfo.id}}</h2>
+      <h3 class="text-black font-weight-bold">
+        Solicitud ampliación de términos
+      </h3>
+    </div>
+  </div>
+  <div
+    class="d-flex flex-row flex-wrap justify-content-end"
+    style="gap: 15px 15px; padding: 0% 1rem"
+  >
+    <button
+      (click)="goBack()"
+      mat-stroked-button
+      class="text-primary font-weight-bold border border-primary"
+    >
+      Cancelar
+    </button>
+
+    <button
+      (click)="submit()"
+      mat-raised-button
+      [disabled]="errorDate"
+      class="text-white px-4 bg-primary"
+      aria-label="Example icon-button with a menu"
+    >
+      Guardar
+    </button>
+  </div>
+  <div class="container-view">
+    <form [formGroup]="formViewProrroga">
+      <div class="inputs">
+        <div class="input">
+          <mat-label>Tipo de solicitud de autorización</mat-label>
+          <mat-form-field appearance="outline">
+            <input formControlName="tipoSolicitud" matInput disabled="true" />
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <mat-label>Usuario Aprobador*</mat-label>
+            <mat-form-field appearance="outline">
+              <mat-select formControlName="aprobador" placeholder="Seleccione">
+                <mat-option
+                  *ngFor="let item of arrayAprobadores"
+                  [value]="item"
+                >
+                  {{ item.user_detalle?.full_name }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="formViewProrroga.get('aprobador').hasError('required') && formViewProrroga.get('aprobador').touched">
+                Este campo es obligatorio.
+            </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="input-aprobador">
+          <mat-label>Tiempo de ampliación de términos en días</mat-label>
+          <mat-form-field appearance="outline">
+            <input formControlName="ampliacion" matInput disabled="true" />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="input-textarea">
+        <mat-label>Justificación</mat-label>
+        <mat-form-field appearance="outline" class="w-100">
+          <textarea matInput formControlName="justification"></textarea>
+        </mat-form-field>
+      </div>
+    </form>
+  </div>
+</div>

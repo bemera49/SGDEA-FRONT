@@ -1,0 +1,64 @@
+<div class="">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-info card-header-icon row">
+                        <div class="card-icon">
+                            <i class="material-icons">info</i>
+                        </div>
+                        <h4 class="card-title">Detalle 4-72</h4>
+                        <button mat-button type="button" (click)="closeDialog()" title="{{ 'Cerrar' | translate }}"
+                            class="close pull-right" data-dismiss="alert" aria-label="Close">
+                            <i class="material-icons">close</i>
+                        </button>
+                    </div>
+
+                    <div class="card-body">
+                        <div *ngIf="soporteFisicoData?.summarized" class="row">
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                <iframe [src]="getUrl(soporteFisicoData?.summarized?.Url)" width="100%" height="600px"
+                                    frameborder="0"></iframe>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                <div class="timeline">
+                                    <div class="timeline-event"
+                                        *ngIf="soporteFisicoData?.summarized?.Eventos?.length > 0">
+                                        <div class="timeline-content">
+                                            <h3 class="timeline-title"> {{
+                                                soporteFisicoData?.summarized?.Eventos[0]?.TipoEvento }} </h3>
+                                            <p class="timeline-date">Fecha:
+                                                {{soporteFisicoData?.summarized?.Eventos[0]?.Fecha }}</p>
+                                            <p class="timeline-description">
+                                                {{ soporteFisicoData?.summarized?.Eventos[0]?.Descripcion }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-event"
+                                        *ngIf="soporteFisicoData?.summarized?.Eventos?.length > 1">
+                                        <div class="timeline-content">
+                                            <h3 class="timeline-title"> {{
+                                                soporteFisicoData?.summarized?.Eventos[soporteFisicoData?.summarized?.Eventos?.length
+                                                - 1]?.TipoEvento }} </h3>
+                                            <p class="timeline-date">Fecha:
+                                                {{soporteFisicoData?.summarized?.Eventos[soporteFisicoData?.summarized?.Eventos?.length
+                                                - 1]?.Fecha }}</p>
+                                            <p class="timeline-description">
+                                                {{
+                                                soporteFisicoData?.summarized?.Eventos[soporteFisicoData?.summarized?.Eventos?.length
+                                                - 1]?.Descripcion }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div  *ngIf="soporteFisicoData?.response"  class="row">
+                            {{ soporteFisicoData?.response }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

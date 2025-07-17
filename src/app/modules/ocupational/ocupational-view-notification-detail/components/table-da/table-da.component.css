@@ -1,0 +1,55 @@
+table {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+
+table td{
+  display: table-cell;
+  padding: 17px 12px;
+
+}
+
+
+
+.tr-da{
+  border-bottom: 1px solid #E2E2E2;
+}
+
+.tr-da.tr-active{
+  border-bottom: 1px solid #dd0707;
+}
+
+
+.demo-table th{
+  text-align: center;
+}
+
+
+.button-table{
+  --size :22.67px;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  line-height: 6px;
+  padding: 0;
+  
+  background-color: transparent;
+}
+
+.add-items{
+  border: 1px solid #008ed6;
+  color:#008ed6;
+  
+}
+
+.remove-items{
+  border: 1px solid #6C6B76;
+  color:#6C6B76;
+   
+}
+
+.container-table{
+  margin: 52px 0;
+}

@@ -1,0 +1,83 @@
+<app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+<button (click)="location.back()" mat-button style="width: 150px">
+    <mat-icon>chevron_left</mat-icon>Volver
+</button>
+
+<form [formGroup]="form" class="row mx-2">
+
+    <span class="d-flex flex-column col-md-4 col-lg-4">
+        <label>Tipo de solicitud de autorizacion*</label>
+        <mat-form-field appearance="outline" class="w-100">
+            <mat-select placeholder="Tipo de solicitud de autorizacion" formControlName="tipo">
+                <mat-option *ngFor="let tipo of listTipoAutorizacion" [value]="tipo.value">{{tipo.name}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.controls['tipo'].invalid && form.controls['tipo'].touched">
+                Este campo es requerido
+            </mat-error>
+        </mat-form-field>
+    </span>
+
+    <span class="d-flex flex-column col-md-4 col-lg-4">
+        <label>Funcionario aprobador*</label>
+        <mat-form-field appearance="outline" class="w-100">
+            <mat-select placeholder="Funcionario aprobador" formControlName="usuario">
+                <mat-option *ngFor="let us of usuarios" [value]="us.value">{{us.name}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.controls['usuario'].invalid && form.controls['usuario'].touched">
+                Este campo es requerido
+            </mat-error>
+        </mat-form-field>
+    </span>
+
+    <span class="d-flex flex-column col-md-4 col-lg-4">
+        <label>Causales de rechazo*</label>
+        <mat-form-field appearance="outline" class="w-100">
+            <mat-select placeholder="causales" formControlName="causales">
+                <mat-option *ngFor="let us of listCausales" [value]="us.value">{{us.name}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.controls['causales'].invalid && form.controls['causales'].touched">
+                Este campo es requerido
+            </mat-error>
+        </mat-form-field>
+    </span>
+    <span class="d-flex flex-column col-md-4 col-lg-4">
+        <label>Causal otro*</label>
+        <mat-form-field appearance="outline" class="w-100">
+            <input placeholder="Especifique" matInput formControlName="causal_otro">
+            <mat-error *ngIf="form.controls['causal_otro'].invalid && form.controls['causal_otro'].touched">
+                Este campo es requerido
+            </mat-error>
+        </mat-form-field>
+    </span>
+    <span class="d-flex flex-column col-md-6 col-lg-6">
+        <label>Observaciones</label>
+        <mat-form-field appearance="outline" class="w-100">
+            <input placeholder="observaciones" matInput formControlName="observaciones">
+            <mat-error *ngIf="form.controls['observaciones'].invalid && form.controls['observaciones'].touched">
+                Este campo es requerido
+            </mat-error>
+        </mat-form-field>
+    </span>
+</form>
+
+
+<!-- respuesta proeyctara hu023 incorporada -->
+<!-- respuesta proeyctara hu023 incorporada-->
+
+<!-- aprobar -rechazar -->
+<!-- <div class="d-flex justify-content-end">
+    <button class="btn btn-primary mr-2" (click)="gestion('aprobar')">Aprobar</button>
+    <button class="btn btn-primary" (click)="gestion('rechazar')">Rechazar</button>
+</div> -->
+<!-- aprobar -rechazar -->
+
+<!-- tablas -->
+<app-table class="table w-100 border" [config]="dataConfigCuentasAsociadas">
+</app-table>
+
+<app-table class="table w-100 border" [config]="dataConfigProceso">
+</app-table>
+
+<app-table class="table w-100 border" [config]="dataConfigSolAsociadas">
+</app-table>
+<!-- tablas -->

@@ -1,0 +1,12 @@
+.buttonShow {
+    height: 44px;
+      width: fit-content;
+      padding: 12px 15px;
+      border-radius: 12px;
+      border: none;
+      line-height: 2px;
+      font-weight: 700;
+      color: #fff;
+      background-color: #00A3E4;
+      transition: color 1s ease, background-color 1s ease;
+}

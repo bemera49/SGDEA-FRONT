@@ -1,0 +1,27 @@
+<form [formGroup]="formSecurity">
+  <div class="container">
+    <mat-form-field class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+      <mat-label>{{ "Clasificación de seguridad" }}</mat-label>
+      <mat-select id="clasificacionSeguridad" formControlName="clasificacionSeguridad" name="clasificacionSeguridad">
+        <mat-option value="Clasificado">Clasificado</mat-option>
+        <mat-option value="Reservado">Reservado</mat-option>
+        <mat-option value="Publico">Público</mat-option>
+      </mat-select>
+      <mat-error
+        *ngIf="!formSecurity.get('clasificacionSeguridad').valid && formSecurity.get('clasificacionSeguridad').touched">
+        {{ "El campo es obligatorio" }}
+      </mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button class="btn btn-primary" [disabled]="!formSecurity.get('clasificacionSeguridad').valid"
+      type="submit" (click)="openModalModify()">
+      Reclasificar expediente
+    </button>
+  </div>
+</form>
+
+
+<section class="container-tables">
+  <app-table-dependency></app-table-dependency>
+  <app-table-auth></app-table-auth>
+</section>

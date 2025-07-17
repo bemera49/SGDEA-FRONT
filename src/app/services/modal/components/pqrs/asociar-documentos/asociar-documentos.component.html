@@ -1,0 +1,80 @@
+<mat-dialog-content class="modal-container">
+  <div class="d-flex flex-row align-items-center justify-content-between">
+    <mat-icon class="text-primary">attach_file_add</mat-icon>
+    <button mat-icon-button (click)="close(false)">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <h3 mat-dialog-title class="w-100 mt-2 text-body">Asociar Documento a Expediente</h3>
+
+  <div class="row">
+
+    <span class="d-flex flex-column col-md-6  col-sm-12">
+      <label>Nombre de expediente</label>
+      <mat-form-field  appearance="outline" class=" w-100">
+        <mat-icon class="flex align-items-center" matPrefix >search</mat-icon>
+        <input  [(ngModel)]="expedientName" (keyup)="getExpedients()"
+        placeholder="Nombre de expediente"
+        matInput
+        />
+      </mat-form-field>
+    </span>
+
+    <span class="d-flex flex-column col-md-3 col-sm-12">
+      <label>Serie</label>
+      <mat-form-field  appearance="outline" class=" w-100">
+        <mat-icon class="flex align-items-center" matPrefix >search</mat-icon>
+        <input [(ngModel)]="expedientSerie" (keyup)="getExpedients()"
+        placeholder="Serie"
+        matInput
+        />
+      </mat-form-field>
+    </span>
+
+    <span class="d-flex flex-column col-md-3 col-sm-12">
+      <label>Subserie</label>
+      <mat-form-field   appearance="outline" class=" w-100">
+        <mat-icon class="flex align-items-center" matPrefix >search</mat-icon>
+        <input [(ngModel)]="subExpedientSerie" (keyup)="getExpedients()"
+        placeholder="Subserie"
+        matInput
+        />
+      </mat-form-field>
+    </span>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nombre del expediente</th>
+        <th scope="col">Serie</th>
+        <th scope="col">Subserie</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let e of expedients">
+        <td>{{e.nombreGdExpediente}}</td>
+        <td>{{e.serie}}</td>
+        <td>{{e.subserie}}</td>
+        <td>
+          <mat-checkbox
+            [ngClass]="{'border-danger': isSend && expedientId == undefined}" color="primary"
+            [checked]="e.idGdExpediente === expedientId"
+            class="expedient"
+             (change)="selectExpedient(e.idGdExpediente)">
+          </mat-checkbox>*
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="alert alert-info" *ngIf="!expedients.length" role="alert">
+    Expediente no existe.  Es necesario crear el expediente para continuar
+  </div>
+  <small *ngIf="isSend && expedientId == undefined" class="text-danger ">Debes asociar un expediente</small>
+  <div class="d-flex flex-wrap flex-md-nowrap justify-content-center" style="gap: 10px">
+    <button mat-flat-button  *ngIf="expedients.length" class="bg-primary text-white w-100" (click)="onConfirm()">Asociar documento</button>
+    <button mat-flat-button *ngIf="!expedients.length" (click)="close(true)"  class="bg-primary text-white w-100" >Crear expediente</button>
+  </div>
+</mat-dialog-content>

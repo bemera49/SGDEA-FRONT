@@ -1,0 +1,33 @@
+{
+    "users": [
+        { "name": "Gerenciar usuários", "route": "/users-index/false", "operacion": "user%index", "icon": "person" },
+        { "name": "Gerenciar perfis", "route": "/roles-index", "operacion": "roles%roles%index", "icon": "people" },
+        { "name": "Gerenciar operações", "route": "/operations-index", "operacion": "roles%roles-operaciones%index", "icon": "build" }
+    ],
+    "setting": [
+        { "name": "Extrato de pagamento da primeira parcela", "route": "/statement1-index", "operacion": "configuracionApp%declaracion-pagos1a-cuota%index", "icon": "date_range" },
+        { "name": "Declaração de pagamento da segunda parcela", "route": "/statement2-index", "operacion": "configuracionApp%declaracion-pagos2a-cuota%index", "icon": "date_range" },
+        { "name": "Grandes contribuintes", "route": "/greatc-index", "operacion": "configuracionApp%grandes-contribuyentes%index", "icon": "date_range" },
+        { "name": "Compartilhe 3", "route": "/fee-index", "operacion": "configuracionApp%cuota3%index", "icon": "date_range" },
+        { "name": "Taxa de grandes contribuintes 3", "route": "/greatc-c3-index", "operacion": "configuracionApp%grandes-contribuyentes-cuota3%index", "icon": "date_range" },
+        { "name": "UVT histórico", "route": "/history-uvt-index", "operacion": "configuracionApp%historico-uvt%index", "icon": "history" },
+        { "name": "Tarifas de arrendamento", "route": "/rental-rate-index", "operacion": "configuracionApp%tarifas-de-renta%index", "icon": "attach_money" },
+        { "name": "Regime de transição", "route": "/transition-regime-index", "operacion": "configuracionApp%regimen-de-tansicion%index", "icon": "attach_money" },
+        { "name": "Taxa de juros presuntiva", "route": "/presumptive-interest-index", "operacion": "configuracionApp%tarifa-de-intereses-presuntivos%index", "icon": "attach_money" },
+        { "name": "Categorias", "route": "/categories-index", "operacion": "configuracionApp%categorias%index", "icon": "settings_applications" },
+        { "name": "Perguntas", "route": "/questions-index", "operacion": "configuracionApp%preguntas%index", "icon": "settings_applications" },
+        { "name": "Temas da lista de verificação", "route": "/themes-checklist-index", "operacion": "configuracionApp%temas-check-list%index", "icon": "build" },
+        { "name": "Perguntas da lista de verificação", "route": "/themes-questions-checklist-index", "operacion": "configuracionApp%temas-preguntas-check-list%index", "icon": "build" },
+        { "name": "Carta de relatório", "route": "/report-letter-index", "operacion": "configuracionApp%carta-informe%index", "icon": "settings_applications" },
+        { "name": "Configurações da seção", "route": "/sections-index", "operacion": "configuracionApp%configuracion-secciones%index", "icon": "settings_applications" },
+        {
+            "name": "Tempos de resposta",
+            "route": "/time-request-index",
+            "operacion": "configuracionApp%cg-tiempos-request%index",
+            "icon": "query_builder"
+        } 
+    ],
+    "customers": [
+        { "name": "Gerenciar clientes", "route": "/customers-index", "operacion": "clientes%clientes%index", "icon": "location_city" }
+    ]
+}

@@ -1,0 +1,54 @@
+<table class="">
+
+  <thead class="border-bottom">
+    <ng-container *ngFor="let item of headers">
+      <th *ngIf="!item.action">{{item.header}}</th>
+      <th *ngIf="item.action">
+        <button type="button" class="button-table add-item" (click)="onAddTask()">+</button>
+      </th>
+    </ng-container>
+
+  </thead>
+
+  <tbody class="border-bottom">
+
+    <ng-container *ngIf="inputsMeeting.length !== 0">
+      <tr *ngFor="let item of inputsMeeting">
+        <td>
+          <button type="button" class="button-table remove-item">-</button>
+        </td>
+        <td>
+          <app-select-meetings [data]="['ABCD']" [model]="inputsMeeting.AreInvolucrada"></app-select-meetings>
+        </td>
+        <td>
+          <app-input-meetings [type]="'text'" [model]="inputsMeeting.Codigo"></app-input-meetings>
+        </td>
+        <td>
+          <app-select-meetings [data]="['data','data','data']"></app-select-meetings>
+        </td>
+        <td>
+          <app-input-meetings [type]="'email'" [model]="inputsMeeting.Correo"></app-input-meetings>
+        </td>
+        <td>
+          <app-date-picker-meetings [placeholder]="'dd/mm/aa hh:mm'"
+            [model]="parseDate(inputsMeeting.FAPropuesta)"></app-date-picker-meetings>
+
+        </td>
+        <td>
+          <app-input-meetings [type]="'file'" [model]="inputsMeeting.AyudaDeMoria"></app-input-meetings>
+        </td>
+      </tr>
+    </ng-container>
+
+    <tr *ngFor="let item of dataSource">
+      <ng-container *ngFor="let header of headers" class="border-bottom">
+        <td *ngIf="!header.action" class="items">{{ item[header.key] }}</td>
+        <td>
+          <button *ngIf="header.action" class="button-table remove-item">-</button>
+        </td>
+      </ng-container>
+    </tr>
+
+  </tbody>
+
+</table>

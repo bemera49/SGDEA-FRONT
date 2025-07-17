@@ -1,0 +1,71 @@
+#headerContainer {
+    width: 100%;
+    position: relative;
+    min-height: 70px;
+    align-items: center;
+}
+
+.centerheader {
+    max-width: 70%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+
+#containerIcon {
+    display: flex;
+    width: 2rem;
+    height: 2rem;
+    background: #F2FBFF;
+    border-radius: 50%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15)
+
+}
+
+#conteicon {
+    color: #008ED6;
+    font-size: 1.5rem;
+}
+
+.tituloPB {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.125rem;
+    font-weight: 500;
+    margin-bottom: 0px;
+}
+
+.subtituloPAB {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: #6C6B76;
+    margin-bottom: 0px;
+}
+
+.SolidEdit {
+    font-size: 0.75rem;
+    color: #008ED6 !important;
+    text-decoration: line-through;
+    cursor: pointer;
+}
+
+.iconos {
+    color: #008ED6;
+    font-size: 24px;
+    align-content: center;
+    margin-top: 0.25rem;
+    margin-right: 0.5rem;
+}
+
+#container-icons {
+    display: flex;
+    position: absolute;
+    right: 0;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.header-icon {
+    display: inline-block;
+    cursor: pointer;
+    color: #6C6B76;
+}

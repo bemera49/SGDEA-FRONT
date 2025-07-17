@@ -1,0 +1,72 @@
+<app-layout-section [title]="'Validación de la solicitud'">
+
+  <div class="w-100">
+    <table class="table" style="margin: 20px  10px; width: 100%;" >
+      <thead scope="row">
+        <tr>
+          <th colspan="6" >Criterios a validar</th>
+          <th colspan="3"  class="text-center">Cumple</th>
+          <th colspan="3" class="text-center">No cumple</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of conditions" scope="row">
+          <td colspan="6">
+            <label>{{c.name}} *</label>
+            <br>
+            <span class="fw-bold text-danger " style="font-size: 12px;" *ngIf="c.isValid === null && fieldsUnchecked">Este campo es requerido</span>
+          </td>
+          <td colspan="3" class="text-center">
+            <mat-radio-button  name="{{ c?.id }}" (change)="onSelectItem(c, 1)"  [id]="c?.id" [value]="c?.id"></mat-radio-button>
+          </td>
+          <td colspan="3" class="text-center">
+            <mat-radio-button  type="radio" name="{{ c?.id }}" (change)="onSelectItem(c, 0)" [value]="c?.id"></mat-radio-button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <form [formGroup]="form2" class="mx-3 my-1" *ngIf="!allComplies ">
+      <mat-form-field required="true" appearance="outline">
+        <mat-label> Observación </mat-label>
+        <textarea class="resizable-textarea" maxlength="500" rows="6" formControlName="observation" matInput placeholder="Ingresa una observación para este rechazo de solicitud"></textarea>
+        <mat-error *ngIf="form2.controls['observation'].invalid || form2.controls['observation'].touched">
+          Campo requerido
+        </mat-error>
+      </mat-form-field>
+      <div class="d-flex justify-content-end " >
+        <button class="btn-reject" (click)="checkAllCheckedItems()">Rechazar</button>
+      </div>
+    </form>
+    <div class="d-flex justify-content-center " *ngIf="allComplies">
+      <button (click)="checkAllCheckedItems()" class="btn-validate">Validar</button>
+    </div>
+  </div>
+
+</app-layout-section>
+
+<app-layout-section *ngIf="date.length" [title]="allComplies ? 'Fecha de validación' : 'fecha de rechazo'">
+  <div class="mx-3 my-1">
+    <p class="label-validation-date">{{allComplies ? 'Fecha de validación' : 'fecha de rechazo'}}</p>
+    <p class="validation-date">{{date }}</p>
+  </div>
+</app-layout-section>
+
+
+<app-layout-section [title]="'Solicitud de tiempo adicional'" *ngIf="allComplies">
+  <div class="mt-4">
+    <form [formGroup]="form" (submit)="requestExtension()" class="mx-3 ">
+      <mat-form-field required="true" appearance="outline">
+        <mat-label> Justificación </mat-label>
+        <textarea rows="6" maxlength="500" class="resizable-textarea" formControlName="justification" matInput placeholder="Ingresa una justificación para esta solicitud"></textarea>
+        <mat-error *ngIf="form.controls['justification'].invalid || form.controls['justification'].touched">
+          Campo requerido
+        </mat-error>
+      </mat-form-field>
+      <div class="d-flex justify-content-end ">
+        <button type="submit" class="btn-validate">Solicitar</button>
+      </div>
+    </form>
+
+  </div>
+
+</app-layout-section>

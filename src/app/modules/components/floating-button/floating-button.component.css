@@ -1,0 +1,76 @@
+.btnFloatContentVertical {
+  position: fixed;
+  top: 150px; /* Adjust as needed */
+  right: 2px !important; /* Adjust as needed */
+  /* Add other styles as needed */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 10px;
+  width: 50px;
+  overflow-y: auto;
+  max-height: 100%;
+  width: 100px;
+}
+
+p {
+  width: auto;
+}
+
+.btn-group-vertical {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+
+.btn.btn-secondary {
+  text-align: center;
+  width: 100%; /* Adjust as needed */
+  margin-bottom: 5px; /* Adjust as needed */
+  height: auto;
+}
+
+.buttonIconSubmenu {
+  height: auto; /* Adjust as needed */
+  padding: 8px 5px; /* Adjust as needed */
+  max-width: 75px;
+
+}
+
+.wrap-text {
+  white-space: normal;
+  overflow-wrap: break-word;
+  width: 57px !important;
+  font-size: 9px;
+  margin: 0;
+  padding: 0;
+}
+
+small{
+  font-size: 9px;
+}
+
+.material-icons{
+  font-size: 11px;
+}
+
+.mat-icon {
+  height: 11px;
+  width: 11px;
+  position: relative !important;
+  left: 0px;
+  top: 0px !important;
+  display: inline;
+}
+
+.wrap-text-main{
+  color: white !important;
+  margin: 0 !important;
+}
+
+@media (max-width: 900px) {
+  .btnFloatContentVertical {
+    top: 50px !important;
+  }
+}

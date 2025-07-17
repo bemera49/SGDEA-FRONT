@@ -1,0 +1,85 @@
+<mat-dialog-content class="mat-typography">
+
+    <mat-tab-group>
+        <mat-tab label="Información básica">
+            <section class="containerQDetail">
+                <!-- Card datos de contactos -->
+                <div class="contenedorCard">
+
+                    <div class="formulario" [formGroup]="typeDocumentalForm">
+                        <div class="row">
+                            <div class="column">
+                                <div class="label">Nombre del tipo documental*</div>
+                                <mat-form-field appearance="outline" class="input-mata">
+                                    <input type="text" matInput formControlName="nombreTipoDocumental">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="column">
+                                <div class="label">Nombre corto nombrado*</div>
+                                <mat-form-field appearance="outline" class="input-mata">
+                                    <input type="text" matInput formControlName="nombre_corto">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="column">
+                                <div class="label">Código de plantilla de calidad*</div>
+                                <mat-form-field appearance="outline" class="input-mata">
+                                    <input type="number" matInput formControlName="codigo_documento_calidad">
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+
+                        <!-- Observaciones y estado -->
+                        <div class="row">
+                            <div class="column">
+                                <div class="label">Clasificación de seguridad</div>
+                                <mat-form-field appearance="outline" class="input-mata">
+                                    <mat-select formControlName="clasificacion_seguridad">
+                                        <mat-option value="Reservada">Reservada</mat-option>
+                                        <mat-option value="Clasificada">Clasificada</mat-option>
+                                        <mat-option value="Pública">Pública</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="column">
+                                <div class="label">Estado*</div>
+                                <mat-form-field appearance="outline" class="input-mata">
+                                    <mat-select formControlName="estadoTipoDocumental">
+                                        <mat-option value=10>Activa</mat-option>
+                                        <mat-option value=0>Inactiva</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="buttons d-flex justify-content-center align-items-center">
+                            <button mat-button style="color: #00A3E4;" (click)="onClose()">
+                                <strong>Cancelar</strong>
+                            </button>
+                            <button class="custom-add-button" *ngIf="this.config.action === 'create'"
+                                (click)="addTipoDocumental()">
+                                Guardar
+                            </button>
+                            <button class="custom-add-button" *ngIf="this.config.action === 'editar'" (click)="updateTipoDocumental()">
+                                Guardar
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+        </mat-tab>
+
+        <mat-tab label="Metadatos de contenido" *ngIf="this.config.action === 'editar'">
+            <app-add-metadatos-type-documental [dataTipoDocumental]="this.config.data"></app-add-metadatos-type-documental>
+        </mat-tab>
+    </mat-tab-group>
+
+
+</mat-dialog-content>

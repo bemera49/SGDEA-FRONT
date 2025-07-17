@@ -1,0 +1,218 @@
+<div *ngIf="!isMap()">
+  <!-- Componente de submenú de calidad que recibe un conjunto de ítems de menú -->
+  <app-sub-menu-quality [ItemsMenu]="itemsMenu"></app-sub-menu-quality>
+
+  <!-- Botón para regresar a la página anterior -->
+  <app-button-back-arrow [href]="exit"></app-button-back-arrow>
+
+  <div class="content-main px-3 mb-4">
+    <div class="d-flex flex-row flex-wrap justify-content-between align-items-center mb-3" style="gap: 15px">
+      <div class="d-flex flex-column w-100">
+        <div class="d-flex content-buttons-val mt-4">
+          <!-- Título de la solicitud -->
+          <h2 class="text-black font-weight-bold">Solicitud {{ dataView.filed }}</h2>
+          <div>
+            <!-- Botón para finalizar la solicitud, visible si el tipo de tarea es 19 -->
+            <app-button-continue
+              *ngIf="idTipeTask == 19"
+              (click)="onEndSolicitude()"
+              [text]="'Finalizar'"
+              [onDisabled]="true"></app-button-continue>
+
+            <div *ngIf="idTipeTask == 11" class="d-flex gap-5">
+              <!-- Botón para devolver la solicitud, habilitado si el formulario de observaciones es válido -->
+              <app-button-continue
+                *can="['calidad%analista%MapaProcesos']"
+                (click)="onBackSolicitude()"
+                [text]="'Devolver'"
+                [onDisabled]="observationForm.valid"></app-button-continue>
+              <!-- Botón para validar la solicitud, siempre deshabilitado -->
+              <app-button-continue
+                *can="['calidad%analista%MapaProcesos']"
+                (click)="onValid()"
+                [text]="'Validar'"
+                [onDisabled]="true"></app-button-continue>
+            </div>
+          </div>
+        </div>
+        <!-- Estado actual de la solicitud -->
+        <b>{{ dataView.state }}</b>
+      </div>
+
+      <div class="d-flex flex-row align-items-center flex-wrap justify-content-end" style="gap: 15px 15px">
+        <!-- Enlace para crear una nueva solicitud si el estado es "Rechazada" -->
+        <a *ngIf="dataView.state === 'Rechazada'" 
+           [routerLink]="['/quality/quality-create-request']"
+           mat-stroked-button
+           (click)="setIdTask()"
+           class="text-primary font-weight-bold border border-primary">
+          Nueva Solicitud
+        </a>
+
+        <!-- Botón para finalizar la solicitud, visible bajo ciertas condiciones -->
+        <a *ngIf="(idTipeTask === 6 && isAllDocVersionsAdded == 0) || (idTipeTask == 7 && isAllDocWaterMarkAdded == 0)" 
+           (click)="onFinalize()" 
+           mat-stroked-button
+           class="text-primary font-weight-bold border border-primary"
+           style="cursor:pointer">
+          Finalizar
+        </a>
+
+        <!-- Botón para exportar la solicitud en PDF -->
+        <button *ngIf="dataView.state === 'Rechazada' || (dataView.sgc_tipo_tarea_id === 1 && !dataView.analysis_plan)" 
+                mat-raised-button 
+                class="text-white bg-primary" 
+                (click)="downloadPdf()">
+          Exportar solicitud
+        </button>
+      </div>
+    </div>
+
+    <!-- Botón para finalizar, visible si el tipo de tarea es 9 -->
+    <div *ngIf="dataView.sgc_tipo_tarea_id === 9" class="d-flex justify-content-end">
+      <button
+        (click)="submit()"
+        mat-raised-button
+        class="text-white px-4 bg-primary"
+        aria-label="Finalizar solicitud"
+        [disabled]="btnfinish">
+        Finalizar
+      </button>
+    </div>
+
+    <!-- Grupo de pestañas para la solicitud -->
+    <mat-tab-group #stepper>
+      <!-- Pestaña de Solicitud -->
+       <!--TAB 1-->
+      <mat-tab label="Solicitud">
+        <form [formGroup]="solicitudForm">
+          <app-layout-section>
+            <h3>Solicitud</h3>
+            <h4>Información general</h4>
+            <div class="row">
+              <div class="col-md-6" *ngFor="let data of dataInformation">
+                <!-- Componente para mostrar información de la solicitud -->
+                <app-row-information [label]="data.label" [info]="data.value"></app-row-information>
+              </div>
+            </div>
+          </app-layout-section>
+
+          <!-- Sección de Selección múltiple -->
+          <app-layout-section [title]="'Selección múltiple'">
+            <strong class="strong-tile">La solicitud aplica a</strong>
+            <p *ngIf="dataView.multiple_choice === 0" class="tipo-documento text-muted">Un solo documento</p>
+            <p *ngIf="dataView.multiple_choice === 1" class="tipo-documento text-muted">Varios documentos</p>
+          </app-layout-section>
+        </form>
+      </mat-tab>
+
+      <!-- Pestaña de Documento propuesto -->
+      <mat-tab label="Documento propuesto" *ngIf="dataView.document_file || dataView.diagram">
+        <div *ngIf="dataView.sgc_tipo_tarea_id === 9" class="d-flex justify-content-end" style="margin-top: 18px">
+          <!-- Botón para solicitar publicación del documento propuesto -->
+          <button
+            (click)="openModalSolcitud(dataView.document_id)"
+            mat-raised-button
+            class="text-white px-4 bg-primary"
+            aria-label="Solicitar publicación"
+            style="border: none; border-radius: 4px; height: 42px"
+            [disabled]="botonesDeshabilitadosPropuesto[dataView.document_id]">
+            Solicitar publicación
+          </button>
+        </div>
+
+        <app-layout-section>
+          <!-- Sección para editar la metadata del documento -->
+          <div class="d-flex justify-content-end mb-4">
+            <button *ngIf="(idTipeTask === 6 && isAllDocVersionsAdded == 0) || (idTipeTask === 7 && isAllDocWaterMarkAdded == 0)" 
+                    [routerLink]="['/quality/quality-doc-metadata', proposedDocId, idTipeTask]" 
+                    class="btn btn-primary rounded-4">
+              Editar metadata
+            </button>
+          </div>
+
+          <!-- Visor de documentos -->
+          <div class="d-flex flex-column justify-content-center align-items-center">
+            <ngx-doc-viewer [url]="pathDoc" viewer="url" style="width:100%;height:100vh;"></ngx-doc-viewer>
+          </div>
+
+          <app-layout-section [title]="'Documentos'">
+            <!-- Componente para guardar documentos -->
+            <app-save-documents
+              *can="['calidad%analista%MapaProcesos']"
+              [idParam]="idParam"
+              [documentoOffice]="document"
+              [documentoDiagram]="diagrama"
+              [idTypeTask]="idTipeTask"></app-save-documents>
+          </app-layout-section>
+        </app-layout-section>
+
+        <!-- Sección de observaciones, visible si el tipo de tarea es 19 -->
+        <app-layout-section *ngIf="idTipeTask == 19">
+          <div class="w-100 mt-3">
+            <form [formGroup]="observationForm">
+              <app-visualization-conversation [observations]="dataObservation"></app-visualization-conversation>
+              <mat-form-field appearance="outline" class="observation">
+                <mat-label>Cual</mat-label>
+                <input matInput maxlength="2000" formControlName="observation" />
+                <mat-error *ngIf="observationForm.get('observation').invalid">El campo es requerido.</mat-error>
+              </mat-form-field>
+            </form>
+          </div>
+        </app-layout-section>
+      </mat-tab>
+
+      <!-- Pestaña de Documentos adicionales, visible si corresponde -->
+      <ng-container *ngIf="dataView.multiple_choice !== 0 && dataView.documents_addtional.length !== 0">
+        <mat-tab label="Documentos adicionales">
+          <app-table-da [dataTable]="dataView.documents_addtional"></app-table-da>
+        </mat-tab>
+      </ng-container>
+
+      <!-- Pestaña de Plan de análisis, visible si corresponde -->
+      <ng-container>
+        <mat-tab label="Plan de análisis" *ngIf="dataView.analysis_plan || stateAnalysisPlan || stateAnalysisPlan === 'create'">
+          <app-tab-analysis-plan
+            [analysis_plan]="dataView.analysis_plan"
+            [dependence]="dataView.dependence_all"
+            [typeRequest]="requestType"></app-tab-analysis-plan>
+        </mat-tab>
+      </ng-container>
+
+      <!-- Pestaña de Divulgación, visible para tipos de tarea específicos -->
+      <ng-container *can="['calidad%crear%editar%plan-de-analisis']">
+        <mat-tab *ngIf="dataView.sgc_tipo_tarea_id === 10" label="Divulgación">
+          <app-tab-divulgacion></app-tab-divulgacion>
+        </mat-tab>
+      </ng-container>
+
+      <!-- Pestaña de Designaciones, visible bajo ciertas condiciones -->
+       <!-- Ingreso a HU9 -->
+      <ng-container *can="['calidad%Designación%Consultar%Analista']">
+        <mat-tab label="Designaciones" *ngIf="stateAnalysisPlan || stateAnalysisPlan === 'create'">
+          <app-designations
+            [idParam]="idParam"
+            [listAnalyst]="dataView.list_analysts_all_sap"
+            [dataViewAll]="dataView"></app-designations>
+        </mat-tab>
+      </ng-container>
+
+      <!-- Pestaña de Validación DGCP, visible para tipos de tarea específicos -->
+      <ng-container *can="['calidad%analista%MapaProcesos']">
+        <mat-tab label="Validación DGCP" *ngIf="idTipeTask !== 4">
+          <app-validaciones-dgcp [checked]="validate_criteria_checked"></app-validaciones-dgcp>
+        </mat-tab>
+      </ng-container>
+
+      <!-- HU 014 TAB -->
+      <!-- Pestaña de Prórroga, visible bajo ciertas condiciones -->
+      <ng-container #extension *can="['calidad%otorgar%prorroga']">
+        <mat-tab label="Prórroga" *ngIf="dataView.sgc_tipo_tarea_id !== 1">
+          <app-request-extension
+            [requestId]="this.dataView.id"
+            [justification]="this.dataView.justification_add_time"></app-request-extension>
+        </mat-tab>
+      </ng-container>
+    </mat-tab-group>
+  </div>
+</div>

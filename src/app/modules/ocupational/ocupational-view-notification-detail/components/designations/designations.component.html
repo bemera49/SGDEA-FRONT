@@ -1,0 +1,36 @@
+<!-- ACA ESTA HU09 -->
+
+<form [formGroup]="DesignationForm" (ngSubmit)="onSubmit()">
+  <app-layout-section [title]="'Designaciones'">
+
+    <div class="container-inputs">
+      <div>
+        <div class="container-select">
+          <label id="option">Analista Designado</label>
+          <mat-select aria-label="No asignado" formControlName="analyst_id">
+            <mat-option *ngFor="let item of listAnalyst" [value]="item.id">{{item.nombre}}</mat-option>
+          </mat-select>
+        </div>
+        <mat-error *ngIf="DesignationForm.invalid &&   DesignationForm.controls['analyst_id'].touched">
+          <span class="error">Debe ingresar un nombre.</span>
+        </mat-error>
+      </div>
+
+
+      <div class="container-input">
+        <label> Prórroga</label>
+        <!-- Actualmente esta en 0 días pero proximamente se atendera en como un input -->
+        <input placeholder="0 días" matInput disabled>
+      </div>
+    </div>
+    <div class="w-100 d-flex justify-content-center mt-2 gap-2">
+      <app-button-continue [text]="'Guardar'" [onDisabled]="DesignationForm.valid"></app-button-continue>
+    </div>
+  </app-layout-section>
+</form>
+
+
+<app-layout-section [title]="'Trazabilidad'">
+  <app-traceability-table [id]="'prueba de props'" [headertableitem]="headertableitem">
+  </app-traceability-table>
+</app-layout-section>

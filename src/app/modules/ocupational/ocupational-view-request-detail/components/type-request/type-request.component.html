@@ -1,0 +1,84 @@
+<!-- ACA ESTA HU09 -->
+
+<form [formGroup]="TypeRequestForm" (ngSubmit)="onSubmit()">
+  <app-layout-section [title]="'Tipo Solicitud'">
+
+
+
+      <div class="row ">
+        <div class="col-md-12">
+          <div class="row ">
+            <div class="col-md-4">
+                <div class="container-select">
+                  <label id="option">Tipo Solicitud</label>
+                  <mat-select aria-label="No asignado" formControlName="tipoSolicitud" >
+        
+                    <mat-option value="1">Interno</mat-option>
+                    <mat-option value="2">Externo</mat-option>
+        
+                  </mat-select>
+                </div>
+                <mat-error *ngIf="TypeRequestForm.invalid &&   TypeRequestForm.controls['tipoSolicitud'].touched">
+                  <span class="error">Debe seleccionar un tipo.</span>
+                </mat-error>
+            </div>
+            <div class="col-md-4">
+              <div class="container-select" *ngIf="isExternoSelected() && ProviderReceived">
+                <label id="option">Proveedor</label>
+                <mat-select aria-label="No asignado" formControlName="proveedor" (selectionChange)="onProveedorChange($event)">
+                  <mat-option *ngFor="let item of ProviderReceived" [value]="item.id">{{item.nombre}}</mat-option>
+                </mat-select>
+              </div>
+              <mat-error *ngIf="TypeRequestForm.invalid && TypeRequestForm.controls['proveedor'].touched">
+                <span class="error">Debe seleccionar un proveedor.</span>
+              </mat-error>
+
+            </div>
+            <div class="col-md-4">
+              <div *ngIf="selectedProveedorEmail">
+                <mat-form-field appearance="outline">
+                  <mat-label>Email del proveedor</mat-label>
+                  <input matInput [value]="selectedProveedorEmail" disabled>
+                </mat-form-field>
+              </div>        
+            </div>        
+
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <app-layout-section [title]="'Cuerpo del correo'" *ngIf="isExternoSelected()">
+            <mat-form-field appearance="outline" class="observations">
+              <mat-label>Cual</mat-label>
+              <textarea matInput formControlName="cuerpocorreo" maxlength="2000" rows="4"></textarea>
+            </mat-form-field>
+          </app-layout-section>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="w-100 d-flex justify-content-center mt-2 gap-2">
+            <ng-container>
+              <div class="text-center">
+                <button  type="submit" class="btn btn-primary">Aprobar</button>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+
+
+  
+  </app-layout-section>
+</form>
+
+
+
+
+
+
+

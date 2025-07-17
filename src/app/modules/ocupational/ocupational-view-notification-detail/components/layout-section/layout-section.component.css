@@ -1,0 +1,16 @@
+.layout-section{
+  height: fit-content;
+  min-width: 100%;
+  margin-top: 50px;
+  padding: 20px;
+  border: 1px solid #E2E2E2;
+  border-radius: 12px;
+  box-shadow: 4px 4px 6px #8FB2C71A; 
+  overflow: auto;
+}
+
+.layout-section__subtile{
+  font-weight: 500;
+  color: #222;
+  margin-left: 15px;
+}

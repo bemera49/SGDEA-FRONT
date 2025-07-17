@@ -1,0 +1,321 @@
+<!-- Vista disponile para la Secretaria concepto -  HU001 y HU002 -->
+<section class="containerQDetail" *can="['juridica%recibir%aprobar%devolver']">
+
+    <div class="contenedorCard">
+        <!-- Componente de ruta de navegación -->
+        <div class="nav-submenu">
+            <app-sub-menu-juridical [ItemsMenu]="items"></app-sub-menu-juridical>
+        </div>
+
+        <!-- Boton regresar -->
+        <br>
+        <a href="/#/juridica/view-request" class="btn-volver" style="cursor: pointer;">
+            <span class="material-icons">arrow_back_ios</span>
+            <strong>Volver</strong>
+        </a><br><br>
+
+        <!-- Numero de solicitud y estado -->
+        <div class="d-flex justify-content-between align-items-center">
+            <h2 style="color: #000000; font-weight: 300; font-family: 'Poppins', sans-serif; margin: 0;">
+                <strong>Solicitud #{{numeroRadiRadicado}}</strong> <!--Cambiar al integrar-->
+                <h4 style="color: #2c3948; margin: 0;">{{estado}}</h4> <!--Cambiar al integrar-->
+            </h2>
+
+            <!-- Boton dropdown -->
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle custom-button" type="button" id="dropdownMenuButton"
+                    style="background-color: #00A3E4; margin-right: 10px;" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                    <span style="font-family: 'Arial', sans-serif; font-size: 16px; color: white; text-transform: none;"
+                        class="button-text">Acciones</span>
+                </button>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" (click)="searchConceptOnClick()">
+                        <span class="material-icons">find_in_page</span>Buscar
+                        concepto jurídico
+                    </a>
+                    <a class="dropdown-item" (click)="clickApprovedDetail()">
+                        <span class="material-icons">task_alt</span>Aprobar
+                    </a>
+                    <a class="dropdown-item" (click)="clickReturnDetail()">
+                        <span class="material-icons">refresh</span>Devolver
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs de presentación -->
+        <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" class="custom-tab-group">
+
+            <mat-tab label="Información general">
+                <!-- app-juridica-detail-request.component.html -->
+                <app-general-information [dataDetail]="dataDetailPadre"
+                    (observacionForm)="onObservacionFormChange($event)">
+                </app-general-information>
+            </mat-tab>
+
+        </mat-tab-group>
+    </div>
+
+    <!-- Boton para ocultar la vista desplegable -->
+    <button *ngIf="viewConcepts" (click)="searchConceptOnClick()" class="btn btn-circle-custom"
+        [style.backgroundColor]="'#008ED6'">
+        <i class="material-icons returnaq-icon">keyboard_arrow_right</i>
+    </button>
+
+    <!-- componente app-search-concept -->
+    <div class="seeConcepts" [class.open]="viewConcepts">
+        <div class="content">
+            <app-search-concept></app-search-concept>
+        </div>
+    </div>
+
+</section>
+
+<!-- Vista disponile para la Solicitante conceptos- HU003 -->
+<section class="containerQDetail" *can="['juridica%recibir%subsanar']">
+
+    <div class="contenedorCard">
+        <!-- Componente de ruta de navegación -->
+        <div class="nav-submenu">
+            <app-sub-menu-juridical [ItemsMenu]="items"></app-sub-menu-juridical>
+        </div>
+
+        <!-- Boton regresar -->
+        <br>
+        <a href="/#/juridica/view-request" class="btn-volver" style="cursor: pointer;">
+            <span class="material-icons">arrow_back_ios</span>
+            <strong>Volver</strong>
+        </a><br><br>
+
+        <!-- Numero de solicitud y estado -->
+        <div class="d-flex justify-content-between align-items-center">
+            <h2 style="color: #000000; font-weight: 300; font-family: 'Poppins', sans-serif; margin: 0;">
+                <strong>Solicitud #{{numeroRadiRadicado}}</strong> <!--Cambiar al integrar-->
+                <h4 style="color: #2c3948; margin: 0;">{{estado}}</h4> <!--Cambiar al integrar-->
+            </h2>
+
+            <!-- buttons Subsanar/cancelar -->
+            <div class="buttons" *ngIf="dataDetailPadre?.key_tipo_tarea == 'DESIGNAR_RESPONSABLE' ||  (dataDetailPadre?.observacion && dataDetailPadre?.key_tipo_tarea == 'EVALUAR_SOLICITUD')">
+                <div class="d-flex justify-content-center align-items-center">
+                    <button class="button-subsanar bg-white border border-primary rounded text-primary py-2 px-4 me-3"
+                        (click)="viewRequestRouting()">Cancelar</button>
+                    <button class="button-subsanar bg-primary border border-primary rounded text-white py-2 px-4 me-3"
+                        (click)="clickSubsanarDetail()">Subsanar</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Tabs de presentación -->
+        <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" class="custom-tab-group">
+
+            <mat-tab label="Información general">
+                <app-general-information-fill [dataDetail]="dataDetailPadre"
+                    (aclarationForm)="onObservacionFormChange($event)"
+                    (attachmentsModify)="onObservacionAttachmentModify($event)"></app-general-information-fill>
+            </mat-tab>
+
+            <mat-tab label="Detalle solicitud" *ngIf="dataDetailPadre.solicitud.detalle_solicitud == null">
+                <app-detail-anexos [dataDetail]="dataDetailPadre"></app-detail-anexos>
+            </mat-tab>
+
+        </mat-tab-group>
+    </div>
+
+</section>
+
+<!-- Vista disponile para la jefe concepto - HU004 y HU012-->
+<section class="containerQDetail" *can="['juridica%designar%responsable']">
+
+    <div class="contenedorCard">
+        <!-- Componente de ruta de navegación -->
+        <div class="nav-submenu">
+            <app-sub-menu-juridical [ItemsMenu]="items"></app-sub-menu-juridical>
+        </div>
+
+        <!-- Boton regresar -->
+        <br>
+        <a href="/#/juridica/view-request" class="btn-volver" style="cursor: pointer;">
+            <span class="material-icons">arrow_back_ios</span>
+            <strong>Volver</strong>
+        </a><br><br>
+
+        <!-- Numero de solicitud y estado -->
+        <div class="d-flex justify-content-between align-items-center">
+            <h2 style="color: #000000; font-weight: 300; font-family: 'Poppins', sans-serif; margin: 0;">
+                <strong>Solicitud #{{numeroRadiRadicado}}</strong> <!--Cambiar al integrar-->
+                <h4 style="color: #2c3948; margin: 0;">{{estado}}</h4> <!--Cambiar al integrar-->
+            </h2>
+
+            <!-- Vista disponile para el Jefe conceptos- HU004 -->
+            <div class="buttons"
+                *ngIf="dataDetailPadre?.key_tipo_tarea == 'DESIGNAR_RESPONSABLE' && mostrarBotonAsignar">
+                <div class="d-flex justify-content-center align-items-center">
+                    <button class="button-subsanar bg-primary border border-primary rounded text-white py-2 px-4 me-3"
+                        (click)="clickDesignarDetail()">
+                        Asignar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Vista disponile para el Jefe conceptos- HU007, aprobar y rechazar -->
+            <div class="buttons"
+                *ngIf="dataDetailPadre?.key_tipo_tarea == 'VERIFICAR_RANGO_COMPLEJIDAD_JEFE' || dataDetailPadre?.key_tipo_tarea == 'VERIFICAR_RANGO_COMPLEJIDAD'">
+                <div class="d-flex justify-content-center align-items-center">
+                    <button *ngIf="dataDetailPadre?.key_tipo_tarea == 'VERIFICAR_RANGO_COMPLEJIDAD_JEFE' || dataDetailPadre?.key_tipo_tarea == 'VERIFICAR_RANGO_COMPLEJIDAD'"
+                    class="button-subsanar bg-primary border border-primary rounded text-white py-2 px-4 me-3"
+                        (click)="approvedProrroga()">
+                        Aprobar
+                    </button>
+                    <button *ngIf="dataDetailPadre?.key_tipo_tarea == 'VERIFICAR_RANGO_COMPLEJIDAD_JEFE'"
+                        class="button-subsanar bg-primary border border-primary rounded text-white py-2 px-4 me-3"
+                        (click)="rejectProrroga()">
+                        Rechazar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs de presentación -->
+        <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" class="custom-tab-group">
+
+            <mat-tab label="Información general">
+                <!-- app-juridica-detail-request.component.html -->
+                <app-general-information [dataDetail]="dataDetailPadre"
+                    (observacionForm)="onObservacionFormChange($event)">
+                </app-general-information>
+
+            </mat-tab>
+
+            <!-- componente request-extension (Prorroga) -->
+            <mat-tab label="Solicitud de prórroga"
+                *ngIf="dataDetailPadre?.key_tipo_tarea == 'VERIFICAR_RANGO_COMPLEJIDAD_JEFE' || dataDetailPadre?.key_tipo_tarea == 'VERIFICAR_RANGO_COMPLEJIDAD'">
+                <app-request-extension (observacionForm)="onObservacionFormChange($event)"
+                    (rangoForm)="onRangeFormChange($event)"></app-request-extension>
+            </mat-tab>
+
+        </mat-tab-group>
+    </div>
+
+    <!-- Boton para ocultar la vista desplegable -->
+    <button *ngIf="viewConcepts" (click)="searchConceptOnClick()" class="btn btn-circle-custom"
+        [style.backgroundColor]="'#008ED6'">
+        <i class="material-icons returnaq-icon">keyboard_arrow_right</i>
+    </button>
+
+    <!-- componente app-search-concept -->
+    <div class="seeConcepts" [class.open]="viewConcepts">
+        <div class="content">
+            <app-search-concept></app-search-concept>
+        </div>
+    </div>
+
+</section>
+
+<!-- Vista disponile para el proyector conceptos - HU005 - HU009 -->
+<section class="containerQDetail" *can="['juridica%evaluar%solicitud']">
+
+    <div class="contenedorCard">
+        <!-- Componente de ruta de navegación -->
+        <div class="nav-submenu">
+            <app-sub-menu-juridical [ItemsMenu]="items"></app-sub-menu-juridical>
+        </div>
+
+        <!-- Boton regresar -->
+        <br>
+        <a href="/#/juridica/view-request" class="btn-volver" style="cursor: pointer;">
+            <span class="material-icons">arrow_back_ios</span>
+            <strong>Volver</strong>
+        </a><br><br>
+
+        <!-- Numero de solicitud y estado -->
+        <div class="d-flex justify-content-between align-items-center">
+            <h2 style="color: #000000; font-weight: 300; font-family: 'Poppins', sans-serif; margin: 0;">
+                <strong>Solicitud #{{numeroRadiRadicado}}</strong> <!--Cambiar al integrar-->
+                <h4 style="color: #2c3948; margin: 0;">{{estado}}</h4> <!--Cambiar al integrar-->
+            </h2>
+
+            <!-- Boton dropdown -->
+            <div class="buttons">
+                <div class="d-flex justify-content-center align-items-center">
+                    <button *ngIf="dataDetailPadre?.key_tipo_tarea == 'EVALUAR_SOLICITUD'"
+                        class="button-subsanar bg-primary border border-primary rounded text-white py-2 px-4 me-3"
+                        (click)="devolverSolicitud()">Devolver</button>
+                    <!-- Reclamar -->
+                    <button *ngIf="dataDetailPadre?.key_tipo_tarea == 'EVALUAR_SOLICITUD' && !oneObservacion"
+                        class="button-reclamar bg-primary border border-primary rounded text-white py-2 px-4 me-3"
+                        id="buttonReclamar" (click)="clickReclamarDetail();">
+                        Reclamar</button>
+
+                    <button
+                        *ngIf="dataDetailPadre?.key_tipo_tarea == 'PRORROGA_APROBADA' || dataDetailPadre?.key_tipo_tarea == 'PRORROGA_RECHAZADA'"
+                        class="button-reclamar bg-primary border border-primary rounded text-white py-2 px-4 me-3"
+                        id="buttonReclamar" (click)="closeExtension();">
+                        Cerrar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs de presentación -->
+        <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" class="custom-tab-group">
+
+            <!-- app-juridica-detail-request.component.html -->
+            <mat-tab label="Información general">
+                <app-general-information [dataDetail]="dataDetailPadre"
+                    (observacionForm)="onObservacionFormChange($event)"
+                    (justificacionForm)="onJustificacionFormChange($event)">
+                </app-general-information>
+            </mat-tab>
+
+            <!-- Solicitud de prórroga -->
+            <mat-tab label="Solicitud de prórroga"
+                *ngIf="dataDetailPadre?.key_tipo_tarea == 'PRORROGA_APROBADA' || dataDetailPadre?.key_tipo_tarea == 'PRORROGA_RECHAZADA'">
+                <app-request-extension></app-request-extension>
+            </mat-tab>
+
+            <!-- Plantilla y Seguridad -->
+            <mat-tab label="Plantilla y seguridad" *ngIf="dataDetailPadre?.key_tipo_tarea == 'PROYECTAR_CONCEPTO'">
+                <app-template-security *ngIf="!mostrarEditor"
+                    (observacionForm)="onFormTemplateSecurityChange($event)"></app-template-security>
+                <sgda-editor *ngIf="mostrarEditor" [initialData]="editorContent"
+                    (ckDocument)="changeDocument($event)"></sgda-editor>
+            </mat-tab>
+
+            <!-- Anexos -->
+            <mat-tab label="Anexos"
+                *ngIf="dataDetailPadre?.key_tipo_tarea == 'PROYECTAR_CONCEPTO' || dataDetailPadre?.key_tipo_tarea == 'VERIFICAR_RANGO_COMPLEJIDAD_JEFE'">
+                <app-attachments [uploadFile]="true" (attachmentsModify)="onUploadFiles($event)"></app-attachments>
+            </mat-tab>
+
+            <!-- Ficha relatoría -->
+            <mat-tab label="Ficha relatoría"
+                *ngIf="dataDetailPadre?.key_tipo_tarea == 'PROYECTAR_CONCEPTO' || dataDetailPadre?.key_tipo_tarea == 'VERIFICAR_RANGO_COMPLEJIDAD_JEFE'">
+                <app-ficha-relatoria [dataDetail]="dataDetailPadre"></app-ficha-relatoria>
+            </mat-tab>
+
+            <mat-tab label="Observaciones"
+                *ngIf="dataDetailPadre?.key_tipo_tarea == 'PROYECTAR_CONCEPTO' || dataDetailPadre?.key_tipo_tarea == 'VERIFICAR_RANGO_COMPLEJIDAD_JEFE'">
+                <app-observaciones [dataDetail]="dataDetailPadre"></app-observaciones>
+            </mat-tab>
+
+        </mat-tab-group>
+
+
+        <!-- HU-009 -->
+        <div class="butonesGlobalesDetail"
+            *ngIf="dataDetailPadre?.key_tipo_tarea == 'PROYECTAR_CONCEPTO' || dataDetailPadre?.key_tipo_tarea == 'SOLICITAR_PRORROGA'">
+            <button class="button-trabajo bg-primary border border-primary rounded text-white py-2 px-4 me-3"
+                *ngIf="!oneJustificacion">Trabajo
+                Colaborativo</button>
+            <button class="button-individual bg-primary border border-primary rounded text-white py-2 px-4 me-3"
+                *ngIf="!oneJustificacion">Buscar
+                Conceptos</button>
+            <button class="button-prorroga bg-primary border border-primary rounded text-white py-2 px-4 me-3"
+                (click)="solicitarProrroga()" *ngIf="!oneJustificacion || oneJustificacion">Solicitar Prórroga</button>
+            <button class="button-save bg-primary border border-primary rounded text-white py-2 px-4 me-3"
+                *ngIf="!oneJustificacion">Guardar</button>
+        </div>
+    </div>
+</section>

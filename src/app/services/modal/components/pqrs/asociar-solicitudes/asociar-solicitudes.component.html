@@ -1,0 +1,55 @@
+<div class="modal-container">
+    <div class="d-flex flex-row align-items-center justify-content-between">
+        <i class="material-icons text-primary cap-icon">article</i>
+
+        <button (click)="close()" class="btn-none">
+            <i class="material-icons">close</i>
+        </button>
+    </div>
+
+    <h2 mat-dialog-title>{{ data.title }}</h2>
+
+    <div mat-dialog-content>
+        <form [formGroup]="form" (ngSubmit)="submitForm()">
+            <div appearance="fill" class="d-flex flex-column">
+              <label>Tipo de plantilla</label>
+                <select required class="form-select" formControlName="tipoPlantilla" (change)="onTemplateSelectionChange($event)">
+                    <option selected disabled value="">Seleccione</option>
+                    <option *ngFor="let plantilla of plantillas" [value]="plantilla.value">
+                    {{ plantilla.viewValue }}
+                    </option>
+                </select>
+            </div>
+
+          
+
+            <div *ngIf="selectedTemplate">
+                <h5 class="mt-4 text-body font-weight-bold">Documento generado</h5>
+                <!--PDF SELECTED-->
+                <div class="border rounded d-flex py-2 px-1 mt-1 flex-row align-items-center justify-content-around w-100" style="gap: 2px">
+                    <img src="assets/img/pdf-icon.svg">
+                    <div class="text-pdf">{{ selectedTemplate.viewValue }}</div>
+                    <div class="ml-2 d-flex" style="gap: 0px 10px;">
+                        <button (click)="viewTemplate($event)" class="button-pdf">
+                            <mat-icon>visibility</mat-icon>
+                        </button>
+                        <button (click)="downloadTemplate()" class="button-pdf">
+                            <mat-icon>download</mat-icon>
+                        </button>
+                        <button (click)="removeSelectedTemplate()" class="button-pdf">
+                            <mat-icon>close</mat-icon>
+                        </button>
+                    </div>
+                </div>
+                <!--END PDF-->    
+            </div>
+
+            <div mat-dialog-actions class="d-flex flex-wrap flex-md-nowrap justify-content-center">
+                <button mat-button (click)="close()" class="btn btn-white text-primary border border-primary btn-styles text-center m-2 w-100">Cancelar</button>
+                <button mat-button [disabled]="!form.valid"  type="submit" class="btn btn-primary btn-styles text-center m-2 w-100">Guardar</button>
+            </div>
+
+        </form>
+    </div>
+
+</div>

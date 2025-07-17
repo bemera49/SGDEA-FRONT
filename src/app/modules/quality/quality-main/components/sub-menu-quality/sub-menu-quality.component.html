@@ -1,0 +1,12 @@
+<nav class="nav-quality">
+  <menu class="menu-quality">
+    <li><a href="">Inicio</a></li>
+    <li><span>/</span></li>
+    <li><a href="">Calidad</a></li>
+    <li><span>/</span></li>
+    <ng-container *ngFor="let item of ItemsMenu">
+      <li><a [routerLink]="['/quality/',item.link]" routerLinkActive="router-link-active-quality">{{item.text}}</a></li>
+      <li><span>/</span></li>
+    </ng-container>
+  </menu>
+</nav>

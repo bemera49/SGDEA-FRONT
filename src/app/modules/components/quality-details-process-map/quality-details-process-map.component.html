@@ -1,0 +1,17 @@
+<div *ngIf="!isEditing">
+    <ng-container *ngFor="let detail of cardData">
+      <h5>{{ detail.title }}</h5>
+      <p>{{ detail.value }}</p>
+    </ng-container>
+    <button (click)="toggleEdit()">Editar</button>
+  </div>
+  
+  <form *ngIf="isEditing" (ngSubmit)="saveChanges()">
+    <ng-container *ngFor="let detail of cardData; let i = index">
+      <label for="{{ 'field-' + i }}">{{ detail.title }}</label>
+      <input id="{{ 'field-' + i }}" type="text" [(ngModel)]="detail.value" name="{{ 'field-' + i }}">
+    </ng-container>
+    <button type="submit">Guardar</button>
+    <button type="button" (click)="toggleEdit()">Cancelar</button>
+  </form>
+  

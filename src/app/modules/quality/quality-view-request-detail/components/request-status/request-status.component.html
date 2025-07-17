@@ -1,0 +1,7 @@
+<div class="state" [ngClass]="{
+  'rojo' : stateProp ===  state.RECHAZADO,
+  'azul' : stateProp ===  state.EN_ELABORACION,
+  'amarillo' : stateProp ===  state.EN_TRAMITE
+}">
+  <b>{{stateProp}}</b>
+</div>

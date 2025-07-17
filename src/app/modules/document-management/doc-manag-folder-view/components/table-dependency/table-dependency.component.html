@@ -1,0 +1,25 @@
+<h4>Dependencias autorizadas</h4>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <ng-container matColumnDef="Dependencia">
+    <th mat-header-cell *matHeaderCellDef> Dependencias </th>
+    <td mat-cell *matCellDef="let element"> {{element.nombreDependencia}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="Permisos">
+    <th mat-header-cell *matHeaderCellDef> Permisos </th>
+    <td mat-cell *matCellDef="let element"> {{element.permisos | joinPermissions}}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" [class.highlight-clicked]="row.highlighted"
+    [class.highlight-hover]="row.hovered" (click)="onRowClick(row)" (mouseenter)="onRowMouseEnter(row)"
+    (mouseleave)="onRowMouseLeave(row)"></tr>
+</table>
+
+<app-container-buttons [firstTexto]="'Agregar dependencia'" [secondTexto]="'Eliminar dependencia'" (fistEvent)="onAdd()"
+  (secondEvent)="onDelete()"></app-container-buttons>

@@ -1,0 +1,60 @@
+th {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  line-height: 16px !important;
+  color: #2C3948 !important;
+}
+label {
+  font-size: 15px !important;
+  font-weight: 400 !important;
+  line-height: 18px !important;
+  color: #2C3948 !important;
+}
+
+.btn-reject {
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  color: #00A3E4;
+  margin: 0px 10px;
+  padding: 10px ;
+  border-radius: 10px;
+}
+
+.btn-validate {
+  background-color: #00A3E4;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  text-align: center;
+  color: white;
+  border: none;
+  padding: 12px 15px!important;
+}
+
+.label-validation-date{
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: left;
+  color: #6B737C;
+  margin-bottom: 3px;
+}
+
+.validation-date{
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 22px;
+  text-align: left;
+  color: #6B737C;
+}
+
+
+.resizable-textarea {
+  resize: both; /* Permite redimensionar tanto horizontal como verticalmente */
+  overflow: auto; /* Añade barra de desplazamiento si es necesario */
+
+}

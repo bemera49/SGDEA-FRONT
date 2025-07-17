@@ -1,0 +1,34 @@
+.wrapper {
+}
+
+.text-pdf {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 160px;
+  font-size: 14px;
+}
+
+.button-pdf {
+  border: none;
+  background: none;
+  padding: 0;
+  color: #6c6b76;
+}
+
+label {
+  font-weight: bold;
+}
+
+.desasociarBtn {
+  width: 200px;
+  align-self: end;
+}
+.container-terminos,
+.container-terminos-aprobado {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.container-terminos-aprobado {
+  grid-template-columns: repeat(4, 1fr);
+}

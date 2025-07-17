@@ -1,0 +1,237 @@
+<form (submit)="submitFormReceive()" [formGroup]="form" style="gap: 5px 0px">
+    <mat-card class="mt-4 border-1 border">
+        <h3 class="font-weight-bold">Informacion general</h3>
+        <div class="row">
+            <span class="d-flex flex-column col-md-6 col-lg-6">
+                <label>Radicado</label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input placeholder="Ingresa el # de radicado" matInput formControlName="radicado">
+                    <mat-error *ngIf="form.controls['radicado'].invalid && form.controls['radicado'].touched">
+                        Este campo es requerido
+                    </mat-error>
+                </mat-form-field>
+            </span>
+
+            <span class="d-flex flex-column col-md-6 col-lg-6">
+                <label>Fecha de radicación</label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input placeholder="Ingresa la fecha de radicado" matInput [matDatepicker]="picker"
+                        formControlName="fecha">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="form.controls['fecha'].invalid && form.controls['fecha'].touched">
+                        Este campo es requerido
+                    </mat-error>
+                </mat-form-field>
+            </span>
+
+            <span class="d-flex flex-column col-md-6 col-lg-6">
+                <label>Tipo de solicitud</label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input placeholder="Ingresa el tipo de solicitud" matInput formControlName="tipo">
+                    <mat-error *ngIf="form.controls['tipo'].invalid && form.controls['tipo'].touched">
+                        Este campo es requerido
+                    </mat-error>
+                </mat-form-field>
+            </span>
+
+            <span class="d-flex flex-column col-md-6 col-lg-6">
+                <label>Profesional</label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input placeholder="Ingresa el profesional" matInput formControlName="profesional">
+                    <mat-error *ngIf="form.controls['profesional'].invalid && form.controls['profesional'].touched">
+                        Este campo es requerido
+                    </mat-error>
+                </mat-form-field>
+            </span>
+
+            <span class="d-flex flex-column col-md-6 col-lg-6">
+                <label>Fecha de asignación</label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input placeholder="Ingresa la fecha de asignación" matInput [matDatepicker]="picker2"
+                        formControlName="fecha_asignacion">
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                    <mat-error
+                        *ngIf="form.controls['fecha_asignacion'].invalid && form.controls['fecha_asignacion'].touched">
+                        Este campo es requerido
+                    </mat-error>
+                </mat-form-field>
+            </span>
+
+            <span class="d-flex flex-column col-md-6 col-lg-6">
+                <label>Estado</label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input placeholder="Ingresa el estado" matInput formControlName="estado">
+                    <mat-error *ngIf="form.controls['estado'].invalid && form.controls['estado'].touched">
+                        Este campo es requerido
+                    </mat-error>
+                </mat-form-field>
+            </span>
+
+            <span class="d-flex flex-column col-md-6 col-lg-6">
+                <label>Fecha de creación</label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input placeholder="Ingresa la fecha de creacion" matInput [matDatepicker]="picker3"
+                        formControlName="fecha_creacion">
+                    <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                    <mat-datepicker #picker3></mat-datepicker>
+                    <mat-error
+                        *ngIf="form.controls['fecha_creacion'].invalid && form.controls['fecha_creacion'].touched">
+                        Este campo es requerido
+                    </mat-error>
+                </mat-form-field>
+            </span>
+
+            <span class="d-flex flex-column col-md-6 col-lg-6">
+                <label>Estado aviso</label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input placeholder="Ingresa el estado" matInput formControlName="status_aviso">
+                    <mat-error *ngIf="form.controls['status_aviso'].invalid && form.controls['status_aviso'].touched">
+                        Este campo es requerido
+                    </mat-error>
+                </mat-form-field>
+            </span>
+
+            <span class="d-flex flex-column col-md-6 col-lg-6">
+                <label>Hora creación</label>
+                <input style="margin-top: 4px;border: 1px solid #e0e0e0; height: 3.5rem;padding-left: 10px;" matInput
+                    placeholder="Ingresa la hora de creacion" aria-label="12hr format" [ngxTimepicker]="default"
+                    readonly formControlName="hora_creacion">
+                <mat-error *ngIf="form.controls['hora_creacion'].invalid && form.controls['hora_creacion'].touched">
+                    Este campo es requerido
+                </mat-error>
+                <ngx-material-timepicker #default></ngx-material-timepicker>
+            </span>
+
+            <span class="d-flex flex-column col-md-6 col-lg-6">
+                <label>Fecha Inicio</label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input placeholder="Ingresa la fecha de inicio" matInput [matDatepicker]="picker4"
+                        formControlName="fecha_inicio_deseado">
+                    <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                    <mat-datepicker #picker4></mat-datepicker>
+                    <mat-error
+                        *ngIf="form.controls['fecha_inicio_deseado'].invalid && form.controls['fecha_inicio_deseado'].touched">
+                        Este campo es requerido
+                    </mat-error>
+                </mat-form-field>
+            </span>
+
+            <span class="d-flex flex-column col-md-6 col-lg-6">
+                <label>Fecha Fin Deseado</label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input placeholder="Ingresa la fecha fin deseado" matInput [matDatepicker]="picker5"
+                        formControlName="fecha_fin_deseado">
+                    <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
+                    <mat-datepicker #picker5></mat-datepicker>
+                    <mat-error
+                        *ngIf="form.controls['fecha_fin_deseado'].invalid && form.controls['fecha_fin_deseado'].touched">
+                        Este campo es requerido
+                    </mat-error>
+                </mat-form-field>
+            </span>
+
+            <span class="d-flex flex-column col-md-6 col-lg-6">
+                <label>Funcionarios</label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input placeholder="Ingresa el funcionario" matInput formControlName="funcionarios">
+                    <mat-error *ngIf="form.controls['funcionarios'].invalid && form.controls['funcionarios'].touched">
+                        Este campo es requerido
+                    </mat-error>
+                </mat-form-field>
+            </span>
+
+            <span class="d-flex flex-column col-md-6 col-lg-6">
+                <label>Número aviso</label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input placeholder="Ingresa el numero de aviso" matInput formControlName="numero_aviso">
+                    <mat-error *ngIf="form.controls['numero_aviso'].invalid && form.controls['numero_aviso'].touched">
+                        Este campo es requerido
+                    </mat-error>
+                </mat-form-field>
+            </span>
+
+            <span class="d-flex flex-column col-md-6 col-lg-6">
+                <label>Clase aviso</label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input placeholder="Ingresa la clase de aviso" matInput formControlName="clase_aviso">
+                    <mat-error *ngIf="form.controls['clase_aviso'].invalid && form.controls['clase_aviso'].touched">
+                        Este campo es requerido
+                    </mat-error>
+                </mat-form-field>
+            </span>
+
+            <span class="d-flex flex-column col-md-6 col-lg-6">
+                <label>Autor aviso</label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input placeholder="Ingresa el autor del aviso" matInput formControlName="autor_aviso">
+                    <mat-error *ngIf="form.controls['autor_aviso'].invalid && form.controls['autor_aviso'].touched">
+                        Este campo es requerido
+                    </mat-error>
+                </mat-form-field>
+            </span>
+
+            <span class="d-flex flex-column col-md-6 col-lg-6">
+                <label># orden</label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input placeholder="Ingresa el numero de orden" matInput formControlName="no_orden">
+                    <mat-error *ngIf="form.controls['no_orden'].invalid && form.controls['no_orden'].touched">
+                        Este campo es requerido
+                    </mat-error>
+                </mat-form-field>
+            </span>
+
+            <span class="d-flex flex-column col-md-6 col-lg-6">
+                <label>Circunstancias</label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input placeholder="Ingresa las circunstancias" matInput formControlName="circunstancias">
+                    <mat-error
+                        *ngIf="form.controls['circunstancias'].invalid && form.controls['circunstancias'].touched">
+                        Este campo es requerido
+                    </mat-error>
+                </mat-form-field>
+            </span>
+
+            <span class="d-flex flex-column col-md-6 col-lg-6">
+                <label>Descripción</label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input placeholder="Ingresa la descripcion" matInput formControlName="descripcion">
+                    <mat-error *ngIf="form.controls['descripcion'].invalid && form.controls['descripcion'].touched">
+                        Este campo es requerido
+                    </mat-error>
+                </mat-form-field>
+            </span>
+        </div>
+    </mat-card>
+
+    <mat-card class="mt-4 border-1 border">
+        <h3 class="font-weight-bold">Adjuntos</h3>
+        <div class="row">
+            <div class="col-md-6 col-lg-6">
+                <label for="file_uploaded1">Memorando Interno</label>
+                <input #inputFile type="file" multiple name="file_uploaded1" class="form-control" />
+            </div>
+            <div class="col-md-6 col-lg-6">
+                <label for="file_uploaded2">Soportes</label>
+                <input #inputFile type="file" multiple name="file_uploaded2" class="form-control" />
+            </div>
+        </div>
+    </mat-card>
+
+    <mat-card class="mt-4 border-1 border">
+        <h3 class="font-weight-bold">Observaciones</h3>
+        <div class="row">
+            <span class="d-flex flex-column col-md-12 col-lg-12">
+                <label>Motivo de aprobacion o devolucion</label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input placeholder="Ingresa las observaciones" matInput formControlName="observaciones">
+                    <mat-error *ngIf="form.controls['observaciones'].invalid && form.controls['observaciones'].touched">
+                        Este campo es requerido
+                    </mat-error>
+                </mat-form-field>
+            </span>
+        </div>
+    </mat-card>
+
+</form>

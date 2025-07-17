@@ -1,0 +1,17 @@
+<h4>Crear documento</h4>
+
+<form [formGroup]="formSelect" (ngSubmit)="onSubmit()"
+  class="container-modal d-flex flex-column justify-content-center mt-5">
+  <mat-form-field class="col-lg-12 col-md-12">
+    <mat-label>Nuevo documento</mat-label>
+    <mat-select name="select" id="select" formControlName="select">
+      <mat-option [value]="1">Digitalizado</mat-option>
+      <mat-option [value]="2">Físico</mat-option>
+      <mat-option [value]="3">Electrónico</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button type="submit" mat-raised-button [mat-dialog-close]="true" class="btn btn-primary">
+    Crear
+  </button>
+</form>

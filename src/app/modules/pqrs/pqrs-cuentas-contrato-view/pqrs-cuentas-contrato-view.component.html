@@ -1,0 +1,14 @@
+<app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+
+<mat-card class="mx-4 py-4 px-5">
+    <h3 class="text-black font-weight-bold">Detalle de cuenta contrato</h3>
+
+    <div class="row" style="gap: 5px 0px">
+        <span *ngFor="let detalle of detalles" class="col-md-6">
+          <h5 class="text-body-tertiary font-weight-bold m-0">{{ detalle.label }}</h5>
+          <p class="col-md-6 p-0">{{ detalle.value }}</p>
+        </span>
+    </div>
+      
+
+</mat-card>

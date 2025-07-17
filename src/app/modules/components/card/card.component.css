@@ -1,0 +1,60 @@
+
+.container {
+  flex: 1;
+  width: 100%;
+  width: 240px;
+  background: #ffffff;
+  border-bottom: 1.5px solid #008ed6;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 30px 20px;
+  transition: transform 1s;
+}
+
+.container:hover {
+  transform: scale(1.05);
+}
+
+.icon {
+  float: left;
+}
+
+.title {
+  width: 164px;
+  height: 44px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 22px;
+  color: #222222;
+  margin-top: 4px;
+  margin-bottom: 0px;
+}
+
+.number {
+  width: 31px;
+  height: 25px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 25px;
+  color: #222222;
+  float: right;
+  margin-top: -14px;
+}
+
+.arrow {
+  float: right;
+}
+
+.paragraph {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #a4a4ad;
+}

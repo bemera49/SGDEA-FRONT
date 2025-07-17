@@ -1,0 +1,25 @@
+.state{
+  display: inline-block;
+  min-height: 32px;
+  width: fit-content;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 0.5px solid;
+  line-height: 15px;
+  text-align: center;
+}
+
+.azul{
+  background-color: #E5EDFF;
+  border-color: #0049FF;
+}
+
+.rojo{
+  background-color: #FDE5E5;
+  border-color: #EA0000;
+}
+
+.amarillo{
+  background-color: #FFF8E7;
+  border-color: #FFB800;
+}

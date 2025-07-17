@@ -1,0 +1,84 @@
+/* Estilo general de la tabla */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.875rem;
+  /* Ajusta el tamaño de la fuente según sea necesario */
+  text-align: left;
+  background-color: transparent;
+  flex-wrap: nowrap;
+}
+
+/* Estilo de los encabezados de la tabla */
+.table th {
+  background-color: transparent;
+  /* Color de fondo para los encabezados */
+  color: #333;
+  font-weight: bold;
+  /* Color del texto para los encabezados */
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  /* Línea divisoria debajo de los encabezados */
+}
+
+/* Estilo de las celdas de la tabla */
+.table tr {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  /* Línea divisoria entre filas */
+}
+
+
+/* Estilo para resaltar el estado 'Activo' */
+.table .activo {
+      box-sizing: border-box;
+  
+      /* Auto layout */
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      padding: 8px 10px;
+      flex-wrap: nowrap;
+      position: absolute;
+      top: calc(50% - 32px/2);
+  
+      /* verde claro */
+      background: transparent;
+      /* verde oscuro */
+      border: none;
+      border-radius: 8px;
+}
+
+/* Estilo para el estado 'En Trámite' */
+.table .en-tramite {
+
+  box-sizing: border-box;
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 8px 10px;
+  gap: 10px;
+
+  position: absolute;
+  width: 97px;
+  height: 32px;
+  top: calc(50% - 32px/2);
+
+  /* lila devuelto */
+  background: transparent;
+  border:none;
+  border-radius: 8px;
+}
+
+.pagination-container {
+  overflow-x: auto;
+}
+
+.gray-row {
+  background-color: #d3d3d3;
+}

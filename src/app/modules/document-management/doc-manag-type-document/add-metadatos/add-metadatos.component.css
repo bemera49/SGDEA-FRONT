@@ -1,0 +1,110 @@
+/* Estilos generales */
+.containerQDetail {
+    display: flex;
+    align-items: stretch;
+    height: 100%;
+    width: 100%;
+}
+
+.contenedorCard {
+    margin: 20px auto;
+    padding: 0 2%;
+    max-width: 100%;
+    width: 90%;
+}
+
+.card {
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.metadata-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.metadata-list {
+    width: 45%;
+}
+
+.metadata-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.metadata-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.metadata-list li mat-checkbox {
+    /* Estilo específico para el checkbox */
+    flex: 1;
+    /* Permite que el checkbox se expanda para ocupar el espacio disponible */
+    display: flex;
+    /* Convierte el checkbox en un contenedor flex */
+    align-items: center;
+    white-space: nowrap;
+    /* Evita que las palabras se rompan */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* Agrega puntos suspensivos si el texto es demasiado largo */
+}
+
+.metadata-list li mat-checkbox .mat-checkbox-label {
+    /* Estilo para el label del checkbox */
+    flex: 1;
+    /* Permite que el label se expanda */
+    word-wrap: break-word;
+    /* Permite que las palabras se rompan en la siguiente línea */
+}
+
+
+.metadata-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.naming-mask {
+    margin-top: 20px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-add-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #00A3E4;
+    border: 2px solid #00A3E4;
+    /* Aumenta el grosor del borde */
+    border-radius: 8px;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button mat-icon-button {
+    margin-left: 10px;
+}

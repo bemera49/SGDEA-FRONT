@@ -1,0 +1,58 @@
+.container {
+    margin: auto;
+    width: 100%;
+    max-width: 97%;
+    overflow-x: auto;
+    border-radius: 10px;
+    margin: 10px 20px;
+    box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.14);
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 10px;
+  }
+  
+  th {
+    text-align: left;
+    padding: 12px;
+    font-size: 13px;
+    color: #333;
+    font-weight: 500;
+  }
+  
+  td {
+    text-align: left;
+    padding: 12px;
+    font-size: 14px;
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.87) !important;
+  }
+  
+  tbody tr:nth-child(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+  
+  tbody tr:nth-child(even) {
+    background-color: #ffffff;
+  }
+  
+  tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.075);
+  }
+  
+  tbody tr.selected {
+    background-color: rgba(0, 165, 223, 0.5);; 
+  }
+  
+  .app-floating-button {
+    display: none; 
+  }
+  
+  .app-floating-button.active {
+    display: block;
+  }
+  
+  

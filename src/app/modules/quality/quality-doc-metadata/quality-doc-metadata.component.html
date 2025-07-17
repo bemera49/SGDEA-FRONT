@@ -1,0 +1,239 @@
+<app-layout-section>
+  <div class="content-main px-3 mb-4" [formGroup]="metadataForm">
+    <div class="d-flex flex-column">
+      <app-button-back-arrow [href]="'/quality/quality-view-request/'"></app-button-back-arrow>
+
+      <h3 class="text-black font-weight-bold">Metadata documento</h3>
+    </div>
+
+    <section class="general-info-form mt-4">
+      <div class="d-flex flex-column">
+        <h5 class="text-black font-weight-bold">Información general</h5>
+      </div>
+      <div class="row mt-4">
+        <!-- Nivel -->
+        <div class="col-lg-4 col-md-6 col-10 mx-auto">
+          <mat-form-field appearance="outline">
+            <mat-label>Nivel</mat-label>
+            <mat-select formControlName="level">
+              <mat-option [value]="lvl.id" *ngFor="let lvl of metadata?.levels">{{lvl.nombre}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <!-- Proceso -->
+        <div class="col-lg-4 col-md-6 col-10 mx-auto">
+          <mat-form-field appearance="outline">
+            <mat-label>Proceso</mat-label>
+            <mat-select formControlName="process">
+              <mat-option [value]="p.id" *ngFor="let p of metadata?.process">{{p.nombre}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <!-- Subproceso -->
+        <div class="col-lg-4 col-md-6 col-10 mx-auto">
+          <mat-form-field appearance="outline">
+            <mat-label>Subproceso</mat-label>
+            <mat-select formControlName="subprocess">
+              <mat-option [value]="sp.id" *ngFor="let sp of metadata?.subprocess">{{sp.nombre}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <!-- Procedimiento -->
+        <div class="col-lg-4 col-md-6 col-10 mx-auto">
+          <mat-form-field appearance="outline">
+            <mat-label>Procedimiento</mat-label>
+            <mat-select formControlName="procedure">
+              <mat-option>Comunicación Interna</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <!-- Nombre del documento -->
+        <div class="col-lg-8 col-md-6 col-10 mx-auto">
+          <mat-form-field appearance="outline">
+            <mat-label>Nombre del documento</mat-label>
+            <input matInput formControlName="name">
+            <mat-error *ngIf="metadataForm.get('name').hasError('required') && metadataForm.get('name').touched">
+              El nombre  es requerido.
+            </mat-error>
+
+          </mat-form-field>
+        </div>
+
+        <!-- Gerencia -->
+        <div class="col-md-6 col-10 mx-auto">
+          <mat-form-field appearance="outline">
+            <mat-label>Gerencia</mat-label>
+            <mat-select formControlName="management">
+              <mat-option [value]="m.id" *ngFor="let m of metadata?.managements">{{m.nombre}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <!-- Dirección/División/Oficina -->
+        <div class="col-md-6 col-10 mx-auto">
+          <mat-form-field appearance="outline">
+            <mat-label>Dirección/División/Oficina</mat-label>
+            <input matInput formControlName="area">
+          </mat-form-field>
+        </div>
+
+        <!-- Centro de costos -->
+        <div class="col-lg-4 col-md-6 col-10 mx-auto">
+          <mat-form-field appearance="outline">
+            <mat-label>Centro de costos</mat-label>
+            <mat-select formControlName="cost_center">
+              <mat-option [value]="m.id" *ngFor="let m of metadata?.cost_centers">{{m.nombre}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <!-- Tipos de solicitud -->
+        <div class="col-lg-4 col-md-6 col-10 mx-auto">
+          <mat-form-field appearance="outline">
+            <mat-label>Tipos de solicitud</mat-label>
+            <mat-select formControlName="type_request">
+              <mat-option [value]="tr.id" *ngFor="let tr of metadata?.type_requests">{{tr.nombre}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <!-- Tipos documental -->
+        <div class="col-lg-4 col-md-6 col-10 mx-auto">
+          <mat-form-field appearance="outline">
+            <mat-label>Tipos documental</mat-label>
+            <mat-select formControlName="type_documentary">
+              <mat-option [value]="tr.id" *ngFor="let tr of metadata?.type_documentarys">{{tr.nombre}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <!-- Visualización de privacidad -->
+        <div class="col-md-6 col-10 mx-auto">
+          <mat-form-field appearance="outline">
+            <mat-label>Visualización privacidad</mat-label>
+            <mat-select formControlName="privacy">
+              <mat-option [value]="p.id" *ngFor="let p of metadata?.privacys">{{p.nombre}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <!-- Fecha de aprobación -->
+        <div class="col-md-6 col-10 mx-auto">
+          <mat-form-field appearance="outline">
+            <mat-label>Fecha de aprobación</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="approval_date">
+            <mat-datepicker-toggle [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+    </section>
+
+    <section class="submit-fields-form mt-4">
+      <div class="d-flex flex-column">
+        <h5 class="text-black font-weight-bold">Diligencia los campos</h5>
+      </div>
+      <div class="row mt-3 gap-5">
+        <!-- Código -->
+        <div class="col-lg-4 col-md-6 col-10 mx-auto">
+          <mat-form-field appearance="outline">
+            <mat-label>Código</mat-label>
+            <input matInput formControlName="code">
+            <mat-error *ngIf="metadataForm.get('code').hasError('required') && metadataForm.get('code').touched">
+              El código es requerido.
+            </mat-error>
+            <mat-error *ngIf="metadataForm.get('code').hasError('minlength')">
+              El código debe tener al menos 3 caracteres.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Número de folios -->
+        <div class="col-lg-4 col-md-6 col-10 mx-auto">
+          <mat-form-field appearance="outline">
+            <mat-label>Número de folios</mat-label>
+            <input matInput formControlName="folio" type="number">
+            <mat-error *ngIf="metadataForm.get('folio').hasError('required') && metadataForm.get('folio').touched">
+              El número de folios es requerido.
+            </mat-error>
+            <mat-error *ngIf="metadataForm.get('folio').hasError('min')">
+              El número de folios debe ser mayor a 0.
+            </mat-error>
+            <mat-error *ngIf="metadataForm.get('folio').hasError('pattern')">
+              Solo se permiten números en este campo.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Versión -->
+        <div class="col-lg-4 col-md-6 col-10 mx-auto">
+          <mat-form-field appearance="outline">
+            <mat-label>Versión</mat-label>
+            <input matInput formControlName="version" type="number">
+            <mat-error *ngIf="metadataForm.get('version').hasError('required') && metadataForm.get('version').touched">
+              La versión es requerida.
+            </mat-error>
+            <mat-error *ngIf="metadataForm.get('version').hasError('min')">
+              La versión debe ser mayor a 0.
+            </mat-error>
+            <mat-error *ngIf="metadataForm.get('version').hasError('pattern')">
+              Solo se permiten números en este campo.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Vigencia desde -->
+        <div class="col-md-6 col-10 mx-auto">
+          <mat-form-field appearance="outline">
+            <mat-label>Vigencia desde</mat-label>
+            <input matInput [matDatepicker]="pickerStartDate" formControlName="start_date">
+            <mat-datepicker-toggle [for]="pickerStartDate"></mat-datepicker-toggle>
+            <mat-datepicker #pickerStartDate></mat-datepicker>
+            <mat-error *ngIf="metadataForm.get('start_date').hasError('required') && metadataForm.get('start_date').touched">
+              La fecha de inicio es requerida.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Vigencia hasta -->
+        <div class="col-md-6 col-10 mx-auto">
+          <mat-form-field appearance="outline">
+            <mat-label>Vigencia hasta</mat-label>
+            <input matInput [matDatepicker]="pickerEndDate" formControlName="end_date">
+            <mat-datepicker-toggle [for]="pickerEndDate"></mat-datepicker-toggle>
+            <mat-datepicker #pickerEndDate></mat-datepicker>
+            <mat-error *ngIf="metadataForm.get('end_date').hasError('required') && metadataForm.get('end_date').touched">
+              La fecha de término es requerida.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Descripción del cambio -->
+        <div class="col-md-6 col-10 mx-auto">
+          <mat-form-field appearance="outline">
+            <mat-label>Descripción del cambio</mat-label>
+            <input matInput formControlName="description_change">
+            <mat-error *ngIf="metadataForm.get('description_change').hasError('required') && metadataForm.get('description_change').touched">
+              La descripción es requerida.
+            </mat-error>
+            <mat-error *ngIf="metadataForm.get('description_change').hasError('maxlength')">
+              La descripción no debe exceder 200 caracteres.
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+
+      <!-- Submit Button -->
+      <div class="row mt-4">
+        <div class="col-lg-12 text-center">
+          <button mat-raised-button color="primary" (click)="onSubmit()">Guardar cambios</button>
+        </div>
+      </div>
+    </section>
+  </div>
+</app-layout-section>

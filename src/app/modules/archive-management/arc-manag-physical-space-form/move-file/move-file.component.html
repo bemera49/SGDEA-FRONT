@@ -1,0 +1,45 @@
+<form [formGroup]="moduleForm" class="form-horizontal" (ngSubmit)="submitForm()">
+    <div class="row">
+
+        <div class="modal-header col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-2">
+
+            <h4 class="modal-title w-100" id="myModalLabel">
+                <mat-label> {{ 'Trasladar la unidad de conservación a una nueva unidad de almacenamiento' | translate }} </mat-label>
+            </h4>
+
+            <button mat-button type="button" (click)="closeDialog()" title="{{ 'Cerrar' | translate }}" class="close pull-right" data-dismiss="alert" aria-label="Close">
+                <i class="material-icons">close</i>
+            </button>
+
+        </div>
+
+        <!-- card One -->
+        <div class="modal-body">
+            <div class="row">
+                <p>
+                    Por favor especifique el código de la nueva unidad de almacenamiento a la que se desea trasladar la unidad de conservación {{unidadCampoGaArchivo}}, incluida en la unidad de almacenamiento {{boxCode}}
+                </p>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <mat-form-field>
+                        <mat-label>{{ 'Código de la unidad de almacenamiento *' | translate }}</mat-label>
+                        <input matInput type="text" value="" formControlName="codigoUnidad" maxlength="50">
+                        <mat-error *ngIf="!moduleForm.get('codigoUnidad').valid || moduleForm.get( 'codigoUnidad').touched ">
+                            {{ 'El campo es obligatorio' | translate }}.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+            </div>
+        </div>
+        <!-- End card One -->
+
+    </div>
+
+    <div mat-dialog-actions style="display:flex;justify-content: center;gap: 10px">
+        <button class="btn bg-primary text-white rounded border-0 py-3 px-5" type="submit" [disabled]="validatecliente">Guardar</button>
+        <button class="btn bg-white border border-primary rounded py-3 px-5 text-primary" type="button" (click)="closeDialog()">Cancelar</button>
+    </div>
+</form>

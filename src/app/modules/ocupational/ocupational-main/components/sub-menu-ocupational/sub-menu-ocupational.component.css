@@ -1,0 +1,33 @@
+a{
+  text-decoration: none;
+}
+
+li{
+  list-style-type: none;
+}
+
+menu{
+  padding: 0;
+}
+.menu-ocupational{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.menu-ocupational li a{
+  font-weight: 300;
+  color: #A4A4AD;
+}
+
+.menu-ocupational li span{
+  color: #A4A4AD;
+}
+
+.menu-ocupational li a:hover{
+  color: #023F5E;
+}
+
+.menu-ocupational li a.router-link-active-ocupational{
+  color: #023F5E;
+}

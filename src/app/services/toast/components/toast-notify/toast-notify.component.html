@@ -1,0 +1,25 @@
+<article
+  class="toast-notification d-inline-flex justify-content-between w-full"
+>
+  <div class="d-flex flex-row align-items-center">
+    <mat-icon class="toast-icon text-primary">{{
+      data.success ? "done" : "error"
+    }}</mat-icon>
+    <div class="px-4">
+      <p class="toast-title w-100" matSnackBarLabel>{{ data.title }}</p>
+      <p class="toast-subtitle w-100" matSnackBarLabel>
+        {{ data.description }}
+      </p>
+    </div>
+  </div>
+  <button
+    class="toast-close"
+    mat-icon-button
+    aria-label="Cerrar"
+    matSnackBarAction
+    (click)="snackBarRef.dismissWithAction()"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</article>
+

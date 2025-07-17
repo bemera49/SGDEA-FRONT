@@ -1,0 +1,17 @@
+<div class="visualization">
+  <div *ngFor="let user of observations" class="container-data">
+    <div class="flex">
+      <b>Usuario:</b>
+      <strong>{{user.user}}</strong>
+    </div>
+    <div class="flex">
+      <b>Fecha:</b>
+      <span>{{user.fecha | date:'dd/MM/yyyy hh:mm:ss a'}}</span>
+    </div>
+    <div class="flex">
+      <b>Observación:</b>
+      <p>{{user.contenido}}</p>
+    </div>
+  </div>
+
+</div>

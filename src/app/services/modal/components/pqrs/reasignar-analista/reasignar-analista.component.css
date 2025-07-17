@@ -1,0 +1,29 @@
+.modal-container {
+    width: 500px;
+}
+
+.modal-icon {
+    font-size: 50px;
+}
+
+.modal-message {
+    font-size: 18px;
+}
+
+.modal-description {
+font-size: 14px;
+}
+
+.modal-button {
+    width: 90%;
+}
+
+@media (max-width: 600px) {
+    .modal-container {
+        width: 100%;
+    }
+
+    .modal-button {
+        width: 80%;
+    }
+}

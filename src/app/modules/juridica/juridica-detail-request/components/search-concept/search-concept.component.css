@@ -1,0 +1,175 @@
+/* INICIO estilos generales */
+.title {
+    margin-left: 10px;
+    color: #000000;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    display: inline;
+    font-size: 24px;
+    margin-bottom: 16px;
+}
+
+.contentTitle {
+    flex-direction: column;
+    margin: 2px;
+    padding: 2px;
+    background-color: #ffffff;
+}
+
+.sectionContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 8px;
+    padding: 10px;
+    background-color: #ffffff;
+}
+
+.grid-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-left: 10px;
+    margin-bottom: 20px;
+}
+
+.row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 1px;
+}
+
+.column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #6C6B76;
+    font-size: 16px;
+}
+
+/* FIN estilos generales */
+
+
+/* Ajusta la distancia del icono y el placeholder */
+::ng-deep .mat-form-field .mat-icon {
+    margin-right: 10px;
+}
+
+
+/* INICIO Estilos botones */
+.btn-small {
+    padding: 2px 3px;
+    font-size: 18.4px;
+    width: 130px;
+    margin-bottom: 8px;
+    /* Aseguramos márgenes entre botones */
+    margin-right: 12px;
+    /* Este margen aplica separación entre los botones */
+}
+
+.buttons {
+    display: flex;
+    gap: 12px;
+    /* Mantiene el espacio entre botones */
+    margin-bottom: 1px;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttons .btn-small:last-child {
+    margin-right: 0;
+    /* Eliminamos margen del último botón para mantener el diseño limpio */
+}
+
+/* FIN Estilos botones */
+
+
+/*INICIO Estilos tabla conceptos*/
+.horizontal-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+.horizontal-table td {
+    color: #2C3948;
+    padding: 8px 12px;
+    border: none;
+    vertical-align: top;
+}
+
+.horizontal-table td:first-child {
+    font-weight: bold;
+    color: #333;
+}
+
+.horizontal-table a {
+    color: #00a4e4;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    padding-left: 12px;
+    position: relative;
+}
+
+.horizontal-table a::after {
+    position: absolute;
+    right: -12px;
+    font-weight: bold;
+}
+
+.horizontal-table tr:last-child a {
+    padding: 8px 0;
+    text-align: right;
+    display: block;
+    width: 100%;
+}
+
+/*INICIO Estilos paginator*/
+.pagination-container {
+    overflow-x: auto;
+}
+
+/*FIN Estilos paginator*/
+
+
+/*INICIO ver ficha*/
+
+.btn-volver {
+    margin-left: 10px;
+    cursor: pointer;
+    color: #00A3E4;
+    display: flex;
+    align-items: center;
+}
+
+
+.sectionContent {
+    padding: 16px;
+}
+
+.grid-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.column {
+    flex: 1;
+    min-width: 200px;
+    margin: 8px;
+}
+
+.label {
+    font-weight: bold;
+}
+
+.value {
+    margin-top: 4px;
+}

@@ -1,0 +1,53 @@
+<section class="containerQDetail">
+    <div class="contenedorCard">
+        <!-- Tablas de datos -->
+        <div class="metadata-container">
+            <!-- Metadatos disponibles -->
+            <div class="metadata-list">
+                <h3><b>Metadatos disponibles</b></h3>
+                <p>Haga click en el metadato que desea asignar</p>
+                <ul>
+                    <li *ngFor="let metadata of metadatosDisponibles; let i = index" (click)="onAssign(metadata)">
+                        {{metadata.id}} | {{metadata.nombre}}
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Flechas para transferir toda la información -->
+            <div class="metadata-buttons">
+                <button mat-icon-button (click)="assignAll()">
+                    <mat-icon>chevron_right</mat-icon>
+                </button>
+                <button mat-icon-button (click)="unassignAll()">
+                    <mat-icon>chevron_left</mat-icon>
+                </button>
+            </div>
+
+            <!-- Metadatos asignados -->
+            <div class="metadata-list">
+                <h3><b>Metadatos asignados</b></h3>
+                <p>Haga click en el botón eliminar para desasignar un metadato</p>
+                <ul>
+                    <li *ngFor="let metadata of assignedMetadata; let i = index">
+                        {{metadata.nombre}}
+                        <button mat-icon-button (click)="onRemove(metadata)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+
+        </div><br>
+
+        <!-- Buttons Guardar/Cancelar -->
+        <div class="buttons" class="d-flex justify-content-center align-items-center">
+            <button mat-button style="color: #00A3E4;" (click)="onClose()">
+                <strong>Cancelar</strong>
+            </button>
+            <button class="custom-add-button" (click)="onSave()">
+                Guardar
+            </button>
+        </div>
+
+    </div>
+</section>

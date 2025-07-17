@@ -1,0 +1,12 @@
+<nav class="nav-ocupational">
+  <menu class="menu-ocupational">
+    <li><a href="">Inicio</a></li>
+    <li><span>/</span></li>
+    <li><a href="">Ocupacional</a></li>
+    <li><span>/</span></li>
+    <ng-container *ngFor="let item of ItemsMenu">
+      <li><a [routerLink]="['/ocupational/',item.link]" routerLinkActive="router-link-active-ocupational">{{item.text}}</a></li>
+      <li><span>/</span></li>
+    </ng-container>
+  </menu>
+</nav>

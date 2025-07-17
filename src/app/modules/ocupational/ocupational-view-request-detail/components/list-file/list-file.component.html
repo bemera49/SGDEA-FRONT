@@ -1,0 +1,56 @@
+<div class="flex w-5 mb-5">
+  <section class="flex px-4 mx-2">
+    <main class="pl-3 pb-4">
+      <h2 class="font-weight-bold">Examenes Anexos</h2>
+    </main>
+    <section class="pl-4 rounded border border-[#E2E2E2]">
+      <header>
+          <h3 class="font-weight-bold">Seleccione El Examen</h3>
+      </header>
+  <!-- quality-download-template.component.html -->
+
+  <article class="pl-2 col">
+
+    <div class="row" *ngFor="let documento of getDatosShow()">
+      <div class="col-md-10">
+        <div class="w-100 d-flex justify-content-center mt-2 gap-2">
+          <button   [disabled]="buttondowload" (click)="descargarDocumento(documento.id, documento.original_name)" class="flex row rounded border border-[#E2E2E2] w-100 bg-transparent p-2 pl-3 align-items-center mb-3">
+            <!-- Icono para archivo Word -->
+            <ng-container  *ngIf="documento.mime_type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'">
+              <img class="mr-4" src="assets/img/logos/word-icon.svg" alt="Word Icon"/>
+            </ng-container>
+            <!-- Icono para archivo Excel -->
+            <ng-container *ngIf="documento.mime_type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'">
+              <img  class="mr-4" src="assets/img/logos/excel-icon.svg" alt="Excel Icon">
+            </ng-container>
+            <ng-container *ngIf="documento.mime_type === 'application/pdf'">
+              <img  class="mr-4" src="assets/img/logos/pdf-icon.svg" alt="Pdf Icon">
+            </ng-container>
+            {{ documento.original_name }}
+          </button>
+        </div>
+      </div>
+    <!--
+      <div class="col-md-2">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="w-100 d-flex justify-content-center mt-2 gap-2">
+              <ng-container>
+                <div class="text-center">
+                  <button (click)="mostrarDocumento(documento.id, documento.original_name)" class="btn btn-primary">Ver</button>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    -->
+    </div>
+    
+  </article>
+
+    </section>
+  </section>
+</div>
+
+

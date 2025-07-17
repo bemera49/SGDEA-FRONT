@@ -1,0 +1,70 @@
+<!-- HU 009 - Reasignar PQRS o solicitud a analista para su trámite -->
+
+<mat-dialog-content class="modal-container">
+  <div class="d-flex flex-row align-items-center justify-content-between">
+    <mat-icon class="text-primary">group</mat-icon>
+    <button mat-icon-button (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <h2 mat-dialog-title class="w-100 mt-2 text-body">{{ data.title }}</h2>
+  <p class="w-100">Completa los campos para realizar la reasignación.</p>
+
+  <form class="row" [formGroup]="form">
+    <!-- <mat-form-field appearance="fill" class="col-md-12">
+      <mat-label>Seleccione el rol</mat-label>
+      <mat-select formControlName="rol">
+        <mat-option *ngFor="let role of roles" [value]="role.idRol">{{role.nombreRol}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.controls['rol'].invalid || form.controls['rol'].touched">
+        Este campo es requerido
+      </mat-error>
+    </mat-form-field> -->
+
+    <mat-form-field appearance="fill" class="col-md-6">
+      <mat-label>Fecha inicial</mat-label>
+      <input formControlName="fecha_inicial" matInput type="date">
+      <mat-error *ngIf="form.controls['fecha_inicial'].invalid || form.controls['fecha_inicial'].touched">
+        Este campo es requerido
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="col-md-6">
+      <mat-label>Fecha final</mat-label>
+      <input formControlName="fecha_final" matInput type="date">
+      <mat-error *ngIf="form.controls['fecha_final'].invalid || form.controls['fecha_final'].touched">
+        Este campo es requerido
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="col-md-12">
+      <mat-label class="title m-0">Rol</mat-label>
+      <mat-select placeholder="Seleccione" formControlName="rol"  >
+        <mat-option *ngFor="let rol of listRoles" [value]="rol.idRol">{{rol.nombreRol}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.controls['rol'].invalid || form.controls['rol'].touched">
+        Este campo es requerido
+      </mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field appearance="fill" class="col-md-12">
+      <mat-label>Funcionario actual</mat-label>
+      <mat-select formControlName="funcionario_actual">
+        <mat-option *ngFor="let funcionario of funcionarios" [value]="funcionario.id">{{funcionario?.user_detalle?.full_name}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.controls['funcionario_actual'].invalid || form.controls['funcionario_actual'].touched">
+        Este campo es requerido
+      </mat-error>
+    </mat-form-field>
+
+   
+    
+    <div class="d-flex flex-wrap flex-md-nowrap justify-content-center" style="gap: 10px">
+      <button type="button" mat-stroked-button class="border border-primary text-primary bg-white w-100" (click)="close()">Cancelar</button>
+      <button mat-flat-button class="bg-primary text-white w-100" (click)="submit()">Buscar</button>
+    </div>
+  </form>
+
+</mat-dialog-content>

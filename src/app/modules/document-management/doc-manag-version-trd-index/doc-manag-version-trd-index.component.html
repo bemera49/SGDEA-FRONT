@@ -1,0 +1,139 @@
+<div class="main-content">
+  <app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+  <div class="container-fluid">
+
+      <!-- Start Row One -->
+      <div class="row ">
+          <!-- start Detail card -->
+          <div class="col-12">
+              <div class="card ">
+                  <div class="card-header card-header-info card-header-icon">
+                      <div class="card-icon">
+                          <i class="material-icons">{{ initCardHeaderIcon }}</i>
+                      </div>
+                      <h4 class="card-title">
+                        {{initCardHeaderTitle}}
+                      </h4>
+                  </div>
+                  <div class="card-body">
+                      <div class="row">
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-sm-12">
+                              <div class="row d-flex align-items-stretch mb-4">
+                                  <div class=" col-xl-3  col-lg-4 col-md-6 col-sm-12">
+                                    <mat-form-field appearance="outline" >
+                                      <mat-label>Nombre/Versión TRD</mat-label>
+                                      <input  [(ngModel)]="nameVersion" style="height: 20px" matInput>
+                                    </mat-form-field>
+                                  </div>
+                                  <div class="col-xl-3  col-lg-4 col-md-6 col-sm-12">
+                                    <mat-form-field appearance="outline"  >
+                                      <mat-label>Tipo de instrumento</mat-label>
+                                      <mat-select [(ngModel)]="instrumentalType" style="height: 20px" class="" >
+                                        <mat-option value="Tabla de Retención Documental">Tabla de Retención Documental</mat-option>
+                                        <mat-option value="Tabla de Valoración Documental">Tabla de Valoración Documental</mat-option>
+                                      </mat-select>
+                                    </mat-form-field>
+                                  </div>
+                                  <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12">
+                                    <mat-form-field  appearance="outline">
+                                      <mat-label>Estado</mat-label>
+                                      <mat-select [(ngModel)]="status" style="height: 20px" class="" >
+                                        <mat-option value="Activa">Activo</mat-option>
+                                        <mat-option value="Inactiva">Inactivo</mat-option>
+                                        <mat-option value="Borrador">Borrador</mat-option>
+                                      </mat-select>
+                                    </mat-form-field>
+                                  </div>
+                                  <div class="col-lg-2 col-md-6 col-sm-12">
+                                    <button (click)="getTrdVersions()" mat-raised-button class="btn bg-primary " type="button" id="exportToExcelButton" >
+                                        Consultar
+                                    </button>
+                                  </div>
+                                  <div class="col-lg-2 col-md-6 col-sm-12">
+                                    <button [disabled]="!status.length && !instrumentalType.length && !nameVersion.length" mat-raised-button class="btn bg-secondary " style="color: white; " (click)="clearFilters()">
+                                      Limpiar filtros
+                                      <mat-icon>
+                                        close
+                                      </mat-icon>
+                                    </button>
+                                  </div>
+                              </div>
+                            </div>
+                              <div #dataTable class="table-responsive" *ngIf="trdVersions.length > 0   else ''">
+                                <table class="table">
+                                  <thead>
+                                    <tr>
+                                      <th scope="col">#</th>
+                                      <th scope="col">Nombre versión TRD</th>
+                                      <th scope="col">Tipo</th>
+                                      <th scope="col">Fecha inicio aplicación</th>
+                                      <th scope="col">Fecha final aplicación</th>
+                                      <th scope="col">Estado</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr *ngFor="let trd of trdVersions; let i = index">
+                                      <th scope="row">{{i + 1}}</th>
+                                      <td  >
+                                       <a [routerLink]="['/documentManagement/version-trd-update', trd.id]"  class="link-underline-primary">
+                                       {{trd.version_nombre}}
+                                       </a>
+                                      </td>
+                                      <td>{{trd.tipo_instrumento}}</td>
+                                      <td>{{trd.fecha_inicio_aplicacion}}</td>
+                                      <td>{{trd.fecha_final_aplicacion || 'No definida'}}</td>
+                                      <td>{{trd.estado }}</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                              <nav class="d-flex justify-content-end" aria-label="Page navigation example">
+                                <ul class="pagination">
+                                  <li class="page-item" [class.disabled]="currentPage === 1">
+                                    <a class="page-link" (click)="onPageChange(currentPage - 1)" aria-label="Previous">
+                                      <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                  </li>
+                                  <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="currentPage === i + 1">
+                                    <a class="page-link" (click)="onPageChange(i + 1)">{{ i + 1 }}</a>
+                                  </li>
+                                  <li class="page-item" [class.disabled]="currentPage === totalPages">
+                                    <a class="page-link" (click)="onPageChange(currentPage + 1)" aria-label="Next">
+                                      <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                  </li>
+                                </ul>
+                              </nav>
+                          </div>
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 w-100">
+                              <div class="d-flex justify-content-end mt-3">
+                                <button class="btn bg-primary" type="button" id="exportToExcelButton"
+                                  style="background-color: #00A3E4;  margin-right: 10px;" (click)="downloadFileExcel()">
+                                  Exportar a Excel
+                                </button>
+                                <button class="btn bg-primary" type="button" id="exportToExcelButton"
+                                  style="background-color: #00A3E4;  margin-right: 10px;"routerLink="/documentManagement/version-trd-create">
+                                    Crear Tabla  de retención Documental
+                                </button>
+                              </div>
+                          </div>
+                      </div>
+                      <ng-template #message>
+                        <div class="d-flex flex-column justify-content-center align-items-center">
+                          <img src="/assets/img/Documents.svg" alt="document" class="img-document" />
+                          <strong>019.No se encontraron registros
+                            que coincidan con su consulta</strong>
+                        </div>
+                      </ng-template>
+                  </div>
+              </div>
+
+          </div>
+          <!-- End Detail card -->
+      </div>
+      <!-- End Row One -->
+  </div>
+</div>
+
+

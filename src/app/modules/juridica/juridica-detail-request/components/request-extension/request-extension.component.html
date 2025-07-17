@@ -1,0 +1,63 @@
+<div class="card">
+    <div class="card-body">
+
+        <h3 class="mb-4" style="color: #000000; font-weight: 300; font-family: 'Poppins', sans-serif; text-align: center;">
+            <strong>Solicitud de prórroga</strong>
+        </h3>
+
+        <!-- Primero va un párrafo con Justificación y al lado un input con mat-form-field utilizando textArea -->
+        <div class="row">
+            <div class="col-3">
+                <p style="color: #A4A4AD; font-weight: 400; font-family: 'Poppins', sans-serif;">
+                    <strong>Justificación</strong>
+                </p>
+            </div>
+            <div class="col-9">
+                <mat-form-field class="full-width">
+                    <textarea matInput placeholder="Inserte" [formControl]="justification"></textarea>
+                    <mat-error *ngIf="justification.hasError('required') && justification.touched">
+                        Campo obligatorio
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <!-- Despues va, Rango definido y con un input de selección -->
+        <div class="row mt-4">
+            <div class="col-6">
+                <p style="color: #A4A4AD; font-weight: 400; font-family: 'Poppins', sans-serif;">
+                    <strong>Rango definido</strong>
+                </p>
+            </div>
+            <div class="col-6">
+                <mat-form-field class="full-width">
+                    <mat-select placeholder="Seleccione" [formControl]="range">
+                        <mat-option *ngFor="let item of ranges" [value]="item.id">
+                            {{ item.range_name }}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="range.hasError('required') && range.touched">
+                        Campo obligatorio
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <!-- Y por último las Observaciones, con su input de tipo textArea -->
+        <div class="row mt-4">
+            <div class="col-3">
+                <p style="color: #A4A4AD; font-weight: 400; font-family: 'Poppins', sans-serif;">
+                    <strong>Observaciones</strong>
+                </p>
+            </div>
+            <div class="col-9">
+                <mat-form-field class="full-width">
+                    <textarea matInput placeholder="Inserte" [formControl]="observation"></textarea>
+                    <!-- <mat-error *ngIf="observation.hasError('required') && observation.touched">
+                        Campo obligatorio
+                    </mat-error> -->
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="d-flex flex-column align-items-center modal-container">
+    <span *ngIf="data.isSuccess; else errorIcon" class="material-icons text-primary modal-icon">
+        check_circle
+    </span>
+    <ng-template #errorIcon>
+        <span class="material-icons text-primary modal-icon">
+            report
+        </span>
+    </ng-template>
+
+    <p class="text-center my-3 w-100 modal-message">{{ data.title }}</p>
+    <p class="text-center mb-25 w-100 modal-description">{{ data.description }}</p>
+
+    <button class="btn btn-primary text-center modal-button" (click)="close()">Aceptar</button>
+</div>

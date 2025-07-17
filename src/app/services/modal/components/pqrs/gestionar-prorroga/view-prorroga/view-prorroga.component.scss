@@ -1,0 +1,14 @@
+.container-view {
+  background: white;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  margin: 1% 1rem;
+  form {
+    padding: 1rem;
+    .inputs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+  }
+}

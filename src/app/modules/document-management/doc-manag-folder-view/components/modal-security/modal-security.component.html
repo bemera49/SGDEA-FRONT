@@ -1,0 +1,41 @@
+<h4>Seguridad</h4>
+<form [formGroup]="formSecurity">
+  <div class="row mt-4">
+    <mat-form-field class="col-md-12 col-lg-6">
+      <mat-label>Asunto / Contenido</mat-label>
+      <input type="text" matInput formControlName="asunto" />
+    </mat-form-field>
+
+    <mat-form-field class="col-md-12 col-lg-6">
+      <mat-label>Nombre de archivo</mat-label>
+      <input type="text" matInput formControlName="nombreDocuemento" />
+    </mat-form-field>
+  </div>
+
+  <div class="row ">
+    <mat-form-field class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+      <mat-label>Clasificación de seguridad</mat-label>
+      <mat-select id="clasificacionSeguridad" formControlName="clasificacionSeguridad" name="clasificacionSeguridad">
+        <mat-option value="Clasificado">Clasificado</mat-option>
+        <mat-option value="Reservado">Reservado</mat-option>
+        <mat-option value="Publico">Público</mat-option>
+      </mat-select>
+
+      <!-- <mat-error
+      *ngIf="!formSecurity.get('clasificacionSeguridad').valid && formSecurity.get('clasificacionSeguridad').touched">
+      {{ "El campo es obligatorio" }}
+    </mat-error> -->
+    </mat-form-field>
+
+    <!--  [disabled]="!formSecurity.get('clasificacionSeguridad').valid" -->
+    <button mat-raised-button class="btn btn-primary" type="submit" (click)="openModalModify()">
+      Reclasificar expediente
+    </button>
+  </div>
+</form>
+
+<div class="container-tables">
+  <app-table-dependency-doc></app-table-dependency-doc>
+  <app-table-auth-doc></app-table-auth-doc>
+
+</div>

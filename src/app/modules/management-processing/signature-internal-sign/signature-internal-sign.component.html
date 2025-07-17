@@ -1,0 +1,51 @@
+<button mat-icon-button (click)="this.router.navigate(['/signin/home'])" style="width: 150px; margin: 20px">
+    <mat-icon>chevron_left</mat-icon>Volver
+</button>
+
+<div style="width: 90%; margin: 0 auto; display: flex; justify-content: center; align-items: center; padding: 20px">
+    <h3 class="title-page">Firma electrónica de documentos</h3>
+
+</div>
+
+<div  style="width: 90%; display: flex; justify-content: flex-end; align-items: center; gap: 16px; padding: 16px;  border: 1px solid #E2E2E2; border-radius: 20px; margin: 0 auto; background: white; margin-bottom: 40px;">
+   
+    <embed style="width: 100%; height: 900px" [src]="base64Data" type="application/pdf">
+
+   
+    <form [formGroup]="formGroup" style="width: 30%">
+        <div>
+            <span>
+                <label for="">Asunto del documento</label>
+                <mat-form-field appearance="outline" >
+                    <input type="text" matInput [readonly]="true" formControlName="asunto" placeholder="Ingrese">
+                </mat-form-field>
+            </span>
+         
+            <span>
+                <label for="">Proyector</label>
+                <mat-form-field appearance="outline" >
+                    <input type="text" matInput [readonly]="true" formControlName="proyector" placeholder="Ingrese">
+                </mat-form-field>
+            </span>
+            
+            <span>
+                <label for="">Fecha límite</label>
+                <mat-form-field appearance="outline" >
+                    <input matInput type="datetime-local" [readonly]="true"  formControlName="fechaLimite" placeholder="start date">
+                </mat-form-field>
+            </span>
+        
+       
+        </div>
+       
+
+        <div style="width: 100%; display: flex; justify-content: center; align-items: center; gap: 8px;">
+            <button mat-button style="width: 50%" class="bg-primary text-white"
+            (click)="postCambiarEstado(2, 1)" [disabled]="approvedButton">Aprobar</button>
+            <button mat-button (click)="postCambiarEstado(4, 2)" [disabled]="refuseButton"style="width: 50%" class="bg-primary text-white">
+                Rechazar
+            </button>
+        </div>
+
+    </form>
+</div>

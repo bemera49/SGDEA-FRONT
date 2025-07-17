@@ -1,0 +1,31 @@
+<!-- HU 006 - Realizar Clasificación interna de una PQRS o solicitud - TIPIFICAR-->
+
+<mat-dialog-content class="modal-container">
+  <div class="d-flex flex-row align-items-center justify-content-between">
+    <mat-icon class="text-primary">account_tree</mat-icon>
+    <button mat-icon-button (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <h2 mat-dialog-title class="w-100 mt-2 text-body">{{ data.title }}</h2>
+  <p class="w-100">Completa los campos para realizar el proceso.</p>
+
+  <span>
+    <label for="">Clasificación interna</label>
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-select [(ngModel)]="selectedClasificacionInternaId" (ngModelChange)="onSelectClasificacionInterna()"
+        placeholder="Seleccione">
+        <mat-option *ngFor="let clasificacionesInterna of clasificacionesInternas"
+          [value]="clasificacionesInterna.id">{{clasificacionesInterna.detalle}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </span>
+
+  <div class="d-flex flex-wrap flex-md-nowrap justify-content-center" style="gap: 10px">
+    <button type="button" mat-stroked-button class="border border-primary text-primary bg-white w-100"
+      (click)="onConfirmClose()" [disabled]="modalOpen">Cancelar</button>
+    <button mat-flat-button class="bg-primary text-white w-100" (click)="onConfirm()"
+      [disabled]="!selectedClasificacionInternaId || modalOpen ">Aceptar</button>
+  </div>
+</mat-dialog-content>

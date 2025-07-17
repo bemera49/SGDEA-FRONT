@@ -1,0 +1,50 @@
+.input-meeting{
+  display: inline-block;
+  width: 174px;
+  max-height: 80px;
+  padding: 20px 10px;
+  border-radius: 6px;
+  border: 1px solid #E2E2E2;
+  line-height: 12px;
+  background-color: #fff;
+  overflow: auto;
+  white-space: nowrap; 
+}
+
+
+
+
+.file{
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  width: 100%;
+}
+
+
+.container-file{
+  position: relative; 
+}
+
+.file-requerid{
+  border: 1px solid #e41212; 
+}
+
+.label-file{
+  cursor: pointer;
+  width: 143px;
+  font-weight: 600;
+  line-height: 16px;
+}
+
+.clip{
+  position: absolute;
+  top: 9px;
+  right: 10%;
+
+}
+
+.input-meeting:required{
+  border: 1px solid #e41212;
+}
+

@@ -1,0 +1,299 @@
+/**
+
+ */
+
+import { AfterViewChecked, Component, ElementRef, EventEmitter, Inject, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { GlobalAppService } from 'src/app/services/global-app.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { RestService } from 'src/app/services/rest.service';
+import { SweetAlertService } from 'src/app/services/sweet-alert.service';
+import { environment } from 'src/environments/environment';
+/* import { table } from 'console'; */
+
+export interface DialogData {
+  idDocument: any;
+  initCardHeaderIcon: any;
+  textForm: any;
+  ruoteServiceDocuments: any;
+  redirectionPath: any;
+  dataDocumentos: any;
+}
+
+@Component({
+  selector: 'app-view-pdf-modal',
+  template: '',
+  styleUrls: ['./view-pdf-modal.component.css']
+})
+export class ViewPdfModalComponent implements OnInit {
+
+  @Output() public closeModalEmiter = new EventEmitter<any>(); // Data a retornar
+  // Variable para dar tamaño al dialog
+  widthDialog = '95%';
+  // Iconos del formulario
+  @Input() initCardHeaderIcon = 'library_books';
+  // Nombre de tarjetas del formulario
+  @Input() textForm = 'Vista del documento';
+  // Ruta a ejecutar
+  @Input() ruoteServiceDocuments: any = 'radicacion/documentos/upload-document';
+  // Objeto que se envia al back como parametro request
+  @Input() idDocument: object;
+  // Ruta a redirigir en caso de que el usuario no posea permisos para realizar la accion
+  @Input() redirectionPath = '/dashboard';
+  // Data adicionar para enviar al servicio
+  @Input() dataDocumentos: any;
+
+  constructor(public dialog: MatDialog) { }
+
+  ngOnInit() {
+    // hace le llamado del dialogo
+    //this.openDialog();
+  }
+
+  /** Metodo que abre el dialogo para digitar los filtros */
+  openDialog() {
+
+    const dialogRef = this.dialog.open(ViewPdfModalDialog, {
+      disableClose: false,
+      width: this.widthDialog,
+      data: {
+        idDocument: this.idDocument,
+        initCardHeaderIcon: this.initCardHeaderIcon,
+        textForm: "Prueba de modal",
+        ruoteServiceDocuments: this.ruoteServiceDocuments,
+        redirectionPath: this.redirectionPath,
+        dataDocumentos: this.dataDocumentos
+      }
+    });
+    dialogRef.afterClosed().subscribe(res => {
+      let respuesta = res;
+      if (!respuesta) {
+        respuesta = { event: 'close', status: false, data: [] };
+      }
+      this.closeComponent(respuesta);
+    });
+  }
+
+  /*** Método para cerrar o destruir el componente desde el padre ***/
+  closeComponent(respuesta) {
+    this.closeModalEmiter.emit(respuesta);
+  }
+
+}
+
+
+@Component({
+  selector: 'app-view-pdf-modal-dialog',
+  templateUrl: './view-pdf-modal.component.html',
+  styleUrls: ['./view-pdf-modal.component.css']
+})
+
+export class ViewPdfModalDialog implements OnInit, AfterViewChecked {
+
+  /**Variable del formulario */
+  initCardHeaderIcon: any; // Icono del formulario
+  textForm: string; // titulo del formulrio
+  ruoteServiceDocuments: any; // Ruta a ejecutar
+  redirectionPath: any; // Ruta redireccionar
+  idDocument: any; // id Del documento a descargar
+  dataDocumentos: any; // Data adicional para enviar al servicio
+
+  validTextType: boolean = false;
+  // Version api
+  versionApi = environment.versionApiDefault;
+
+  // Autentificacion
+  authorization: string;
+
+  // Variables de consumo de servicios
+  responseService: any;
+  responseServiceErr: any;
+
+  // textAlertViewPdfStatus: boolean = false;
+  textAlertViewPdfStatus: boolean = true;
+  textAlertViewPdf: string;
+  styleIframe: any = {
+    'display': 'none'
+  };
+  styleContent: any = {
+    'height': '150px'
+  };
+
+  viewImageStatus: boolean = true;
+  viewPdfStatus: boolean = true;
+  colGrip: string = "col-lg-12 col-md-12 col-sm-12 col-xs-12";
+  styleContentNew: any = {
+    'height': '500px'
+  };
+
+  /*** pdfOpen ***/
+  pdfAsArray: any;
+  urlTemplate: string;
+  binaryData: any = [];
+  dataPdf: any;
+  imageUrl: any;
+  raw: any;
+  rawLength: any;
+
+  typeRenderFile: string = "application/pdf";
+
+  @ViewChild('pdfIframe') pdfIframe!: ElementRef;
+
+
+  constructor(
+    public dialogRef: MatDialogRef<ViewPdfModalDialog>, @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    public sweetAlertService: SweetAlertService, private globalAppService: GlobalAppService,
+    public lhs: LocalStorageService, public restService: RestService
+  ) {
+
+    /**
+    * Configuración del formulario
+    */
+    this.initCardHeaderIcon = this.data.initCardHeaderIcon;
+    this.textForm = this.data.textForm;
+    this.idDocument = this.data.idDocument;
+    this.ruoteServiceDocuments = this.data.ruoteServiceDocuments;
+    this.redirectionPath = this.data.redirectionPath;
+    this.dataDocumentos = this.data.dataDocumentos;
+  }
+
+  ngOnInit() {
+    this.getTokenLS();
+  }
+
+
+  printPdf() {
+    const iframe = this.pdfIframe.nativeElement as HTMLIFrameElement;
+    if (iframe && iframe.contentWindow) {
+      iframe.contentWindow.focus();  // Asegurarse de que el iframe tiene el foco
+      iframe.contentWindow.print();  // Llamar a la función de impresión del navegador
+    }
+  }
+
+  // Método para obtener el token que se encuentra encriptado en el local storage
+  getTokenLS() {
+    // Se consulta si el token se envió como input //
+    this.lhs.getToken().then((res: string) => {
+      this.authorization = res;
+      this.dowloadDocuments(this.idDocument, this.authorization);
+    });
+  }
+
+  ngAfterViewChecked() {
+    $('.cdk-global-overlay-wrapper').css('z-index', '1000');
+    $('.cdk-overlay-pane').css('overflow', 'auto');
+  }
+
+  closeDialog() {
+    this.dialogRef.close({ event: 'close', status: false, data: [] });
+  }
+
+  dowloadDocuments(idDocument, authorization) {
+
+    let data = {
+      ButtonSelectedData: {
+        0: {
+          id: idDocument
+        }
+      }
+    };
+
+    if (this.dataDocumentos) {
+      data['ButtonSelectedData'][0] = this.dataDocumentos;
+    }
+
+    this.sweetAlertService.sweetLoading();
+
+    this.restService.restPut(this.versionApi + this.ruoteServiceDocuments, data, authorization).subscribe(
+      (res) => {
+        this.responseService = res;
+        this.globalAppService.resolveResponse(this.responseService, false).then((res) => {
+          let responseResolveResponse = res;
+          if (responseResolveResponse == true) {
+
+            this.viewPdfStatus = true;
+            this.styleIframe = {
+              'display': 'block'
+            };
+            this.styleContent = this.styleContentNew;
+            console.log(this.responseService);
+            let fileName = this.responseService.fileName;
+            var extension = fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
+
+            if (extension === 'pdf') {
+              this.openPdf(this.responseService.datafile);
+              this.viewImageStatus = false
+              this.viewPdfStatus = true
+            } else {
+              this.viewPdfStatus = false
+              this.viewImageStatus = true
+              this.openImage(this.responseService.datafile);
+            }
+            // Cargando false
+            this.sweetAlertService.sweetClose();
+          } else {
+            this.closeDialog();
+          }
+        });
+
+      }, (err) => {
+        this.responseServiceErr = err;
+        // Evaluar respuesta de error del servicio
+        this.globalAppService.resolveResponseError(this.responseServiceErr).then((res) => { });
+        this.closeDialog();
+      }
+    );
+  }
+
+  openImage(fileBase64) {
+    if (this.viewImageStatus) {
+      this.processDataImage(fileBase64).then(() => {
+        document.getElementById('imageView').setAttribute('src', this.imageUrl);
+      });
+    }
+  }
+
+  processDataImage(fileBase64) {
+    return new Promise(resolve => {
+      let imageAsArray = this.convertDataURIToBinary(fileBase64);
+      this.imageUrl = 'assets/images/';  // Ruta de la imagen
+      this.binaryData = [];
+      this.binaryData.push(imageAsArray);
+      this.imageUrl = window.URL.createObjectURL(new Blob(this.binaryData, { type: this.typeRenderFile }));
+      resolve(true);
+    });
+  }
+
+  openPdf(fileBase64) {
+    if (this.viewPdfStatus) {
+      this.processDataPdf(fileBase64).then((res) => {
+        document.getElementById('frameViewPdf').setAttribute('src', this.urlTemplate + encodeURIComponent(this.dataPdf));
+      });
+    }
+  }
+
+  processDataPdf(fileBase64) {
+    return new Promise(resolve => {
+      this.pdfAsArray = this.convertDataURIToBinary(fileBase64);
+      this.urlTemplate = 'assets/dist/pdfViewJs/viewer.html?file=';
+      this.binaryData = [];
+      this.binaryData.push(this.pdfAsArray);
+      this.dataPdf = window.URL.createObjectURL(new Blob(this.binaryData, { type: this.typeRenderFile }));
+      resolve(true);
+    });
+  }
+
+  convertDataURIToBinary(base64) {
+    this.raw = window.atob(base64);
+    this.rawLength = this.raw.length;
+    var array = new Uint8Array(new ArrayBuffer(this.rawLength));
+    for (var i = 0; i < this.rawLength; i++) {
+      array[i] = this.raw.charCodeAt(i);
+    }
+
+    return array;
+  }
+
+
+
+}

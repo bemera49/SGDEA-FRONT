@@ -1,0 +1,499 @@
+{
+  "users": [
+    {
+      "name": "Administrar usuarios",
+      "route": "/users-index/false",
+      "operacion": "user%index",
+      "icon": "person"
+    },
+    {
+      "name": "Administrar perfiles",
+      "route": "/roles-index",
+      "operacion": "roles%roles%index",
+      "icon": "people"
+    },
+    {
+      "name": "Administrar operaciones",
+      "route": "/operations-index",
+      "operacion": "roles%roles-operaciones%index",
+      "icon": "build"
+    }
+  ],
+  "documentManagement": [
+    {
+      "name": "Gestionar Oficinas Productoras",
+      "route": "/dependencies-index",
+      "operacion": "gestionDocumental%trd-dependencias%index",
+      "icon": "dns"
+    },
+    {
+      "name": "Carga TRD",
+      "route": "/upload-trd",
+      "operacion": "gestionDocumental%trd%load-trd-file",
+      "icon": "settings_applications"
+    },
+    {
+      "name": "Versionamiento TRD",
+      "route": "/version-trd-index",
+      "operacion": "gestionDocumental%trd-tmp%index",
+      "icon": "bookmarks"
+    },
+    {
+      "name": "Gestionar Series y Subseries",
+      "route": "documentManagement/folder-series-inactivation",
+      "operacion": "gestionar%series%subseries%inactivacion",
+      "icon": "fact_check",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Gestionar tipos documentales",
+      "route": "documentManagement/folder-type-documental",
+      "operacion": "gestionar%tipos%documentales%trd",
+      "icon": "fact_check",
+      "ruta_completa": 1
+    }
+  ],
+  "correspondenceManagement": [
+    {
+      "name": "Reasignación masiva",
+      "route": "/mass-reassignment-index",
+      "operacion": "radicacion%reasignacion-radicado%index",
+      "icon": "library_add_check"
+    },
+    {
+      "name": "Envío físico",
+      "route": "correspondenceManagement/distribution-shipping-index-ef/1",
+      "operacion": "radicacion%distribuciony-envio%index",
+      "icon": "dynamic_feed",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Envío electrónico",
+      "route": "correspondenceManagement/distribution-shipping-index-ee/2",
+      "operacion": "radicacion%distribuciony-envio%index",
+      "icon": "dynamic_feed",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Notificación física",
+      "route": "correspondenceManagement/distribution-shipping-index-nf/3",
+      "operacion": "radicacion%distribuciony-envio%index",
+      "icon": "dynamic_feed",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Notificación electrónica",
+      "route": "correspondenceManagement/distribution-shipping-index-ne/4",
+      "operacion": "radicacion%distribuciony-envio%index",
+      "icon": "dynamic_feed",
+      "ruta_completa": 1
+    },
+    {
+      "name": "En Trámite",
+      "route": "correspondenceManagement/distribution-shipping-index",
+      "operacion": "radicacion%distribuciony-envio%index",
+      "icon": "dynamic_feed",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Anulación",
+      "route": "/annulment-index",
+      "operacion": "radicacion%anulacion%index",
+      "icon": "pan_tool"
+    }
+  ],
+  "filing": [
+    {
+      "name": "Bandeja de tareas",
+      "route": "/filing-index/false",
+      "operacion": "radicacion%radicados%index",
+      "icon": "description"
+    },
+    {
+      "name": "Trabajo colaborativo",
+      "route": "/filing/filing-coop-works/false",
+      "operacion": "radicacion%trabajo-colaborativo%list",
+      "icon": "description",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Radicación correo e.",
+      "route": "/filing-email-index",
+      "operacion": "radicacion%radicacion-email%login-email",
+      "icon": "contact_mail"
+    },
+    {
+      "name": "Gestión flujos de firma",
+      "route": "/signin",
+      "operacion": "firmas%index",
+      "icon": "credit_score",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Bandeja de firmas",
+      "route": "/signin/home",
+      "operacion": "firmas%index%bandeja",
+      "icon": "credit_score",
+      "ruta_completa": 1
+    }
+  ],
+  "setting": [
+    {
+      "name": "Configuración carga TRD",
+      "route": "/upload-trd-index",
+      "operacion": "configuracionApp%cg-trd%index",
+      "icon": "settings_applications"
+    },
+    {
+      "name": "Proveedores de envío",
+      "route": "/providers-index",
+      "operacion": "configuracionApp%cg-proveedores%index",
+      "icon": "local_shipping"
+    },
+    {
+      "name": "Tipos de radicado",
+      "route": "/filing-types-index",
+      "operacion": "configuracionApp%tipos-radicados%index",
+      "icon": "description"
+    },
+    {
+      "name": "Grupos de usuarios",
+      "route": "/user-groups-index",
+      "operacion": "configuracionApp%grupos-usuarios%index",
+      "icon": "edit_location"
+    },
+    {
+      "name": "Horario laboral",
+      "route": "/times-response-index",
+      "operacion": "configuracionApp%cg-tiempos-respuesta%index",
+      "icon": "query_builder"
+    },
+    {
+      "name": "Días no laborados",
+      "route": "/non-working-days-index",
+      "operacion": "configuracionApp%dias-no-laborados%index",
+      "icon": "alarm_off"
+    },
+    {
+      "name": "Gestión de plantillas",
+      "route": "/templates-index",
+      "operacion": "configuracionApp%cg-gestion-plantillas%index",
+      "icon": "widgets"
+    },
+    {
+      "name": "Variables plantillas",
+      "route": "/templates-variables-index",
+      "operacion": "configuracionApp%cg-plantilla-variables%index",
+      "icon": "mark_chat_read"
+    },
+    {
+      "name": "Encuesta de satisfacción",
+      "route": "/poll-index",
+      "operacion": "configuracionApp%encuestas%index",
+      "icon": "rule"
+    },
+    {
+      "name": "Principal y regionales",
+      "route": "/region-index",
+      "operacion": "configuracionApp%regionales%index",
+      "icon": "add_business"
+    },
+    {
+      "name": "Configuración del radicado",
+      "route": "/filing-setting-update",
+      "operacion": "configuracionApp%numero-radicado%index-one",
+      "icon": "settings_applications"
+    },
+    {
+      "name": "Configuración general",
+      "route": "/general-setting-update",
+      "operacion": "configuracionApp%configuracion-general%index-one",
+      "icon": "policy"
+    },
+    {
+      "name": "Etiqueta radicación",
+      "route": "/filing-label-index",
+      "operacion": "configuracionApp%configuracion-general%index-label",
+      "icon": "point_of_sale"
+    },
+    {
+      "name": "Gestión terceros",
+      "route": "/third-management-index",
+      "operacion": "configuracionApp%cg-gestion-terceros%index",
+      "icon": "person_search"
+    },
+    {
+      "name": "Reemplazo de vacaciones",
+      "route": "/reemplazo-vacaciones",
+      "operacion": "configuracionApp%reemplazo%vacaciones",
+      "icon": "edit_calendar"
+    },
+    {
+      "name": "Administracion de metadatos",
+      "route": "/administracion-metadatos",
+      "operacion": "configuracionApp%administracion%metadatos",
+      "icon": "description"
+    },
+    {
+      "name": "Tiempos de respuesta",
+      "route": "/time-request-index",
+      "operacion": "configuracionApp%cg-tiempos-request%index",
+      "icon": "query_builder"
+    }
+  ],
+  "archiveManagement": [
+    {
+      "name": "Asignación de espacio físico",
+      "route": "/physical-space-index",
+      "operacion": "gestionArchivo%espacio-fisico%index",
+      "icon": "business"
+    },
+    {
+      "name": "Transferencias documentales",
+      "route": "/documentary-transfer-index",
+      "operacion": "gestionDocumental%trd-transferencia%index",
+      "icon": "backup_table"
+    },
+    {
+      "name": "Traslado masivo",
+      "route": "/upload-mass-transfer",
+      "operacion": "gestionArchivo%gestion-archivo%index",
+      "icon": "backup_table"
+    },
+    {
+      "name": "Cargue masivo",
+      "route": "/bulk-load",
+      "operacion": "gestionArchivo%gestion-archivo%index",
+      "icon": "backup_table"
+    }
+  ],
+  "pqrs": [
+    {
+      "name": "Gestionar PQRS",
+      "route": "/log-pqrs-index",
+      "operacion": "pqrs%index",
+      "icon": "backup_table"
+    },
+    {
+      "name": "Cuentas contrato",
+      "route": "/pqrs-cuentas-contrato",
+      "operacion": "pqrs%index",
+      "icon": "backup_table"
+    }
+  ],
+  "firmas": [
+    {
+      "name": "Gestión flujos de firma",
+      "route": "/signin",
+      "operacion": "firmas%index",
+      "icon": "credit_score",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Bandeja de firmas",
+      "route": "/signin/home",
+      "operacion": "firmas%index%bandeja",
+      "icon": "credit_score",
+      "ruta_completa": 1
+    }
+  ],
+  "quality": [
+    {
+      "name": "Mapa de procesos",
+      "route": "/quality-process-map",
+      "operacion": "calidad%listar",
+      "icon": "backup_table"
+    },
+    {
+      "name": "Descargar Plantillas",
+      "route": "/quality-download-template",
+      "operacion": "calidad%listar",
+      "icon": "backup_table"
+    },
+    {
+      "name": "Consultar Solicitudes",
+      "route": "/quality-view-request",
+      "operacion": "calidad%listar",
+      "icon": "backup_table"
+    },
+    {
+      "name": "Tareas Recibidas",
+      "route": "/quality-tasks-received",
+      "operacion": "calidad%listar",
+      "icon": "backup_table"
+    },
+    {
+      "name": "Administrar Analistas SGDEA",
+      "route": "/quality-analyst-index",
+      "operacion": "calidad%listar",
+      "icon": "backup_table"
+    }
+  ],
+  "ocupational": [
+    {
+      "name": "Notificaciones",
+      "route": "/ocupational-notification-index",
+      "operacion": "ocupacional%listar",
+      "icon": "backup_table"
+    },
+    {
+      "name": "Solicitudes Pendientes",
+      "route": "/ocupational-request-index",
+      "operacion": "ocupacional%listar",
+      "icon": "backup_table"
+    },
+    {
+      "name": "Solicitudes Cerradas",
+      "route": "/ocupational-notification-closed-index",
+      "operacion": "ocupacional%listar",
+      "icon": "backup_table"
+    },
+    {
+      "name": "Asignaciones",
+      "route": "/ocupational-notification-index",
+      "operacion": "ocupacional%listar",
+      "icon": "backup_table"
+    },
+    {
+      "name": "Reportes",
+      "route": "/ocupational-notification-index",
+      "operacion": "ocupacional%listar",
+      "icon": "backup_table"
+    }
+
+
+
+  ],
+
+  "predial": [
+    {
+      "name": "Crear solicitud",
+      "route": "/predial-create-request",
+      "operacion": "predial%create%request",
+      "icon": "backup_table"
+    }
+
+  ],
+
+
+  "juridica": [
+    {
+      "name": "Visualizar notificaciones",
+      "route": "/view-request",
+      "operacion": "juridica%index",
+      "icon": "balance"
+    }
+  ],
+  "documentaryLoans": [
+    {
+      "name": "Préstamo de expedientes",
+      "route": "/loan-of-files",
+      "operacion": "gestionArchivo%prestamo-documental%index-loan-files",
+      "icon": "credit_score"
+    },
+    {
+      "name": "Admin Préstamo expedientes",
+      "route": "/manage-loan-of-files",
+      "operacion": "gestionArchivo%prestamo-documental%index-manage-loan-files",
+      "icon": "rule_folder"
+    }
+  ],
+  "radicacionEntrada": [
+    {
+      "name": "Crear radicado de entrada",
+      "route": "/filing/filing-create/2",
+      "operacion": "radicacion%entrada%create",
+      "icon": "credit_score",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Consultar Radicado de entrada",
+      "route": "/filing/filing-index/false/2",
+      "operacion": "radicacion%entrada%index",
+      "icon": "description",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Radicación Página Web",
+      "route": "/filing/filing-web-index",
+      "operacion": "radicacion%radicacion-web%index",
+      "icon": "web",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Radicación SDQS Bogotá te escucha",
+      "route": "/filing/sdqs-requests-index",
+      "operacion": "radicacion%distribucion-solicitudes%index",
+      "icon": "dynamic_feed",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Radicados Correo Electrónico",
+      "route": "/filing/filing-radicados-email-index",
+      "operacion": "radicacion%radicados-email%index",
+      "icon": "contact_mail",
+      "ruta_completa": 1
+    }
+  ],
+  "reports": [
+    {
+      "name": "Reportes",
+      "route": "/reports-index",
+      "operacion": "reportes%index-list",
+      "icon": "api"
+    },
+    {
+      "name": "Reportes personalizados",
+      "route": "/reports-custom",
+      "operacion": "reportes%reportes-personalizados%index",
+      "icon": "api"
+    }
+  ],
+  "audit": [
+    {
+      "name": "Registro de auditoría",
+      "route": "/log-audit-index",
+      "operacion": "configuracionApp%log%index",
+      "icon": "timer"
+    }
+  ],
+  "expediente": [
+    {
+      "name": "Consultar expedientes",
+      "route": "/documentManagement/folder-index/close",
+      "operacion": "expediente%crear-expediente",
+      "icon": "preview",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Consultar solicitudes de préstamo",
+      "route": "/documentManagement/folder-view-loan",
+      "operacion": "expediente%folder-view-loan",
+      "icon": "preview",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Crear expediente",
+      "route": "/documentManagement/folder-create",
+      "operacion": "expediente%crear-expediente",
+      "icon": "preview",
+      "ruta_completa": 1
+    },
+    {
+      "name": "Incluir documento a expediente",
+      "route": "/filing/filing-index/false",
+      "operacion": "expediente%incluir-documento-expediente",
+      "icon": "preview",
+      "ruta_completa": 1
+    }
+  ],
+  "gestionTramite": [
+    {
+      "name": "Actos Administrativos",
+      "route": "/filing/filing-acts/false",
+      "operacion": "actosAdministrativos%consulta",
+      "icon": "api",
+      "ruta_completa": 1
+    }
+  ]
+}

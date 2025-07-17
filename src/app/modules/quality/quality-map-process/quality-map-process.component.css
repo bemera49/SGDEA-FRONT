@@ -1,0 +1,84 @@
+.containerQDetail {
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+  padding: 3em;
+}
+
+.pantallaA {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0;
+  max-width: 53%;
+  background: #FFFFFF;
+  /* Añadido */
+}
+
+
+.pantallab {
+  width: 30.5rem;
+  right: 0px;
+  top: 7.5rem;
+  background: #FFFFFF;
+  box-shadow: -5px 4px 15px rgba(0, 0, 0, 0.05);
+  border-radius: 20px 0px 0px 20px;
+  padding: 0.938rem;
+}
+.pantallaA-full {
+  flex-grow: 1 !important;
+  display: flexbox;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0;
+  transition: flex-grow 0.5s ease;
+  /* Añadido */
+}
+
+.btn-circle-custom {
+  flex-grow: 0;
+  flex-shrink: 0;
+  border: 2px solid;
+  background-color: #008ED6;
+  border-radius: 50%;
+  width: 1.875rem;
+  height: 1.875rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-top: 2rem;
+  left: 1.1%;
+}
+
+.btn-circle-custom:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+@media (max-width: 768px) {
+  .containerQDetail {
+    flex-direction: column;
+    align-items: center;
+    padding: 1em;
+  }
+
+  .pantallaA,
+  .pantallab {
+    width: 100%;
+    max-width: none;
+    margin: 0 0 1rem 0;
+    flex-grow: 1 !important;
+    /* Añadido */
+  }
+
+  .pantallab {
+    width: 100%;    
+    overflow: hidden;
+  }
+
+  .btn-circle-custom {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+}

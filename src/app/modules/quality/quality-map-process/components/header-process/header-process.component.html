@@ -1,0 +1,27 @@
+<ng-container *ngIf="dataIntercept">
+
+  <header *ngIf="dataIntercept.type === 'sub-process' || dataIntercept.type === 'process' " class="d-flex row pl-4 "
+    id="headerContainer">
+
+    <div class="pl-2">
+      <div class="d-flex justify-content-center align-items-center" id="containerIcon">
+        <i class="material-icons returnaq-icon mt-1" id="conteicon">{{ account_tree }}</i>
+      </div>
+    </div>
+
+    <div class="col mb-0 centerheader">
+      <span class="mb-0 subtituloPAB" *ngIf="dataIntercept.type === 'process'">Ficha de proceso</span>
+      <span class="mb-0 subtituloPAB" *ngIf="dataIntercept.type === 'sub-process'">Ficha de subproceso</span>
+      <h5 class="mt-0 mb-0 tituloPB">
+        {{dataIntercept.data.code}} - {{ dataIntercept.data.name | cleanName:dataIntercept.data.code }}</h5>
+      <a class="mt-0 mb-1 SolidEdit" (click)="onRequestModification()">Solicitar modificación</a>
+    </div>
+
+    <div id="container-icons" *ngIf="dataIntercept.type === 'sub-process' || dataIntercept.type === 'process'">
+      <i class="material-icons returnaq-icon iconos header-icon" *ngIf="dataIntercept.type === 'sub-process'"
+        (click)="onGoStep(data.id, 2)">{{
+        fullscreen}}</i>
+    </div>
+  </header>
+
+</ng-container>

@@ -1,0 +1,18 @@
+<form class="d-flex flex-column align-items-center modal-container" [formGroup]="form" (submit)="handleSubmit()">
+    <span class="material-icons text-primary modal-icon">
+        {{data.showIcon}}
+    </span>
+
+    <p class="text-center my-3 w-100 modal-message" [innerHTML]="data.message">{{ data.message }}</p>
+    <p class="text-center mb-25 w-100 modal-description">{{ data.description }}</p>
+
+    <mat-form-field appearance="outline">
+        <mat-label>{{data.label}}</mat-label>
+        <textarea matInput formControlName="textarea"></textarea>
+    </mat-form-field>
+
+    <div class="d-flex flex-wrap align-items-center" style="gap: 10px">
+        <button *ngIf="!data?.btnCancelIsHide" class="btn bg-white border border-primary rounded py-3 px-5 text-primary" type="button" (click)="close()">Cancelar</button>
+        <button class="btn bg-primary text-white rounded border-0 py-3 px-5" type="submit">Aceptar</button>
+    </div>
+</form>

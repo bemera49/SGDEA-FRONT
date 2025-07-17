@@ -1,0 +1,43 @@
+.contenedorCard {
+    margin: 20px auto;
+    padding: 0 2%;
+    max-width: 100%;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table th {
+    color: #2c3948;
+  }
+  
+  .h3 {
+    font: 2.25rem;
+  }
+  
+  .h4 {
+    font: 1.5625rem;
+  }
+  
+  .table th,
+  .table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+  }
+
+  .card-title {
+    margin-bottom: 10px;
+    /* Espaciado entre títulos */
+  }
+  
+  .table-responsive {
+    overflow-x: auto;
+    /* Asegura que la tabla sea desplazable en pantallas pequeñas */
+  }
+
+
+

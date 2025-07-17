@@ -1,0 +1,68 @@
+<app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+<div class="main-content overflow-hidden">
+  <button  mat-button style="width: 150px" [routerLink]="['/documentManagement/production-office-trd-index']"   >
+    <mat-icon>chevron_left</mat-icon>Volver
+  </button>
+  <div class="container-fluid">
+     <!-- Start Row One -->
+    <div class="row ">
+      <!-- start Detail card -->
+      <div class="col-12">
+          <div class="card ">
+              <div class="card-header card-header-info card-header-icon">
+                  <div class="card-icon">
+                      <i class="material-icons">{{ initCardHeaderIcon }}</i>
+                  </div>
+                  <h4 class="card-title">
+                    {{initCardHeaderTitle}}
+                  </h4>
+                  <div class="col-12 d-flex justify-content-end">
+                    <button type="button"  class="btn btn-primary mx-2">
+                      Actualizar
+                    </button>
+                    <!-- <button [disabled]="modalOpen" type="button" [routerLink]="['/documentManagement/version-trd-index']"   class="btn btn-light">Cancelar</button> -->
+                    <button   class="btn btn-light">Eliminar</button>
+                  </div>
+              </div>
+              <div class="card-body">
+                  <div class="row">
+                      <div class="col-12 col-lg-6  ">
+                        <mat-form-field appearance="outline" >
+                          <mat-label>Código de la oficina productora</mat-label>
+                          <input matInput>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-12 col-lg-6">
+                        <mat-form-field appearance="outline" class="">
+                          <mat-label>Estado</mat-label>
+                          <mat-select>
+                            <mat-option value="Activa">Activa</mat-option>
+                            <mat-option value="Inactiva">Inactiva</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-12 col-lg-9  ">
+                        <mat-form-field appearance="outline" >
+                          <mat-label>Nombre de la oficina productora</mat-label>
+                          <input matInput>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-12 col-lg-9  ">
+                        <mat-form-field appearance="outline" class="">
+                          <mat-label>Unidad administrativa padre</mat-label>
+                          <mat-select>
+                            <mat-option value="1">1</mat-option>
+                            <mat-option value="2">2</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+      </div>
+      <!-- End Detail card -->
+    </div>
+  </div>
+
+</div>

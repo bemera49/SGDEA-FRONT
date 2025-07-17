@@ -1,0 +1,33 @@
+<div>
+    <div class="row">
+
+        <div class="modal-header col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-2">
+
+            <h4 class="modal-title w-100" id="myModalLabel">
+                <mat-label> {{ 'Retirar unidad de almacenamiento' | translate }} </mat-label>
+            </h4>
+
+            <button mat-button type="button" (click)="closeDialog()" title="{{ 'Cerrar' | translate }}" class="close pull-right" data-dismiss="alert" aria-label="Close">
+                <i class="material-icons">close</i>
+            </button>
+
+        </div>
+
+        <!-- card One -->
+        <div class="modal-body">
+            <div class="row">
+                <p>
+                    Usted va a retirar la unidad de almacenamiento {{boxCode}} de la bandeja , esta seguro?
+                </p>
+            </div>
+
+        </div>
+        <!-- End card One -->
+
+    </div>
+
+    <div mat-dialog-actions style="display:flex;justify-content: center;gap: 10px">
+        <button class="btn bg-primary text-white rounded border-0 py-3 px-5" (click)="confirm()" type="submit" >Aceptar</button>
+        <button class="btn bg-white border border-primary rounded py-3 px-5 text-primary" type="button" (click)="closeDialog()">Cancelar</button>
+    </div>
+</div>

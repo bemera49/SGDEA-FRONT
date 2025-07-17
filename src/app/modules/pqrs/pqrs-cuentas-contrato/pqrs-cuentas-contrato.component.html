@@ -1,0 +1,24 @@
+<app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+
+<div class="container"> 
+    <div class="d-flex flex-row align-items-end m-4">
+        <div class="bg-primary rounded" style="max-width: max-content; padding: 15px 18px; border-radius: 1px; box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(87, 144, 214, 0.4);">
+            <mat-icon class="text-white">person</mat-icon>
+        </div>
+        <p class="w-100 px-3" style="color: #3C4858; font-size: 18px;">Listado de Cuentas Contrato</p>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th *ngFor="let title of dtTitles">{{ title.title }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cuenta of cuentasContrato; let i = index" (click)="selectRow(i)" [class.selected]="cuenta.selected">
+          <td *ngFor="let title of dtTitles">{{ cuenta[title.data] }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <app-floating-button [menuButtons]="menuButtons" (menuEmiterData)="menuReceiveData($event)"></app-floating-button>

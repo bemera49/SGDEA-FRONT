@@ -1,0 +1,225 @@
+<section class="px-3">
+  <app-sub-menu-quality [ItemsMenu]="items"></app-sub-menu-quality>
+  <app-button-back-arrow [href]="back"></app-button-back-arrow>
+  <h2 class="font-weight-bold">Crear solicitud</h2>
+  <div class="mt-4 mb-4">
+    <!-- <app-request-status [stateProp]="stateRequest.nombre"></app-request-status> -->
+  </div>
+
+  <form [formGroup]="SolicitudFormGroup" (ngSubmit)="onSubmit()">
+    <mat-tab-group #stepper>
+      <!--TAB 1-->
+      <mat-tab label="Solicitud">
+        <app-layout-section [title]="'Información general'">
+          <div class="row mt-5" style="gap: 5px 0px">
+
+            <mat-form-field appearance="outline" class="col-md-6 col-lg-4">
+              <mat-label>Solicitante</mat-label>
+              <input matInput formControlName="solicitante" placeholder="Nombre del solicitante" disabled>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="col-md-6 col-lg-3">
+              <mat-label>Cargo</mat-label>
+              <input matInput formControlName="cargo" placeholder="Nombre del solicitante" disabled>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="col-md-6 col-lg-4">
+              <mat-label>Gerencia</mat-label>
+              <input matInput formControlName="gerencia" placeholder="Nombre del solicitante" disabled>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="col-md-6">
+              <mat-label>Dirección / División / Oficina</mat-label>
+              <input matInput formControlName="direccionDivisionOficina" disabled>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="col-md-6 col-lg-4">
+              <mat-label>Centro de costos</mat-label>
+              <input matInput formControlName="centroCostos" disabled>
+            </mat-form-field>
+          </div>
+        </app-layout-section>
+
+        <app-layout-section [title]="'Selección múltiple'">
+          <h4 class="font-weight-bold text-dark-emphasis">La solicitud aplica a</h4>
+          <mat-radio-group formControlName="solicitudAplica" class="custom-radio"
+            [class.error]="SolicitudFormGroup.controls['solicitudAplica'].touched && SolicitudFormGroup.controls['solicitudAplica'].invalid">
+            <mat-radio-button class="px-2" [value]="0">Solo 1 documento</mat-radio-button>
+            <mat-radio-button class="px-3" [value]="1">Varios documentos</mat-radio-button>
+          </mat-radio-group>
+          <mat-error *ngIf="SolicitudFormGroup.controls['solicitudAplica'].errors?.['required']">
+            Debe seleccionar una opción.
+          </mat-error>
+        </app-layout-section>
+
+
+
+        <app-layout-section [title]="'Diligencie los campos'">
+          <div class="row mt-5" style="gap: 5px 0px">
+            <mat-form-field appearance="outline" class="col-md-12 col-lg-4">
+              <mat-label>Tipo de solicitud</mat-label>
+              <mat-select formControlName="tipoSolicitud">
+                <mat-option *ngFor="let item of requestType | sortAlphabetical"
+                  [value]="item.id">{{item.nombre}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="SolicitudFormGroup.get('tipoSolicitud').invalid">
+                El tipo de solicitud es requerido.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="col-md-6 col-lg-3">
+              <mat-label>Nivel</mat-label>
+              <mat-select formControlName="level">
+                <mat-option *ngFor="let item of level | sortAlphabetical" [value]="item.id">{{item.nombre}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="SolicitudFormGroup.get('level').invalid">
+                El tipo de solicitud es requerido.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="col-md-6">
+              <mat-label>Proceso al que pertenece el documento</mat-label>
+              <mat-select formControlName="proceso">
+                <mat-option *ngFor="let item of process | sortAlphabetical" [value]="item.id"
+                  selected>{{item.nombre}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="SolicitudFormGroup.get('proceso').invalid">
+                El tipo de solicitud es requerido.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="col-md-6">
+              <mat-label>Sub proceso</mat-label>
+              <mat-select formControlName="subProceso">
+                <mat-option *ngFor="let item of subProcess | sortAlphabetical"
+                  [value]="item.id">{{item.nombre}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="SolicitudFormGroup.get('subProceso').invalid">
+                El tipo de solicitud es requerido.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="col-md-6 col-lg-4">
+              <mat-label>Nombre del documento</mat-label>
+              <input type="text" matInput [matAutocomplete]="auto"
+                [formControl]="SolicitudFormGroup.get('nombreDelDocumento')" maxlength="200">
+              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                <mat-option *ngFor="let option of predictiveText; track option" [value]="option">
+                  {{ option }}
+                </mat-option>
+              </mat-autocomplete>
+              <mat-error *ngIf="SolicitudFormGroup.get('nombreDelDocumento').invalid">
+                El tipo de solicitud es requerido.
+              </mat-error>
+            </mat-form-field>
+
+
+            <!-- 
+            <mat-form-field appearance="outline" class="col-md-6 col-lg-4">
+              <mat-label>Nombre del documento</mat-label>
+              <input matInput formControlName="nombreDelDocumento" placeholder="Número de radicado" maxlength="100">
+              <mat-error *ngIf="SolicitudFormGroup.get('nombreDelDocumento').invalid">
+                El tipo de solicitud es requerido.
+              </mat-error>
+            </mat-form-field> -->
+
+            <mat-form-field appearance="outline" class="col-md-6 col-lg-3">
+              <mat-label>Tipo documental</mat-label>
+              <mat-select formControlName="tipoDocumental">
+                <mat-option *ngFor="let item of documentary_type | sortAlphabetical"
+                  [value]="item.id">{{item.nombre}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="SolicitudFormGroup.get('tipoDocumental').invalid">
+                El tipo de solicitud es requerido.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="col-md-6 col-lg-4">
+              <mat-label>Privacidad</mat-label>
+              <mat-select formControlName="privacidad">
+                <mat-option *ngFor="let item of privacy | sortAlphabetical"
+                  [value]="item.id">{{item.nombre}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="SolicitudFormGroup.get('privacidad').invalid">
+                El tipo de solicitud es requerido.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="col-md-12">
+              <mat-label>Justificación</mat-label>
+              <textarea matInput formControlName="justificacion" maxlength="2000"></textarea>
+            </mat-form-field>
+
+          </div>
+        </app-layout-section>
+
+
+
+        <app-layout-section [title]="'Nuevos documentos'">
+          <div class="row" style="gap: 5px 0px ">
+            <mat-form-field (click)="inputFile.click()" appearance="fill" class="col-md-6" style="cursor: pointer;">
+              <mat-label>Documento propuesto</mat-label>
+              <input matInput formControlName="documentoPropuesto" [value]="nameFile"
+                placeholder="Seleccione un archivo" readonly style="cursor: pointer;">
+              <input #inputFile type="file" hidden (change)="uploadFile($event)">
+              <!-- accept=".doc .docx" -->
+              <mat-icon matSuffix>attach_file</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="col-md-6" (click)="inputDiagrama.click()" *ngIf="hiddenDiagram">
+              <mat-label>Diagrama</mat-label>
+              <input matInput formControlName="diagramaUrl" [value]="diagramaFile" placeholder="Seleccione un archivo"
+                readonly style="cursor: pointer;">
+              <input #inputDiagrama type="file" hidden (change)="uploadFileDiagrama($event)" accept=".vsdx">
+              <mat-icon matSuffix>attach_file</mat-icon>
+            </mat-form-field>
+
+          </div>
+          <div class="d-flex flex-wrap align-items-center justify-content-center mt-4" style="gap: 10px 30px;">
+            <app-cancel-link [link]="'/quality/quality-view-request'" [text]="'Regresar'"></app-cancel-link>
+
+
+            <app-button-continue *ngIf="SolicitudFormGroup.get('solicitudAplica').value === 0"
+              [text]="'Guardar y cargar documento'" [onDisabled]="SolicitudFormGroup.valid "></app-button-continue>
+
+            <app-button-continue *ngIf="SolicitudFormGroup.get('solicitudAplica').value === 1 " [text]="'Solicitar'"
+              [onDisabled]="SolicitudFormGroup.valid && getMultipleFile()"></app-button-continue>
+
+          </div>
+        </app-layout-section>
+
+      </mat-tab>
+
+
+      <!--TAB 2 -->
+      <!-- *ngIf="additionalDocuments" -->
+      <!-- <mat-tab label="Documentos propuestos" *ngIf="additionalDocuments">
+        <app-layout-section>
+          <div class="w-100 d-flex justify-content-center align-items-center" style="overflow-x: auto;">
+            <ngx-doc-viewer [url]="documentURL" viewer="url" style="width:100%;height:50vh;">
+            </ngx-doc-viewer>
+          </div>
+          <app-layout-section [title]="'Documentos propuestos'">
+            <div class="w-100 d-flex justify-content-between align-items-center" style="overflow-x: auto;">
+
+            </div>
+          </app-layout-section>
+        </app-layout-section>
+      </mat-tab>
+ -->
+      <!--TAB  -->
+
+      <mat-tab label="Documentos adicionales" *ngIf="SolicitudFormGroup.get('solicitudAplica').value === 1">
+        <app-layout-section [title]="'Documentos adicionales'">
+          <app-multi-files [formGroupProps]="SolicitudFormGroup" (submitEvent)="onSubmit()"></app-multi-files>
+        </app-layout-section>
+        <!-- <div class="d-flex justify-content-center mt-5">
+          <app-button-continue *ngIf="SolicitudFormGroup.get('solicitudAplica').value === 1" [text]="'Solicitar'"
+            [onDisabled]="SolicitudFormGroup.valid && getMultipleFile()"></app-button-continue>
+        </div> -->
+      </mat-tab>
+    </mat-tab-group>
+
+  </form>
+
+</section>

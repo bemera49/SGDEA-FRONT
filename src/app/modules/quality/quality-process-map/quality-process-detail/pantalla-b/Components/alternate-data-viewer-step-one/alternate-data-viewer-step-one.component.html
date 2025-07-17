@@ -1,0 +1,81 @@
+<ng-container *ngIf="Procedure; else noDataTemplate">
+    <ng-container>
+        <app-header-process-map [Procedure]="Procedure"
+        [filebyId]="filebyId"
+        typeheader="documents"
+        [isCharacterization]="false"
+            [stepReturn]="false"
+            [diagramData]="diagramdata"
+            [diagramView]="DiagramView"
+            (gostep)="gostep($event)"
+            (descargarDocumento)="descargarDocumento($event)">
+        </app-header-process-map>
+    </ng-container>
+    <ng-container>
+        <nav class="w-100% row py-2 justify-content-around border-top align-content-center">
+        </nav>
+        <ng-container *ngIf="Procedure">
+            <section>
+                <ng-container>
+                    <div class="componenttable mb-1">
+                        <header class="headertable">
+                            <div class=" mb-1 ml-3 mr-1" id='containerIcon'>
+                                <i class="material-icons returnaq-icon conteicon">{{ Info }}</i>
+                            </div>
+                            <div>
+                                <h6 class="titletable" *ngIf="Procedure">Ficha de identificación</h6>
+                            </div>
+                        </header>
+                        <section>
+                            <ng-container *ngIf="Procedure">
+                                <app-reusable-table [data]="Procedure" tableType="file"></app-reusable-table>
+                            </ng-container>
+                        </section>
+                    </div>
+                </ng-container>
+                <ng-container>
+                    <div class="componenttable mb-1">
+                        <header class="headertable">
+                            <div class=" mb-1 ml-3 mr-1" id='containerIcon'>
+                                <i class="material-icons returnaq-icon conteicon">{{ Info }}</i>
+                            </div>
+                        <div>
+                            <h6 class="titletable">Nivel descripción </h6>
+                        </div>
+                    </header>
+                    <section>
+                        <app-reusable-table *ngIf="Procedure" [nameProces]="datoProces" [data]="Procedure"
+                            tableType="LevelOfDescriptión"></app-reusable-table>
+                    </section>
+                    </div>
+                </ng-container>
+                <!-- Tabla Mostrar Descripción del documento -->
+                <ng-container>
+                    <div class="componenttable mb-1">
+                        <header class="headertable">
+                            <div class=" mb-1 ml-3 mr-1" id='containerIcon'>
+                                <i class="material-icons returnaq-icon conteicon">{{ Info }}</i>
+                            </div>
+                        <div>
+                            <h6 class="titletable">descripción</h6>
+                        </div>
+                    </header>
+                    <section>
+                        <ng-container *ngIf="datoSubproces">
+                            <app-reusable-table [datossubproces]="datoSubproces" [data]="Procedure"
+                                tableType="description"></app-reusable-table>
+                        </ng-container>
+                    </section>
+                    </div>
+                </ng-container>
+            </section>
+        </ng-container>
+
+    </ng-container>
+</ng-container>
+
+<ng-template #noDataTemplate>
+    <div class="no-data-container">
+        No hay datos para seleccionar
+    </div>
+</ng-template>

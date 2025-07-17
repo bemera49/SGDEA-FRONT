@@ -1,0 +1,22 @@
+.body-tr:hover {
+    background:#EBF8FF;
+}
+
+.checkbox {
+    background: blue;
+    padding: 8px;
+}
+
+.table-row {
+    min-width: 300px; min-height: 200px; text-align: center; border-bottom: 1px solid #E2E2E2; padding: 24px;
+}
+
+.table-header-column {
+    min-width: 300px; text-align: center; padding-bottom: 16px;
+}
+
+
+
+.disabled {
+ background-color: rgb(199, 199, 199) !important;
+}

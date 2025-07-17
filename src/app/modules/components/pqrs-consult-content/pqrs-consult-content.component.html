@@ -1,0 +1,101 @@
+<div class="col-12">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <button routerLink="/external-pqrs-main" class="btn btn-link btn-sm">PQRSD</button>
+        </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            <button class="btn btn-link btn-sm" disabled>Consultar</button>
+          </li>
+        </ol>
+      </nav>
+    <mat-card style="margin-top: 1%;" class="border border-2 rounded w-100 card-height">
+        <form (submit)="submitFormReceive(formDirective)" [formGroup]="pqrsForm" #formDirective="ngForm"  style="gap: 5px 0px">
+            <div class="row">
+                <mat-form-field class="col-md-6 col-lg-6">
+                    <mat-label>Número de Radicado</mat-label>
+                    <input matInput formControlName="numeroRadiRadicado" type="text">
+                    <mat-hint
+                      *ngIf="pqrsForm.controls['numeroRadiRadicado'].invalid && pqrsForm.controls['numeroRadiRadicado'].touched"
+                      class="text-danger">
+                      Este campo es requerido
+                    </mat-hint>
+                  </mat-form-field>
+    
+                  <mat-form-field class="col-md-6 col-lg-6">
+                    <mat-label>Código de Verificación</mat-label>
+                    <input matInput formControlName="codigoVerificacion" type="text">
+                    <mat-hint
+                      *ngIf="pqrsForm.controls['codigoVerificacion'].invalid && pqrsForm.controls['codigoVerificacion'].touched"
+                      class="text-danger">
+                      Este campo es requerido
+                    </mat-hint>
+                  </mat-form-field>
+
+                  <div class="col-md-12 col-lg-12 d-flex justify-content-end">
+                    <button type="submit" class="btn  mat-raised-button bg-primary" [disabled]="!pqrsForm.valid">Consultar</button>
+                </div>
+            </div>
+        </form>
+    </mat-card>
+    <mat-card *ngIf="isConsultImage" style="margin-top: 1%;" class="border border-2 rounded w-100 card-height">
+        <div class="row">
+            <div class="col-12">
+                <h3 *ngIf="listDocuments.length > 0">Documentos anexos</h3>
+                <ul class="list-group" *ngIf="listDocuments.length > 0">
+                    <li class="list-group-item d-flex justify-content-between align-items-start" *ngFor="let image of listDocuments">
+                        <div class="row">
+                            <div class="ms-2 me-auto">
+                                <mat-icon aria-hidden="false" aria-label="icon" fontIcon="{{ image.icon }}"></mat-icon>
+                            </div>
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Nombre archivo: {{ image.nombre }}</div>
+                                Descripcción; {{ image.descripcion }}
+                            </div>
+                            <div class="ms-2 me-auto">
+                                <button type="button" class="btn btn-primary" (click)="viewdocument(image.id)">Ver documento</button>
+                            </div>
+                        </div>
+                      <span class="badge text-bg-primary rounded-pill">14</span>
+                </ul>
+                <div *ngIf="listDocuments.length == 0">
+                    <h3>El radicado No cuenta con documentos anexos</h3>
+                </div>
+
+            </div>
+        </div>
+    </mat-card>
+    <mat-card *ngIf="isConsult" style="margin-top: 1%;" class="border border-2 rounded w-100 card-height">
+        <div class="row">
+            <div class="col-12" *ngIf="numeroRadiRadicado">
+                <h3>{{ numeroRadiRadicado }}</h3>
+                <p>Estado: <span class="badge badge-info"> {{estado}}</span></p>
+                <hr>
+            </div>
+            <div class="col-6" *ngIf="fechaDocumentoRadiRadicado">
+                <h4>Fecha radicado</h4>
+                <p>{{ fechaDocumentoRadiRadicado }}</p>
+            </div>
+            <div class="col-6" *ngIf="nombreRemitente">
+                <h4>{{nameRad}}</h4>
+                <p>{{ nombreRemitente }}</p>
+            </div>
+            <div class="col-6" *ngIf="fechaVencimientoRadiRadicados">
+                <h4>Fecha de vencimiento</h4>
+                <p>{{ fechaVencimientoRadiRadicados }}</p>
+            </div>
+            <div class="col-6" *ngIf="numeroCuentaContrato">
+                <h4>Número cuenta contrato</h4>
+                <p>{{ numeroCuentaContrato }}</p>
+            </div>
+            <div class="col-6" *ngIf="numeroRadiRadicadoAsociado">
+                <h4>Número radicado asociado</h4>
+                <p>{{ numeroRadiRadicadoAsociado }}</p>
+            </div>
+            <div class="col-6" *ngIf="asuntoRadiRadicado">
+                <h4>Asunto del Radicado</h4>
+                <p>{{ asuntoRadiRadicado }}</p>
+            </div>
+        </div>
+    </mat-card>
+</div>

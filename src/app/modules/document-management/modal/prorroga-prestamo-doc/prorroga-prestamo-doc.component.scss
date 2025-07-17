@@ -1,0 +1,29 @@
+.modal-container {
+  width: 50vw;
+  max-height: 80vh;
+  overflow-y: auto;
+  .container-content {
+    form {
+      .input-group {
+        display: flex;
+        align-items: center;
+        gap: 2%;
+        width: 100%;
+        .input {
+          display: flex;
+          flex-direction: column;
+          width: 48%;
+        }
+        .input-date {
+          display: grid;
+          grid-template-columns: 90% 10%;
+          button {
+            background-color: transparent;
+            border: none;
+            height: 55px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -6,7 +6,7 @@
     "paths": {
       "@app/*": [
         "src/app/*"
-      ],
+      ]
     },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
@@ -15,7 +15,7 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es2020",
+    "target": "ES2022",
     "typeRoots": [
       "node_modules/@types"
     ],
@@ -23,6 +23,7 @@
       "es2017",
       "dom"
     ],
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "useDefineForClassFields": false
   }
 }

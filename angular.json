@@ -17,6 +17,7 @@
               "luxon",
               "crypto-js",
               "sweetalert2",
+              "proxy.conf.json",
               "socket.io-client",
               "rxjs/Observable",
               "rxjs/add/observable/throw",
@@ -39,10 +40,7 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
               "node_modules/angular-calendar/scss/angular-calendar.scss",
@@ -124,9 +122,6 @@
           "defaultConfiguration": "development",
           "options": {
             "browserTarget": "sgdea:build"
-            //"ssl": true,
-            //"sslCert": "certs/nginx-selfsigned.crt",
-            //"sslKey": "private/nginx-selfsigned.key"
           },
           "configurations": {
             "production": {
@@ -197,10 +192,7 @@
               "src/assets/js/pdfmake.min.js",
               "src/assets/js/vfs_fonts.js"
             ],
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ]
+            "assets": ["src/favicon.ico", "src/assets"]
           }
         }
       }

@@ -15,61 +15,61 @@ export const environment = {
    * Variables de conexión hacia el API REST
    */
 
-  apiUrl: '/',
-  apiUrlBasePath: '/',
-  versionApiDefault: '',
+  apiUrl: "/",
+  apiUrlBasePath: "/",
+  versionApiDefault: "",
 
-  frontUrl: '/',
+  frontUrl: "/",
 
   /**
    * Variables para configurar servidor de sockets
    */
-  SOCKET_ENDPOINT: 'http://3.225.70.18:3002/',
-  socketConnect: 'socketConnect',
-  socketMenu: 'socketMenu',
-  socketMenuMulti: 'socketMenuMulti',
-  socketLanguage: 'socketLanguage',
-  roomRolUser: 'roomRolUser_',
-  roomLanguageUser: 'roomLanguageUser_',
+  //SOCKET_ENDPOINT: 'http://3.225.70.18:3002/',
+  socketConnect: "socketConnect",
+  socketMenu: "socketMenu",
+  socketMenuMulti: "socketMenuMulti",
+  socketLanguage: "socketLanguage",
+  roomRolUser: "roomRolUser_",
+  roomLanguageUser: "roomLanguageUser_",
 
   /**
    * Nombre del hash almacenado en el LocalStorage, contiene los datos sencibles del usuario que realizao inicio de sesión
    */
-  hashMenu: '2c358af0-8cbb-46c6-a55c-e00f8b93a9b7',
-  hashSgdea: '2586e6b7-fa9d-425d-9f67-1f98d266dc59',
-  hashTimeOut: '8efa3946-f76b-49cc-9471-079bc883d850 ',
+  hashMenu: "2c358af0-8cbb-46c6-a55c-e00f8b93a9b7",
+  hashSgdea: "2586e6b7-fa9d-425d-9f67-1f98d266dc59",
+  hashTimeOut: "8efa3946-f76b-49cc-9471-079bc883d850 ",
 
-  hashMailSgdea: '9b307ade-1122-4dca-becf-b6174fe6c7a6',
-  hashMailInitialListSgdea: '950f34cf-f23f-4138-8451-7321aeb612d0',
+  hashMailSgdea: "9b307ade-1122-4dca-becf-b6174fe6c7a6",
+  hashMailInitialListSgdea: "950f34cf-f23f-4138-8451-7321aeb612d0",
 
   /**
    * Nombre del dataList mostrado en el datatables, a esta se concatena el nombre del modulo que se ejecuta
    * Nombre del modulo donde se encuentra ubicado el usuario
    */
-  hashDataList: '5705bffb-e313-43d8-865f-4edd8e40911a',
-  hashDataListModule: '4544423c-cbab-404d-bec9-6a3beabe0843',
-  hashDataFilter: 'f97e407a-1aae-4953-873f-c104ffdffaaf',
-  dataIdDepe: '2de2f8f8-8f12-406e-97e0-2d73320468ba',
-  hashMenuButtonRadi: 'f9817c23-7700-4a82-979c-f26e30d6ae58',
-  hashMenuButtonRadiCor: '90af720f-86a6-4f21-9ca3-e2b97c7a7a4c',
-  hashRadiAsociados: '8f9a3431-b417-4fec-b753-7cb4be3806fb',
+  hashDataList: "5705bffb-e313-43d8-865f-4edd8e40911a",
+  hashDataListModule: "4544423c-cbab-404d-bec9-6a3beabe0843",
+  hashDataFilter: "f97e407a-1aae-4953-873f-c104ffdffaaf",
+  dataIdDepe: "2de2f8f8-8f12-406e-97e0-2d73320468ba",
+  hashMenuButtonRadi: "f9817c23-7700-4a82-979c-f26e30d6ae58",
+  hashMenuButtonRadiCor: "90af720f-86a6-4f21-9ca3-e2b97c7a7a4c",
+  hashRadiAsociados: "8f9a3431-b417-4fec-b753-7cb4be3806fb",
 
   /** Lenguajes soportados */
   supportedLanguages: {
     es: true,
     en: true,
-    br: false
+    br: false,
   },
 
   /**
    * Llave para la librería CryptoJS
    */
-  llaveAES: '123456',
+  llaveAES: "123456",
 
   /**
    * Clave de recaptcha
    */
-  captchaSiteKey: '6Lc8_d4UAAAAANK-6A3w_lP6Crr6BJzT9ldbK_iO',
+  captchaSiteKey: "6Lc8_d4UAAAAANK-6A3w_lP6Crr6BJzT9ldbK_iO",
   /**
    * Tipos de usuario
    */
@@ -98,7 +98,7 @@ export const environment = {
     Inactivo: 0,
     Combinado: 8,
     Firmado: 9,
-    Cargado: 10
+    Cargado: 10,
   },
   /** Pais por defecto */
   defaultCountry: 1,
@@ -116,7 +116,7 @@ export const environment = {
   statusLoanTypeText: {
     consultaSala: 1,
     prestamoFisico: 2,
-    prestamoDigital: 3
+    prestamoDigital: 3,
   },
   /**
    * Estado de préstamo
@@ -136,18 +136,87 @@ export const environment = {
     finalizado: 11,
     pendienteTransferir: 13,
     transferenciaAceptada: 14,
-    transferenciaRechazada: 15
+    transferenciaRechazada: 15,
   },
   /*** Bandeja de Correos Radicacion Email */
-  mailbox: 'Recibidos',
+  mailbox: "Recibidos",
 
   /**
    * Validación de tipos de archivo aceptados
    */
   validateFile: {
     anexosRadicado: [
-      { type: 'xls' }, { type: 'xlsx' }, { type: 'pdf' }, { type: 'doc' }, { type: 'docx' }, { type: 'odt' }, { type: 'jpg' }, { type: 'png' }, { type: 'avi' }, { type: 'mp3' }, { type: 'mp4' }, { type: 'html' }, { type: 'dwg' }, { type: 'dxf' }, { type: 'svg' }, { type: 'csv' }, { type: 'jpeg' }, { type: 'skp' }, { type: 'rvt' }, { type: 'rfa' }, { type: 'rte' }, { type: 'pln' }, { type: 'tpl' }, { type: 'txt' }, { type: 'docm' }, { type: 'rtf' }, { type: 'xlsm' }, { type: 'ods' }, { type: 'pps' }, { type: 'ppt' }, { type: 'ppsx' }, { type: 'pptx' }, { type: 'ppsm' }, { type: 'pptm' }, { type: 'potx' }, { type: 'odp' }, { type: 'wma' }, { type: 'wav' }, { type: 'flac' }, { type: 'midi' }, { type: 'ogg' }, { type: 'm3u' }, { type: 'divx' }, { type: 'mov' }, { type: 'mpg' }, { type: 'mkv' }, { type: 'wmv' }, { type: 'wpl' }, { type: 'bmp' }, { type: 'ico' }, { type: 'webp' }, { type: 'gif' }, { type: 'psd' }, { type: 'heic' }, { type: 'nef' }, { type: 'crw' }, { type: 'ai' }, { type: 'zip' }, { type: 'rar' }, { type: 'rar5' }, { type: '7z' }, { type: 'ace' }, { type: 'r00' }, { type: 'r01' }, { type: 'gz' }, { type: 'xml' }, { type: 'eml' }, { type: 'msg' }, { type: 'tiff' }, { type: 'tar.bz2' },
-    ]
+      { type: "xls" },
+      { type: "xlsx" },
+      { type: "pdf" },
+      { type: "doc" },
+      { type: "docx" },
+      { type: "odt" },
+      { type: "jpg" },
+      { type: "png" },
+      { type: "avi" },
+      { type: "mp3" },
+      { type: "mp4" },
+      { type: "html" },
+      { type: "dwg" },
+      { type: "dxf" },
+      { type: "svg" },
+      { type: "csv" },
+      { type: "jpeg" },
+      { type: "skp" },
+      { type: "rvt" },
+      { type: "rfa" },
+      { type: "rte" },
+      { type: "pln" },
+      { type: "tpl" },
+      { type: "txt" },
+      { type: "docm" },
+      { type: "rtf" },
+      { type: "xlsm" },
+      { type: "ods" },
+      { type: "pps" },
+      { type: "ppt" },
+      { type: "ppsx" },
+      { type: "pptx" },
+      { type: "ppsm" },
+      { type: "pptm" },
+      { type: "potx" },
+      { type: "odp" },
+      { type: "wma" },
+      { type: "wav" },
+      { type: "flac" },
+      { type: "midi" },
+      { type: "ogg" },
+      { type: "m3u" },
+      { type: "divx" },
+      { type: "mov" },
+      { type: "mpg" },
+      { type: "mkv" },
+      { type: "wmv" },
+      { type: "wpl" },
+      { type: "bmp" },
+      { type: "ico" },
+      { type: "webp" },
+      { type: "gif" },
+      { type: "psd" },
+      { type: "heic" },
+      { type: "nef" },
+      { type: "crw" },
+      { type: "ai" },
+      { type: "zip" },
+      { type: "rar" },
+      { type: "rar5" },
+      { type: "7z" },
+      { type: "ace" },
+      { type: "r00" },
+      { type: "r01" },
+      { type: "gz" },
+      { type: "xml" },
+      { type: "eml" },
+      { type: "msg" },
+      { type: "tiff" },
+      { type: "tar.bz2" },
+    ],
   },
 
   /**
@@ -156,7 +225,7 @@ export const environment = {
   tipoRadicadoCodigo: {
     salida: 1,
     entrada: 2,
-    pqrs: 4
+    pqrs: 4,
   },
   /**
    *  Tipos de Radicado por id
@@ -165,19 +234,19 @@ export const environment = {
     salida: 1,
     entrada: 2,
     pqrs: 3,
-    comunicacionInterna: 4
+    comunicacionInterna: 4,
   },
   /**
    * Medio de Recepción
    */
   medioRecepcion: {
-    correoElectronico: 7
+    correoElectronico: 7,
   },
   /**
    * Tipos de mascara TRD ConfiguracionMascara
    */
   mascaraTRD: {
-    columnasSeparadas: 4
+    columnasSeparadas: 4,
   },
   /**
    * Tipo de persona Number muestra el id
@@ -185,15 +254,15 @@ export const environment = {
   tipoPersonaNumber: {
     PersonaJuridica: 1,
     PersonaNatural: 2,
-    Funcionario: 3
+    Funcionario: 3,
   },
   /**
    * Tiempo de cerrar sesión por inactividad en minutos
    */
   timeOutSessionMin: 10,
-  /** 
-    * Estados el expediente
-    */
+  /**
+   * Estados el expediente
+   */
   statusExpedienteText: {
     Cerrado: 0,
     Abierto: 10,
@@ -206,13 +275,12 @@ export const environment = {
     activo: 10,
     inactivo: 0,
   },
-  /** 
-   * Indica si se ocultan o quitan modulos adicional de limitar la creación de todos los modulos en el sistema 
+  /**
+   * Indica si se ocultan o quitan modulos adicional de limitar la creación de todos los modulos en el sistema
    **/
   sgda: {
     ocultarModulos: true,
     limitarCreacion: 60,
     limitarCreacionUsuarios: 5,
-  }
+  },
 };
-

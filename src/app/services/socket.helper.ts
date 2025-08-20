@@ -2,10 +2,10 @@ import { connect, Socket } from "socket.io-client";
 import { environment } from "src/environments/environment";
 
 export enum IOEvents {
-  connect = 'connect',
-  disconnect = 'disconnect',
-  join_room = 'join_room',
-  notificador = 'notificador',
+  connect = "connect",
+  disconnect = "disconnect",
+  join_room = "join_room",
+  notificador = "notificador",
 }
 
 /**
@@ -28,13 +28,15 @@ export class SocketHelper {
   socketId?: string;
 
   constructor() {
+    // SOLUCIÓN TEMPORAL: Comentar la conexión
+    console.log("SocketHelper initialized but connection disabled");
     this.socket = connect(environment.SOCKET_ENDPOINT);
 
     /**
      * Evento que se dispara cuando se conecta al socket.
      */
     this.on<any>(IOEvents.connect, () => {
-      console.log('Connected to socket', { socket: this.socket });
+      console.log("Connected to socket", { socket: this.socket });
       this.socketId = this.socket?.id;
     });
 
@@ -42,7 +44,7 @@ export class SocketHelper {
      * Evento que se dispara cuando se desconecta del socket.
      */
     this.on(IOEvents.disconnect, () => {
-      console.log('Disconnected from socket');
+      console.log("Disconnected from socket");
       this.socketId = undefined;
     });
   }

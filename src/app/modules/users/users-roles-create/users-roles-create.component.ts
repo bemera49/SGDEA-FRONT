@@ -2,32 +2,31 @@
 
  */
 
-import { Component, OnInit } from '@angular/core';
-import { SweetAlertService } from '../../../services/sweet-alert.service';
-import { RestService } from '../../../services/rest.service';
-import { environment } from 'src/environments/environment';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
-import { Router } from '@angular/router';
-import { GlobalAppService } from 'src/app/services/global-app.service';
+import { Component, OnInit } from "@angular/core";
+import { SweetAlertService } from "../../../services/sweet-alert.service";
+import { RestService } from "../../../services/rest.service";
+import { environment } from "src/environments/environment";
+import { LocalStorageService } from "src/app/services/local-storage.service";
+import { Router } from "@angular/router";
+import { GlobalAppService } from "src/app/services/global-app.service";
 
 @Component({
-  selector: 'app-users-roles-create',
-  templateUrl: './users-roles-create.component.html',
-  styleUrls: ['./users-roles-create.component.css']
+  selector: "app-users-roles-create",
+  templateUrl: "./users-roles-create.component.html",
+  styleUrls: ["./users-roles-create.component.css"],
 })
 export class UsersRolesCreateComponent implements OnInit {
-
   authorization: string;
   // Nombre del boton
-  textButtonForm = 'Crear';
+  textButtonForm = "Crear";
   // Nombre del formulario
-  textFormRol = 'Nuevo perfil';
+  textFormRol = "Nuevo perfil";
   /** BreadcrumbOn  */
   breadcrumbOn = [
-    { 'name': 'Gestión de usuarios', 'route': '/users' },
-    { 'name': 'Administrar perfiles', 'route': '/users/roles-index' }
+    { name: "Gestión de usuarios", route: "/users" },
+    { name: "Administrar perfiles", route: "/users/roles-index" },
   ];
-  breadcrumbRouteActive = 'Crear';
+  breadcrumbRouteActive = "Crear";
 
   /**
    * Configuraciones para los servicios
@@ -35,7 +34,13 @@ export class UsersRolesCreateComponent implements OnInit {
   responseServiceFormSubmit: any;
   responseServiceFormSubmitErr: any;
 
-  constructor(public sweetAlertService: SweetAlertService, public restService: RestService, public lhs: LocalStorageService, private router: Router, public globalAppService: GlobalAppService) { }
+  constructor(
+    public sweetAlertService: SweetAlertService,
+    public restService: RestService,
+    public lhs: LocalStorageService,
+    private router: Router,
+    public globalAppService: GlobalAppService,
+  ) {}
 
   ngOnInit() {
     // Hace el llamado del token
@@ -48,28 +53,46 @@ export class UsersRolesCreateComponent implements OnInit {
      */
     this.sweetAlertService.sweetLoading();
     let versionApi = environment.versionApiDefault;
-
-    this.restService.restPost(versionApi + 'roles/roles/create', data, this.authorization)
-      .subscribe((res) => {
-        this.responseServiceFormSubmit = res;      
-        // Evaluar respuesta del servicio
-        this.globalAppService.resolveResponse(this.responseServiceFormSubmit, true, '/users/users-index/false').then((res) => {
-          let responseResolveResponse = res;
-          if (responseResolveResponse == true) {
-            // Guarda en el local storage el mensaje
-            localStorage.setItem('setFlashText', this.responseServiceFormSubmit.message);
-            // Redirecciona a la pagina principal
-            this.router.navigate(['/users/roles-index']);
-            // Cargando false
-            this.sweetAlertService.sweetClose();
-          }
-        });
-      }, (err) => {
-        this.responseServiceFormSubmitErr = err;
-        // Evaluar respuesta de error del servicio
-        this.globalAppService.resolveResponseError(this.responseServiceFormSubmitErr, true, '/users/users-index/false').then((res) => { });
-      }
-    );
+    //agregar fecha de creación
+    this.restService
+      .restPost(versionApi + "roles/roles/create", data, this.authorization)
+      .subscribe(
+        (res) => {
+          this.responseServiceFormSubmit = res;
+          // Evaluar respuesta del servicio
+          this.globalAppService
+            .resolveResponse(
+              this.responseServiceFormSubmit,
+              true,
+              "/users/users-index/false",
+            )
+            .then((res) => {
+              let responseResolveResponse = res;
+              if (responseResolveResponse == true) {
+                // Guarda en el local storage el mensaje
+                localStorage.setItem(
+                  "setFlashText",
+                  this.responseServiceFormSubmit.message,
+                );
+                // Redirecciona a la pagina principal
+                this.router.navigate(["/users/roles-index"]);
+                // Cargando false
+                this.sweetAlertService.sweetClose();
+              }
+            });
+        },
+        (err) => {
+          this.responseServiceFormSubmitErr = err;
+          // Evaluar respuesta de error del servicio
+          this.globalAppService
+            .resolveResponseError(
+              this.responseServiceFormSubmitErr,
+              true,
+              "/users/users-index/false",
+            )
+            .then((res) => {});
+        },
+      );
   }
 
   // Método para obtener el token que se encuentra encriptado en el local storage
@@ -79,5 +102,4 @@ export class UsersRolesCreateComponent implements OnInit {
       this.authorization = res;
     });
   }
-
 }

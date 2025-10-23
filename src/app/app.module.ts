@@ -1,9 +1,9 @@
-/**
-
- */
-
 import { CommonModule } from "@angular/common";
-import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from "@angular/common/http";
+import {
+  HTTP_INTERCEPTORS,
+  HttpClient,
+  HttpClientModule,
+} from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
@@ -61,17 +61,20 @@ import { DynamicFormsTypesRepeatComponent } from "./modules/components/dynamic-f
 import { BnNgIdleService } from "bn-ng-idle"; // import bn-ng-idle service
 import { environment } from "src/environments/environment";
 
-import { AuthInterceptor } from 'src/app/app.interceptor';
+import { AuthInterceptor } from "src/app/app.interceptor";
 import { ToastNotifyModule } from "./services/toast/components/toast-notify/toast-notify.module";
 
 import { AdminLayoutModule } from "./modules/admin-layout/admin-layout.module";
 
 export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, environment.frontUrl + "assets/i18n/", ".json");
+  return new TranslateHttpLoader(
+    http,
+    environment.frontUrl + "assets/i18n/",
+    ".json",
+  );
 }
 
 @NgModule({
-
   imports: [
     CommonModule,
     BrowserAnimationsModule,
@@ -140,7 +143,11 @@ export function createTranslateLoader(http: HttpClient) {
     ChangeChildrenService,
     BnNgIdleService,
   ],
-  declarations: [AppComponent, DynamicFormsTypesRepeatComponent, DynamicFormsTypesNotRepeatComponent],
+  declarations: [
+    AppComponent,
+    DynamicFormsTypesRepeatComponent,
+    DynamicFormsTypesNotRepeatComponent,
+  ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

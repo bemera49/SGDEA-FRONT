@@ -1,6 +1,22 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from "@angular/core";
-import { AbstractControl, UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from "@angular/forms";
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild,
+} from "@angular/core";
+import {
+  AbstractControl,
+  UntypedFormArray,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators,
+} from "@angular/forms";
 import { ThemePalette } from "@angular/material/core";
 import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -21,7 +37,7 @@ import { ActivateTranslateService } from "../../../services/activate-translate.s
 import { FilingCreateDetailResolutionComponent } from "../filing-create-detail-resolution/filing-create-detail-resolution.component";
 
 //HU030 - Radicados con varias cuentas contrato y agregar o editar cuentas contrato en un radicado.
-import { CreacionContactosComponent } from '../../../modules/pqrs/radicados-cuenta-contrato/creacion-contactos/creacion-contactos.component';
+import { CreacionContactosComponent } from "../../../modules/pqrs/radicados-cuenta-contrato/creacion-contactos/creacion-contactos.component";
 
 import { NivelPrioridad } from "@app/interfaces/radicados/nivel-prioridad";
 import { ResNivelesPrivacidad } from "@app/interfaces/radicados/nivel-privacidad.interface";
@@ -63,12 +79,13 @@ export class FilingFormComponent implements OnInit, OnDestroy {
   @Input() textForm7 = "Notificacion";
   @Input() textForm8 = "Tipo de Prioridad";
 
-
   // Iconos del formulario
   @Input() initCardHeaderIcon = "description";
   @Input() initCardHeaderIconDatos = "library_books";
   /** BreadcrumbOn  */
-  @Input() breadcrumbOn = [{ name: "Radicación estándar", route: "/filing/filing-index/false" }];
+  @Input() breadcrumbOn = [
+    { name: "Radicación estándar", route: "/filing/filing-index/false" },
+  ];
   @Input() breadcrumbRouteActive = "Formulario principal";
   @Input() messageUnderConstruction = "funcionalidad en construcción";
 
@@ -80,7 +97,7 @@ export class FilingFormComponent implements OnInit, OnDestroy {
   showButtonClearAttachment: boolean = true;
   showCreateDireccion: boolean = true;
   editorContent = "";
-  direccionCliente = '';
+  direccionCliente = "";
   firmaRadiRadicado = null;
 
   /** Data seleccionada en la tabla principal */
@@ -112,7 +129,9 @@ export class FilingFormComponent implements OnInit, OnDestroy {
   statusModalUploadFile: boolean = false; // Muestra el componente de Envio de Documentos
 
   ruoteServiceDocuments: string =
-    environment.apiUrl + environment.versionApiDefault + "radicacion/transacciones/upload-file";
+    environment.apiUrl +
+    environment.versionApiDefault +
+    "radicacion/transacciones/upload-file";
   eventClickButtonSelectedData: any;
 
   // Variable del formulario
@@ -243,7 +262,6 @@ export class FilingFormComponent implements OnInit, OnDestroy {
   resServicesSgdeaScan: any;
   resServicesSgdeaScanErr: any;
 
-
   listSeries: any; // Series
   listSubseries: any; // Subseries
   listTipoDocumental: any; // Tipos documentales
@@ -259,7 +277,10 @@ export class FilingFormComponent implements OnInit, OnDestroy {
   listTipoRadicadoActosAdmin: any; // Tipos Radicados actos administrativos
   listNumRadicado: any; // Numeros Radicados
   listTramites: any; // Tramites
-  bisOptions: any = [{ value: "SI", viewValue: "SI" }, { value: "NO", viewValue: "NO" }];
+  bisOptions: any = [
+    { value: "SI", viewValue: "SI" },
+    { value: "NO", viewValue: "NO" },
+  ];
   listTramitador: any; // Usuario tramitador
   listMedioRecepcion: any; // Medios de recepcion
   listDependencias: any; // Dependencias
@@ -277,34 +298,80 @@ export class FilingFormComponent implements OnInit, OnDestroy {
   listNivelGeografico3: any;
 
   /** lists filtered + nombrelista by search keyword */
-  filteredlistSeries: ReplaySubject<ListaBusq[]> = new ReplaySubject<ListaBusq[]>(1);
-  filteredlistSubseries: ReplaySubject<ListaBusq[]> = new ReplaySubject<ListaBusq[]>(1);
-  filteredlistTipoDocumental: ReplaySubject<ListaBusq[]> = new ReplaySubject<ListaBusq[]>(1);
-  filteredlistCliente: ReplaySubject<ListaBusq[]> = new ReplaySubject<ListaBusq[]>(1);
-  filteredlistTipoPersona: ReplaySubject<ListaBusq[]> = new ReplaySubject<ListaBusq[]>(1);
-  filterdIdTipoIdentificacion: ReplaySubject<ListaBusq[]> = new ReplaySubject<ListaBusq[]>(1);
-  filteredlistTipoRespuesta: ReplaySubject<ListaBusq[]> = new ReplaySubject<ListaBusq[]>(1);
-  filteredlistMedioRespuesta: ReplaySubject<ListaBusq[]> = new ReplaySubject<ListaBusq[]>(1);
+  filteredlistSeries: ReplaySubject<ListaBusq[]> = new ReplaySubject<
+    ListaBusq[]
+  >(1);
+  filteredlistSubseries: ReplaySubject<ListaBusq[]> = new ReplaySubject<
+    ListaBusq[]
+  >(1);
+  filteredlistTipoDocumental: ReplaySubject<ListaBusq[]> = new ReplaySubject<
+    ListaBusq[]
+  >(1);
+  filteredlistCliente: ReplaySubject<ListaBusq[]> = new ReplaySubject<
+    ListaBusq[]
+  >(1);
+  filteredlistTipoPersona: ReplaySubject<ListaBusq[]> = new ReplaySubject<
+    ListaBusq[]
+  >(1);
+  filterdIdTipoIdentificacion: ReplaySubject<ListaBusq[]> = new ReplaySubject<
+    ListaBusq[]
+  >(1);
+  filteredlistTipoRespuesta: ReplaySubject<ListaBusq[]> = new ReplaySubject<
+    ListaBusq[]
+  >(1);
+  filteredlistMedioRespuesta: ReplaySubject<ListaBusq[]> = new ReplaySubject<
+    ListaBusq[]
+  >(1);
 
   filteredlistTipoRadicado: Array<ListaBusq> = [];
   filteredlistTipoComunicacion: Array<ListaBusq> = [];
-  filteredlistNumRadicado: ReplaySubject<ListaBusq[]> = new ReplaySubject<ListaBusq[]>(1);
-  filteredlistTramites: ReplaySubject<ListaBusq[]> = new ReplaySubject<ListaBusq[]>(1);
-  filteredlistTramitador: ReplaySubject<ListaBusq[]> = new ReplaySubject<ListaBusq[]>(1);
-  filteredlistMedioRecepcion: ReplaySubject<ListaBusq[]> = new ReplaySubject<ListaBusq[]>(1);
-  filteredlistTipoTramite: ReplaySubject<ListaBusq[]> = new ReplaySubject<ListaBusq[]>(1);
-  filteredlistDependencias: ReplaySubject<ListaBusq[]> = new ReplaySubject<ListaBusq[]>(1);
-  filteredlistFuncionarios: ReplaySubject<ListaBusq[]> = new ReplaySubject<ListaBusq[]>(1);
-  filteredlistGenero: ReplaySubject<ListaBusq[]> = new ReplaySubject<ListaBusq[]>(1);
-  filteredlistRangoEdad: ReplaySubject<ListaBusq[]> = new ReplaySubject<ListaBusq[]>(1);
-  filteredlistVulnerabilidad: ReplaySubject<ListaBusq[]> = new ReplaySubject<ListaBusq[]>(1);
-  filteredlistEtnia: ReplaySubject<ListaBusq[]> = new ReplaySubject<ListaBusq[]>(1);
+  filteredlistNumRadicado: ReplaySubject<ListaBusq[]> = new ReplaySubject<
+    ListaBusq[]
+  >(1);
+  filteredlistTramites: ReplaySubject<ListaBusq[]> = new ReplaySubject<
+    ListaBusq[]
+  >(1);
+  filteredlistTramitador: ReplaySubject<ListaBusq[]> = new ReplaySubject<
+    ListaBusq[]
+  >(1);
+  filteredlistMedioRecepcion: ReplaySubject<ListaBusq[]> = new ReplaySubject<
+    ListaBusq[]
+  >(1);
+  filteredlistTipoTramite: ReplaySubject<ListaBusq[]> = new ReplaySubject<
+    ListaBusq[]
+  >(1);
+  filteredlistDependencias: ReplaySubject<ListaBusq[]> = new ReplaySubject<
+    ListaBusq[]
+  >(1);
+  filteredlistFuncionarios: ReplaySubject<ListaBusq[]> = new ReplaySubject<
+    ListaBusq[]
+  >(1);
+  filteredlistGenero: ReplaySubject<ListaBusq[]> = new ReplaySubject<
+    ListaBusq[]
+  >(1);
+  filteredlistRangoEdad: ReplaySubject<ListaBusq[]> = new ReplaySubject<
+    ListaBusq[]
+  >(1);
+  filteredlistVulnerabilidad: ReplaySubject<ListaBusq[]> = new ReplaySubject<
+    ListaBusq[]
+  >(1);
+  filteredlistEtnia: ReplaySubject<ListaBusq[]> = new ReplaySubject<
+    ListaBusq[]
+  >(1);
 
-  filteredlistTipoAnexo: ReplaySubject<ListaBusq[]> = new ReplaySubject<ListaBusq[]>(1);
+  filteredlistTipoAnexo: ReplaySubject<ListaBusq[]> = new ReplaySubject<
+    ListaBusq[]
+  >(1);
 
-  filteredlistNivelGeografico1: ReplaySubject<ListaBusq[]> = new ReplaySubject<ListaBusq[]>(1);
-  filteredlistNivelGeografico2: ReplaySubject<ListaBusq[]> = new ReplaySubject<ListaBusq[]>(1);
-  filteredlistNivelGeografico3: ReplaySubject<ListaBusq[]> = new ReplaySubject<ListaBusq[]>(1);
+  filteredlistNivelGeografico1: ReplaySubject<ListaBusq[]> = new ReplaySubject<
+    ListaBusq[]
+  >(1);
+  filteredlistNivelGeografico2: ReplaySubject<ListaBusq[]> = new ReplaySubject<
+    ListaBusq[]
+  >(1);
+  filteredlistNivelGeografico3: ReplaySubject<ListaBusq[]> = new ReplaySubject<
+    ListaBusq[]
+  >(1);
 
   /** slide-toggle  */
   color: ThemePalette = "primary";
@@ -322,12 +389,24 @@ export class FilingFormComponent implements OnInit, OnDestroy {
   idCliente: any;
 
   // Route Templaste
-  ruoteServiceDocumentsTemplate: string = environment.apiUrl + this.versionApi + "radicacion/transacciones/load-format";
+  ruoteServiceDocumentsTemplate: string =
+    environment.apiUrl +
+    this.versionApi +
+    "radicacion/transacciones/load-format";
   // Upload Documents Anexos
-  ruoteServiceDocumentsAne: string = environment.apiUrl + this.versionApi + "radicacion/documentos/upload-document";
+  ruoteServiceDocumentsAne: string =
+    environment.apiUrl +
+    this.versionApi +
+    "radicacion/documentos/upload-document";
   // Route Documents modal
   ruoteServiceDocumentsModal: any;
-  validateFile: any = [{ type: "xls" }, { type: "xlsx" }, { type: "pdf" }, { type: "doc" }, { type: "docx" }];
+  validateFile: any = [
+    { type: "xls" },
+    { type: "xlsx" },
+    { type: "pdf" },
+    { type: "doc" },
+    { type: "docx" },
+  ];
   validateFileAnexos: any = environment.validateFile.anexosRadicado;
   statusUploadFileAne: boolean = false; // Muestra el modal para adjuntar anexos
   statusUploadFileAneMasive: boolean = false; // Muestra el modal para adjuntar anexos masivos
@@ -360,7 +439,8 @@ export class FilingFormComponent implements OnInit, OnDestroy {
   creacionRadiRadicado = "";
 
   /** Las variables para mostrar la alerta informativa  */
-  @Input() initialNotificationClassAlert: string = "alert alert-info alert-with-icon";
+  @Input() initialNotificationClassAlert: string =
+    "alert alert-info alert-with-icon";
   @Input() initialNotificationMessageArray: any = [];
 
   /** Clases para selector de remitente's */
@@ -375,58 +455,56 @@ export class FilingFormComponent implements OnInit, OnDestroy {
   _onDestroy = new Subject<void>();
 
   tiposDeViaOptions = [
-    { value: 'AC', viewValue: 'Avenida Calle' },
-    { value: 'AK', viewValue: 'Avenida Carrera' },
-    { value: 'CL', viewValue: 'Calle' },
-    { value: 'KR', viewValue: 'Carrera' },
-    { value: 'DG', viewValue: 'Diagonal' },
-    { value: 'TV', viewValue: 'Transversal' }
+    { value: "AC", viewValue: "Avenida Calle" },
+    { value: "AK", viewValue: "Avenida Carrera" },
+    { value: "CL", viewValue: "Calle" },
+    { value: "KR", viewValue: "Carrera" },
+    { value: "DG", viewValue: "Diagonal" },
+    { value: "TV", viewValue: "Transversal" },
   ];
 
   //actos administrativos
   public notificacionesList: TipoNotificacion[] = [];
-  public nivelesPrivacidad: ResNivelesPrivacidad = { message: '', data: [] };
+  public nivelesPrivacidad: ResNivelesPrivacidad = { message: "", data: [] };
   public nivelPrioridadList: NivelPrioridad[] = [];
-
 
   // Letras para la dirección
   letraOptions = [
-    { value: '', viewValue: '' },
-    { value: 'A', viewValue: 'A' },
-    { value: 'B', viewValue: 'B' },
-    { value: 'C', viewValue: 'C' },
-    { value: 'D', viewValue: 'D' },
-    { value: 'E', viewValue: 'E' },
-    { value: 'F', viewValue: 'F' },
-    { value: 'G', viewValue: 'G' },
-    { value: 'H', viewValue: 'H' },
-    { value: 'I', viewValue: 'I' },
-    { value: 'J', viewValue: 'J' },
-    { value: 'K', viewValue: 'K' },
-    { value: 'L', viewValue: 'L' },
-    { value: 'M', viewValue: 'M' },
-    { value: 'N', viewValue: 'N' },
-    { value: 'Ñ', viewValue: 'Ñ' },
-    { value: 'O', viewValue: 'O' },
-    { value: 'P', viewValue: 'P' },
-    { value: 'Q', viewValue: 'Q' },
-    { value: 'R', viewValue: 'R' },
-    { value: 'S', viewValue: 'S' },
-    { value: 'T', viewValue: 'T' },
-    { value: 'U', viewValue: 'U' },
-    { value: 'V', viewValue: 'V' },
-    { value: 'W', viewValue: 'W' },
-    { value: 'X', viewValue: 'X' },
-    { value: 'Y', viewValue: 'Y' },
-    { value: 'Z', viewValue: 'Z' }
+    { value: "", viewValue: "" },
+    { value: "A", viewValue: "A" },
+    { value: "B", viewValue: "B" },
+    { value: "C", viewValue: "C" },
+    { value: "D", viewValue: "D" },
+    { value: "E", viewValue: "E" },
+    { value: "F", viewValue: "F" },
+    { value: "G", viewValue: "G" },
+    { value: "H", viewValue: "H" },
+    { value: "I", viewValue: "I" },
+    { value: "J", viewValue: "J" },
+    { value: "K", viewValue: "K" },
+    { value: "L", viewValue: "L" },
+    { value: "M", viewValue: "M" },
+    { value: "N", viewValue: "N" },
+    { value: "Ñ", viewValue: "Ñ" },
+    { value: "O", viewValue: "O" },
+    { value: "P", viewValue: "P" },
+    { value: "Q", viewValue: "Q" },
+    { value: "R", viewValue: "R" },
+    { value: "S", viewValue: "S" },
+    { value: "T", viewValue: "T" },
+    { value: "U", viewValue: "U" },
+    { value: "V", viewValue: "V" },
+    { value: "W", viewValue: "W" },
+    { value: "X", viewValue: "X" },
+    { value: "Y", viewValue: "Y" },
+    { value: "Z", viewValue: "Z" },
   ];
-
 
   // Sufijos para la dirección
   sufijoOptions = [
-    { value: '', viewValue: '' },
-    { value: 'SUR', viewValue: 'Sur' },
-    { value: 'ESTE', viewValue: 'Este' }
+    { value: "", viewValue: "" },
+    { value: "SUR", viewValue: "Sur" },
+    { value: "ESTE", viewValue: "Este" },
   ];
 
   tiposAnexosFisicosOptions: any = [];
@@ -442,9 +520,10 @@ export class FilingFormComponent implements OnInit, OnDestroy {
   tipoAnexo: any = [];
 
   isDevolution: boolean = false;
-  disabledDevelution: string = ''
+  disabledDevelution: string = "";
 
-  @ViewChild('imprimirRadicado', { static: false }) imprimirRadicado: ElementRef;
+  @ViewChild("imprimirRadicado", { static: false })
+  imprimirRadicado: ElementRef;
 
   constructor(
     public route: ActivatedRoute,
@@ -466,23 +545,23 @@ export class FilingFormComponent implements OnInit, OnDestroy {
     private changeChildrenService: ChangeChildrenService,
     private modal: ModalService,
   ) {
-    localStorage.removeItem('signature');
+    localStorage.removeItem("signature");
     //actos adminitrativos
     this.notificacionesList = [];
     this.nivelPrioridadList = [
       {
         id: 1,
-        name: "Alta"
+        name: "Alta",
       },
       {
         id: 2,
-        name: "Media"
+        name: "Media",
       },
       {
         id: 0,
-        name: "Baja"
-      }
-    ]
+        name: "Baja",
+      },
+    ];
 
     this.direccionManual = false;
     this.tipoZonaNotificacion = false;
@@ -500,12 +579,20 @@ export class FilingFormComponent implements OnInit, OnDestroy {
       idCliente: new UntypedFormControl(
         "",
         Validators.compose([
-          this.tipoRadicado === 2 ? Validators.required : null
-        ])
+          this.tipoRadicado === 2 ? Validators.required : null,
+        ]),
       ),
-      idCgTipoRadicado: new UntypedFormControl("", Validators.compose([Validators.required])),
+      idCgTipoRadicado: new UntypedFormControl(
+        "",
+        Validators.compose([Validators.required]),
+      ),
       tipoComunicacionId: new UntypedFormControl("", Validators.compose([])),
-      idTipoTramite: new UntypedFormControl("", Validators.compose([this.tipoRadicado === 2 ? Validators.required : null])),
+      idTipoTramite: new UntypedFormControl(
+        "",
+        Validators.compose([
+          this.tipoRadicado === 2 ? Validators.required : null,
+        ]),
+      ),
       idTipoAnexoFisico: new UntypedFormControl("", Validators.compose([])),
       // idMedioRespuesta: new UntypedFormControl("", Validators.compose([Validators.required])),
       numeroCuentaInterna: new UntypedFormControl("", Validators.compose([])),
@@ -515,7 +602,10 @@ export class FilingFormComponent implements OnInit, OnDestroy {
       nPlacaDos: new UntypedFormControl("", Validators.compose([])),
       sufijoDos: new UntypedFormControl("", Validators.compose([])),
       bisNotificacion: new UntypedFormControl("", Validators.compose([])),
-      letraDosNotificacionDos: new UntypedFormControl("", Validators.compose([])),
+      letraDosNotificacionDos: new UntypedFormControl(
+        "",
+        Validators.compose([]),
+      ),
       letraTresNotificacion: new UntypedFormControl("", Validators.compose([])),
       nPlacaDosNotificacion: new UntypedFormControl("", Validators.compose([])),
       sufijoDosNotificacion: new UntypedFormControl("", Validators.compose([])),
@@ -523,67 +613,95 @@ export class FilingFormComponent implements OnInit, OnDestroy {
         "",
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
       fechaDocumentoRadiRadicado: new UntypedFormControl(
         new Date(), // Set default to current date and time
-        Validators.compose([
-          Validators.required
-        ])
+        Validators.compose([Validators.required]),
       ),
-      RadiRadicadoHijos: new UntypedFormControl("", Validators.compose([
-        // Validators.required
-      ])
+      RadiRadicadoHijos: new UntypedFormControl(
+        "",
+        Validators.compose([
+          // Validators.required
+        ]),
       ),
       unicoRadiCgTipoRadicado: new UntypedFormControl(
         "",
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
       idOrigen: new UntypedFormControl(
         "",
         Validators.compose([
-          this.tipoRadicado == 2 ? Validators.required : null
-        ])
+          this.tipoRadicado == 2 ? Validators.required : null,
+        ]),
       ),
-      idTipoPersona: new UntypedFormControl({ value: "", disabled: true }, Validators.compose([])),
-      idMedioRespuesta: new UntypedFormControl({ value: "1", disabled: true }, Validators.compose([])),
+      idTipoPersona: new UntypedFormControl(
+        { value: "", disabled: true },
+        Validators.compose([]),
+      ),
+      idMedioRespuesta: new UntypedFormControl(
+        { value: "1", disabled: true },
+        Validators.compose([]),
+      ),
 
       //idTipoIdentificacion: new UntypedFormControl({ value: 1, disabled: true }, Validators.compose([])),
-      idTipoIdentificacion: new UntypedFormControl({ value: "", disabled: true }, Validators.compose([])),
-      nombreCliente: new UntypedFormControl({ value: "", disabled: true }, Validators.compose([])),
-      numeroDocumentoCliente: new UntypedFormControl({ value: "", disabled: true }, Validators.compose([])),
-      direccionCliente: new UntypedFormControl({ value: "", disabled: false }, Validators.compose([])),
-      idNivelGeografico3: new UntypedFormControl({ value: "", disabled: true }, Validators.compose([])),
-      idNivelGeografico2: new UntypedFormControl({ value: "", disabled: true }, Validators.compose([])),
-      idNivelGeografico1: new UntypedFormControl({ value: "", disabled: true }, Validators.compose([])),
-      correoElectronicoCliente: new UntypedFormControl({ value: "", disabled: true }, Validators.compose([
-        Validators.email
-      ])),
+      idTipoIdentificacion: new UntypedFormControl(
+        { value: "", disabled: true },
+        Validators.compose([]),
+      ),
+      nombreCliente: new UntypedFormControl(
+        { value: "", disabled: true },
+        Validators.compose([]),
+      ),
+      numeroDocumentoCliente: new UntypedFormControl(
+        { value: "", disabled: true },
+        Validators.compose([]),
+      ),
+      direccionCliente: new UntypedFormControl(
+        { value: "", disabled: false },
+        Validators.compose([]),
+      ),
+      idNivelGeografico3: new UntypedFormControl(
+        { value: "", disabled: true },
+        Validators.compose([]),
+      ),
+      idNivelGeografico2: new UntypedFormControl(
+        { value: "", disabled: true },
+        Validators.compose([]),
+      ),
+      idNivelGeografico1: new UntypedFormControl(
+        { value: "", disabled: true },
+        Validators.compose([]),
+      ),
+      correoElectronicoCliente: new UntypedFormControl(
+        { value: "", disabled: true },
+        Validators.compose([Validators.email]),
+      ),
       telefonoCliente: new UntypedFormControl(
         { value: "", disabled: true },
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
       celular: new UntypedFormControl(
         { value: "", disabled: true },
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
       tipoZona: new UntypedFormControl(
         false,
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
       tipoZonaNotificacion: new UntypedFormControl(
         false,
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
       CityCode: new UntypedFormControl("", []),
       remitentes: this.formBuilder.array([]),
@@ -593,31 +711,31 @@ export class FilingFormComponent implements OnInit, OnDestroy {
         "",
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
       rangoEdadClienteCiudadanoDetalle: new UntypedFormControl(
         "",
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
       vulnerabilidadClienteCiudadanoDetalle: new UntypedFormControl(
         "",
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
       etniaClienteCiudadanoDetalle: new UntypedFormControl(
         "",
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
       isCiudadano: new UntypedFormControl(
         false,
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
       /*** Fin PQRSD Detinatario ***/
 
@@ -626,94 +744,107 @@ export class FilingFormComponent implements OnInit, OnDestroy {
       /*** Inicio Información radicado ***/
       idGdTrdSerie: new UntypedFormControl(
         "",
-        Validators.compose([
-          Validators.required
-        ])
+        Validators.compose([Validators.required]),
       ),
       idGdTrdSubserie: new UntypedFormControl(
         "",
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
-      idTrdTipoDocumental: new UntypedFormControl("",
-        Validators.compose([
-          Validators.required
-        ])
+      idTrdTipoDocumental: new UntypedFormControl(
+        "",
+        Validators.compose([Validators.required]),
       ),
       idTramites: new UntypedFormControl(
         "0",
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
       PrioridadRadiRadicados: new UntypedFormControl(
         null,
         Validators.compose([
           //Validators.required
-        ])
+        ]),
       ),
       PrioridadDevolucion: new UntypedFormControl(
         false,
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
       PrioridadInsistencia: new UntypedFormControl(
         false,
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
       idCgMedioRecepcion: new UntypedFormControl(
         // this.tipoRadicado == 2 ? "" : "9",
         // this.tipoRadicado == 2 ? Validators.required : null
-        Validators.compose([])),
-      asuntoRadiRadicado: new UntypedFormControl("", Validators.compose([Validators.required])),
+        Validators.compose([]),
+      ),
+      asuntoRadiRadicado: new UntypedFormControl(
+        "",
+        Validators.compose([Validators.required]),
+      ),
       codigoPostal: new UntypedFormControl({ value: "", disabled: true }),
       // idMedioRespuesta: new UntypedFormControl({ value: "", disabled: true }, Validators.compose([])),
-      direccionManualCuentaContrato: new UntypedFormControl(false, Validators.compose([])),
+      direccionManualCuentaContrato: new UntypedFormControl(
+        false,
+        Validators.compose([]),
+      ),
 
       // Vencimiento
       fechaVencimientoRadiRadicados: new UntypedFormControl(
         { value: "", disabled: false },
-        Validators.compose([])
+        Validators.compose([]),
       ),
-      foliosRadiRadicado: new UntypedFormControl({ value: "0", disabled: false }, Validators.compose([])),
+      foliosRadiRadicado: new UntypedFormControl(
+        { value: "0", disabled: false },
+        Validators.compose([]),
+      ),
       descripcionAnexoRadiRadicado: new UntypedFormControl(
         "",
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
       // Dias Restantes
       diasRestantes: new UntypedFormControl(
         15,
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
       observacionRadiRadicado: new UntypedFormControl(
         "",
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
       /*** Inicio Información radicado PQRSD ***/
       autorizacionRadiRadicados: new UntypedFormControl(
         "",
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
       /*** Fin Información radicado PQRSD ***/
 
       /*** Fin Información radicado ***/
 
       // Dependencia
-      idTrdDepeUserTramitador: new UntypedFormControl("", Validators.compose([Validators.required])),
+      idTrdDepeUserTramitador: new UntypedFormControl(
+        "",
+        Validators.compose([Validators.required]),
+      ),
       // Funcionarios
-      user_idTramitador: new UntypedFormControl("", Validators.compose([Validators.required])),
+      user_idTramitador: new UntypedFormControl(
+        "",
+        Validators.compose([Validators.required]),
+      ),
       // tipo servicio
       //tipoServicioId: new UntypedFormControl("", Validators.compose([Validators.required])),
 
@@ -725,258 +856,293 @@ export class FilingFormComponent implements OnInit, OnDestroy {
         "",
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
       listSubseriesFilter: new UntypedFormControl(
         "",
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
       listTipoComunicacionFilter: new UntypedFormControl(
         "",
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
       listTipoDocumentalFilter: new UntypedFormControl(
         "",
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
       listClienteFilter: new UntypedFormControl(
         "",
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
       listTipoPersonaFilter: new UntypedFormControl(
         "",
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
       listTipoIdentificacion: new UntypedFormControl(
         "",
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
       listNumRadicadoFilter: new UntypedFormControl(
         "",
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
       listTipoRadicadoFilter: new UntypedFormControl(
         "",
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
       listTramitesFilter: new UntypedFormControl(
         "",
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
       listTramitadorFilter: new UntypedFormControl(
         "",
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
       listMedioRecepcionFilter: new UntypedFormControl(
         "",
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
       listNivelGeografico3Filter: new UntypedFormControl(
         "",
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
       listMedioRespuesta: new UntypedFormControl(
         "",
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
 
       listNivelGeografico2Filter: new UntypedFormControl(
         "",
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
       listNivelGeografico1Filter: new UntypedFormControl(
         "",
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
       listDependenciasFilter: new UntypedFormControl(
         "",
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
       listFuncionariosFilter: new UntypedFormControl(
         "",
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
       listGeneroFilter: new UntypedFormControl(
         "",
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
       listRangoEdadFilter: new UntypedFormControl(
         "",
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
       listVulnerabilidadFilter: new UntypedFormControl(
         "",
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
       listEtniaFilter: new UntypedFormControl(
         "",
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
 
       listTipoAnexoFilter: new UntypedFormControl(
         "",
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
 
       fileUpload: new UntypedFormControl(
         "",
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
 
       aceptaPolitica: new UntypedFormControl(
         "",
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
 
       //notificaciones
-      direccionNotificacion: new UntypedFormControl('', Validators.compose([])),
+      direccionNotificacion: new UntypedFormControl("", Validators.compose([])),
 
       //PQRS
-      numeroRadicadoExterno: new UntypedFormControl('', Validators.compose([
-        // Validators.pattern('^[0-9]*$')
-      ])),
-      numeroCuentaContrato: new UntypedFormControl('', Validators.compose([])),
+      numeroRadicadoExterno: new UntypedFormControl(
+        "",
+        Validators.compose([
+          // Validators.pattern('^[0-9]*$')
+        ]),
+      ),
+      numeroCuentaContrato: new UntypedFormControl("", Validators.compose([])),
 
-      tipoRespuestaId: new UntypedFormControl('', Validators.compose([])),
-      contactoSap: new UntypedFormControl('', Validators.compose([])),
-      direccion: new UntypedFormControl('', Validators.compose([])),
-      tipoDeVia: new UntypedFormControl('', Validators.compose([])),
-      numVia: new UntypedFormControl('', Validators.compose([])),
-      letra: new UntypedFormControl('', Validators.compose([])),
-      sufijo: new UntypedFormControl('', Validators.compose([])),
-      nPlaca: new UntypedFormControl('', Validators.compose([])),
-      complemento: new UntypedFormControl('', Validators.compose([])),
-      zona: new UntypedFormControl('', Validators.compose([Number(this.tipoRadicado) === 2 ? Validators.required : null])),
-      tipoDeViaNotificacion: new UntypedFormControl('', Validators.compose([])),
-      numViaNotificacion: new UntypedFormControl('', Validators.compose([])),
-      letraNotificacion: new UntypedFormControl('', Validators.compose([])),
-      sufijoNotificacion: new UntypedFormControl('', Validators.compose([])),
-      nPlacaNotificacion: new UntypedFormControl('', Validators.compose([])),
-      complementoNotificacion: new UntypedFormControl('', Validators.compose([])),
-      tipoSolicitudId: new UntypedFormControl('', Validators.compose([Number(this.tipoRadicado) === 2 ? Validators.required : null])),
+      tipoRespuestaId: new UntypedFormControl("", Validators.compose([])),
+      contactoSap: new UntypedFormControl("", Validators.compose([])),
+      direccion: new UntypedFormControl("", Validators.compose([])),
+      tipoDeVia: new UntypedFormControl("", Validators.compose([])),
+      numVia: new UntypedFormControl("", Validators.compose([])),
+      letra: new UntypedFormControl("", Validators.compose([])),
+      sufijo: new UntypedFormControl("", Validators.compose([])),
+      nPlaca: new UntypedFormControl("", Validators.compose([])),
+      complemento: new UntypedFormControl("", Validators.compose([])),
+      zona: new UntypedFormControl(
+        "",
+        Validators.compose([
+          Number(this.tipoRadicado) === 2 ? Validators.required : null,
+        ]),
+      ),
+      tipoDeViaNotificacion: new UntypedFormControl("", Validators.compose([])),
+      numViaNotificacion: new UntypedFormControl("", Validators.compose([])),
+      letraNotificacion: new UntypedFormControl("", Validators.compose([])),
+      sufijoNotificacion: new UntypedFormControl("", Validators.compose([])),
+      nPlacaNotificacion: new UntypedFormControl("", Validators.compose([])),
+      complementoNotificacion: new UntypedFormControl(
+        "",
+        Validators.compose([]),
+      ),
+      tipoSolicitudId: new UntypedFormControl(
+        "",
+        Validators.compose([
+          Number(this.tipoRadicado) === 2 ? Validators.required : null,
+        ]),
+      ),
 
-      tipoServicioId: new UntypedFormControl('', Validators.compose([Number(this.tipoRadicado) === 2 ? Validators.required : null])),
+      tipoServicioId: new UntypedFormControl(
+        "",
+        Validators.compose([
+          Number(this.tipoRadicado) === 2 ? Validators.required : null,
+        ]),
+      ),
       cuentaConAnexos: new UntypedFormControl(false),
 
       //actos administrativos
-      idTipoPrioridad: new UntypedFormControl('', Validators.compose([])),
-      idNivelPrivacidad: new UntypedFormControl('', Validators.compose([])),
-      idTipoNotificacion: new UntypedFormControl('', Validators.compose([])),
+      idTipoPrioridad: new UntypedFormControl("", Validators.compose([])),
+      idNivelPrivacidad: new UntypedFormControl("", Validators.compose([])),
+      idTipoNotificacion: new UntypedFormControl("", Validators.compose([])),
       // cuentaConAnexos: new UntypedFormControl(false),
       // anexos: new UntypedFormControl(null),
       // tipoAnexo: new UntypedFormControl('', Validators.compose([])),
     });
 
-    this.hashLocalStorage = this.authService.decryptAES(localStorage.getItem(environment.hashSgdea));
+    this.hashLocalStorage = this.authService.decryptAES(
+      localStorage.getItem(environment.hashSgdea),
+    );
   }
-
 
   filingCreate: boolean = false;
   ngOnInit() {
-
     this.actualizarHora();
 
     this.moduleForm.controls["fechaDocumentoRadiRadicado"].disable();
     if (Number(this.tipoRadicado) === 2) {
-      this.camposRequeridos('2', true);
+      this.camposRequeridos("2", true);
       this.editorActivo = false;
     } else {
       this.moduleForm.controls["idCgMedioRecepcion"].setValue(9);
     }
 
-    if (this.tipoRadicado == 'actoAdmin') {
-      this.camposRequeridos('actoAdmin', true);
+    if (this.tipoRadicado == "actoAdmin") {
+      this.camposRequeridos("actoAdmin", true);
     }
 
     if (this.moduleForm.controls["idCgTipoRadicado"].value == 2) {
-      this.moduleForm.controls["idCgMedioRecepcion"].setValidators([Validators.required]);
-      this.moduleForm.get('idCgMedioRecepcion').updateValueAndValidity();
+      this.moduleForm.controls["idCgMedioRecepcion"].setValidators([
+        Validators.required,
+      ]);
+      this.moduleForm.get("idCgMedioRecepcion").updateValueAndValidity();
     }
     this.getNivelesPrivacidad(); // trae los tipo de notificaciones
     this.getNotificaciones(); // trae los tipos de notificaciones
     // this.getTipoAnexo();
-    if (this.route.snapshot.url[0].path == 'filing-create' || this.route.snapshot.url[0].path == 'filing-update') {
+    if (
+      this.route.snapshot.url[0].path == "filing-create" ||
+      this.route.snapshot.url[0].path == "filing-update"
+    ) {
       this.filingCreate = true;
       this.editorActivo = false;
     }
-    if (this.route.snapshot.url[0].path == 'filing-update') {
+    if (this.route.snapshot.url[0].path == "filing-update") {
       this.editorActivo = true;
     }
 
     if (this.moduleForm.controls["idMedioRespuesta"].value == 1) {
-      this.moduleForm.controls["direccionCliente"].setValidators([Validators.required]);
+      this.moduleForm.controls["direccionCliente"].setValidators([
+        Validators.required,
+      ]);
       this.moduleForm.controls["correoElectronicoCliente"].setValidators([]);
       this.moduleForm.controls["direccionCliente"].updateValueAndValidity();
-      this.moduleForm.controls["correoElectronicoCliente"].updateValueAndValidity();
+      this.moduleForm.controls[
+        "correoElectronicoCliente"
+      ].updateValueAndValidity();
     }
 
     // if (this.moduleForm.controls["idMedioRespuesta"].value == 2) {
-      // this.moduleForm.controls["direccionCliente"].setValidators([]);
-      // this.moduleForm.controls["correoElectronicoCliente"].setValidators([Validators.required]);
-      // this.moduleForm.controls["correoElectronicoCliente"].updateValueAndValidity();
-      // this.moduleForm.controls["direccionCliente"].updateValueAndValidity();
+    // this.moduleForm.controls["direccionCliente"].setValidators([]);
+    // this.moduleForm.controls["correoElectronicoCliente"].setValidators([Validators.required]);
+    // this.moduleForm.controls["correoElectronicoCliente"].updateValueAndValidity();
+    // this.moduleForm.controls["direccionCliente"].updateValueAndValidity();
     // }
 
-    let checked = this.moduleForm.controls["autorizacionRadiRadicados"].value
-      if (checked) {
-        this.moduleForm.controls["idMedioRespuesta"].setValue(2); // Correo Electrónico
-        this.moduleForm.controls["correoElectronicoCliente"].setValidators([Validators.required, Validators.email]);
-        // this.moduleForm.controls["direccionCliente"].clearValidators();
-      } else {
-        this.moduleForm.controls["idMedioRespuesta"].setValue(1); // Personal
-        // this.moduleForm.controls["direccionCliente"].setValidators([Validators.required]);
-        this.moduleForm.controls["correoElectronicoCliente"].clearValidators();
-      }
-      this.moduleForm.controls["correoElectronicoCliente"].updateValueAndValidity();
-      // this.moduleForm.controls["direccionCliente"].updateValueAndValidity();
+    let checked = this.moduleForm.controls["autorizacionRadiRadicados"].value;
+    if (checked) {
+      this.moduleForm.controls["idMedioRespuesta"].setValue(2); // Correo Electrónico
+      this.moduleForm.controls["correoElectronicoCliente"].setValidators([
+        Validators.required,
+        Validators.email,
+      ]);
+      // this.moduleForm.controls["direccionCliente"].clearValidators();
+    } else {
+      this.moduleForm.controls["idMedioRespuesta"].setValue(1); // Personal
+      // this.moduleForm.controls["direccionCliente"].setValidators([Validators.required]);
+      this.moduleForm.controls["correoElectronicoCliente"].clearValidators();
+    }
+    this.moduleForm.controls[
+      "correoElectronicoCliente"
+    ].updateValueAndValidity();
+    // this.moduleForm.controls["direccionCliente"].updateValueAndValidity();
 
     //   elements.forEach(element => {
     //     element.removeAttribute('aria-owns');
@@ -990,60 +1156,88 @@ export class FilingFormComponent implements OnInit, OnDestroy {
     this.detectLanguageChange();
     // Start listen for search field value changes
     // Series
-    this.moduleForm.controls["listSeriesFilter"].valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {
-      this.filterBanks("listSeries");
-    });
+    this.moduleForm.controls["listSeriesFilter"].valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.filterBanks("listSeries");
+      });
     // Subseries
-    this.moduleForm.controls["listSubseriesFilter"].valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {
-      this.filterBanks("listSubseries");
-    });
+    this.moduleForm.controls["listSubseriesFilter"].valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.filterBanks("listSubseries");
+      });
     // Tipos documentales
-    this.moduleForm.controls["listTipoDocumentalFilter"].valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {
-      this.filterBanks("listTipoDocumental");
-    });
+    this.moduleForm.controls["listTipoDocumentalFilter"].valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.filterBanks("listTipoDocumental");
+      });
     // Clientes
-    this.moduleForm.controls["listClienteFilter"].valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {
-      this.filterBanks("listCliente");
-    });
+    this.moduleForm.controls["listClienteFilter"].valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.filterBanks("listCliente");
+      });
     // Num radicados
-    this.moduleForm.controls["listNumRadicadoFilter"].valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {
-      this.filterBanks("listNumRadicado");
-    });
+    this.moduleForm.controls["listNumRadicadoFilter"].valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.filterBanks("listNumRadicado");
+      });
     // Tipos radicados
-    this.moduleForm.controls["listTipoRadicadoFilter"].valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {
-      this.filterBanks("listTipoRadicado");
-    });
+    this.moduleForm.controls["listTipoRadicadoFilter"].valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.filterBanks("listTipoRadicado");
+      });
     // Tipos comunicacion
-    this.moduleForm.controls["listTipoComunicacionFilter"].valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {
-      this.filterBanks("listTipoComunicado");
-    });
+    this.moduleForm.controls["listTipoComunicacionFilter"].valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.filterBanks("listTipoComunicado");
+      });
     // Tramites
-    this.moduleForm.controls["listTramitesFilter"].valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {
-      this.filterBanks("listTramites");
-    });
+    this.moduleForm.controls["listTramitesFilter"].valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.filterBanks("listTramites");
+      });
     // Usuario Tramitador
-    this.moduleForm.controls["listTramitadorFilter"].valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {
-      this.filterBanks("listTramitador");
-    });
+    this.moduleForm.controls["listTramitadorFilter"].valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.filterBanks("listTramitador");
+      });
     // Medios de recepcion
-    this.moduleForm.controls["listMedioRecepcionFilter"].valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {
-      this.filterBanks("listMedioRecepcion");
-    });
+    this.moduleForm.controls["listMedioRecepcionFilter"].valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.filterBanks("listMedioRecepcion");
+      });
     // Dependencias
-    this.moduleForm.controls["listDependenciasFilter"].valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {
-      this.filterBanks("listDependencias");
-    });
+    this.moduleForm.controls["listDependenciasFilter"].valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.filterBanks("listDependencias");
+      });
     // Funcionarios
-    this.moduleForm.controls["listFuncionariosFilter"].valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {
-      this.filterBanks("listFuncionarios");
-    });
+    this.moduleForm.controls["listFuncionariosFilter"].valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.filterBanks("listFuncionarios");
+      });
     // Tipo de persona
-    this.moduleForm.controls["listTipoPersonaFilter"].valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {
-      this.filterBanks("listTipoPersona");
-    });
+    this.moduleForm.controls["listTipoPersonaFilter"].valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.filterBanks("listTipoPersona");
+      });
     // Tipo de identificacion
     // if (this.moduleForm.controls["listTipoIdentificacion"]) {
-      this.moduleForm.controls["listTipoIdentificacion"].valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {
+    this.moduleForm.controls["listTipoIdentificacion"].valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
         this.filterBanks("listTipoIdentificacion");
       });
     // }
@@ -1068,22 +1262,28 @@ export class FilingFormComponent implements OnInit, OnDestroy {
     /** End search field value changes*/
 
     // Medio de recepción
-    this.moduleForm.controls["listMedioRespuesta"].valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {
-      this.filterBanks("listTipoPersona");
-    });
+    this.moduleForm.controls["listMedioRespuesta"].valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.filterBanks("listTipoPersona");
+      });
     /** End search field value changes*/
 
     /** Start Information PQRSD */
     // Valida si el tipo de PQRSD yt el remitente es nuevo
     if (this.statusNewPQRSD) {
       // Lista Genero
-      this.moduleForm.controls["listGeneroFilter"].valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {
-        this.filterBanks("listGenero");
-      });
+      this.moduleForm.controls["listGeneroFilter"].valueChanges
+        .pipe(takeUntil(this._onDestroy))
+        .subscribe(() => {
+          this.filterBanks("listGenero");
+        });
       // Lista Rango de edad
-      this.moduleForm.controls["listRangoEdadFilter"].valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {
-        this.filterBanks("listRangoEdad");
-      });
+      this.moduleForm.controls["listRangoEdadFilter"].valueChanges
+        .pipe(takeUntil(this._onDestroy))
+        .subscribe(() => {
+          this.filterBanks("listRangoEdad");
+        });
       // Lista Vulnerabilidad
       this.moduleForm.controls["listVulnerabilidadFilter"].valueChanges
         .pipe(takeUntil(this._onDestroy))
@@ -1091,19 +1291,31 @@ export class FilingFormComponent implements OnInit, OnDestroy {
           this.filterBanks("listVulnerabilidad");
         });
       // Lista Etnia
-      this.moduleForm.controls["listEtniaFilter"].valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {
-        this.filterBanks("listEtnia");
-      });
+      this.moduleForm.controls["listEtniaFilter"].valueChanges
+        .pipe(takeUntil(this._onDestroy))
+        .subscribe(() => {
+          this.filterBanks("listEtnia");
+        });
 
       // Dependencias
-      this.moduleForm.controls["listTipoAnexoFilter"].valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {
-        this.filterBanks("listTipoanexo");
-      });
+      this.moduleForm.controls["listTipoAnexoFilter"].valueChanges
+        .pipe(takeUntil(this._onDestroy))
+        .subscribe(() => {
+          this.filterBanks("listTipoanexo");
+        });
 
-      this.moduleForm.controls["generoClienteCiudadanoDetalle"].setValidators([Validators.required]);
-      this.moduleForm.controls["rangoEdadClienteCiudadanoDetalle"].setValidators([Validators.required]);
-      this.moduleForm.controls["vulnerabilidadClienteCiudadanoDetalle"].setValidators([Validators.required]);
-      this.moduleForm.controls["etniaClienteCiudadanoDetalle"].setValidators([Validators.required]);
+      this.moduleForm.controls["generoClienteCiudadanoDetalle"].setValidators([
+        Validators.required,
+      ]);
+      this.moduleForm.controls[
+        "rangoEdadClienteCiudadanoDetalle"
+      ].setValidators([Validators.required]);
+      this.moduleForm.controls[
+        "vulnerabilidadClienteCiudadanoDetalle"
+      ].setValidators([Validators.required]);
+      this.moduleForm.controls["etniaClienteCiudadanoDetalle"].setValidators([
+        Validators.required,
+      ]);
 
       // this.moduleForm.controls['autorizacionRadiRadicados'].setValidators([Validators.required]);
     }
@@ -1112,7 +1324,9 @@ export class FilingFormComponent implements OnInit, OnDestroy {
     /** Start email Filign */
     if (this.radicacionEmail) {
       // Se asigna correo electronico
-      this.moduleForm.controls["idCgMedioRecepcion"].setValue(environment.medioRecepcion.correoElectronico);
+      this.moduleForm.controls["idCgMedioRecepcion"].setValue(
+        environment.medioRecepcion.correoElectronico,
+      );
       this.moduleForm.controls["idCgMedioRecepcion"].disable();
     }
 
@@ -1124,24 +1338,26 @@ export class FilingFormComponent implements OnInit, OnDestroy {
     // verifica si un estado (this.affairStatus) es verdadero y de ser así, limpia this.affairmsg de emojis y establece el texto limpio en el campo asuntoRadiRadicado del formulario.
     if (this.affairStatus) {
       const cleanedText = this.removeEmojis(this.affairmsg);
-      this.moduleForm.controls['asuntoRadiRadicado'].setValue(cleanedText);
+      this.moduleForm.controls["asuntoRadiRadicado"].setValue(cleanedText);
     }
     /** End email Filign */
-
   }
 
   actualizarHora() {
     if (!this.paramOID) {
       setInterval(() => {
-        this.moduleForm.controls['fechaDocumentoRadiRadicado'].setValue(new Date(), { emitEvent: false });
-      }, 1000)
+        this.moduleForm.controls["fechaDocumentoRadiRadicado"].setValue(
+          new Date(),
+          { emitEvent: false },
+        );
+      }, 1000);
     }
   }
 
   private camposRequeridos(controlsToValidate: string, required: boolean) {
     let fields = [];
     switch (controlsToValidate) {
-      case 'actoAdmin':
+      case "actoAdmin":
         fields = [
           "idNivelPrivacidad",
           "idTipoNotificacion",
@@ -1151,10 +1367,10 @@ export class FilingFormComponent implements OnInit, OnDestroy {
           "idTrdTipoDocumental",
           "diasRestantes",
           "PrioridadRadiRadicados",
-          "fechaVencimientoRadiRadicados"
-        ]
+          "fechaVencimientoRadiRadicados",
+        ];
         break;
-      case '2':
+      case "2":
         fields = [
           "idCgMedioRecepcion",
           "tipoSolicitudId",
@@ -1164,24 +1380,19 @@ export class FilingFormComponent implements OnInit, OnDestroy {
           "idTipoTramite",
           "idTrdTipoDocumental",
           // "idGdTrdSubserie",
-          "idGdTrdSerie"
-        ];
-        break;
-      case 'serieSubserie':
-        fields = [
           "idGdTrdSerie",
-          "idGdTrdSubserie"
         ];
         break;
-      case 'remitentes':
-        fields = [
-          "remitentes"
-        ];
+      case "serieSubserie":
+        fields = ["idGdTrdSerie", "idGdTrdSubserie"];
+        break;
+      case "remitentes":
+        fields = ["remitentes"];
         break;
     }
     const validators = required ? [Validators.required] : [];
 
-    fields.forEach(control => {
+    fields.forEach((control) => {
       if (!required) {
         this.moduleForm.controls[control].reset(); // Reset the control state
       }
@@ -1190,20 +1401,28 @@ export class FilingFormComponent implements OnInit, OnDestroy {
     });
   }
 
-
   matDrawerContainerStyle: any;
   ngAfterViewInit() {
     // Obtenemos los estilos del mat-drawe-container
-    const matDrawerContainer = document.querySelector('.mat-drawer-container') as HTMLElement;
+    const matDrawerContainer = document.querySelector(
+      ".mat-drawer-container",
+    ) as HTMLElement;
     const style = window.getComputedStyle(matDrawerContainer);
-    this.matDrawerContainerStyle = [style.width, style.maxWidth, style.height, style.maxHeight];
+    this.matDrawerContainerStyle = [
+      style.width,
+      style.maxWidth,
+      style.height,
+      style.maxHeight,
+    ];
     console.log("matDrawerContainerStyle", this.matDrawerContainerStyle);
   }
 
   deshabilitarDias() {
     setTimeout(() => {
-      const button = document.querySelector('.mat-datetimepicker-calendar-header-date') as HTMLElement;
-      button.addEventListener('click', (e) => {
+      const button = document.querySelector(
+        ".mat-datetimepicker-calendar-header-date",
+      ) as HTMLElement;
+      button.addEventListener("click", (e) => {
         this.deshabilitarDias2();
       });
       this.deshabilitarDias2();
@@ -1213,77 +1432,114 @@ export class FilingFormComponent implements OnInit, OnDestroy {
   private deshabilitarDias2() {
     // Deshabilitar anteriores a la fecha actual
     const today = new Date();
-    const todayString = today.toISOString().split('T')[0];
-    const todayElement = document.querySelectorAll('.mat-datetimepicker-calendar-body-cell') as NodeListOf<HTMLElement>;
+    const todayString = today.toISOString().split("T")[0];
+    const todayElement = document.querySelectorAll(
+      ".mat-datetimepicker-calendar-body-cell",
+    ) as NodeListOf<HTMLElement>;
     for (let i = 0; i < todayElement.length; i++) {
-      if (Number(todayElement[i].textContent) < Number(todayString.split('-')[2])) {
-        todayElement[i].style.pointerEvents = 'none';
-        todayElement[i].style.color = '#ccc';
-        todayElement[i].style.backgroundColor = '#f5f5f5';
-        todayElement[i].style.border = '1px solid #f5f5f5';
-        todayElement[i].style.borderRadius = '50%';
-        todayElement[i].style.cursor = 'not-allowed';
-        todayElement[i].style.opacity = '0.5';
+      if (
+        Number(todayElement[i].textContent) < Number(todayString.split("-")[2])
+      ) {
+        todayElement[i].style.pointerEvents = "none";
+        todayElement[i].style.color = "#ccc";
+        todayElement[i].style.backgroundColor = "#f5f5f5";
+        todayElement[i].style.border = "1px solid #f5f5f5";
+        todayElement[i].style.borderRadius = "50%";
+        todayElement[i].style.cursor = "not-allowed";
+        todayElement[i].style.opacity = "0.5";
       }
     }
   }
 
   // actos administrativos
   public getNivelesPrivacidad(): void {
-    this.radicadosService.getNivelesPrivacidad().subscribe(
-      {
-        next: (value: ResNivelesPrivacidad) => {
-          this.nivelesPrivacidad = value;
-        },
-        error: (err: any) => {
-          console.log("ERR GET COM", err)
-        }
-      }
-    );
-
+    this.radicadosService.getNivelesPrivacidad().subscribe({
+      next: (value: ResNivelesPrivacidad) => {
+        this.nivelesPrivacidad = value;
+      },
+      error: (err: any) => {
+        console.log("ERR GET COM", err);
+      },
+    });
   }
 
   public getNotificaciones(): void {
-    this.radicadosService.getNotificaciones().subscribe(
-      {
-        next: (value: TipoNotificacion[]) => {
-          this.notificacionesList = value;
-        },
-        error: (err: any) => {
-          console.log("ERR GET COM", err)
-        }
-      }
-    );
+    this.radicadosService.getNotificaciones().subscribe({
+      next: (value: TipoNotificacion[]) => {
+        this.notificacionesList = value;
+      },
+      error: (err: any) => {
+        console.log("ERR GET COM", err);
+      },
+    });
   }
   // end actos administrativos
 
   getOptionsService() {
-    this.http.get(environment.apiUrl + environment.versionApiDefault + `api/tipos_servicios`).pipe(take(1)).subscribe((data) => {
-      this.tipoServiciosOptions = data;
-    })
+    this.http
+      .get(
+        environment.apiUrl +
+          environment.versionApiDefault +
+          `api/tipos_servicios`,
+      )
+      .pipe(take(1))
+      .subscribe((data) => {
+        this.tipoServiciosOptions = data;
+      });
 
-    this.http.get(environment.apiUrl + environment.versionApiDefault + `api/tipos_solicitudes`).pipe(take(1)).subscribe((data) => {
-      this.tiposSolicitudesOptions = data;
-    })
+    this.http
+      .get(
+        environment.apiUrl +
+          environment.versionApiDefault +
+          `api/tipos_solicitudes`,
+      )
+      .pipe(take(1))
+      .subscribe((data) => {
+        this.tiposSolicitudesOptions = data;
+      });
 
-    this.http.get(environment.apiUrl + environment.versionApiDefault + `api/tipos_tramites`).pipe(take(1)).subscribe((data) => {
-      this.tipoTramitesOptions = data;
-    })
+    this.http
+      .get(
+        environment.apiUrl +
+          environment.versionApiDefault +
+          `api/tipos_tramites`,
+      )
+      .pipe(take(1))
+      .subscribe((data) => {
+        this.tipoTramitesOptions = data;
+      });
 
-    this.http.get(environment.apiUrl + environment.versionApiDefault + `api/medio_respuesta`).pipe(take(1)).subscribe((data) => {
-      this.medioRespuestaOptions = data;
-    })
+    this.http
+      .get(
+        environment.apiUrl +
+          environment.versionApiDefault +
+          `api/medio_respuesta`,
+      )
+      .pipe(take(1))
+      .subscribe((data) => {
+        this.medioRespuestaOptions = data;
+      });
 
-    this.http.get(environment.apiUrl + environment.versionApiDefault + `api/tipos_anexos_fisicos`).pipe(take(1)).subscribe((data) => {
-      this.tiposAnexosFisicosOptions = data;
-    })
+    this.http
+      .get(
+        environment.apiUrl +
+          environment.versionApiDefault +
+          `api/tipos_anexos_fisicos`,
+      )
+      .pipe(take(1))
+      .subscribe((data) => {
+        this.tiposAnexosFisicosOptions = data;
+      });
 
-    this.http.get(environment.apiUrl + environment.versionApiDefault + `api/tipos_origen`).pipe(take(1)).subscribe((data) => {
-      this.tiposOrigenOptions = data;
-    })
+    this.http
+      .get(
+        environment.apiUrl + environment.versionApiDefault + `api/tipos_origen`,
+      )
+      .pipe(take(1))
+      .subscribe((data) => {
+        this.tiposOrigenOptions = data;
+      });
   }
-
-
 
   // Método para obtener el token que se encuentra encriptado en el local storage
   getTokenLS() {
@@ -1293,9 +1549,16 @@ export class FilingFormComponent implements OnInit, OnDestroy {
       /** Llamado de los servicios para las listas */
       this.getListGeneral();
       this.getListClientes();
-      if (this.route.snapshot.url[0].path == 'filing-create') {
-        this.menu = 'create';
-        this.menuButtons = [{ icon: 'cancel', title: 'Cancelar', action: 'CancelRadicado', data: '' }];
+      if (this.route.snapshot.url[0].path == "filing-create") {
+        this.menu = "create";
+        this.menuButtons = [
+          {
+            icon: "cancel",
+            title: "Cancelar",
+            action: "CancelRadicado",
+            data: "",
+          },
+        ];
       } else {
         this.menuButtons = this.menuButtonsSelectOne;
       }
@@ -1305,13 +1568,18 @@ export class FilingFormComponent implements OnInit, OnDestroy {
         this.booleanRadicado = true;
         this.onSearchId(this.paramOID, this.authorization);
         this.iconMenu = "menu";
-        this.menuButtons = [{ icon: "save", title: "Guardar", action: "save", data: "" }];
+        this.menuButtons = [
+          { icon: "save", title: "Guardar", action: "save", data: "" },
+        ];
         // this.menuButtons = [ { icon: "save", title: "Guardar", action: "save", data: "" },
         //                       { icon: "close", title: "Cancelar", action: "close", data: "" }];
 
         this.moduleForm.controls["idCgTipoRadicado"].disable();
-        if (this.route.snapshot.url[0].path == 'filing-update-request' || this.route.snapshot.url[0].path == 'filing-update-web-page'
-           || this.route.snapshot.url[0].path == 'filing-update') {
+        if (
+          this.route.snapshot.url[0].path == "filing-update-request" ||
+          this.route.snapshot.url[0].path == "filing-update-web-page" ||
+          this.route.snapshot.url[0].path == "filing-update"
+        ) {
           this.moduleForm.controls["idTrdDepeUserTramitador"];
           this.moduleForm.controls["fechaDocumentoRadiRadicado"].disable();
           this.moduleForm.controls["idTrdDepeUserTramitador"].disable();
@@ -1326,9 +1594,16 @@ export class FilingFormComponent implements OnInit, OnDestroy {
 
         if (this.isToclone) {
           this.iconMenu = "menu";
-          this.menuButtons = [{ icon: "save", title: "Guardar", action: "save", data: "" },
-          { icon: "cancel", title: "Cancelar", action: "CancelRadicado", data: "" }];
-          this.menu = 'clone';
+          this.menuButtons = [
+            { icon: "save", title: "Guardar", action: "save", data: "" },
+            {
+              icon: "cancel",
+              title: "Cancelar",
+              action: "CancelRadicado",
+              data: "",
+            },
+          ];
+          this.menu = "clone";
           this.onSearchId(this.paramOID, this.authorization);
         }
 
@@ -1347,32 +1622,46 @@ export class FilingFormComponent implements OnInit, OnDestroy {
     };
 
     this.restService
-      .restGetParams(this.versionApi + "radicacion/radicados/get-remitente-by-email", params, authorization)
+      .restGetParams(
+        this.versionApi + "radicacion/radicados/get-remitente-by-email",
+        params,
+        authorization,
+      )
       .subscribe(
         (res) => {
           this.resSerRemitenteByEmail = res;
 
           // Evaluar respuesta del servicio
-          this.globalAppService.resolveResponse(this.resSerRemitenteByEmail, true, this.redirectionPath).then((res) => {
-            let resResolveResponse = res;
-            if (resResolveResponse == true) {
-              this.isMailRecordExists = this.resSerRemitenteByEmail.data.isMailRecordExists;
-              if (this.isMailRecordExists == true) {
-                this.idMailRemitente = this.resSerRemitenteByEmail.data.idMailRemitente;
-                this.moduleForm.controls["idCliente"].setValue(this.idMailRemitente);
-                this.destinatario();
-              } else {
-                this.moduleForm.controls["isNuevoRemitente"].setValue(true);
-                this.MatSlideToggleChange({ checked: true });
+          this.globalAppService
+            .resolveResponse(
+              this.resSerRemitenteByEmail,
+              true,
+              this.redirectionPath,
+            )
+            .then((res) => {
+              let resResolveResponse = res;
+              if (resResolveResponse == true) {
+                this.isMailRecordExists =
+                  this.resSerRemitenteByEmail.data.isMailRecordExists;
+                if (this.isMailRecordExists == true) {
+                  this.idMailRemitente =
+                    this.resSerRemitenteByEmail.data.idMailRemitente;
+                  this.moduleForm.controls["idCliente"].setValue(
+                    this.idMailRemitente,
+                  );
+                  this.destinatario();
+                } else {
+                  this.moduleForm.controls["isNuevoRemitente"].setValue(true);
+                  this.MatSlideToggleChange({ checked: true });
+                }
               }
-            }
-          });
+            });
         },
         (err) => {
           this.resSerRemitenteByEmailErr = err;
           // Evaluar respuesta de error del servicio
           // this.globalAppService.resolveResponseError(this.resSerRemitenteByEmailErr, true, this.redirectionPath ).then((res) => { });
-        }
+        },
       );
   }
 
@@ -1385,223 +1674,313 @@ export class FilingFormComponent implements OnInit, OnDestroy {
   private medioRespuesta: number = 0;
   idClienteSearch: number = 0;
   onSearchId(id, authori) {
-    const idCgTipoRadicadoOld = this.moduleForm.controls["idCgTipoRadicado"].value;
+    const idCgTipoRadicadoOld =
+      this.moduleForm.controls["idCgTipoRadicado"].value;
     // loading Active
     this.sweetAlertService.sweetLoading();
     let params = {
       id: this.paramOID,
     };
-  
-    params['mostrarBotonCancelar'] = false;
-    this.restService.restGetParams(this.versionApi + "radicacion/radicados/index-one", params, authori).subscribe(
-      (res) => {
-        this.resSerFormSubmit = res;
-        if (!this.isToclone) {
-          this.firmaRadiRadicado = this.resSerFormSubmit.data['firmaRadiRadicado'];
-          localStorage.setItem('signature', this.firmaRadiRadicado)
-        }else{
-            this.idCliente = this.resSerFormSubmit.data['idCliente'][0]['cliente'];
-            this.moduleForm.get('idCliente').setValue(this.idCliente);
-        }
 
-        this.isDevolution = false;
-        if (res.data != undefined && res.data.estadoId != undefined && res.data.estadoId == 44) {
-          this.isCooperative = true;
-        }
-
-        if (res.data != undefined && res.data.estadoId != undefined && res.data.estadoId == 45) {
-          this.isDevolution = true;
-
-          this.moduleForm.controls['tipoRespuestaId'].disable();
-          this.moduleForm.controls['asuntoRadiRadicado'].disable();
-          this.moduleForm.controls['numeroRadicadoExterno'].disable();
-          this.moduleForm.controls['tipoSolicitudId'].disable();
-
-          this.moduleForm.controls['numeroCuentaContrato'].disable();
-          this.moduleForm.controls['numeroCuentaInterna'].disable();
-          this.moduleForm.controls['contactoSap'].disable();
-          this.moduleForm.controls['tipoZona'].disable();
-
-          if (this.moduleForm.get('tipoZona').value) {
-            this.moduleForm.controls['direccion'].disable();
+    params["mostrarBotonCancelar"] = false;
+    this.restService
+      .restGetParams(
+        this.versionApi + "radicacion/radicados/index-one",
+        params,
+        authori,
+      )
+      .subscribe(
+        (res) => {
+          this.resSerFormSubmit = res;
+          if (!this.isToclone) {
+            this.firmaRadiRadicado =
+              this.resSerFormSubmit.data["firmaRadiRadicado"];
+            localStorage.setItem("signature", this.firmaRadiRadicado);
           } else {
-            this.moduleForm.controls['tipoDeVia'].disable();
-            this.moduleForm.controls['numVia'].disable();
-            this.moduleForm.controls['letra'].disable();
-            this.moduleForm.controls['bis'].disable();
-            this.moduleForm.controls['letraDos'].disable();
-            this.moduleForm.controls['sufijo'].disable();
-            this.moduleForm.controls['nPlaca'].disable();
-            this.moduleForm.controls['letraTres'].disable();
-            this.moduleForm.controls['nPlacaDos'].disable();
-            this.moduleForm.controls['sufijoDos'].disable();
-            this.moduleForm.controls['complemento'].disable();
-
+            this.idCliente =
+              this.resSerFormSubmit.data["idCliente"][0]["cliente"];
+            this.moduleForm.get("idCliente").setValue(this.idCliente);
           }
 
-          this.moduleForm.controls['direccionManualCuentaContrato'].disable();
-          this.moduleForm.controls['direccion'].disable();
-          this.moduleForm.controls['zona'].disable();
+          this.isDevolution = false;
+          if (
+            res.data != undefined &&
+            res.data.estadoId != undefined &&
+            res.data.estadoId == 44
+          ) {
+            this.isCooperative = true;
+          }
 
-          this.moduleForm.controls['idTrdDepeUserTramitador'].disable();
-          this.moduleForm.controls['user_idTramitador'].disable();
-          this.moduleForm.controls['tipoServicioId'].disable();
-          this.moduleForm.controls['idGdTrdSerie'].disable();
-          this.moduleForm.controls['idGdTrdSubserie'].disable();
-          this.moduleForm.controls['idTrdTipoDocumental'].disable();
+          if (
+            res.data != undefined &&
+            res.data.estadoId != undefined &&
+            res.data.estadoId == 45
+          ) {
+            this.isDevolution = true;
 
-          this.moduleForm.controls['autorizacionRadiRadicados'].disable();
-          this.moduleForm.controls['idCliente'].disable();
-        }
+            this.moduleForm.controls["tipoRespuestaId"].disable();
+            this.moduleForm.controls["asuntoRadiRadicado"].disable();
+            this.moduleForm.controls["numeroRadicadoExterno"].disable();
+            this.moduleForm.controls["tipoSolicitudId"].disable();
 
-        if (res.data.plantilla) {
-          this.editorContent = res.data.plantilla;
-        }
+            this.moduleForm.controls["numeroCuentaContrato"].disable();
+            this.moduleForm.controls["numeroCuentaInterna"].disable();
+            this.moduleForm.controls["contactoSap"].disable();
+            this.moduleForm.controls["tipoZona"].disable();
 
-        console.log({ "info-radicado": this.isDevolution });
-
-        if ([6, 7, 8, 9].includes(res.data.idCgTipoRadicado)) {
-          this.tipoRadicado = "actoAdmin";
-          this.camposRequeridos('actoAdmin', true)
-        } else {
-          this.tipoRadicado = res.data.idCgTipoRadicado;
-        }
-       
-        // Evaluar respuesta del servicio
-        this.globalAppService.resolveResponse(this.resSerFormSubmit, true, this.redirectionPath).then((res) => {
-          let resResolveResponse = res;
-          if (resResolveResponse == true) {
-            // console.log("resSerFormSubmit", this.resSerFormSubmit)
-            this.NoRadicado = this.resSerFormSubmit.data["numeroRadiRadicado"];
-
-            if (
-              typeof this.resSerFormSubmit.textNumeroRadicadoOConsecutivo != "undefined" &&
-              this.resSerFormSubmit.textNumeroRadicadoOConsecutivo != ""
-            ) {
-              this.textNumeroRadicadoOConsecutivo = this.resSerFormSubmit.textNumeroRadicadoOConsecutivo;
+            if (this.moduleForm.get("tipoZona").value) {
+              this.moduleForm.controls["direccion"].disable();
+            } else {
+              this.moduleForm.controls["tipoDeVia"].disable();
+              this.moduleForm.controls["numVia"].disable();
+              this.moduleForm.controls["letra"].disable();
+              this.moduleForm.controls["bis"].disable();
+              this.moduleForm.controls["letraDos"].disable();
+              this.moduleForm.controls["sufijo"].disable();
+              this.moduleForm.controls["nPlaca"].disable();
+              this.moduleForm.controls["letraTres"].disable();
+              this.moduleForm.controls["nPlacaDos"].disable();
+              this.moduleForm.controls["sufijoDos"].disable();
+              this.moduleForm.controls["complemento"].disable();
             }
 
-            if (this.resSerFormSubmit.data) {
-              console.log("this.resSerFormSubmit.data", this.resSerFormSubmit.data);
-              for (let name in this.resSerFormSubmit.data) {
-                if (this.moduleForm.controls[name]) {
-                  this.moduleForm.controls[name].setValue(this.resSerFormSubmit.data[name]);
-                }
-                if (name == "idCgTipoRadicado" && this.resSerFormSubmit.data[name] != idCgTipoRadicadoOld) {
-                  this.getListClientes();
-                }
-                // Busca nivel geografico 2 y 3 en el primer registro
-                if (name == "idNivelGeografico1") {
-                  this.nivelGeografico2(this.resSerFormSubmit.data[name]);
+            this.moduleForm.controls["direccionManualCuentaContrato"].disable();
+            this.moduleForm.controls["direccion"].disable();
+            this.moduleForm.controls["zona"].disable();
+
+            this.moduleForm.controls["idTrdDepeUserTramitador"].disable();
+            this.moduleForm.controls["user_idTramitador"].disable();
+            this.moduleForm.controls["tipoServicioId"].disable();
+            this.moduleForm.controls["idGdTrdSerie"].disable();
+            this.moduleForm.controls["idGdTrdSubserie"].disable();
+            this.moduleForm.controls["idTrdTipoDocumental"].disable();
+
+            this.moduleForm.controls["autorizacionRadiRadicados"].disable();
+            this.moduleForm.controls["idCliente"].disable();
+          }
+
+          if (res.data.plantilla) {
+            this.editorContent = res.data.plantilla;
+          }
+
+          console.log({ "info-radicado": this.isDevolution });
+
+          if ([6, 7, 8, 9].includes(res.data.idCgTipoRadicado)) {
+            this.tipoRadicado = "actoAdmin";
+            this.camposRequeridos("actoAdmin", true);
+          } else {
+            this.tipoRadicado = res.data.idCgTipoRadicado;
+          }
+
+          // Evaluar respuesta del servicio
+          this.globalAppService
+            .resolveResponse(this.resSerFormSubmit, true, this.redirectionPath)
+            .then((res) => {
+              let resResolveResponse = res;
+              if (resResolveResponse == true) {
+                // console.log("resSerFormSubmit", this.resSerFormSubmit)
+                this.NoRadicado =
+                  this.resSerFormSubmit.data["numeroRadiRadicado"];
+
+                if (
+                  typeof this.resSerFormSubmit.textNumeroRadicadoOConsecutivo !=
+                    "undefined" &&
+                  this.resSerFormSubmit.textNumeroRadicadoOConsecutivo != ""
+                ) {
+                  this.textNumeroRadicadoOConsecutivo =
+                    this.resSerFormSubmit.textNumeroRadicadoOConsecutivo;
                 }
 
-                if (name == "idNivelGeografico2") {
-                  this.nivelGeografico3(this.resSerFormSubmit.data[name]);
-                }
+                if (this.resSerFormSubmit.data) {
+                  console.log(
+                    "this.resSerFormSubmit.data",
+                    this.resSerFormSubmit.data,
+                  );
+                  for (let name in this.resSerFormSubmit.data) {
+                    if (this.moduleForm.controls[name]) {
+                      this.moduleForm.controls[name].setValue(
+                        this.resSerFormSubmit.data[name],
+                      );
+                    }
+                    if (
+                      name == "idCgTipoRadicado" &&
+                      this.resSerFormSubmit.data[name] != idCgTipoRadicadoOld
+                    ) {
+                      this.getListClientes();
+                    }
+                    // Busca nivel geografico 2 y 3 en el primer registro
+                    if (name == "idNivelGeografico1") {
+                      this.nivelGeografico2(this.resSerFormSubmit.data[name]);
+                    }
 
-                if (this.isToclone) {
-                  this.moduleForm.controls['autorizacionRadiRadicados'].setValue(false);  
-                }else if (name == "autorizacionRadiRadicados") {
-                  if (this.resSerFormSubmit.data[name] == 10 || this.resSerFormSubmit.data[name] == true) {
-                    this.AutorizaChange({ checked: true });
+                    if (name == "idNivelGeografico2") {
+                      this.nivelGeografico3(this.resSerFormSubmit.data[name]);
+                    }
+
+                    if (this.isToclone) {
+                      this.moduleForm.controls[
+                        "autorizacionRadiRadicados"
+                      ].setValue(false);
+                    } else if (name == "autorizacionRadiRadicados") {
+                      if (
+                        this.resSerFormSubmit.data[name] == 10 ||
+                        this.resSerFormSubmit.data[name] == true
+                      ) {
+                        this.AutorizaChange({ checked: true });
+                      }
+                    }
+
+                    if (this.isToclone) {
+                      this.moduleForm.controls["aceptaPolitica"].setValue(
+                        false,
+                      );
+                    } else if (name == "aceptaPolitica") {
+                      this.moduleForm.controls["aceptaPolitica"].setValue(true);
+                    }
+
+                    if (this.isToclone) {
+                      this.moduleForm.controls["tipoZonaNotificacion"].setValue(
+                        false,
+                      );
+                    } else if (name == "tipoZonaNotificacion") {
+                      this.moduleForm.controls["tipoZonaNotificacion"].setValue(
+                        true,
+                      );
+                    }
+
+                    if (this.isToclone) {
+                      this.moduleForm.controls["tipoZona"].setValue(false);
+                    } else if (name == "tipoZona") {
+                      this.moduleForm.controls["tipoZona"].setValue(true);
+                    }
+
+                    if (name["foliosRadiRadicado"] != "") {
+                      this.moduleForm.controls["cuentaConAnexos"].setValue(
+                        true,
+                      );
+                    }
+
+                    if (name == "creacionRadiRadicado") {
+                      this.creacionRadiRadicado =
+                        this.resSerFormSubmit.data[name];
+                    }
+                    if (
+                      name == "zona" &&
+                      this.resSerFormSubmit.data[name] != null &&
+                      this.resSerFormSubmit.data[name] != ""
+                    ) {
+                      this.moduleForm.controls["tipoZona"].setValue(true);
+                    }
+
+                    if (
+                      name == "idGdTrdSubserie" &&
+                      this.resSerFormSubmit.data[name] != null
+                    ) {
+                      this.subSerie = this.resSerFormSubmit.data[name];
+                    }
+
+                    if (
+                      name == "idTrdTipoDocumental" &&
+                      this.resSerFormSubmit.data[name] != null
+                    ) {
+                      this.tipoDoc = this.resSerFormSubmit.data[name];
+                    }
+
+                    if (
+                      name == "idCliente" &&
+                      this.resSerFormSubmit.data[name] != null
+                    ) {
+                      this.idClienteSearch =
+                        this.resSerFormSubmit.data[name][0]["cliente"];
+                    }
+
+                    if (this.isToclone) {
+                      this.validarCampoInsistencia = false;
+                      this.moduleForm.controls["PrioridadInsistencia"].setValue(
+                        false,
+                      );
+                    } else if (
+                      name == "PrioridadInsistencia" &&
+                      this.resSerFormSubmit.data[name] > 0
+                    ) {
+                      this.validarCampoInsistencia = false;
+                      this.messageRadicaInsistencia = "Si";
+                      this.validarUnaVez = true;
+                      this.moduleForm.controls["PrioridadInsistencia"].setValue(
+                        true,
+                      );
+                    }
+
+                    if (this.isToclone) {
+                      this.validarCampoDevolucion = false;
+                      this.moduleForm.controls["PrioridadDevolucion"].setValue(
+                        false,
+                      );
+                    } else if (
+                      name == "PrioridadDevolucion" &&
+                      this.resSerFormSubmit.data[name] > 0
+                    ) {
+                      this.validarCampoDevolucion = false;
+                      this.messageDevolucionDocumento = "Si";
+                      this.validarUnaVez = true;
+                      this.moduleForm.controls["PrioridadDevolucion"].setValue(
+                        true,
+                      );
+                    }
+
+                    if (name == "fechaVencimientoRadiRadicados") {
+                      const fechaVencimiento = moment(
+                        this.resSerFormSubmit.data[name],
+                        "DD/MM/YYYY",
+                      ).toDate();
+                      this.moduleForm.controls[
+                        "fechaVencimientoRadiRadicados"
+                      ].setValue(fechaVencimiento);
+                    }
+
+                    if (name == "creacionRadiRadicado") {
+                      const fechaVencimiento = moment(
+                        this.resSerFormSubmit.data[name],
+                      )
+                        .local()
+                        .toDate();
+                      this.moduleForm.controls[
+                        "fechaDocumentoRadiRadicado"
+                      ].setValue(fechaVencimiento);
+                    }
+
+                    if (
+                      name == "diasRestantes" &&
+                      this.resSerFormSubmit.data[name]
+                    ) {
+                      this.moduleForm.controls["diasRestantes"].setValue(
+                        this.resSerFormSubmit.data[name],
+                      );
+                    }
                   }
                 }
 
-                if (this.isToclone) {
-                  this.moduleForm.controls['aceptaPolitica'].setValue(false);  
-                }else if (name == "aceptaPolitica") {
-                  this.moduleForm.controls['aceptaPolitica'].setValue(true);  
+                if (!this.isToclone) {
+                  this.menuButtons = this.resSerFormSubmit.dataTransacciones;
+                  /* this.menuButtons = [{ icon: "save", title: "Guardar", action: "save", data: "" },...this.menuButtons ]; */
                 }
-
-                if (this.isToclone) {
-                  this.moduleForm.controls['tipoZonaNotificacion'].setValue(false);  
-                }else if (name == "tipoZonaNotificacion") {
-                  this.moduleForm.controls['tipoZonaNotificacion'].setValue(true);  
-                }
-
-                if (this.isToclone) {
-                  this.moduleForm.controls['tipoZona'].setValue(false);  
-                }else if (name == "tipoZona") {
-                  this.moduleForm.controls['tipoZona'].setValue(true);  
-                }
-
-                if (name['foliosRadiRadicado'] != "") {
-                  this.moduleForm.controls['cuentaConAnexos'].setValue(true);
-                }
-
-                if (name == "creacionRadiRadicado") {
-                  this.creacionRadiRadicado = this.resSerFormSubmit.data[name];
-                }
-                if (name == "zona" && this.resSerFormSubmit.data[name] != null && this.resSerFormSubmit.data[name] != '') {
-                  this.moduleForm.controls['tipoZona'].setValue(true);
-                }
-
-                if (name == 'idGdTrdSubserie' && this.resSerFormSubmit.data[name] != null) {
-                  this.subSerie = this.resSerFormSubmit.data[name];
-                }
-
-                if (name == 'idTrdTipoDocumental' && this.resSerFormSubmit.data[name] != null) {
-                  this.tipoDoc = this.resSerFormSubmit.data[name];
-                }
-
-                if (name == 'idCliente' && this.resSerFormSubmit.data[name] != null) {
-                  this.idClienteSearch = this.resSerFormSubmit.data[name][0]['cliente'];
-                }
-
-                if (this.isToclone) {
-                  this.validarCampoInsistencia = false;
-                  this.moduleForm.controls['PrioridadInsistencia'].setValue(false);
-                }else if (name == 'PrioridadInsistencia' && this.resSerFormSubmit.data[name] > 0) {
-                  this.validarCampoInsistencia = false;
-                  this.messageRadicaInsistencia = 'Si';
-                  this.validarUnaVez = true;
-                  this.moduleForm.controls['PrioridadInsistencia'].setValue(true);
-                }
-
-                if (this.isToclone) {
-                  this.validarCampoDevolucion = false;
-                  this.moduleForm.controls['PrioridadDevolucion'].setValue(false);
-                }else if (name == 'PrioridadDevolucion' && this.resSerFormSubmit.data[name] > 0) {
-                  this.validarCampoDevolucion = false;
-                  this.messageDevolucionDocumento = 'Si';
-                  this.validarUnaVez = true;
-                  this.moduleForm.controls['PrioridadDevolucion'].setValue(true);
-                }
-                
-                
-                if (name == 'fechaVencimientoRadiRadicados') {
-                  const fechaVencimiento = moment(this.resSerFormSubmit.data[name], 'DD/MM/YYYY').toDate();
-                  this.moduleForm.controls['fechaVencimientoRadiRadicados'].setValue(fechaVencimiento);
-                }
-
-                if (name == 'creacionRadiRadicado') {
-                  const fechaVencimiento = moment(this.resSerFormSubmit.data[name]).local().toDate();
-                  this.moduleForm.controls['fechaDocumentoRadiRadicado'].setValue(fechaVencimiento);
-                }
-
-                if (name == 'diasRestantes' && this.resSerFormSubmit.data[name]) {
-                  this.moduleForm.controls['diasRestantes'].setValue(this.resSerFormSubmit.data[name]);
-                }
+                this.destinatario();
+                this.validaDependencias();
               }
-            }
-
-            if (!this.isToclone) {
-              this.menuButtons = this.resSerFormSubmit.dataTransacciones;
-              /* this.menuButtons = [{ icon: "save", title: "Guardar", action: "save", data: "" },...this.menuButtons ]; */
-            }
-            this.destinatario();
-            this.validaDependencias();
-          }
-        });
-      },
-      (err) => {
-        this.resSerFormSubmitErr = err;
-        // Evaluar respuesta de error del servicio
-        this.globalAppService
-          .resolveResponseError(this.resSerFormSubmitErr, true, this.redirectionPath)
-          .then((res) => { });
-      }
-    );
+            });
+        },
+        (err) => {
+          this.resSerFormSubmitErr = err;
+          // Evaluar respuesta de error del servicio
+          this.globalAppService
+            .resolveResponseError(
+              this.resSerFormSubmitErr,
+              true,
+              this.redirectionPath,
+            )
+            .then((res) => {});
+        },
+      );
   }
 
   /**
@@ -1609,7 +1988,9 @@ export class FilingFormComponent implements OnInit, OnDestroy {
    * @param condicion indica si es push o setValue al asignar los valores
    */
   asignacionRadicados(condicion) {
-    let RadiAsociados = this.authService.decryptAES(localStorage.getItem(environment.hashRadiAsociados));
+    let RadiAsociados = this.authService.decryptAES(
+      localStorage.getItem(environment.hashRadiAsociados),
+    );
     if (RadiAsociados) {
       if (!condicion) {
         this.moduleForm.controls["RadiRadicadoHijos"].setValue(RadiAsociados);
@@ -1619,121 +2000,135 @@ export class FilingFormComponent implements OnInit, OnDestroy {
 
   validateNumberCuentaContrato(event: Event): void {
     const input = event.target as HTMLInputElement;
-    const sanitizedValue = input.value.replace(/[^0-9]/g, '');
+    const sanitizedValue = input.value.replace(/[^0-9]/g, "");
     input.value = sanitizedValue;
-    this.moduleForm.get('numeroCuentaContrato')?.setValue(sanitizedValue);
+    this.moduleForm.get("numeroCuentaContrato")?.setValue(sanitizedValue);
   }
 
   // ValidateCorreoCliente(event: Event): void {
   //   const input = event.target as HTMLInputElement;
   //   const sanitizedValue = input.value.replace(/[^a-zA-Z0-9@._-]/g, '');  // Permitir solo caracteres válidos en un correo
   //   input.value = sanitizedValue;
-  
+
   //   // Validar el formato del correo
   //   const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   //   if (!emailPattern.test(sanitizedValue)) {
   //     console.log('Correo inválido');
   //   }
-  
+
   //   this.moduleForm.get('correoElectronicoCliente')?.setValue(sanitizedValue);
   // }
 
   validateNumberCuentaInterna(event: Event): void {
     const input = event.target as HTMLInputElement;
-    const sanitizedValue = input.value.replace(/[^0-9]/g, '');
+    const sanitizedValue = input.value.replace(/[^0-9]/g, "");
     input.value = sanitizedValue;
-    this.moduleForm.get('numeroCuentaInterna')?.setValue(sanitizedValue);
+    this.moduleForm.get("numeroCuentaInterna")?.setValue(sanitizedValue);
   }
 
   ValidateDocumentoCliente(event: Event): void {
     const input = event.target as HTMLInputElement;
-    const sanitizedValue = input.value.replace(/[^0-9]/g, '');
+    const sanitizedValue = input.value.replace(/[^0-9]/g, "");
     input.value = sanitizedValue;
-    this.moduleForm.get('numeroDocumentoCliente')?.setValue(sanitizedValue);
+    this.moduleForm.get("numeroDocumentoCliente")?.setValue(sanitizedValue);
   }
 
   ValidateTelefonoCliente(event: Event): void {
     const input = event.target as HTMLInputElement;
-    const sanitizedValue = input.value.replace(/[^0-9]/g, '');
+    const sanitizedValue = input.value.replace(/[^0-9]/g, "");
     input.value = sanitizedValue;
-    this.moduleForm.get('telefonoCliente')?.setValue(sanitizedValue);
+    this.moduleForm.get("telefonoCliente")?.setValue(sanitizedValue);
   }
 
   ValidateTelefonoCelularCliente(event: Event): void {
     const input = event.target as HTMLInputElement;
-    const sanitizedValue = input.value.replace(/[^0-9]/g, '');
+    const sanitizedValue = input.value.replace(/[^0-9]/g, "");
     input.value = sanitizedValue;
-    this.moduleForm.get('celular')?.setValue(sanitizedValue);
+    this.moduleForm.get("celular")?.setValue(sanitizedValue);
   }
 
   ValidateNumeroFolios(event: Event): void {
     const input = event.target as HTMLInputElement;
-    const sanitizedValue = input.value.replace(/[^0-9]/g, '');
+    const sanitizedValue = input.value.replace(/[^0-9]/g, "");
     input.value = sanitizedValue;
-    this.moduleForm.get('foliosRadiRadicado')?.setValue(sanitizedValue);
+    this.moduleForm.get("foliosRadiRadicado")?.setValue(sanitizedValue);
   }
 
   ValidateCodigPostal(event: Event): void {
     const input = event.target as HTMLInputElement;
-    const sanitizedValue = input.value.replace(/[^0-9]/g, '');
+    const sanitizedValue = input.value.replace(/[^0-9]/g, "");
     input.value = sanitizedValue;
-    this.moduleForm.get('codigoPostal')?.setValue(sanitizedValue);
+    this.moduleForm.get("codigoPostal")?.setValue(sanitizedValue);
   }
 
   ValidateCorreoCliente(event: Event): void {
     const input = event.target as HTMLInputElement;
-    const sanitizedValue = input.value.replace(/[^a-zA-Z0-9@._-]/g, '');  // Permitir solo caracteres válidos en un correo
+    const sanitizedValue = input.value.replace(/[^a-zA-Z0-9@._-]/g, ""); // Permitir solo caracteres válidos en un correo
     input.value = sanitizedValue;
-    this.moduleForm.get('correoElectronicoCliente')?.setValue(sanitizedValue);
+    this.moduleForm.get("correoElectronicoCliente")?.setValue(sanitizedValue);
   }
-  
 
   validarUnaVez: boolean = false;
   submitForm() {
-
-    const invalidFields = Object.keys(this.moduleForm.controls).filter(key => this.moduleForm.controls[key].invalid);
+    const invalidFields = Object.keys(this.moduleForm.controls).filter(
+      (key) => this.moduleForm.controls[key].invalid,
+    );
     console.log(invalidFields, this.moduleForm.controls);
-    console.log("GUARDANDO RADICADO")
+    console.log("GUARDANDO RADICADO");
     if (this.tipoRadicado == "actoAdmin") {
-        const remitentesFormArray = this.moduleForm.get('remitentes') as UntypedFormArray;
-        remitentesFormArray.clear();
-        remitentesFormArray.clearValidators();
-        remitentesFormArray.updateValueAndValidity();
-        this.moduleForm.get("idCgMedioRecepcion").setValue(9);
-        this.moduleForm.get('idTipoPersona').setValue("2");
-        this.moduleForm.get('idTipoIdentificacion').setValue("1");
-        this.moduleForm.get('nombreCliente').setValue("&ensp;");
-        this.moduleForm.get('numeroDocumentoCliente').setValue("&ensp;");
-        this.moduleForm.get('direccionCliente').setValue("&ensp;");
-        this.moduleForm.get('idNivelGeografico1').setValue("1");
-        this.moduleForm.get('idNivelGeografico3').setValue("1");
-        this.moduleForm.get('idNivelGeografico2').setValue("1");
-        this.moduleForm.get('correoElectronicoCliente').setValue('&ensp;');
+      const remitentesFormArray = this.moduleForm.get(
+        "remitentes",
+      ) as UntypedFormArray;
+      remitentesFormArray.clear();
+      remitentesFormArray.clearValidators();
+      remitentesFormArray.updateValueAndValidity();
+      this.moduleForm.get("idCgMedioRecepcion").setValue(9);
+      this.moduleForm.get("idTipoPersona").setValue("2");
+      this.moduleForm.get("idTipoIdentificacion").setValue("1");
+      this.moduleForm.get("nombreCliente").setValue("&ensp;");
+      this.moduleForm.get("numeroDocumentoCliente").setValue("&ensp;");
+      this.moduleForm.get("direccionCliente").setValue("&ensp;");
+      this.moduleForm.get("idNivelGeografico1").setValue("1");
+      this.moduleForm.get("idNivelGeografico3").setValue("1");
+      this.moduleForm.get("idNivelGeografico2").setValue("1");
+      this.moduleForm.get("correoElectronicoCliente").setValue("&ensp;");
     }
     if (this.moduleForm.valid) {
-      if(this.isToclone){
-        this.moduleForm.get('idCliente').setValue(this.idCliente);
+      if (this.isToclone) {
+        this.moduleForm.get("idCliente").setValue(this.idCliente);
       }
       // Que me capture el dia, mes, año, hora, minutos y si es am o pm
-      this.moduleForm.get('fechaDocumentoRadiRadicado').value = new Date(moment(this.moduleForm.get('fechaDocumentoRadiRadicado').value).format('YYYY-MM-DD HH:mm'));
+      this.moduleForm.get("fechaDocumentoRadiRadicado").value = new Date(
+        moment(this.moduleForm.get("fechaDocumentoRadiRadicado").value).format(
+          "YYYY-MM-DD HH:mm",
+        ),
+      );
       if (this.tipoRadicado == "actoAdmin") {
         this.submitFormEmit.emit({
           data: this.moduleForm.getRawValue(),
           fileUpload: this.moduleForm.get("fileUpload").value,
-          plantillaHTML: this.editorContent
+          plantillaHTML: this.editorContent,
         });
-      } else if (this.moduleForm.controls["isNuevoRemitente"].value == true || this.moduleForm.controls["idCliente"].value != "") {
+      } else if (
+        this.moduleForm.controls["isNuevoRemitente"].value == true ||
+        this.moduleForm.controls["idCliente"].value != ""
+      ) {
         this.submitFormEmit.emit({
           data: this.moduleForm.getRawValue(),
           fileUpload: this.moduleForm.get("fileUpload").value,
-          plantillaHTML: this.editorContent
+          plantillaHTML: this.editorContent,
         });
         // this.sweetAlertService.sweetClose();
       } else {
-        this.sweetAlertService.sweetInfo("Algo está mal", ["Seleccione remitente/destinatario"]);
+        this.sweetAlertService.sweetInfo("Algo está mal", [
+          "Seleccione remitente/destinatario",
+        ]);
       }
     } else {
-      this.sweetAlertService.sweetInfo("Por favor verifique, datos obligatorios incompletos", "");
+      this.sweetAlertService.sweetInfo(
+        "Por favor verifique, datos obligatorios incompletos",
+        "",
+      );
       this.moduleForm.markAllAsTouched();
     }
   }
@@ -1745,155 +2140,190 @@ export class FilingFormComponent implements OnInit, OnDestroy {
 
     this.restService
       .restGetNotDecrypt(
-        this.versionApi + "radicacion/radicados/index-general-filing-lists-not-encrypt",
-        this.authorization
+        this.versionApi +
+          "radicacion/radicados/index-general-filing-lists-not-encrypt",
+        this.authorization,
       )
       .subscribe(
         (data) => {
           const responseService: any = data;
-          this.globalAppService.resolveResponse(responseService).then((dataGlobal) => {
-            const responseGlobal = dataGlobal;
-            if (responseGlobal === true) {
-
-              /** Informacion del usuario logueado */
-              if (responseService.dataUserLogin) {
-                this.dataUserLogin = responseService.dataUserLogin;
-              }
-
-
-              if (responseService.dataTiposRespuesta) {
-                this.listTipoRespuesta = responseService.dataTiposRespuesta;
-                this.filteredlistTipoRespuesta.next(this.listTipoRespuesta.slice());
-              }
-
-              if (responseService.dataMedioRespuesta) {
-                this.listMediorespuesta = responseService.dataMedioRespuesta;
-                this.filteredlistMedioRespuesta.next(this.listMediorespuesta.slice());
-                console.log({"listMediorespuesta": this.listMediorespuesta, "filteredlistMedioRespuesta": this.filteredlistMedioRespuesta});
-              }
-
-              if (responseService.dataTiposComunicacion) {
-                this.listTipoComunicado = responseService.dataTiposComunicacion;
-                this.filteredlistTipoComunicacion = this.listTipoComunicado;
-              }
-
-
-              // Numeros Radicados
-              if (responseService.dataNumRadicados) {
-                this.listNumRadicado = responseService.dataNumRadicados;
-                // load the list initial
-                this.filteredlistNumRadicado.next(this.listNumRadicado.slice());
-              }
-              // Tipo Radicado
-
-              if (typeof this.tipoRadicado === 'string' && !this.isToclone) {
-                if (this.tipoRadicado == "actoAdmin") {
-                  this.listTipoRadicadoActosAdmin = responseService.dataRadicado.filter(
-                    item => item.tipoRadicado == "1"
-                  );
-                  // load the list initial
-                  this.filteredlistTipoRadicado = this.listTipoRadicadoActosAdmin;
-                } else {
-                  const tipoRadicadoArray = this.tipoRadicado.split(',').map(Number).filter(num => !isNaN(num));
-                  //console.log( responseService.dataRadicado)
-                  this.listTipoRadicado = responseService.dataRadicado.filter(
-                    item => tipoRadicadoArray.includes(item.id)
-                  );
-                  // load the list initial
-                  this.filteredlistTipoRadicado = this.listTipoRadicado;
-
+          this.globalAppService
+            .resolveResponse(responseService)
+            .then((dataGlobal) => {
+              const responseGlobal = dataGlobal;
+              if (responseGlobal === true) {
+                /** Informacion del usuario logueado */
+                if (responseService.dataUserLogin) {
+                  this.dataUserLogin = responseService.dataUserLogin;
                 }
 
+                if (responseService.dataTiposRespuesta) {
+                  this.listTipoRespuesta = responseService.dataTiposRespuesta;
+                  this.filteredlistTipoRespuesta.next(
+                    this.listTipoRespuesta.slice(),
+                  );
+                }
 
+                if (responseService.dataMedioRespuesta) {
+                  this.listMediorespuesta = responseService.dataMedioRespuesta;
+                  this.filteredlistMedioRespuesta.next(
+                    this.listMediorespuesta.slice(),
+                  );
+                  console.log({
+                    listMediorespuesta: this.listMediorespuesta,
+                    filteredlistMedioRespuesta: this.filteredlistMedioRespuesta,
+                  });
+                }
 
-              } else {
-                this.listTipoRadicado = responseService.dataRadicado;
-                // load the list initial
-                this.filteredlistTipoRadicado = responseService.dataRadicado;
-              }
+                if (responseService.dataTiposComunicacion) {
+                  this.listTipoComunicado =
+                    responseService.dataTiposComunicacion;
+                  this.filteredlistTipoComunicacion = this.listTipoComunicado;
+                }
 
-              if (this.filteredlistTipoRadicado.length == 1) {
-                this.moduleForm.controls["idCgTipoRadicado"].setValue(this.filteredlistTipoRadicado[0].id);
-                this.validaDependencias();
-              }
+                // Numeros Radicados
+                if (responseService.dataNumRadicados) {
+                  this.listNumRadicado = responseService.dataNumRadicados;
+                  // load the list initial
+                  this.filteredlistNumRadicado.next(
+                    this.listNumRadicado.slice(),
+                  );
+                }
+                // Tipo Radicado
 
-              if (responseService.dataTipoPersonal) {
-                this.listTipoPersona = responseService.dataTipoPersonal;
-                // Valida lista para que se agregue las tipos de persona
-                var dataTipoPer = responseService.dataTipoPersonal;
-                dataTipoPer.forEach((tipP) => {
-                  // quita el funcionario para agergar a la lista
-                  if (tipP.id != environment.tipoPersonaNumber.Funcionario) {
-                    this.listTipoPersonaNewRemi.push(tipP);
+                if (typeof this.tipoRadicado === "string" && !this.isToclone) {
+                  if (this.tipoRadicado == "actoAdmin") {
+                    this.listTipoRadicadoActosAdmin =
+                      responseService.dataRadicado.filter(
+                        (item) => item.tipoRadicado == "1",
+                      );
+                    // load the list initial
+                    this.filteredlistTipoRadicado =
+                      this.listTipoRadicadoActosAdmin;
+                  } else {
+                    const tipoRadicadoArray = this.tipoRadicado
+                      .split(",")
+                      .map(Number)
+                      .filter((num) => !isNaN(num));
+                    //console.log( responseService.dataRadicado)
+                    this.listTipoRadicado = responseService.dataRadicado.filter(
+                      (item) => tipoRadicadoArray.includes(item.id),
+                    );
+                    // load the list initial
+                    this.filteredlistTipoRadicado = this.listTipoRadicado;
                   }
-                });
-                // load the list initial
-                this.filteredlistTipoPersona.next(this.listTipoPersona.slice());
-              }
-
-              // Lista tipo identificacion
-              if (responseService.dataTiposIdentificacion) {
-                this.listTipoIdentificacion = responseService.dataTiposIdentificacion;
-                this.filterdIdTipoIdentificacion.next(this.listTipoIdentificacion);
-              }
-
-              // Lista tramites
-              if (responseService.dataTramites) {
-                this.listTramites = responseService.dataTramites;
-                // load the list initial
-                this.filteredlistTramites.next(this.listTramites.slice());
-              }
-              // Tipo Documental
-              if (responseService.dataDocumentales) {
-                // this.listTipoDocumental = responseService.dataDocumentales;
-                // load the list initial
-                // this.filteredlistTipoDocumental.next(this.listTipoDocumental.slice());
-              }
-              // Lista medios de recepcion
-              if (responseService.dataMediosRecepcion) {
-                this.listMedioRecepcion = responseService.dataMediosRecepcion;
-                // load the list initial
-                if (this.tipoRadicado == 2) {
-                  this.filteredlistMedioRecepcion.next(this.listMedioRecepcion.filter(item => item.val != 'Asignación por sistema'));
                 } else {
-                  this.filteredlistMedioRecepcion.next(this.listMedioRecepcion.slice());
+                  this.listTipoRadicado = responseService.dataRadicado;
+                  // load the list initial
+                  this.filteredlistTipoRadicado = responseService.dataRadicado;
                 }
-              }
-              // lista Paises
-              if (responseService.dataNivelGeografico1) {
-                this.listNivelGeografico1 = responseService.dataNivelGeografico1;
-                // load the list initial
-                this.filteredlistNivelGeografico1.next(this.listNivelGeografico1.slice());
-              }
-              // lista Departamentos
-              if (responseService.dataNivelGeografico2) {
-                this.listNivelGeografico2 = responseService.dataNivelGeografico2;
-                // load the list initial
-                this.filteredlistNivelGeografico2.next(this.listNivelGeografico2.slice());
-              }
-              // lista Municipios
-              if (responseService.dataNivelGeografico3) {
-                this.listNivelGeografico3 = responseService.dataNivelGeografico3;
-                // load the list initial
-                this.filteredlistNivelGeografico3.next(this.listNivelGeografico3.slice());
-              }
-              // Data multiremitentes
-              if (responseService.dataRadiUnico) {
-                this.dataMultiRadi = responseService.dataRadiUnico;
-              }
-              if (this.paramOID == 0)
-                // this.moduleForm.controls["idCgTipoRadicado"].setValue(responseService.dataRadicado[1].id);
 
-                // loading false
-                this.sweetAlertService.sweetClose();
-            }
-          });
+                if (this.filteredlistTipoRadicado.length == 1) {
+                  this.moduleForm.controls["idCgTipoRadicado"].setValue(
+                    this.filteredlistTipoRadicado[0].id,
+                  );
+                  this.validaDependencias();
+                }
+
+                if (responseService.dataTipoPersonal) {
+                  this.listTipoPersona = responseService.dataTipoPersonal;
+                  // Valida lista para que se agregue las tipos de persona
+                  var dataTipoPer = responseService.dataTipoPersonal;
+                  dataTipoPer.forEach((tipP) => {
+                    // quita el funcionario para agergar a la lista
+                    if (tipP.id != environment.tipoPersonaNumber.Funcionario) {
+                      this.listTipoPersonaNewRemi.push(tipP);
+                    }
+                  });
+                  // load the list initial
+                  this.filteredlistTipoPersona.next(
+                    this.listTipoPersona.slice(),
+                  );
+                }
+
+                // Lista tipo identificacion
+                if (responseService.dataTiposIdentificacion) {
+                  this.listTipoIdentificacion =
+                    responseService.dataTiposIdentificacion;
+                  this.filterdIdTipoIdentificacion.next(
+                    this.listTipoIdentificacion,
+                  );
+                }
+
+                // Lista tramites
+                if (responseService.dataTramites) {
+                  this.listTramites = responseService.dataTramites;
+                  // load the list initial
+                  this.filteredlistTramites.next(this.listTramites.slice());
+                }
+                // Tipo Documental
+                if (responseService.dataDocumentales) {
+                  // this.listTipoDocumental = responseService.dataDocumentales;
+                  // load the list initial
+                  // this.filteredlistTipoDocumental.next(this.listTipoDocumental.slice());
+                }
+                // Lista medios de recepcion
+                if (responseService.dataMediosRecepcion) {
+                  this.listMedioRecepcion = responseService.dataMediosRecepcion;
+                  // load the list initial
+                  if (this.tipoRadicado == 2) {
+                    this.filteredlistMedioRecepcion.next(
+                      this.listMedioRecepcion.filter(
+                        (item) => item.val != "Asignación por sistema",
+                      ),
+                    );
+                  } else {
+                    this.filteredlistMedioRecepcion.next(
+                      this.listMedioRecepcion.slice(),
+                    );
+                  }
+                }
+                // lista Paises
+                if (responseService.dataNivelGeografico1) {
+                  this.listNivelGeografico1 =
+                    responseService.dataNivelGeografico1;
+                  // load the list initial
+                  this.filteredlistNivelGeografico1.next(
+                    this.listNivelGeografico1.slice(),
+                  );
+                }
+                // lista Departamentos
+                if (responseService.dataNivelGeografico2) {
+                  this.listNivelGeografico2 =
+                    responseService.dataNivelGeografico2;
+                  // load the list initial
+                  this.filteredlistNivelGeografico2.next(
+                    this.listNivelGeografico2.slice(),
+                  );
+                }
+                // lista Municipios
+                if (responseService.dataNivelGeografico3) {
+                  this.listNivelGeografico3 =
+                    responseService.dataNivelGeografico3;
+                  // load the list initial
+                  this.filteredlistNivelGeografico3.next(
+                    this.listNivelGeografico3.slice(),
+                  );
+                }
+                // Data multiremitentes
+                if (responseService.dataRadiUnico) {
+                  this.dataMultiRadi = responseService.dataRadiUnico;
+                }
+                if (this.paramOID == 0)
+                  // this.moduleForm.controls["idCgTipoRadicado"].setValue(responseService.dataRadicado[1].id);
+
+                  // loading false
+                  this.sweetAlertService.sweetClose();
+              }
+            });
         },
         (err) => {
           this.resSerlistGeneralErr = err;
           // Evaluar respuesta de error del servicio
-          this.globalAppService.resolveResponseError(this.resSerlistGeneralErr).then((res) => { });
-        }
+          this.globalAppService
+            .resolveResponseError(this.resSerlistGeneralErr)
+            .then((res) => {});
+        },
       );
   }
 
@@ -1901,30 +2331,32 @@ export class FilingFormComponent implements OnInit, OnDestroy {
   onSelectionChangeTipoRadicado() {
     this.validaDependencias();
     this.moduleForm.controls["isNuevoRemitente"].value = false;
-    const tipoRadicadoValue = this.moduleForm.controls["idCgTipoRadicado"].value;
+    const tipoRadicadoValue =
+      this.moduleForm.controls["idCgTipoRadicado"].value;
     if (tipoRadicadoValue == 2) {
-      this.camposRequeridos('2', true);
+      this.camposRequeridos("2", true);
     } else {
       this.moduleForm.controls["idCgMedioRecepcion"].setValue(9);
-      this.camposRequeridos('2', false);
+      this.camposRequeridos("2", false);
     }
     if ([3, 5, 6, 7, 8, 9].includes(tipoRadicadoValue)) {
-      this.tipoRadicado = 'actoAdmin';
-      this.camposRequeridos('actoAdmin', true)
+      this.tipoRadicado = "actoAdmin";
+      this.camposRequeridos("actoAdmin", true);
     }
 
     if (
-      this.moduleForm.controls["idCgTipoRadicado"].value != environment.tipoRadicadoId.entrada &&
-      this.moduleForm.controls["idCgTipoRadicado"].value != environment.tipoRadicadoId.pqrs
+      this.moduleForm.controls["idCgTipoRadicado"].value !=
+        environment.tipoRadicadoId.entrada &&
+      this.moduleForm.controls["idCgTipoRadicado"].value !=
+        environment.tipoRadicadoId.pqrs
     ) {
       this.moduleForm.controls["autorizacionRadiRadicados"].setValue(false);
       this.AutorizaChange({ checked: false });
-      this.camposRequeridos('serieSubserie', true);
+      this.camposRequeridos("serieSubserie", true);
     } else {
-      this.camposRequeridos('serieSubserie', true);
+      this.camposRequeridos("serieSubserie", true);
     }
   }
-
 
   /** consultar Lista de clientes según el tipo de radicado seleccionado */
   getListClientes(stringSearch: string = null) {
@@ -1938,7 +2370,7 @@ export class FilingFormComponent implements OnInit, OnDestroy {
       .restGetParamsNotDecrypt(
         this.versionApi + "radicacion/radicados/list-clientes-not-encrypt",
         data,
-        this.authorization
+        this.authorization,
       )
       .subscribe(
         (data) => {
@@ -1952,7 +2384,11 @@ export class FilingFormComponent implements OnInit, OnDestroy {
               this.listCliente = this.resSerListClientes.dataClientes;
               console.log(this.idClienteSearch);
               if (this.idClienteSearch > 0 && this.listCliente.length > 0) {
-                this.moduleForm.controls["idCliente"].setValue(this.listCliente.find((item) => item.id.cliente == this.idClienteSearch)?.id);
+                this.moduleForm.controls["idCliente"].setValue(
+                  this.listCliente.find(
+                    (item) => item.id.cliente == this.idClienteSearch,
+                  )?.id,
+                );
                 this.moduleForm.controls["idCliente"].setValidators([]);
                 this.moduleForm.controls["idCliente"].updateValueAndValidity();
               }
@@ -1963,8 +2399,10 @@ export class FilingFormComponent implements OnInit, OnDestroy {
         (err) => {
           this.resSerListClientesErr = err;
           // Evaluar respuesta de error del servicio
-          this.globalAppService.resolveResponseError(this.resSerListClientesErr).then((res) => { });
-        }
+          this.globalAppService
+            .resolveResponseError(this.resSerListClientesErr)
+            .then((res) => {});
+        },
       );
   }
 
@@ -1979,34 +2417,43 @@ export class FilingFormComponent implements OnInit, OnDestroy {
 
     var data = {
       idCgTipoRadicado: this.moduleForm.controls["idCgTipoRadicado"].value,
-      idTrdDepeUserTramitador: this.moduleForm.controls["idTrdDepeUserTramitador"].value,
+      idTrdDepeUserTramitador:
+        this.moduleForm.controls["idTrdDepeUserTramitador"].value,
     };
 
     this.restService
-      .restGetParams(this.versionApi + "radicacion/radicados/index-list-series", data, this.authorization)
+      .restGetParams(
+        this.versionApi + "radicacion/radicados/index-list-series",
+        data,
+        this.authorization,
+      )
       .subscribe(
         (data) => {
           this.resSerSeries = data;
           // Evaluar respuesta del servicio
-          this.globalAppService.resolveResponse(this.resSerSeries).then((res) => {
-            let responseResolveResponse = res;
-            if (responseResolveResponse == true) {
-              this.listSeries = this.resSerSeries.dataList;
-              this.filteredlistSeries.next(this.listSeries.slice());
-              // loading false
-              this.sweetAlertService.sweetClose();
-              this.getListSubseries();
-            } else {
-              this.listSeries = [];
-              this.filteredlistSeries.next(this.listSeries.slice());
-            }
-          });
+          this.globalAppService
+            .resolveResponse(this.resSerSeries)
+            .then((res) => {
+              let responseResolveResponse = res;
+              if (responseResolveResponse == true) {
+                this.listSeries = this.resSerSeries.dataList;
+                this.filteredlistSeries.next(this.listSeries.slice());
+                // loading false
+                this.sweetAlertService.sweetClose();
+                this.getListSubseries();
+              } else {
+                this.listSeries = [];
+                this.filteredlistSeries.next(this.listSeries.slice());
+              }
+            });
         },
         (err) => {
           this.resSerSeriesErr = err;
           // Evaluar respuesta de error del servicio
-          this.globalAppService.resolveResponseError(this.resSerSeriesErr).then((res) => { });
-        }
+          this.globalAppService
+            .resolveResponseError(this.resSerSeriesErr)
+            .then((res) => {});
+        },
       );
   }
 
@@ -2021,40 +2468,53 @@ export class FilingFormComponent implements OnInit, OnDestroy {
     this.moduleForm.controls["idGdTrdSubserie"].setValue("");
     var data = {
       idCgTipoRadicado: this.moduleForm.controls["idCgTipoRadicado"].value,
-      idTrdDepeUserTramitador: this.moduleForm.controls["idTrdDepeUserTramitador"].value,
+      idTrdDepeUserTramitador:
+        this.moduleForm.controls["idTrdDepeUserTramitador"].value,
       idGdTrdSerie: this.moduleForm.controls["idGdTrdSerie"].value,
     };
 
     this.restService
-      .restGetParams(this.versionApi + "radicacion/radicados/index-list-subseries", data, this.authorization)
+      .restGetParams(
+        this.versionApi + "radicacion/radicados/index-list-subseries",
+        data,
+        this.authorization,
+      )
       .subscribe(
         (data) => {
           this.resSerSubseries = data;
           // Evaluar respuesta del servicio
-          this.globalAppService.resolveResponse(this.resSerSubseries).then((res) => {
-            let responseResolveResponse = res;
-            if (responseResolveResponse == true) {
-              this.listSubseries = this.resSerSubseries.dataList;
-              this.filteredlistSubseries.next(this.listSubseries.slice());
-              this.moduleForm.controls["idGdTrdSubserie"].setValue(this.subSerie);
-              // Validamos si solamente hay un registro en la lista
-              if (this.listSubseries.length == 1) {
-                this.moduleForm.controls["idGdTrdSubserie"].setValue(this.listSubseries[0].id);
+          this.globalAppService
+            .resolveResponse(this.resSerSubseries)
+            .then((res) => {
+              let responseResolveResponse = res;
+              if (responseResolveResponse == true) {
+                this.listSubseries = this.resSerSubseries.dataList;
+                this.filteredlistSubseries.next(this.listSubseries.slice());
+                this.moduleForm.controls["idGdTrdSubserie"].setValue(
+                  this.subSerie,
+                );
+                // Validamos si solamente hay un registro en la lista
+                if (this.listSubseries.length == 1) {
+                  this.moduleForm.controls["idGdTrdSubserie"].setValue(
+                    this.listSubseries[0].id,
+                  );
+                }
+                // loading false
+                this.sweetAlertService.sweetClose();
+                this.getListTipoDocumental();
+              } else {
+                this.listSubseries = [];
+                this.filteredlistSubseries.next(this.listSubseries.slice());
               }
-              // loading false
-              this.sweetAlertService.sweetClose();
-              this.getListTipoDocumental();
-            } else {
-              this.listSubseries = [];
-              this.filteredlistSubseries.next(this.listSubseries.slice());
-            }
-          });
+            });
         },
         (err) => {
           this.resSerSubseriesErr = err;
           // Evaluar respuesta de error del servicio
-          this.globalAppService.resolveResponseError(this.resSerSubseriesErr).then((res) => { });
-        }
+          this.globalAppService
+            .resolveResponseError(this.resSerSubseriesErr)
+            .then((res) => {});
+        },
       );
   }
 
@@ -2065,167 +2525,245 @@ export class FilingFormComponent implements OnInit, OnDestroy {
 
     var data = {
       idCgTipoRadicado: this.moduleForm.controls["idCgTipoRadicado"].value,
-      idTrdDepeUserTramitador: this.moduleForm.controls["idTrdDepeUserTramitador"].value,
+      idTrdDepeUserTramitador:
+        this.moduleForm.controls["idTrdDepeUserTramitador"].value,
       idGdTrdSerie: this.moduleForm.controls["idGdTrdSerie"].value,
       idGdTrdSubserie: this.moduleForm.controls["idGdTrdSubserie"].value,
     };
 
     this.restService
-      .restPost(this.versionApi + "radicacion/radicados/index-list-tipo-documental", data, this.authorization)
+      .restPost(
+        this.versionApi + "radicacion/radicados/index-list-tipo-documental",
+        data,
+        this.authorization,
+      )
       .subscribe(
         (data) => {
           this.resSerTipoDocumental = data;
           // Evaluar respuesta del servicio
-          this.globalAppService.resolveResponse(this.resSerTipoDocumental).then((res) => {
-            let responseResolveResponse = res;
-            if (responseResolveResponse == true) {
-              // Tipo Documental
+          this.globalAppService
+            .resolveResponse(this.resSerTipoDocumental)
+            .then((res) => {
+              let responseResolveResponse = res;
+              if (responseResolveResponse == true) {
+                // Tipo Documental
 
-              if (this.resSerTipoDocumental.dataDocumentales) {
-                this.listTipoDocumental = this.resSerTipoDocumental.dataDocumentales;
-                // load the list initial
-                this.filteredlistTipoDocumental.next(this.listTipoDocumental.slice());
+                if (this.resSerTipoDocumental.dataDocumentales) {
+                  this.listTipoDocumental =
+                    this.resSerTipoDocumental.dataDocumentales;
+                  // load the list initial
+                  this.filteredlistTipoDocumental.next(
+                    this.listTipoDocumental.slice(),
+                  );
 
-                // Valida si el tipo de radicado es PQRSD o entrada
-                if (
-                  this.moduleForm.controls["idCgTipoRadicado"].value == environment.tipoRadicadoId.pqrs ||
-                  this.moduleForm.controls["idCgTipoRadicado"].value == environment.tipoRadicadoId.entrada
-                ) {
-                  // Recorre la lista de tipo documental
-                  this.listTipoDocumental.forEach((element) => {
-                    // Verifica si el tipo documental esta vacio si esta vacio le asigna el sin tipo documental
-                    if (
-                      this.moduleForm.controls["idTrdTipoDocumental"].value == "" &&
-                      element.val == "Sin tipo documental"
-                    ) {
-                      // Asigna el tipo documental
-                      this.moduleForm.controls["idTrdTipoDocumental"].setValue(element.id);
-                      // Valida tipo documental para que se ejecute
-                      this.statusVencimientoEje = true;
-                    }
-                  });
-                } else {
-                  // Si el tipo documental es diferente PQRSD y entrada
-                  this.moduleForm.controls["idTrdTipoDocumental"].setValue(this.tipoDoc);
+                  // Valida si el tipo de radicado es PQRSD o entrada
+                  if (
+                    this.moduleForm.controls["idCgTipoRadicado"].value ==
+                      environment.tipoRadicadoId.pqrs ||
+                    this.moduleForm.controls["idCgTipoRadicado"].value ==
+                      environment.tipoRadicadoId.entrada
+                  ) {
+                    // Recorre la lista de tipo documental
+                    this.listTipoDocumental.forEach((element) => {
+                      // Verifica si el tipo documental esta vacio si esta vacio le asigna el sin tipo documental
+                      if (
+                        this.moduleForm.controls["idTrdTipoDocumental"].value ==
+                          "" &&
+                        element.val == "Sin tipo documental"
+                      ) {
+                        // Asigna el tipo documental
+                        this.moduleForm.controls[
+                          "idTrdTipoDocumental"
+                        ].setValue(element.id);
+                        // Valida tipo documental para que se ejecute
+                        this.statusVencimientoEje = true;
+                      }
+                    });
+                  } else {
+                    // Si el tipo documental es diferente PQRSD y entrada
+                    this.moduleForm.controls["idTrdTipoDocumental"].setValue(
+                      this.tipoDoc,
+                    );
+                  }
                 }
+
+                // loading false
+                this.sweetAlertService.sweetClose();
+
+                //cuando la dependencia no tiene una TRD (Tipo Documental) configurada muestra un array vacido
+              } else {
+                this.listTipoDocumental = [];
+                // load the list initial
+                this.filteredlistTipoDocumental.next(
+                  this.listTipoDocumental.slice(),
+                );
               }
-
-              // loading false
-              this.sweetAlertService.sweetClose();
-
-              //cuando la dependencia no tiene una TRD (Tipo Documental) configurada muestra un array vacido
-            } else {
-              this.listTipoDocumental = [];
-              // load the list initial
-              this.filteredlistTipoDocumental.next(this.listTipoDocumental.slice());
-            }
-          });
+            });
         },
         (err) => {
           this.resSerTipoDocumentalErr = err;
           // Evaluar respuesta de error del servicio
-          this.globalAppService.resolveResponseError(this.resSerTipoDocumentalErr).then((res) => { });
-        }
+          this.globalAppService
+            .resolveResponseError(this.resSerTipoDocumentalErr)
+            .then((res) => {});
+        },
       );
   }
 
   verificarDocNit() {
     let params = {
-      numeroDocumentoCliente: this.moduleForm.controls["numeroDocumentoCliente"].value,
+      numeroDocumentoCliente:
+        this.moduleForm.controls["numeroDocumentoCliente"].value,
     };
 
     this.restService
-      .restPost(this.versionApi + "radicacion/radicados/verificar-identificacion-cliente", params, this.authorization)
+      .restPost(
+        this.versionApi +
+          "radicacion/radicados/verificar-identificacion-cliente",
+        params,
+        this.authorization,
+      )
       .subscribe(
         (res) => {
           this.resServicesVerificarDocNit = res;
 
           if (this.resServicesVerificarDocNit.data["available"] == false) {
             this.moduleForm.controls["numeroDocumentoCliente"].setValue("");
-            this.sweetAlertService.showNotification("danger", this.resServicesVerificarDocNit["message"], 6000);
+            this.sweetAlertService.showNotification(
+              "danger",
+              this.resServicesVerificarDocNit["message"],
+              6000,
+            );
           }
         },
         (err) => {
           this.resServicesVerificarDocNitErr = err;
           // Evaluar respuesta de error del servicio
-          this.globalAppService.resolveResponseError(this.resServicesVerificarDocNitErr).then((res) => { });
-        }
+          this.globalAppService
+            .resolveResponseError(this.resServicesVerificarDocNitErr)
+            .then((res) => {});
+        },
       );
   }
 
   verificarCorreo() {
     let params = {
-      correoElectronicoCliente: this.moduleForm.controls["correoElectronicoCliente"].value,
+      correoElectronicoCliente:
+        this.moduleForm.controls["correoElectronicoCliente"].value,
     };
 
     this.restService
-      .restPost(this.versionApi + "radicacion/radicados/verificar-correo-cliente", params, this.authorization)
+      .restPost(
+        this.versionApi + "radicacion/radicados/verificar-correo-cliente",
+        params,
+        this.authorization,
+      )
       .subscribe(
         (res) => {
           this.resServicesVerificarCorreo = res;
 
           if (this.resServicesVerificarCorreo.data["available"] == false) {
             this.moduleForm.controls["correoElectronicoCliente"].setValue("");
-            this.sweetAlertService.showNotification("danger", this.resServicesVerificarCorreo["message"], 6000);
+            this.sweetAlertService.showNotification(
+              "danger",
+              this.resServicesVerificarCorreo["message"],
+              6000,
+            );
           }
         },
         (err) => {
           this.resServicesVerificarCorreoErr = err;
           // Evaluar respuesta de error del servicio
-          this.globalAppService.resolveResponseError(this.resServicesVerificarCorreoErr).then((res) => { });
-        }
+          this.globalAppService
+            .resolveResponseError(this.resServicesVerificarCorreoErr)
+            .then((res) => {});
+        },
       );
   }
 
   public createDireccionUrbana() {
-    let nPlaca = this.moduleForm.get('nPlaca').value.replaceAll("-", ' ');
-    let nPlaca2 = this.moduleForm.get('nPlacaDos').value.replaceAll("-", '');
-    let bis = this.moduleForm.get('bis').value == 'SI' ? ' BIS' : '';
-    let letraDosValue = this.moduleForm.get('letraDos').value || '';
-    let letraDos = bis == ' BIS' ? ' ' + letraDosValue : letraDosValue;
-    let via = this.moduleForm.get('numVia').value ? this.moduleForm.get('numVia').value : '';
-    if (this.moduleForm.get('sufijo').value) {
-      let direccionUrbana = this.moduleForm.get('tipoDeVia').value + ' ' + via + this.moduleForm.get('letra').value + bis + letraDos + ' ' +
-        this.moduleForm.get('sufijo').value + ' ' + nPlaca + this.moduleForm.get('letraTres').value + ' ' + nPlaca2 + this.moduleForm.get('sufijoDos').value + ' ' +
-        this.moduleForm.get('complemento').value
-      this.moduleForm.get('direccion').setValue(direccionUrbana.toUpperCase());
+    let nPlaca = this.moduleForm.get("nPlaca").value.replaceAll("-", " ");
+    let nPlaca2 = this.moduleForm.get("nPlacaDos").value.replaceAll("-", "");
+    let bis = this.moduleForm.get("bis").value == "SI" ? " BIS" : "";
+    let letraDosValue = this.moduleForm.get("letraDos").value || "";
+    let letraDos = bis == " BIS" ? " " + letraDosValue : letraDosValue;
+    let via = this.moduleForm.get("numVia").value
+      ? this.moduleForm.get("numVia").value
+      : "";
+    if (this.moduleForm.get("sufijo").value) {
+      let direccionUrbana =
+        this.moduleForm.get("tipoDeVia").value +
+        " " +
+        via +
+        this.moduleForm.get("letra").value +
+        bis +
+        letraDos +
+        " " +
+        this.moduleForm.get("sufijo").value +
+        " " +
+        nPlaca +
+        this.moduleForm.get("letraTres").value +
+        " " +
+        nPlaca2 +
+        this.moduleForm.get("sufijoDos").value +
+        " " +
+        this.moduleForm.get("complemento").value;
+      this.moduleForm.get("direccion").setValue(direccionUrbana.toUpperCase());
     } else {
-      let direccionUrbana = this.moduleForm.get('tipoDeVia').value + ' ' + via + this.moduleForm.get('letra').value + bis + letraDos + this.moduleForm.get('sufijo').value + ' ' + nPlaca + this.moduleForm.get('letraTres').value + ' ' + nPlaca2 + this.moduleForm.get('sufijoDos').value + ' ' + this.moduleForm.get('complemento').value
-      this.moduleForm.get('direccion').setValue(direccionUrbana.toUpperCase());
+      let direccionUrbana =
+        this.moduleForm.get("tipoDeVia").value +
+        " " +
+        via +
+        this.moduleForm.get("letra").value +
+        bis +
+        letraDos +
+        this.moduleForm.get("sufijo").value +
+        " " +
+        nPlaca +
+        this.moduleForm.get("letraTres").value +
+        " " +
+        nPlaca2 +
+        this.moduleForm.get("sufijoDos").value +
+        " " +
+        this.moduleForm.get("complemento").value;
+      this.moduleForm.get("direccion").setValue(direccionUrbana.toUpperCase());
     }
   }
 
   async copiarDatos() {
     try {
       // Obtiene el valor del campo 'complemento'
-      const textoParaCopiar = this.moduleForm.get('complemento').value;
+      const textoParaCopiar = this.moduleForm.get("complemento").value;
       // Usa la API del portapapeles para copiar el texto
       await navigator.clipboard.writeText(textoParaCopiar);
       // Se muestra la notificación de éxito
       this.sweetAlertService.showNotification("success", "Dato Copiado", 2000);
     } catch (error) {
       // Maneja cualquier error que pueda ocurrir (por ejemplo, si el acceso al portapapeles está bloqueado)
-      console.error('Error al copiar al portapapeles', error);
+      console.error("Error al copiar al portapapeles", error);
       // Opcional: muestra una notificación de error
       this.sweetAlertService.showNotification("error", "Error al copiar", 2000);
     }
   }
 
   public createBodyAdress(): Direccion {
-    let address = this.moduleForm.get('direccion').value!.trim().replace(/\s+/g, ' ');
+    let address = this.moduleForm
+      .get("direccion")
+      .value!.trim()
+      .replace(/\s+/g, " ");
     return {
       address: address,
       applicationId: "SGDA",
-      secret: 'U0dEQSBFQUFCIDIwMjQgU0dP',
-      isIntersection: '0',
+      secret: "U0dEQSBFQUFCIDIwMjQgU0dP",
+      isIntersection: "0",
       cityCode: "11001",
-    }
+    };
   }
 
   public validarDireccion() {
-    const numVia = this.moduleForm.get('numVia').value;
-    const tipoDeVia = this.moduleForm.get('tipoDeVia').value;
-    const nPlaca = this.moduleForm.get('nPlaca').value;
+    const numVia = this.moduleForm.get("numVia").value;
+    const tipoDeVia = this.moduleForm.get("tipoDeVia").value;
+    const nPlaca = this.moduleForm.get("nPlaca").value;
 
     if (numVia && tipoDeVia && nPlaca) {
       const direccionContrato: Direccion = this.createBodyAdress();
@@ -2235,20 +2773,26 @@ export class FilingFormComponent implements OnInit, OnDestroy {
           if (value.data.length > 0) {
             this.moduleForm.controls["zona"].setValue(value.data[0].zoneDesc);
           } else {
-            this.modal.openAction("Dirección no encontrada", "¿Desea ingresar la dirección manualmente?", () => {
-              this.direccionManual = true;
-            })
+            this.modal.openAction(
+              "Dirección no encontrada",
+              "¿Desea ingresar la dirección manualmente?",
+              () => {
+                this.direccionManual = true;
+              },
+            );
           }
         },
         error: (err: any) => {
           console.log("Error en la validación de la dirección", err);
-        }
+        },
       });
     } else {
-      this.sweetAlertService.sweetInfo("La dirección está incompleta. Asegúrate de completar el número de vía, tipo de vía y número de placa.", "");
+      this.sweetAlertService.sweetInfo(
+        "La dirección está incompleta. Asegúrate de completar el número de vía, tipo de vía y número de placa.",
+        "",
+      );
     }
   }
-
 
   MatSlideToggleChangePolitica(event) {
     if (event.checked) {
@@ -2281,37 +2825,49 @@ export class FilingFormComponent implements OnInit, OnDestroy {
       "codigoPostal",
       "idMedioRespuesta",
     ];
-    if (this.moduleForm.controls['direccionManualCuentaContrato'].value) {
-      this.moduleForm.controls['direccionCliente'].setValue(this.moduleForm.controls['direccion'].value)
+    if (this.moduleForm.controls["direccionManualCuentaContrato"].value) {
+      this.moduleForm.controls["direccionCliente"].setValue(
+        this.moduleForm.controls["direccion"].value,
+      );
     } else {
-      this.moduleForm.controls['direccionCliente'].setValue(this.direccionCliente)
+      this.moduleForm.controls["direccionCliente"].setValue(
+        this.direccionCliente,
+      );
     }
     /** Evaluar si el imput esta checkeado como true o false */
     if (event.checked) {
       this.moduleForm.controls["idCliente"].setValue("");
       this.messageIsNuevoRemitente = "Si";
-      this.direccionCliente = '';
+      this.direccionCliente = "";
 
-      
       for (let key in formsModules) {
         if (this.moduleForm.controls[formsModules[key]]) {
           /** Validar si es radicación email y el correo no existe en base de datos para colocarlo en el campo de nuevo remitente */
-          if (formsModules[key] == "correoElectronicoCliente" && this.radicacionEmail == true && this.isMailRecordExists == false) {
-            this.moduleForm.controls["correoElectronicoCliente"].setValue(this.fromAddressEmail);
+          if (
+            formsModules[key] == "correoElectronicoCliente" &&
+            this.radicacionEmail == true &&
+            this.isMailRecordExists == false
+          ) {
+            this.moduleForm.controls["correoElectronicoCliente"].setValue(
+              this.fromAddressEmail,
+            );
           } else {
-            if (formsModules[key] != 'direccionCliente' && formsModules[key] != 'idMedioRespuesta')
+            if (
+              formsModules[key] != "direccionCliente" &&
+              formsModules[key] != "idMedioRespuesta"
+            )
               this.moduleForm.controls[formsModules[key]].setValue("");
           }
           this.moduleForm.controls[formsModules[key]].enable();
         }
       }
 
-      if(this.moduleForm.get('idNivelGeografico1').value == ''){
-        this.moduleForm.controls['idNivelGeografico1'].setValue(1);
-        this.nivelGeografico2(1)
+      if (this.moduleForm.get("idNivelGeografico1").value == "") {
+        this.moduleForm.controls["idNivelGeografico1"].setValue(1);
+        this.nivelGeografico2(1);
       }
 
-      if (this.moduleForm.controls['autorizacionRadiRadicados'].value){
+      if (this.moduleForm.controls["autorizacionRadiRadicados"].value) {
         this.AutorizaChange({ checked: true });
       }
       this.moduleForm.controls["idCliente"].disable();
@@ -2320,8 +2876,12 @@ export class FilingFormComponent implements OnInit, OnDestroy {
 
       /** Limpiando campos del ciudadano */
       this.moduleForm.controls["generoClienteCiudadanoDetalle"].setValue(null);
-      this.moduleForm.controls["rangoEdadClienteCiudadanoDetalle"].setValue(null);
-      this.moduleForm.controls["vulnerabilidadClienteCiudadanoDetalle"].setValue(null);
+      this.moduleForm.controls["rangoEdadClienteCiudadanoDetalle"].setValue(
+        null,
+      );
+      this.moduleForm.controls[
+        "vulnerabilidadClienteCiudadanoDetalle"
+      ].setValue(null);
       this.moduleForm.controls["etniaClienteCiudadanoDetalle"].setValue(null);
 
       // Valida multipres remitentes
@@ -2330,28 +2890,39 @@ export class FilingFormComponent implements OnInit, OnDestroy {
       this.validaMultiple = false;
       this.colocarValidacionesCampos();
 
-      if (this.moduleForm.controls['direccionManualCuentaContrato'].value) {
-        this.moduleForm.controls['direccionCliente'].setValue(this.moduleForm.controls['direccion'].value)
+      if (this.moduleForm.controls["direccionManualCuentaContrato"].value) {
+        this.moduleForm.controls["direccionCliente"].setValue(
+          this.moduleForm.controls["direccion"].value,
+        );
       } else {
-        this.moduleForm.controls['direccionCliente'].setValue(this.direccionCliente)
+        this.moduleForm.controls["direccionCliente"].setValue(
+          this.direccionCliente,
+        );
       }
 
       // Validación nuevo destinatario dependiente de autorización envío por medios magneticos
-      if(this.moduleForm.controls["autorizacionRadiRadicados"].value){
-        this.moduleForm.controls["correoElectronicoCliente"].setValidators([Validators.email, Validators.required]);
+      if (this.moduleForm.controls["autorizacionRadiRadicados"].value) {
+        this.moduleForm.controls["correoElectronicoCliente"].setValidators([
+          Validators.email,
+          Validators.required,
+        ]);
       } else {
-        this.moduleForm.controls["correoElectronicoCliente"].setValidators([Validators.email]);
+        this.moduleForm.controls["correoElectronicoCliente"].setValidators([
+          Validators.email,
+        ]);
       }
-      this.moduleForm.controls["correoElectronicoCliente"].updateValueAndValidity();
-
-      
-      
+      this.moduleForm.controls[
+        "correoElectronicoCliente"
+      ].updateValueAndValidity();
     } else {
       this.messageIsNuevoRemitente = "No";
 
       for (let key in formsModules) {
         if (this.moduleForm.controls[formsModules[key]]) {
-          if (formsModules[key] != 'direccionCliente' && formsModules[key] != 'idMedioRespuesta')
+          if (
+            formsModules[key] != "direccionCliente" &&
+            formsModules[key] != "idMedioRespuesta"
+          )
             this.moduleForm.controls[formsModules[key]].setValue("");
           this.moduleForm.controls[formsModules[key]].disable();
         }
@@ -2359,7 +2930,9 @@ export class FilingFormComponent implements OnInit, OnDestroy {
 
       // Asigna las nueva lista CON Funcionario
       this.filteredlistTipoPersona.next(this.listTipoPersona.slice());
-      this.filterdIdTipoIdentificacion.next(this.listTipoIdentificacion.slice());
+      this.filterdIdTipoIdentificacion.next(
+        this.listTipoIdentificacion.slice(),
+      );
 
       this.setValueIdCliente(newIdCliente);
       this.moduleForm.controls["idCliente"].enable();
@@ -2370,30 +2943,51 @@ export class FilingFormComponent implements OnInit, OnDestroy {
 
       // Campos no requeridos
       this.quitarValidacionesCampos();
-
     }
     setTimeout(() => {
-      if (this.moduleForm.controls['direccionManualCuentaContrato'].value) {
-        this.moduleForm.controls['direccionCliente'].setValue(this.moduleForm.controls['direccion'].value)
+      if (this.moduleForm.controls["direccionManualCuentaContrato"].value) {
+        this.moduleForm.controls["direccionCliente"].setValue(
+          this.moduleForm.controls["direccion"].value,
+        );
       } else {
-        this.moduleForm.controls['direccionCliente'].setValue(this.direccionCliente)
+        this.moduleForm.controls["direccionCliente"].setValue(
+          this.direccionCliente,
+        );
       }
     }, 1000);
-
 
     /** Fin Evaluar si el imput esta checkeado como true o false */
   }
 
   private colocarValidacionesCampos() {
-    this.moduleForm.controls["nombreCliente"].setValidators([Validators.required]);
-    this.moduleForm.controls["idTipoPersona"].setValidators([Validators.required]);
-    this.moduleForm.controls["idTipoIdentificacion"].setValidators([Validators.required]);
-    this.moduleForm.controls["numeroDocumentoCliente"].setValidators([Validators.required]);
-    this.moduleForm.controls["idNivelGeografico3"].setValidators([Validators.required]);
-    this.moduleForm.controls["idNivelGeografico2"].setValidators([Validators.required]);
-    this.moduleForm.controls["idNivelGeografico1"].setValidators([Validators.required]);
-    this.moduleForm.controls["idMedioRespuesta"].setValidators([Validators.required]);
-    this.moduleForm.controls["correoElectronicoCliente"].setValidators([Validators.required, Validators.email]);
+    this.moduleForm.controls["nombreCliente"].setValidators([
+      Validators.required,
+    ]);
+    this.moduleForm.controls["idTipoPersona"].setValidators([
+      Validators.required,
+    ]);
+    this.moduleForm.controls["idTipoIdentificacion"].setValidators([
+      Validators.required,
+    ]);
+    this.moduleForm.controls["numeroDocumentoCliente"].setValidators([
+      Validators.required,
+    ]);
+    this.moduleForm.controls["idNivelGeografico3"].setValidators([
+      Validators.required,
+    ]);
+    this.moduleForm.controls["idNivelGeografico2"].setValidators([
+      Validators.required,
+    ]);
+    this.moduleForm.controls["idNivelGeografico1"].setValidators([
+      Validators.required,
+    ]);
+    this.moduleForm.controls["idMedioRespuesta"].setValidators([
+      Validators.required,
+    ]);
+    this.moduleForm.controls["correoElectronicoCliente"].setValidators([
+      Validators.required,
+      Validators.email,
+    ]);
     this.moduleForm.controls["idCliente"].setValidators([]);
 
     // Actualiza las validaciones
@@ -2410,9 +3004,10 @@ export class FilingFormComponent implements OnInit, OnDestroy {
     this.moduleForm.controls["idNivelGeografico1"].updateValueAndValidity();
     this.moduleForm.controls["idMedioRespuesta"].updateValueAndValidity();
     this.moduleForm.controls["idCliente"].updateValueAndValidity();
-    this.moduleForm.controls["correoElectronicoCliente"].updateValueAndValidity();
+    this.moduleForm.controls[
+      "correoElectronicoCliente"
+    ].updateValueAndValidity();
     // correoElectronicoCliente
-
   }
 
   private quitarValidacionesCampos() {
@@ -2424,7 +3019,9 @@ export class FilingFormComponent implements OnInit, OnDestroy {
     this.moduleForm.controls["idNivelGeografico2"].setValidators([]);
     this.moduleForm.controls["idNivelGeografico1"].setValidators([]);
     this.moduleForm.controls["idMedioRespuesta"].setValidators([]);
-    this.moduleForm.controls["idCliente"].setValidators([this.tipoRadicado === 2 ? Validators.required : null]);
+    this.moduleForm.controls["idCliente"].setValidators([
+      this.tipoRadicado === 2 ? Validators.required : null,
+    ]);
 
     // Actualiza las validaciones
     this.actualizarValidaciones();
@@ -2437,18 +3034,38 @@ export class FilingFormComponent implements OnInit, OnDestroy {
       // Validamos si remitente existe
       if (this.moduleForm.controls["remitentes"].value.length > 0) {
         // Buscamos el idMedioRespuesta en el array de remitentes
-        let index = this.moduleForm.get("remitentes").value.findIndex((element) => element.idMedioRespuesta > 0);
+        let index = this.moduleForm
+          .get("remitentes")
+          .value.findIndex((element) => element.idMedioRespuesta > 0);
         // Si existe le cambiamos el idMedioRespuesta a 2
         if (index > -1) {
-          this.remitentes.get(index.toString()).get("idMedioRespuesta").setValue(2);
-          this.remitentes.get(index.toString()).get("idMedioRespuesta").updateValueAndValidity();
-          this.moduleForm.get("remitentes").value.forEach((element) => { element.idMedioRespuesta = 2; });
+          this.remitentes
+            .get(index.toString())
+            .get("idMedioRespuesta")
+            .setValue(2);
+          this.remitentes
+            .get(index.toString())
+            .get("idMedioRespuesta")
+            .updateValueAndValidity();
+          this.moduleForm.get("remitentes").value.forEach((element) => {
+            element.idMedioRespuesta = 2;
+          });
           // Buscamos el correo en el array de remitentes
-          let indexCorreo = this.moduleForm.get("remitentes").value.findIndex((element) => element.correoElectronicoCliente == "");
+          let indexCorreo = this.moduleForm
+            .get("remitentes")
+            .value.findIndex(
+              (element) => element.correoElectronicoCliente == "",
+            );
           // Si existe le cambiamos el correo a requerido
           if (indexCorreo > -1) {
-            this.remitentes.get(indexCorreo.toString()).get("correoElectronicoCliente").setValidators([Validators.required, Validators.email]);
-            this.remitentes.get(indexCorreo.toString()).get("correoElectronicoCliente").updateValueAndValidity();
+            this.remitentes
+              .get(indexCorreo.toString())
+              .get("correoElectronicoCliente")
+              .setValidators([Validators.required, Validators.email]);
+            this.remitentes
+              .get(indexCorreo.toString())
+              .get("correoElectronicoCliente")
+              .updateValueAndValidity();
           }
         }
       } else {
@@ -2456,39 +3073,62 @@ export class FilingFormComponent implements OnInit, OnDestroy {
         this.moduleForm.controls["idMedioRespuesta"].setValue(2);
         // y el correo se deshabilita y se coloca requerido
         //this.moduleForm.controls["correoElectronicoCliente"].enable();
-        this.moduleForm.controls["correoElectronicoCliente"].setValidators([Validators.required, Validators.email]);
-        this.moduleForm.controls["correoElectronicoCliente"].updateValueAndValidity();
+        this.moduleForm.controls["correoElectronicoCliente"].setValidators([
+          Validators.required,
+          Validators.email,
+        ]);
+        this.moduleForm.controls[
+          "correoElectronicoCliente"
+        ].updateValueAndValidity();
       }
     } else {
-      this.messageAutoriza = "No"; 
+      this.messageAutoriza = "No";
       // Validamos si remitente existe
       if (this.moduleForm.controls["remitentes"].value.length > 0) {
         // Buscamos el idMedioRespuesta en el array de remitentes
-        let index = this.moduleForm.get("remitentes").value.findIndex((element) => element.idMedioRespuesta > 0);
+        let index = this.moduleForm
+          .get("remitentes")
+          .value.findIndex((element) => element.idMedioRespuesta > 0);
         // Si existe le cambiamos el idMedioRespuesta a 2
         if (index > -1) {
           this.remitentes.get("idMedioRespuesta").setValue(1);
           //this.remitentes.get("idMedioRespuesta").updateValueAndValidity();
-          this.moduleForm.get("remitentes").value.forEach((element) => { element.idMedioRespuesta = 1; });
+          this.moduleForm.get("remitentes").value.forEach((element) => {
+            element.idMedioRespuesta = 1;
+          });
           // Buscamos el correo en el array de remitentes
-          let indexCorreo = this.moduleForm.get("remitentes").value.findIndex((element) => element.correoElectronicoCliente == "");
+          let indexCorreo = this.moduleForm
+            .get("remitentes")
+            .value.findIndex(
+              (element) => element.correoElectronicoCliente == "",
+            );
           // Si existe le cambiamos el correo a requerido
           if (indexCorreo > -1) {
-            this.remitentes.get("correoElectronicoCliente").setValidators([Validators.email]);
-            this.remitentes.get("correoElectronicoCliente").updateValueAndValidity();
+            this.remitentes
+              .get("correoElectronicoCliente")
+              .setValidators([Validators.email]);
+            this.remitentes
+              .get("correoElectronicoCliente")
+              .updateValueAndValidity();
           }
         }
       } else {
         // idMedioRespuesta queda en 1
         this.moduleForm.controls["idMedioRespuesta"].setValue(1);
         // y el correo se deshabilita y se quita requerido
-        if(this.moduleForm.controls["isNuevoRemitente"].value == false && !this.moduleForm.controls["correoElectronicoCliente"].value){
+        if (
+          this.moduleForm.controls["isNuevoRemitente"].value == false &&
+          !this.moduleForm.controls["correoElectronicoCliente"].value
+        ) {
           this.moduleForm.controls["correoElectronicoCliente"].disable();
         }
-        this.moduleForm.controls["correoElectronicoCliente"].setValidators([Validators.email]);
-        this.moduleForm.controls["correoElectronicoCliente"].updateValueAndValidity();
+        this.moduleForm.controls["correoElectronicoCliente"].setValidators([
+          Validators.email,
+        ]);
+        this.moduleForm.controls[
+          "correoElectronicoCliente"
+        ].updateValueAndValidity();
       }
-
     }
     console.log(this.moduleForm.get("remitentes").value);
     /** Fin Evaluar si el imput esta checkeado como true o false */
@@ -2532,77 +3172,113 @@ export class FilingFormComponent implements OnInit, OnDestroy {
     /** Fin Evaluar si el imput esta checkeado como true o false */
   }
 
-
   /**
    * Funcion que muestra los campos adicionales para un radicado que tiene un remitente nuevo y es tipo PQRSD
    */
   setFieldsNewPQRSD() {
     if (
-      this.moduleForm.controls["idCgTipoRadicado"].value == environment.tipoRadicadoId.pqrs &&
-      this.moduleForm.controls["idTipoPersona"].value == environment.tipoPersonaNumber.PersonaNatural
+      this.moduleForm.controls["idCgTipoRadicado"].value ==
+        environment.tipoRadicadoId.pqrs &&
+      this.moduleForm.controls["idTipoPersona"].value ==
+        environment.tipoPersonaNumber.PersonaNatural
     ) {
       this.statusNewPQRSD = true; // Muestra los campos adicionales de PQRSD
       // Verifica si al menos en la lista genero tiene valores
       if (!this.listGenero) {
-        this.restService.restGet(this.versionApi + "radicacion/radicados/ciudadano-list", this.authorization).subscribe(
-          (data) => {
-            this.resSerlistGeneralPQRS = data;
-            // console.log(this.resSerlistGeneralPQRS);
-            // Evaluar respuesta del servicio
-            this.globalAppService.resolveResponse(this.resSerlistGeneralPQRS).then((res) => {
-              let responseResolveResponse = res;
-              if (responseResolveResponse == true) {
-                // lista Etnia
-                if (this.resSerlistGeneralPQRS.dataEtnia) {
-                  this.listEtnia = this.resSerlistGeneralPQRS.dataEtnia;
-                  // load the list initial
-                  this.filteredlistEtnia.next(this.listEtnia.slice());
-                }
-                // lista Gemero
-                if (this.resSerlistGeneralPQRS.dataGenero) {
-                  this.listGenero = this.resSerlistGeneralPQRS.dataGenero;
-                  // load the list initial
-                  this.filteredlistGenero.next(this.listGenero.slice());
-                }
-                // lista Rango de edad
-                if (this.resSerlistGeneralPQRS.dataRangoEdad) {
-                  this.listRangoEdad = this.resSerlistGeneralPQRS.dataRangoEdad;
-                  // load the list initial
-                  this.filteredlistRangoEdad.next(this.listRangoEdad.slice());
-                }
-                // lista Vulnerabilidad
-                if (this.resSerlistGeneralPQRS.dataVulnerabilidad) {
-                  this.listVulnerabilidad = this.resSerlistGeneralPQRS.dataVulnerabilidad;
-                  // load the list initial
-                  this.filteredlistVulnerabilidad.next(this.listVulnerabilidad.slice());
-                }
-              }
-            });
-          },
-          (err) => {
-            this.resSerlistGeneralPQRSErr = err;
-            // Evaluar respuesta de error del servicio
-            this.globalAppService.resolveResponseError(this.resSerlistGeneralPQRSErr).then((res) => { });
-          }
-        );
+        this.restService
+          .restGet(
+            this.versionApi + "radicacion/radicados/ciudadano-list",
+            this.authorization,
+          )
+          .subscribe(
+            (data) => {
+              this.resSerlistGeneralPQRS = data;
+              // console.log(this.resSerlistGeneralPQRS);
+              // Evaluar respuesta del servicio
+              this.globalAppService
+                .resolveResponse(this.resSerlistGeneralPQRS)
+                .then((res) => {
+                  let responseResolveResponse = res;
+                  if (responseResolveResponse == true) {
+                    // lista Etnia
+                    if (this.resSerlistGeneralPQRS.dataEtnia) {
+                      this.listEtnia = this.resSerlistGeneralPQRS.dataEtnia;
+                      // load the list initial
+                      this.filteredlistEtnia.next(this.listEtnia.slice());
+                    }
+                    // lista Gemero
+                    if (this.resSerlistGeneralPQRS.dataGenero) {
+                      this.listGenero = this.resSerlistGeneralPQRS.dataGenero;
+                      // load the list initial
+                      this.filteredlistGenero.next(this.listGenero.slice());
+                    }
+                    // lista Rango de edad
+                    if (this.resSerlistGeneralPQRS.dataRangoEdad) {
+                      this.listRangoEdad =
+                        this.resSerlistGeneralPQRS.dataRangoEdad;
+                      // load the list initial
+                      this.filteredlistRangoEdad.next(
+                        this.listRangoEdad.slice(),
+                      );
+                    }
+                    // lista Vulnerabilidad
+                    if (this.resSerlistGeneralPQRS.dataVulnerabilidad) {
+                      this.listVulnerabilidad =
+                        this.resSerlistGeneralPQRS.dataVulnerabilidad;
+                      // load the list initial
+                      this.filteredlistVulnerabilidad.next(
+                        this.listVulnerabilidad.slice(),
+                      );
+                    }
+                  }
+                });
+            },
+            (err) => {
+              this.resSerlistGeneralPQRSErr = err;
+              // Evaluar respuesta de error del servicio
+              this.globalAppService
+                .resolveResponseError(this.resSerlistGeneralPQRSErr)
+                .then((res) => {});
+            },
+          );
       }
     } else {
       this.statusNewPQRSD = false; // Oculta campos de PQRSD
       // Limpia los valores solo cuando es nuevo
       if (this.paramOID == 0 || !this.isToclone) {
         this.moduleForm.controls["generoClienteCiudadanoDetalle"].setValue("");
-        this.moduleForm.controls["rangoEdadClienteCiudadanoDetalle"].setValue("");
-        this.moduleForm.controls["vulnerabilidadClienteCiudadanoDetalle"].setValue("");
+        this.moduleForm.controls["rangoEdadClienteCiudadanoDetalle"].setValue(
+          "",
+        );
+        this.moduleForm.controls[
+          "vulnerabilidadClienteCiudadanoDetalle"
+        ].setValue("");
         this.moduleForm.controls["etniaClienteCiudadanoDetalle"].setValue("");
         // Quita validacion de que sea requerido
-        this.moduleForm.controls["generoClienteCiudadanoDetalle"].setValidators([]);
-        this.moduleForm.controls["generoClienteCiudadanoDetalle"].updateValueAndValidity();
-        this.moduleForm.controls["rangoEdadClienteCiudadanoDetalle"].setValidators([]);
-        this.moduleForm.controls["rangoEdadClienteCiudadanoDetalle"].updateValueAndValidity();
-        this.moduleForm.controls["vulnerabilidadClienteCiudadanoDetalle"].setValidators([]);
-        this.moduleForm.controls["vulnerabilidadClienteCiudadanoDetalle"].updateValueAndValidity();
-        this.moduleForm.controls["etniaClienteCiudadanoDetalle"].setValidators([]);
-        this.moduleForm.controls["etniaClienteCiudadanoDetalle"].updateValueAndValidity();
+        this.moduleForm.controls["generoClienteCiudadanoDetalle"].setValidators(
+          [],
+        );
+        this.moduleForm.controls[
+          "generoClienteCiudadanoDetalle"
+        ].updateValueAndValidity();
+        this.moduleForm.controls[
+          "rangoEdadClienteCiudadanoDetalle"
+        ].setValidators([]);
+        this.moduleForm.controls[
+          "rangoEdadClienteCiudadanoDetalle"
+        ].updateValueAndValidity();
+        this.moduleForm.controls[
+          "vulnerabilidadClienteCiudadanoDetalle"
+        ].setValidators([]);
+        this.moduleForm.controls[
+          "vulnerabilidadClienteCiudadanoDetalle"
+        ].updateValueAndValidity();
+        this.moduleForm.controls["etniaClienteCiudadanoDetalle"].setValidators(
+          [],
+        );
+        this.moduleForm.controls[
+          "etniaClienteCiudadanoDetalle"
+        ].updateValueAndValidity();
       }
 
       // this.moduleForm.controls['autorizacionRadiRadicados'].setValidators([]);
@@ -2614,7 +3290,9 @@ export class FilingFormComponent implements OnInit, OnDestroy {
   setValueIdCliente(newIdCliente: any) {
     if (this.statusRemitenteMultiple === true) {
       if (this.moduleForm.controls["idCliente"].value != "") {
-        if (typeof this.moduleForm.controls["idCliente"].value[0] == "undefined") {
+        if (
+          typeof this.moduleForm.controls["idCliente"].value[0] == "undefined"
+        ) {
           newIdCliente = [this.moduleForm.controls["idCliente"].value];
           this.moduleForm.controls["idCliente"].setValue(newIdCliente);
           this.destinatario();
@@ -2622,7 +3300,9 @@ export class FilingFormComponent implements OnInit, OnDestroy {
       }
     } else {
       if (this.moduleForm.controls["idCliente"].value != "") {
-        if (typeof this.moduleForm.controls["idCliente"].value[0] != "undefined") {
+        if (
+          typeof this.moduleForm.controls["idCliente"].value[0] != "undefined"
+        ) {
           newIdCliente = this.moduleForm.controls["idCliente"].value[0];
           //this.moduleForm.controls['idCliente'].setValue(newIdCliente); // Duda
           this.moduleForm.controls["idCliente"].value = newIdCliente;
@@ -2642,23 +3322,32 @@ export class FilingFormComponent implements OnInit, OnDestroy {
     };
 
     this.restService
-      .restPost(this.versionApi + "radicacion/radicados/nivel-geografico3", params, this.authorization)
+      .restPost(
+        this.versionApi + "radicacion/radicados/nivel-geografico3",
+        params,
+        this.authorization,
+      )
       .subscribe(
         (res) => {
           this.resServicesNivelGeografico3 = res;
 
           // lista Departamentos
           if (this.resServicesNivelGeografico3.dataNivelGeografico3) {
-            this.listNivelGeografico3 = this.resServicesNivelGeografico3.dataNivelGeografico3;
+            this.listNivelGeografico3 =
+              this.resServicesNivelGeografico3.dataNivelGeografico3;
             // load the list initial
-            this.filteredlistNivelGeografico3.next(this.listNivelGeografico3.slice());
+            this.filteredlistNivelGeografico3.next(
+              this.listNivelGeografico3.slice(),
+            );
           }
         },
         (err) => {
           this.resServicesNivelGeografico3Err = err;
           // Evaluar respuesta de error del servicio
-          this.globalAppService.resolveResponseError(this.resServicesNivelGeografico3Err).then((res) => { });
-        }
+          this.globalAppService
+            .resolveResponseError(this.resServicesNivelGeografico3Err)
+            .then((res) => {});
+        },
       );
   }
 
@@ -2672,23 +3361,32 @@ export class FilingFormComponent implements OnInit, OnDestroy {
     };
 
     this.restService
-      .restPost(this.versionApi + "radicacion/radicados/nivel-geografico2", params, this.authorization)
+      .restPost(
+        this.versionApi + "radicacion/radicados/nivel-geografico2",
+        params,
+        this.authorization,
+      )
       .subscribe(
         (res) => {
           this.resServicesNivelGeografico2 = res;
 
           // lista Municipios
           if (this.resServicesNivelGeografico2.dataNivelGeografico2) {
-            this.listNivelGeografico2 = this.resServicesNivelGeografico2.dataNivelGeografico2;
+            this.listNivelGeografico2 =
+              this.resServicesNivelGeografico2.dataNivelGeografico2;
             // load the list initial
-            this.filteredlistNivelGeografico2.next(this.listNivelGeografico2.slice());
+            this.filteredlistNivelGeografico2.next(
+              this.listNivelGeografico2.slice(),
+            );
           }
         },
         (err) => {
           this.resServicesNivelGeografico2Err = err;
           // Evaluar respuesta de error del servicio
-          this.globalAppService.resolveResponseError(this.resServicesNivelGeografico2Err).then((res) => { });
-        }
+          this.globalAppService
+            .resolveResponseError(this.resServicesNivelGeografico2Err)
+            .then((res) => {});
+        },
       );
   }
 
@@ -2705,7 +3403,6 @@ export class FilingFormComponent implements OnInit, OnDestroy {
     this.moduleForm.controls["idTipoPersona"].enable();
     this.moduleForm.controls["idTipoIdentificacion"].enable();
 
-
     // this.moduleForm.controls['numeroDocumentoCliente'].enable();
     this.moduleForm.controls["direccionCliente"].enable();
     //this.moduleForm.controls["direccionClienteNotificacion"].enable();
@@ -2719,9 +3416,12 @@ export class FilingFormComponent implements OnInit, OnDestroy {
     this.moduleForm.controls["codigoPostal"].enable();
     this.moduleForm.controls["idMedioRespuesta"].enable();
 
-
     this.restService
-      .restPost(this.versionApi + "radicacion/radicados/destinatario", params, this.authorization)
+      .restPost(
+        this.versionApi + "radicacion/radicados/destinatario",
+        params,
+        this.authorization,
+      )
       .subscribe(
         (res) => {
           this.resServicesDestinatario = res;
@@ -2746,14 +3446,23 @@ export class FilingFormComponent implements OnInit, OnDestroy {
               // Asigna los valores al formulario
               for (let key in this.modelClientes[0]) {
                 if (this.moduleForm.controls[key] && key != "idCliente") {
-                  if (this.moduleForm.controls['direccionManualCuentaContrato'].value && key == "direccionCliente") {
+                  if (
+                    this.moduleForm.controls["direccionManualCuentaContrato"]
+                      .value &&
+                    key == "direccionCliente"
+                  ) {
                     this.direccionCliente = this.modelClientes[0][key];
                     continue;
                   }
-                  this.moduleForm.controls[key].setValue(this.modelClientes[0][key]);
+                  this.moduleForm.controls[key].setValue(
+                    this.modelClientes[0][key],
+                  );
                 }
               }
-              console.log("data del modelo cliente line 2707", this.modelClientes);
+              console.log(
+                "data del modelo cliente line 2707",
+                this.modelClientes,
+              );
               // Recorre la data que llega y lo asigna a remitentes
               this.modelClientes.forEach((element) => {
                 if (!idsNivel2.includes(element["idNivelGeografico1"])) {
@@ -2768,18 +3477,21 @@ export class FilingFormComponent implements OnInit, OnDestroy {
                 // }
 
                 // Envia la data para que se cree en remitentes array
-                this.remitentes = this.moduleForm.get("remitentes") as UntypedFormArray;
+                this.remitentes = this.moduleForm.get(
+                  "remitentes",
+                ) as UntypedFormArray;
                 this.remitentes.push(this.createItem(element));
               });
               // Consumo del nivel geografico Departamento y ciudad
               this.nivelGeografico2(idsNivel2);
               this.nivelGeografico3(idsNivel3);
-              let validarAutoriza = this.moduleForm.controls['autorizacionRadiRadicados'].value
+              let validarAutoriza =
+                this.moduleForm.controls["autorizacionRadiRadicados"].value;
               this.AutorizaChange({ checked: validarAutoriza });
             } else {
               // muestra el formulario sin scrooll solo un remitente
               this.statusRemitente = false;
-              this.direccionCliente = ''
+              this.direccionCliente = "";
               // Se envia true a la funcion para que bloquee los campos de remitentes.
               this.MatSlideToggleChange(true);
             }
@@ -2797,8 +3509,10 @@ export class FilingFormComponent implements OnInit, OnDestroy {
         (err) => {
           this.resServicesDestinatarioErr = err;
           // Evaluar respuesta de error del servicio
-          this.globalAppService.resolveResponseError(this.resServicesDestinatarioErr).then((res) => { });
-        }
+          this.globalAppService
+            .resolveResponseError(this.resServicesDestinatarioErr)
+            .then((res) => {});
+        },
       );
   }
 
@@ -2808,40 +3522,70 @@ export class FilingFormComponent implements OnInit, OnDestroy {
    */
   createItem(data): UntypedFormGroup {
     console.log("crearItem data", data);
-    let validarAutoriza = this.moduleForm.controls['autorizacionRadiRadicados'].value
-    let validaciones = validarAutoriza ? [Validators.email, Validators.required] : [Validators.email];
+    let validarAutoriza =
+      this.moduleForm.controls["autorizacionRadiRadicados"].value;
+    let validaciones = validarAutoriza
+      ? [Validators.email, Validators.required]
+      : [Validators.email];
     return this.formBuilder.group({
-      correoElectronicoCliente: new UntypedFormControl(data.correoElectronicoCliente, validaciones),
-      direccionCliente: new UntypedFormControl(data.direccionCliente, Validators.compose([Validators.required])),
-      idNivelGeografico1: new UntypedFormControl(data.idNivelGeografico1, Validators.compose([])),
-      idNivelGeografico2: new UntypedFormControl(data.idNivelGeografico2, Validators.compose([])),
-      idNivelGeografico3: new UntypedFormControl(data.idNivelGeografico3, Validators.compose([])),
-      idTipoPersona: new UntypedFormControl(data.idTipoPersona, Validators.compose([Validators.required])),
-      nombreCliente: new UntypedFormControl(data.nombreCliente, Validators.compose([Validators.required])),
+      correoElectronicoCliente: new UntypedFormControl(
+        data.correoElectronicoCliente,
+        validaciones,
+      ),
+      direccionCliente: new UntypedFormControl(
+        data.direccionCliente,
+        Validators.compose([Validators.required]),
+      ),
+      idNivelGeografico1: new UntypedFormControl(
+        data.idNivelGeografico1,
+        Validators.compose([]),
+      ),
+      idNivelGeografico2: new UntypedFormControl(
+        data.idNivelGeografico2,
+        Validators.compose([]),
+      ),
+      idNivelGeografico3: new UntypedFormControl(
+        data.idNivelGeografico3,
+        Validators.compose([]),
+      ),
+      idTipoPersona: new UntypedFormControl(
+        data.idTipoPersona,
+        Validators.compose([Validators.required]),
+      ),
+      nombreCliente: new UntypedFormControl(
+        data.nombreCliente,
+        Validators.compose([Validators.required]),
+      ),
       codigoPostal: new UntypedFormControl(data.codigoPostal),
-      idTipoIdentificacion: new UntypedFormControl(data.idTipoIdentificacion, Validators.compose([Validators.required])),
-      idMedioRespuesta: new UntypedFormControl(data.idMedioRespuesta, Validators.compose([Validators.required])),
+      idTipoIdentificacion: new UntypedFormControl(
+        data.idTipoIdentificacion,
+        Validators.compose([Validators.required]),
+      ),
+      idMedioRespuesta: new UntypedFormControl(
+        data.idMedioRespuesta,
+        Validators.compose([Validators.required]),
+      ),
       numeroDocumentoCliente: new UntypedFormControl(
         { value: data.numeroDocumentoCliente, disabled: true },
-        Validators.compose([Validators.required])
+        Validators.compose([Validators.required]),
       ),
       telefonoCliente: new UntypedFormControl(
         data.telefonoCliente,
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
       celular: new UntypedFormControl(
         data.celular,
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
       idCliente: new UntypedFormControl(
         data.idCliente,
         Validators.compose([
           // Validators.required
-        ])
+        ]),
       ),
     });
   }
@@ -2858,27 +3602,27 @@ export class FilingFormComponent implements OnInit, OnDestroy {
 
   vencimiento(type: string = "bd") {
     let params = {};
-    if (this.tipoRadicado === 'actoAdmin') {
-      let prioridad = this.moduleForm.controls["PrioridadRadiRadicados"].value
+    if (this.tipoRadicado === "actoAdmin") {
+      let prioridad = this.moduleForm.controls["PrioridadRadiRadicados"].value;
       switch (prioridad) {
         case 1:
-          this.moduleForm.controls["diasRestantes"].setValue('5');
+          this.moduleForm.controls["diasRestantes"].setValue("5");
           break;
         case 2:
-          this.moduleForm.controls["diasRestantes"].setValue('10');
+          this.moduleForm.controls["diasRestantes"].setValue("10");
           break;
         case 3:
-          this.moduleForm.controls["diasRestantes"].setValue('15');
+          this.moduleForm.controls["diasRestantes"].setValue("15");
         default:
-          this.moduleForm.controls["diasRestantes"].setValue('15');
+          this.moduleForm.controls["diasRestantes"].setValue("15");
           break;
       }
-
     }
     // calida que sea update
     if (this.paramOID != 0 && !this.isToclone) {
       params = {
-        idGdTrdTipoDocumental: this.moduleForm.controls["idTrdTipoDocumental"].value,
+        idGdTrdTipoDocumental:
+          this.moduleForm.controls["idTrdTipoDocumental"].value,
         idCgTipoRadicado: this.moduleForm.controls["idCgTipoRadicado"].value,
         diasRestantes: this.moduleForm.controls["diasRestantes"].value,
         tipoInput: type,
@@ -2886,7 +3630,8 @@ export class FilingFormComponent implements OnInit, OnDestroy {
       };
     } else {
       params = {
-        idGdTrdTipoDocumental: this.moduleForm.controls["idTrdTipoDocumental"].value,
+        idGdTrdTipoDocumental:
+          this.moduleForm.controls["idTrdTipoDocumental"].value,
         idCgTipoRadicado: this.moduleForm.controls["idCgTipoRadicado"].value,
         diasRestantes: this.moduleForm.controls["diasRestantes"].value,
         tipoInput: type,
@@ -2896,15 +3641,26 @@ export class FilingFormComponent implements OnInit, OnDestroy {
     // console.log(this.moduleForm.controls['diasRestantes'].value);
 
     this.restService
-      .restPost(this.versionApi + "radicacion/radicados/vencimiento-radicado", params, this.authorization)
+      .restPost(
+        this.versionApi + "radicacion/radicados/vencimiento-radicado",
+        params,
+        this.authorization,
+      )
       .subscribe(
         (res) => {
           this.resServicesVencimiento = res;
 
           if (this.resServicesVencimiento) {
-            this.moduleForm.controls["diasRestantes"].setValue(this.resServicesVencimiento.diasRestantes);
-            const fechaVencimiento = moment(this.resServicesVencimiento.fechaFormatoQA, 'DD/MM/YYYY').toDate();
-            this.moduleForm.controls["fechaVencimientoRadiRadicados"].setValue(fechaVencimiento);
+            this.moduleForm.controls["diasRestantes"].setValue(
+              this.resServicesVencimiento.diasRestantes,
+            );
+            const fechaVencimiento = moment(
+              this.resServicesVencimiento.fechaFormatoQA,
+              "DD/MM/YYYY",
+            ).toDate();
+            this.moduleForm.controls["fechaVencimientoRadiRadicados"].setValue(
+              fechaVencimiento,
+            );
             // Valida que se hizo una modificación manual en el campo de días y muestra el mensaje
             if (this.resServicesVencimiento.fechaVencimientoRadiRadicados) {
               // Llama el servicio de mensajes para buscar y reemplazar dependiendo la internacionalización
@@ -2921,7 +3677,9 @@ export class FilingFormComponent implements OnInit, OnDestroy {
                   // Muestra la notificación
                   this.sweetAlertService.showNotification(
                     "info",
-                    titleTranslate + ": " + this.resServicesVencimiento.fechaVencimientoRadiRadicados
+                    titleTranslate +
+                      ": " +
+                      this.resServicesVencimiento.fechaVencimientoRadiRadicados,
                   );
                 }
               });
@@ -2935,8 +3693,10 @@ export class FilingFormComponent implements OnInit, OnDestroy {
         (err) => {
           this.resServicesVencimientoErr = err;
           // Evaluar respuesta de error del servicio
-          this.globalAppService.resolveResponseError(this.resServicesVencimientoErr).then((res) => { });
-        }
+          this.globalAppService
+            .resolveResponseError(this.resServicesVencimientoErr)
+            .then((res) => {});
+        },
       );
   }
 
@@ -2948,8 +3708,10 @@ export class FilingFormComponent implements OnInit, OnDestroy {
 
     // Valida si muestra el campo de autorización
     if (
-      this.moduleForm.controls["idCgTipoRadicado"].value == environment.tipoRadicadoId.pqrs ||
-      this.moduleForm.controls["idCgTipoRadicado"].value == environment.tipoRadicadoId.entrada
+      this.moduleForm.controls["idCgTipoRadicado"].value ==
+        environment.tipoRadicadoId.pqrs ||
+      this.moduleForm.controls["idCgTipoRadicado"].value ==
+        environment.tipoRadicadoId.entrada
     ) {
       this.statusAutoriza = true;
       // this.statusAutorizaPolitica = true;
@@ -2964,7 +3726,10 @@ export class FilingFormComponent implements OnInit, OnDestroy {
 
     this.dependencias().then(
       (res) => {
-        if (this.moduleForm.controls["idCgTipoRadicado"].value != environment.tipoRadicadoId.pqrs) {
+        if (
+          this.moduleForm.controls["idCgTipoRadicado"].value !=
+          environment.tipoRadicadoId.pqrs
+        ) {
           this.getListSeries();
           this.getListTipoDocumental();
         } else {
@@ -2974,14 +3739,17 @@ export class FilingFormComponent implements OnInit, OnDestroy {
         this.validaTipoRadicadoRemi();
       },
       (err) => {
-        if (this.moduleForm.controls["idCgTipoRadicado"].value != environment.tipoRadicadoId.pqrs) {
+        if (
+          this.moduleForm.controls["idCgTipoRadicado"].value !=
+          environment.tipoRadicadoId.pqrs
+        ) {
           this.getListSeries();
           this.getListTipoDocumental();
         } else {
           this.getListSeries();
           this.getListTipoDocumental();
         }
-      }
+      },
     );
   }
 
@@ -2994,14 +3762,18 @@ export class FilingFormComponent implements OnInit, OnDestroy {
     this.setFieldsNewPQRSD();
 
     return new Promise<any>((resolve) => {
-
       let params = {
-        idGdTrdTipoDocumental: this.moduleForm.controls["idTrdTipoDocumental"].value,
+        idGdTrdTipoDocumental:
+          this.moduleForm.controls["idTrdTipoDocumental"].value,
         idCgTipoRadicado: this.moduleForm.controls["idCgTipoRadicado"].value,
       };
 
       this.restService
-        .restPost(this.versionApi + "radicacion/radicados/dependencias-radicado", params, this.authorization)
+        .restPost(
+          this.versionApi + "radicacion/radicados/dependencias-radicado",
+          params,
+          this.authorization,
+        )
         .subscribe(
           (res) => {
             this.resServicesDependencias = res;
@@ -3010,7 +3782,10 @@ export class FilingFormComponent implements OnInit, OnDestroy {
               // load the list initial
               this.listDependencias = this.resServicesDependencias.dependencias;
               this.filteredlistDependencias.next(this.listDependencias.slice());
-              if (this.route.snapshot.url[0].path == 'filing-update-request' || this.route.snapshot.url[0].path == 'filing-update-web-page') {
+              if (
+                this.route.snapshot.url[0].path == "filing-update-request" ||
+                this.route.snapshot.url[0].path == "filing-update-web-page"
+              ) {
                 this.dependencias2();
               }
             }
@@ -3018,9 +3793,13 @@ export class FilingFormComponent implements OnInit, OnDestroy {
             // verificar el codigo de tipo de radicado
             if (this.resServicesDependencias.codiTipoRadicado != 0) {
               // Se asigna código tipo radicado para la funcion
-              this.codigoTipoRadicado = this.resServicesDependencias.codiTipoRadicado;
+              this.codigoTipoRadicado =
+                this.resServicesDependencias.codiTipoRadicado;
 
-              if (this.resServicesDependencias.codiTipoRadicado != environment.tipoRadicadoCodigo.salida) {
+              if (
+                this.resServicesDependencias.codiTipoRadicado !=
+                environment.tipoRadicadoCodigo.salida
+              ) {
                 // Titulo remitentes
                 this.tittleCliente = "filingModule.selectRemitente";
                 this.tittleCardCliente = "TitleRemitente";
@@ -3029,8 +3808,17 @@ export class FilingFormComponent implements OnInit, OnDestroy {
                 //Cargar campo dependencia
                 if (this.tipoRadicado != 2) {
                   for (let key in this.resServicesDependencias.dependencias) {
-                    if (this.moduleForm.controls['idTrdDepeUserTramitador'].value == '' || this.moduleForm.controls['idTrdDepeUserTramitador'].value == null) {
-                      this.moduleForm.controls['idTrdDepeUserTramitador'].setValue(this.resServicesDependencias.dependencias[0].id);
+                    if (
+                      this.moduleForm.controls["idTrdDepeUserTramitador"]
+                        .value == "" ||
+                      this.moduleForm.controls["idTrdDepeUserTramitador"]
+                        .value == null
+                    ) {
+                      this.moduleForm.controls[
+                        "idTrdDepeUserTramitador"
+                      ].setValue(
+                        this.resServicesDependencias.dependencias[0].id,
+                      );
                     }
                   }
                 }
@@ -3042,14 +3830,24 @@ export class FilingFormComponent implements OnInit, OnDestroy {
               }
 
               // if ( this.resServicesDependencias.codiTipoRadicado != environment.tipoRadicadoCodigo.entrada && this.resServicesDependencias.codiTipoRadicado != environment.tipoRadicadoCodigo.pqrs) {
-              if (this.dataUserLogin["idGdTrdDependencia"] != 0 && this.dataUserLogin["id"] != 0) {
+              if (
+                this.dataUserLogin["idGdTrdDependencia"] != 0 &&
+                this.dataUserLogin["id"] != 0
+              ) {
                 // Solo para crear
                 if (this.paramOID == 0 || !this.isToclone) {
                   if (
-                    this.moduleForm.controls["idTrdDepeUserTramitador"].value == "" || this.moduleForm.controls["idTrdDepeUserTramitador"].value == null
+                    this.moduleForm.controls["idTrdDepeUserTramitador"].value ==
+                      "" ||
+                    this.moduleForm.controls["idTrdDepeUserTramitador"].value ==
+                      null
                   ) {
-                    this.moduleForm.controls["idTrdDepeUserTramitador"].setValue(this.dataUserLogin["idGdTrdDependencia"]);
-                    this.moduleForm.controls["user_idTramitador"].setValue(this.dataUserLogin["id"]);
+                    this.moduleForm.controls[
+                      "idTrdDepeUserTramitador"
+                    ].setValue(this.dataUserLogin["idGdTrdDependencia"]);
+                    this.moduleForm.controls["user_idTramitador"].setValue(
+                      this.dataUserLogin["id"],
+                    );
                   }
                 }
               }
@@ -3073,8 +3871,10 @@ export class FilingFormComponent implements OnInit, OnDestroy {
             this.resServicesDependenciasErr = err;
             // Evaluar respuesta de error del servicio
             resolve(this.codigoTipoRadicado);
-            this.globalAppService.resolveResponseError(this.resServicesDependenciasErr).then((res) => { });
-          }
+            this.globalAppService
+              .resolveResponseError(this.resServicesDependenciasErr)
+              .then((res) => {});
+          },
         );
     });
   }
@@ -3084,24 +3884,31 @@ export class FilingFormComponent implements OnInit, OnDestroy {
       headers: new HttpHeaders({
         "Content-Type": "application/x-www-form-urlencoded",
         Authorization: "Bearer " + this.authorization,
-        language: localStorage.getItem("language") ? localStorage.getItem("language") : "es",
+        language: localStorage.getItem("language")
+          ? localStorage.getItem("language")
+          : "es",
       }),
     };
     // Hacemos la petición get para obtener todas las dependencias con la authorization
-    this.http.get(environment.apiUrl + "api/radicacion/dependenciasRadicados", { headers: httpOptions.headers }).pipe(
-      map((res: any) => {
-        console.log(res);
-        for (let key in res) {
-          res[key].val = res[key].nombreGdTrdDependencia;
-          res[key].id = res[key].idGdTrdDependencia;
-          res[key].codigoTipoRadicado = res[key].codigoGdTrdDependencia;
-        }
-        return res;
+    this.http
+      .get(environment.apiUrl + "api/radicacion/dependenciasRadicados", {
+        headers: httpOptions.headers,
       })
-    ).subscribe((res) => {
-      this.listDependencias = res;
-      this.filteredlistDependencias.next(this.listDependencias.slice());
-    });
+      .pipe(
+        map((res: any) => {
+          console.log(res);
+          for (let key in res) {
+            res[key].val = res[key].nombreGdTrdDependencia;
+            res[key].id = res[key].idGdTrdDependencia;
+            res[key].codigoTipoRadicado = res[key].codigoGdTrdDependencia;
+          }
+          return res;
+        }),
+      )
+      .subscribe((res) => {
+        this.listDependencias = res;
+        this.filteredlistDependencias.next(this.listDependencias.slice());
+      });
   }
 
   /**
@@ -3153,7 +3960,10 @@ export class FilingFormComponent implements OnInit, OnDestroy {
       this.moduleForm.controls["user_idTramitador"].setValue("");
     }
     if (getTiposDoc) {
-      if (this.moduleForm.controls["idCgTipoRadicado"].value != environment.tipoRadicadoId.pqrs) {
+      if (
+        this.moduleForm.controls["idCgTipoRadicado"].value !=
+        environment.tipoRadicadoId.pqrs
+      ) {
         this.getListSeries();
       } else {
         this.getListTipoDocumental();
@@ -3162,30 +3972,47 @@ export class FilingFormComponent implements OnInit, OnDestroy {
 
     if (this.moduleForm.controls["idTrdDepeUserTramitador"].value) {
       let params = {
-        idTrdDepeUserTramitador: this.moduleForm.controls["idTrdDepeUserTramitador"].value,
+        idTrdDepeUserTramitador:
+          this.moduleForm.controls["idTrdDepeUserTramitador"].value,
         idCgTipoRadicado: this.moduleForm.controls["idCgTipoRadicado"].value,
       };
 
       console.log(params);
       this.restService
-        .restPost(this.versionApi + "radicacion/radicados/funcionarios-radicado", params, this.authorization)
+        .restPost(
+          this.versionApi + "radicacion/radicados/funcionarios-radicado",
+          params,
+          this.authorization,
+        )
         .subscribe(
           (res) => {
             this.resServicesFuncionariosRadicado = res;
 
             // Funcionarios encargados segun la Dependencia
             if (this.resServicesFuncionariosRadicado.funcionarios) {
-              this.listFuncionarios = this.resServicesFuncionariosRadicado.funcionarios;
+              this.listFuncionarios =
+                this.resServicesFuncionariosRadicado.funcionarios;
               // load the list initial
               this.filteredlistFuncionarios.next(this.listFuncionarios.slice());
             }
 
             //verificar el codigo de tipo de radicado
-            if (this.resServicesFuncionariosRadicado.codiTipoRadicado != 0 && this.resServicesFuncionariosRadicado.codiTipoRadicado != 2) {
-              if (this.resServicesFuncionariosRadicado.codiTipoRadicado == environment.tipoRadicadoCodigo.salida && this.resServicesFuncionariosRadicado.codiTipoRadicado != environment.tipoRadicadoCodigo.pqrs) {
+            if (
+              this.resServicesFuncionariosRadicado.codiTipoRadicado != 0 &&
+              this.resServicesFuncionariosRadicado.codiTipoRadicado != 2
+            ) {
+              if (
+                this.resServicesFuncionariosRadicado.codiTipoRadicado ==
+                  environment.tipoRadicadoCodigo.salida &&
+                this.resServicesFuncionariosRadicado.codiTipoRadicado !=
+                  environment.tipoRadicadoCodigo.pqrs
+              ) {
                 // Cargar campo funcionario
-                for (let key in this.resServicesFuncionariosRadicado.funcionarios) {
-                  this.moduleForm.controls['user_idTramitador'].setValue(this.resServicesFuncionariosRadicado.funcionarios[0].id);
+                for (let key in this.resServicesFuncionariosRadicado
+                  .funcionarios) {
+                  this.moduleForm.controls["user_idTramitador"].setValue(
+                    this.resServicesFuncionariosRadicado.funcionarios[0].id,
+                  );
                 }
               }
             }
@@ -3193,8 +4020,10 @@ export class FilingFormComponent implements OnInit, OnDestroy {
           (err) => {
             this.resServicesFuncionariosRadicadoErr = err;
             // Evaluar respuesta de error del servicio
-            this.globalAppService.resolveResponseError(this.resServicesFuncionariosRadicadoErr).then((res) => { });
-          }
+            this.globalAppService
+              .resolveResponseError(this.resServicesFuncionariosRadicadoErr)
+              .then((res) => {});
+          },
         );
     }
   }
@@ -3214,7 +4043,9 @@ export class FilingFormComponent implements OnInit, OnDestroy {
     }
     // filter the banks
     this["filtered" + nomList].next(
-      this[nomList].filter((listOption) => listOption.val.toLowerCase().indexOf(search) > -1)
+      this[nomList].filter(
+        (listOption) => listOption.val.toLowerCase().indexOf(search) > -1,
+      ),
     );
   }
 
@@ -3250,8 +4081,10 @@ export class FilingFormComponent implements OnInit, OnDestroy {
         buttonSubmit.click();
         break;
 
-      case 'CloneRadicado':
-        this.router.navigate(["/" + "/filing/filing-clone" + "/" + this.paramiD]);
+      case "CloneRadicado":
+        this.router.navigate([
+          "/" + "/filing/filing-clone" + "/" + this.paramiD,
+        ]);
         break;
 
       case "add":
@@ -3280,7 +4113,7 @@ export class FilingFormComponent implements OnInit, OnDestroy {
                 // Guarda en localStorage para asociacion de radicados
                 localStorage.setItem(
                   environment.hashRadiAsociados,
-                  this.authService.encryptAES(this.dataIdRadicados, false)
+                  this.authService.encryptAES(this.dataIdRadicados, false),
                 );
                 this.router.navigate(["/" + "/filing/filing-create"]);
               }
@@ -3292,7 +4125,9 @@ export class FilingFormComponent implements OnInit, OnDestroy {
         break;
 
       case "edit":
-        this.router.navigate(["/" + "/filing/filing-update" + "/" + this.paramiD]);
+        this.router.navigate([
+          "/" + "/filing/filing-update" + "/" + this.paramiD,
+        ]);
         break;
 
       case "printRadicado":
@@ -3304,21 +4139,25 @@ export class FilingFormComponent implements OnInit, OnDestroy {
         break;
 
       case "view":
-        this.router.navigate(["/" + "/filing/filing-view" + "/" + this.paramiD]);
+        this.router.navigate([
+          "/" + "/filing/filing-view" + "/" + this.paramiD,
+        ]);
         break;
 
       case "CancelRadicado":
-        if (this.menu === 'email') {
+        if (this.menu === "email") {
           this.router.navigate(["/" + "/filing/filing-radicados-email-index"]);
-        } else if (this.menu === 'sdqs') {
+        } else if (this.menu === "sdqs") {
           this.router.navigate(["/" + "/filing/sdqs-requests-index"]);
-        } else if (this.menu === 'web') {
+        } else if (this.menu === "web") {
           this.router.navigate(["/" + "/filing/filing-web-index"]);
-        } else if (this.menu === 'radicados') {
+        } else if (this.menu === "radicados") {
           this.router.navigate(["/" + "/filing/filing-create"]);
-        } else if (this.menu === 'clone') {
-          this.router.navigate(["/" + "/filing/filing-view" + "/" + this.route.snapshot.params.id]);
-        } else if (this.menu === 'create') {
+        } else if (this.menu === "clone") {
+          this.router.navigate([
+            "/" + "/filing/filing-view" + "/" + this.route.snapshot.params.id,
+          ]);
+        } else if (this.menu === "create") {
           this.router.navigate(["/" + "/filing/filing-index/false/2"]);
         }
         break;
@@ -3415,7 +4254,7 @@ export class FilingFormComponent implements OnInit, OnDestroy {
         this.operationDialogObserva = event.action;
         this.statusModalIncludeInFile = true;
         break;
-      case 'printRadi':
+      case "printRadi":
         this.transactionPrintRadi();
         break;
       case "loadFormat":
@@ -3486,31 +4325,43 @@ export class FilingFormComponent implements OnInit, OnDestroy {
             route: event["route"],
             authorization: this.authorization,
           };
-          this.openDialog(FilingCreateDetailResolutionComponent, "75%", dataResolutionDetail);
+          this.openDialog(
+            FilingCreateDetailResolutionComponent,
+            "75%",
+            dataResolutionDetail,
+          );
         }
         break;
-      case 'loadDocumentRadicado':
-
+      case "loadDocumentRadicado":
         /** Cantidad de registros a mostrar en el listado incial, limitante que se envia al bakend */
         let params = {
-          data: ''
+          data: "",
         };
 
-        this.restService.restPost(this.versionApi + 'externos/radicados-externos/token-Sgdea-scan', params, this.authorization).subscribe((res) => {
-          this.resServicesSgdeaScan = res;
+        this.restService
+          .restPost(
+            this.versionApi + "externos/radicados-externos/token-Sgdea-scan",
+            params,
+            this.authorization,
+          )
+          .subscribe(
+            (res) => {
+              this.resServicesSgdeaScan = res;
 
-          const linkSource = `SgdeaScan://aplicacion.documento?toquen=${this.resServicesSgdeaScan.message}&idRadicado=${this.dataIdRadicados[0]}&tipoArchivo=1`;
-          const downloadLink = document.createElement('a');
+              const linkSource = `SgdeaScan://aplicacion.documento?toquen=${this.resServicesSgdeaScan.message}&idRadicado=${this.dataIdRadicados[0]}&tipoArchivo=1`;
+              const downloadLink = document.createElement("a");
 
-          downloadLink.href = linkSource;
-          downloadLink.click();
-
-        }, (err) => {
-          this.resServicesSgdeaScanErr = err;
-          // Evaluar respuesta de error del servicio
-          this.globalAppService.resolveResponseError(this.resServicesSgdeaScanErr).then((res) => { });
-        }
-        );
+              downloadLink.href = linkSource;
+              downloadLink.click();
+            },
+            (err) => {
+              this.resServicesSgdeaScanErr = err;
+              // Evaluar respuesta de error del servicio
+              this.globalAppService
+                .resolveResponseError(this.resServicesSgdeaScanErr)
+                .then((res) => {});
+            },
+          );
         break;
     }
   }
@@ -3521,7 +4372,7 @@ export class FilingFormComponent implements OnInit, OnDestroy {
       width: width,
       data: data,
     });
-    dialogRef.afterClosed().subscribe((res) => { });
+    dialogRef.afterClosed().subscribe((res) => {});
   }
 
   /** Cerrar o desdruir componente observaciones */
@@ -3535,7 +4386,13 @@ export class FilingFormComponent implements OnInit, OnDestroy {
     this.showObservacion = true; // Muestra el campo observación en el modal de adjuntar documentos
     this.statusNameFile = false; // Oculta el campo nombre archivo
     this.statusModalIncludeInFile = false; // Oculta el modal incluir en expediente
-    this.validateFile = [{ type: "xls" }, { type: "xlsx" }, { type: "pdf" }, { type: "doc" }, { type: "docx" }];
+    this.validateFile = [
+      { type: "xls" },
+      { type: "xlsx" },
+      { type: "pdf" },
+      { type: "doc" },
+      { type: "docx" },
+    ];
     // Fin reestablecer variables
     this.statusUploadFileAne = false; // Modal carga de anexos
     this.statusUploadFileAneMasive = false; // Modal de anexos masivos
@@ -3598,27 +4455,37 @@ export class FilingFormComponent implements OnInit, OnDestroy {
     // document.body.innerHTML = originalContents;
 
     // Ocultamos el mat-drawer
-    let matDrawer = document.querySelector('.mat-drawer') as HTMLElement;
-    matDrawer.classList.add('d-none');
+    let matDrawer = document.querySelector(".mat-drawer") as HTMLElement;
+    matDrawer.classList.add("d-none");
     // Ocultamos el btnFloatContentVertical
-    let btnFloatContentVertical = document.querySelector('.btnFloatContentVertical') as HTMLElement;
-    btnFloatContentVertical.classList.add('d-none');
+    let btnFloatContentVertical = document.querySelector(
+      ".btnFloatContentVertical",
+    ) as HTMLElement;
+    btnFloatContentVertical.classList.add("d-none");
 
-    let matDrawerContent = document.querySelector('.mat-drawer-content') as HTMLElement;
-    matDrawerContent.style.overflow = 'visible';
+    let matDrawerContent = document.querySelector(
+      ".mat-drawer-content",
+    ) as HTMLElement;
+    matDrawerContent.style.overflow = "visible";
 
-    const matDrawerContainer = document.querySelector('.mat-drawer-container') as HTMLElement;
-    matDrawerContainer.setAttribute('style', 'width: auto, height: auto; min-height: auto; max-width: auto;');
-
+    const matDrawerContainer = document.querySelector(
+      ".mat-drawer-container",
+    ) as HTMLElement;
+    matDrawerContainer.setAttribute(
+      "style",
+      "width: auto, height: auto; min-height: auto; max-width: auto;",
+    );
 
     setTimeout(() => {
       window.print();
-      matDrawer.classList.remove('d-none');
-      btnFloatContentVertical.classList.remove('d-none');
-      matDrawerContent.style.overflow = 'auto';
-      matDrawerContainer.setAttribute('style', `width: 100vw; height: 100vh; min-height: ${this.matDrawerContainerStyle[2]};`);
+      matDrawer.classList.remove("d-none");
+      btnFloatContentVertical.classList.remove("d-none");
+      matDrawerContent.style.overflow = "auto";
+      matDrawerContainer.setAttribute(
+        "style",
+        `width: 100vw; height: 100vh; min-height: ${this.matDrawerContainerStyle[2]};`,
+      );
     }, 1000);
-
   }
   transactionReturnFiling(dataObserva) {
     let ButtonSelectedData: any = {
@@ -3657,36 +4524,49 @@ export class FilingFormComponent implements OnInit, OnDestroy {
           };
 
           this.restService
-            .restPost(this.versionApi + "radicacion/transacciones/return-filing", params, this.authorization)
+            .restPost(
+              this.versionApi + "radicacion/transacciones/return-filing",
+              params,
+              this.authorization,
+            )
             .subscribe(
               (res) => {
                 this.resServicesReturnFiling = res;
 
-                this.globalAppService.resolveResponse(this.resServicesReturnFiling, false).then((res) => {
-                  const responseResolveResponse = res;
+                this.globalAppService
+                  .resolveResponse(this.resServicesReturnFiling, false)
+                  .then((res) => {
+                    const responseResolveResponse = res;
 
-                  if (responseResolveResponse == true) {
-                    for (let key in this.resServicesReturnFiling.notificacion) {
-                      this.sweetAlertService.showNotification(
-                        this.resServicesReturnFiling.notificacion[key]["type"],
-                        this.resServicesReturnFiling.notificacion[key]["message"]
-                      );
+                    if (responseResolveResponse == true) {
+                      for (let key in this.resServicesReturnFiling
+                        .notificacion) {
+                        this.sweetAlertService.showNotification(
+                          this.resServicesReturnFiling.notificacion[key][
+                            "type"
+                          ],
+                          this.resServicesReturnFiling.notificacion[key][
+                            "message"
+                          ],
+                        );
+                      }
+                      this.sweetAlertService.sweetClose();
                     }
-                    this.sweetAlertService.sweetClose();
-                  }
 
-                  if (this.resServicesReturnFiling.data) {
-                    this.router.navigate([this.redirectionPath]);
-                  } else {
-                    this.onSearchId(this.paramOID, this.authorization);
-                  }
-                });
+                    if (this.resServicesReturnFiling.data) {
+                      this.router.navigate([this.redirectionPath]);
+                    } else {
+                      this.onSearchId(this.paramOID, this.authorization);
+                    }
+                  });
               },
               (err) => {
                 this.resServicesReturnFilingErr = err;
                 // Evaluar respuesta de error del servicio
-                this.globalAppService.resolveResponseError(this.resServicesReturnFilingErr).then((res) => { });
-              }
+                this.globalAppService
+                  .resolveResponseError(this.resServicesReturnFilingErr)
+                  .then((res) => {});
+              },
             );
         }
       });
@@ -3704,26 +4584,37 @@ export class FilingFormComponent implements OnInit, OnDestroy {
     };
 
     this.restService
-      .restPost(this.versionApi + "radicacion/transacciones/schedule", params, this.authorization)
+      .restPost(
+        this.versionApi + "radicacion/transacciones/schedule",
+        params,
+        this.authorization,
+      )
       .subscribe(
         (res) => {
           this.resServicesSchedule = res;
           // console.log(this.resServicesSchedule);
 
-          this.globalAppService.resolveResponse(this.resServicesSchedule, false).then((res) => {
-            const responseResolveResponse = res;
-            if (responseResolveResponse == true) {
-              this.sweetAlertService.showNotification("success", this.resServicesSchedule["message"]);
-              // this.sweetAlertService.showSwal( 'success-message', 'Datos almacenados', this.resServicesSchedule['']);
-              this.onSearchId(this.paramOID, this.authorization);
-            }
-          });
+          this.globalAppService
+            .resolveResponse(this.resServicesSchedule, false)
+            .then((res) => {
+              const responseResolveResponse = res;
+              if (responseResolveResponse == true) {
+                this.sweetAlertService.showNotification(
+                  "success",
+                  this.resServicesSchedule["message"],
+                );
+                // this.sweetAlertService.showSwal( 'success-message', 'Datos almacenados', this.resServicesSchedule['']);
+                this.onSearchId(this.paramOID, this.authorization);
+              }
+            });
         },
         (err) => {
           this.resServicesScheduleErr = err;
           // Evaluar respuesta de error del servicio
-          this.globalAppService.resolveResponseError(this.resServicesScheduleErr).then((res) => { });
-        }
+          this.globalAppService
+            .resolveResponseError(this.resServicesScheduleErr)
+            .then((res) => {});
+        },
       );
   }
 
@@ -3746,26 +4637,37 @@ export class FilingFormComponent implements OnInit, OnDestroy {
     this.sweetAlertService.sweetLoading();
 
     this.restService
-      .restPost(this.versionApi + "radicacion/transacciones/re-asign", params, this.authorization)
+      .restPost(
+        this.versionApi + "radicacion/transacciones/re-asign",
+        params,
+        this.authorization,
+      )
       .subscribe(
         (res) => {
           this.resServicesReasign = res;
 
-          this.globalAppService.resolveResponse(this.resServicesReasign, false).then((res) => {
-            const responseResolveResponse = res;
-            if (responseResolveResponse == true) {
-              this.sweetAlertService.showNotification("success", this.resServicesReasign["message"]);
-            }
-            // Cargando false
-            this.sweetAlertService.sweetClose();
-            this.router.navigate([this.redirectionPath]);
-          });
+          this.globalAppService
+            .resolveResponse(this.resServicesReasign, false)
+            .then((res) => {
+              const responseResolveResponse = res;
+              if (responseResolveResponse == true) {
+                this.sweetAlertService.showNotification(
+                  "success",
+                  this.resServicesReasign["message"],
+                );
+              }
+              // Cargando false
+              this.sweetAlertService.sweetClose();
+              this.router.navigate([this.redirectionPath]);
+            });
         },
         (err) => {
           this.resServicesReasignErr = err;
           // Evaluar respuesta de error del servicio
-          this.globalAppService.resolveResponseError(this.resServicesReasignErr).then((res) => { });
-        }
+          this.globalAppService
+            .resolveResponseError(this.resServicesReasignErr)
+            .then((res) => {});
+        },
       );
   }
 
@@ -3788,26 +4690,37 @@ export class FilingFormComponent implements OnInit, OnDestroy {
     this.sweetAlertService.sweetLoading();
 
     this.restService
-      .restPost(this.versionApi + "radicacion/transacciones/solicita-vobo", params, this.authorization)
+      .restPost(
+        this.versionApi + "radicacion/transacciones/solicita-vobo",
+        params,
+        this.authorization,
+      )
       .subscribe(
         (res) => {
           this.resServicesSoliVobo = res;
 
-          this.globalAppService.resolveResponse(this.resServicesSoliVobo, false).then((res) => {
-            const responseResolveResponse = res;
-            if (responseResolveResponse == true) {
-              this.sweetAlertService.showNotification("success", this.resServicesSoliVobo["message"]);
-            }
-            // Cargando false
-            this.sweetAlertService.sweetClose();
-            this.router.navigate([this.redirectionPath]);
-          });
+          this.globalAppService
+            .resolveResponse(this.resServicesSoliVobo, false)
+            .then((res) => {
+              const responseResolveResponse = res;
+              if (responseResolveResponse == true) {
+                this.sweetAlertService.showNotification(
+                  "success",
+                  this.resServicesSoliVobo["message"],
+                );
+              }
+              // Cargando false
+              this.sweetAlertService.sweetClose();
+              this.router.navigate([this.redirectionPath]);
+            });
         },
         (err) => {
           this.resServicesSoliVoboErr = err;
           // Evaluar respuesta de error del servicio
-          this.globalAppService.resolveResponseError(this.resServicesSoliVoboErr).then((res) => { });
-        }
+          this.globalAppService
+            .resolveResponseError(this.resServicesSoliVoboErr)
+            .then((res) => {});
+        },
       );
   }
 
@@ -3828,29 +4741,44 @@ export class FilingFormComponent implements OnInit, OnDestroy {
     // Cargando true
     this.sweetAlertService.sweetLoading();
 
-    this.restService.restPut(this.versionApi + "radicacion/transacciones/vobo", data, this.authorization).subscribe(
-      (res) => {
-        this.resServicesVobo = res;
+    this.restService
+      .restPut(
+        this.versionApi + "radicacion/transacciones/vobo",
+        data,
+        this.authorization,
+      )
+      .subscribe(
+        (res) => {
+          this.resServicesVobo = res;
 
-        // Evaluar respuesta del servicio
-        this.globalAppService.resolveResponse(this.resServicesVobo, true, this.redirectionPath).then((res) => {
-          let responseResolveResponse = res;
-          if (responseResolveResponse == true) {
-            this.sweetAlertService.showNotification("success", this.resServicesVobo["message"]);
-            this.continueTransaccion();
-          }
-          // Cargando false
-          this.sweetAlertService.sweetClose();
-        });
-      },
-      (err) => {
-        this.resServicesVoboErr = err;
-        // Evaluar respuesta de error del servicio
-        this.globalAppService
-          .resolveResponseError(this.resServicesVoboErr, true, this.redirectionPath)
-          .then((res) => { });
-      }
-    );
+          // Evaluar respuesta del servicio
+          this.globalAppService
+            .resolveResponse(this.resServicesVobo, true, this.redirectionPath)
+            .then((res) => {
+              let responseResolveResponse = res;
+              if (responseResolveResponse == true) {
+                this.sweetAlertService.showNotification(
+                  "success",
+                  this.resServicesVobo["message"],
+                );
+                this.continueTransaccion();
+              }
+              // Cargando false
+              this.sweetAlertService.sweetClose();
+            });
+        },
+        (err) => {
+          this.resServicesVoboErr = err;
+          // Evaluar respuesta de error del servicio
+          this.globalAppService
+            .resolveResponseError(
+              this.resServicesVoboErr,
+              true,
+              this.redirectionPath,
+            )
+            .then((res) => {});
+        },
+      );
   }
 
   /**
@@ -3917,26 +4845,39 @@ export class FilingFormComponent implements OnInit, OnDestroy {
     // loading true
     this.sweetAlertService.sweetLoading();
 
-    this.restService.restPost(this.versionApi + "radicacion/informados/copy", dataSend, this.authorization).subscribe(
-      (res) => {
-        this.resServicesCopyInfo = res;
+    this.restService
+      .restPost(
+        this.versionApi + "radicacion/informados/copy",
+        dataSend,
+        this.authorization,
+      )
+      .subscribe(
+        (res) => {
+          this.resServicesCopyInfo = res;
 
-        this.globalAppService.resolveResponse(this.resServicesCopyInfo, false).then((res) => {
-          const responseResolveResponse = res;
-          if (responseResolveResponse == true) {
-            this.sweetAlertService.showNotification("success", this.resServicesCopyInfo["message"]);
-            // Cargando false
-            this.sweetAlertService.sweetClose();
-            this.onSearchId(this.paramOID, this.authorization);
-          }
-        });
-      },
-      (err) => {
-        this.resServicesCopyInfoErr = err;
-        // Evaluar respuesta de error del servicio
-        this.globalAppService.resolveResponseError(this.resServicesCopyInfoErr).then((res) => { });
-      }
-    );
+          this.globalAppService
+            .resolveResponse(this.resServicesCopyInfo, false)
+            .then((res) => {
+              const responseResolveResponse = res;
+              if (responseResolveResponse == true) {
+                this.sweetAlertService.showNotification(
+                  "success",
+                  this.resServicesCopyInfo["message"],
+                );
+                // Cargando false
+                this.sweetAlertService.sweetClose();
+                this.onSearchId(this.paramOID, this.authorization);
+              }
+            });
+        },
+        (err) => {
+          this.resServicesCopyInfoErr = err;
+          // Evaluar respuesta de error del servicio
+          this.globalAppService
+            .resolveResponseError(this.resServicesCopyInfoErr)
+            .then((res) => {});
+        },
+      );
   }
 
   /**
@@ -3958,26 +4899,37 @@ export class FilingFormComponent implements OnInit, OnDestroy {
     this.sweetAlertService.sweetLoading();
 
     this.restService
-      .restPost(this.versionApi + "radicacion/transacciones/finalize-filing", dataSend, this.authorization)
+      .restPost(
+        this.versionApi + "radicacion/transacciones/finalize-filing",
+        dataSend,
+        this.authorization,
+      )
       .subscribe(
         (res) => {
           this.resServicesFinalizeFiling = res;
 
-          this.globalAppService.resolveResponse(this.resServicesFinalizeFiling, false).then((res) => {
-            const responseResolveResponse = res;
-            if (responseResolveResponse == true) {
-              this.sweetAlertService.showNotification("success", this.resServicesFinalizeFiling["message"]);
-              // Cargando false
-              this.sweetAlertService.sweetClose();
-            }
-            this.router.navigate([this.redirectionPath]);
-          });
+          this.globalAppService
+            .resolveResponse(this.resServicesFinalizeFiling, false)
+            .then((res) => {
+              const responseResolveResponse = res;
+              if (responseResolveResponse == true) {
+                this.sweetAlertService.showNotification(
+                  "success",
+                  this.resServicesFinalizeFiling["message"],
+                );
+                // Cargando false
+                this.sweetAlertService.sweetClose();
+              }
+              this.router.navigate([this.redirectionPath]);
+            });
         },
         (err) => {
           this.resServicesFinalizeFilingErr = err;
           // Evaluar respuesta de error del servicio
-          this.globalAppService.resolveResponseError(this.resServicesFinalizeFilingErr).then((res) => { });
-        }
+          this.globalAppService
+            .resolveResponseError(this.resServicesFinalizeFilingErr)
+            .then((res) => {});
+        },
       );
   }
 
@@ -3999,26 +4951,37 @@ export class FilingFormComponent implements OnInit, OnDestroy {
     this.sweetAlertService.sweetLoading();
 
     this.restService
-      .restPost(this.versionApi + "radicacion/transacciones/shipping-ready", dataSend, this.authorization)
+      .restPost(
+        this.versionApi + "radicacion/transacciones/shipping-ready",
+        dataSend,
+        this.authorization,
+      )
       .subscribe(
         (res) => {
           this.resSerShippingReady = res;
 
-          this.globalAppService.resolveResponse(this.resSerShippingReady, false).then((res) => {
-            const responseResolveResponse = res;
-            if (responseResolveResponse == true) {
-              this.sweetAlertService.showNotification("success", this.resSerShippingReady["message"]);
-            }
-            // Cargando false
-            this.sweetAlertService.sweetClose();
-            this.router.navigate([this.redirectionPath]);
-          });
+          this.globalAppService
+            .resolveResponse(this.resSerShippingReady, false)
+            .then((res) => {
+              const responseResolveResponse = res;
+              if (responseResolveResponse == true) {
+                this.sweetAlertService.showNotification(
+                  "success",
+                  this.resSerShippingReady["message"],
+                );
+              }
+              // Cargando false
+              this.sweetAlertService.sweetClose();
+              this.router.navigate([this.redirectionPath]);
+            });
         },
         (err) => {
           this.resSerShippingReadyErr = err;
           // Evaluar respuesta de error del servicio
-          this.globalAppService.resolveResponseError(this.resSerShippingReadyErr).then((res) => { });
-        }
+          this.globalAppService
+            .resolveResponseError(this.resSerShippingReadyErr)
+            .then((res) => {});
+        },
       );
   }
 
@@ -4040,26 +5003,38 @@ export class FilingFormComponent implements OnInit, OnDestroy {
     this.sweetAlertService.sweetLoading();
 
     this.restService
-      .restPost(this.versionApi + "radicacion/transacciones/solicita-anulacion-radicado", params, this.authorization)
+      .restPost(
+        this.versionApi +
+          "radicacion/transacciones/solicita-anulacion-radicado",
+        params,
+        this.authorization,
+      )
       .subscribe(
         (res) => {
           this.resServicesAnnulment = res;
 
-          this.globalAppService.resolveResponse(this.resServicesAnnulment, false).then((res) => {
-            const responseResolveResponse = res;
-            if (responseResolveResponse == true) {
-              this.sweetAlertService.showNotification("success", this.resServicesAnnulment["message"]);
-              this.onSearchId(this.paramOID, this.authorization);
-            }
-            // Cargando false
-            this.sweetAlertService.sweetClose();
-          });
+          this.globalAppService
+            .resolveResponse(this.resServicesAnnulment, false)
+            .then((res) => {
+              const responseResolveResponse = res;
+              if (responseResolveResponse == true) {
+                this.sweetAlertService.showNotification(
+                  "success",
+                  this.resServicesAnnulment["message"],
+                );
+                this.onSearchId(this.paramOID, this.authorization);
+              }
+              // Cargando false
+              this.sweetAlertService.sweetClose();
+            });
         },
         (err) => {
           this.resServicesAnnulmentErr = err;
           // Evaluar respuesta de error del servicio
-          this.globalAppService.resolveResponseError(this.resServicesAnnulmentErr).then((res) => { });
-        }
+          this.globalAppService
+            .resolveResponseError(this.resServicesAnnulmentErr)
+            .then((res) => {});
+        },
       );
   }
 
@@ -4081,26 +5056,37 @@ export class FilingFormComponent implements OnInit, OnDestroy {
     this.sweetAlertService.sweetLoading();
 
     this.restService
-      .restPost(this.versionApi + "radicacion/transacciones/descartar-consecutivo", params, this.authorization)
+      .restPost(
+        this.versionApi + "radicacion/transacciones/descartar-consecutivo",
+        params,
+        this.authorization,
+      )
       .subscribe(
         (res) => {
           this.resServicesDiscardConsecutive = res;
 
-          this.globalAppService.resolveResponse(this.resServicesDiscardConsecutive, false).then((res) => {
-            const responseResolveResponse = res;
-            if (responseResolveResponse == true) {
-              this.sweetAlertService.showNotification("success", this.resServicesDiscardConsecutive["message"]);
-              this.onSearchId(this.paramOID, this.authorization);
-              // Cargando false
-              this.sweetAlertService.sweetClose();
-            }
-          });
+          this.globalAppService
+            .resolveResponse(this.resServicesDiscardConsecutive, false)
+            .then((res) => {
+              const responseResolveResponse = res;
+              if (responseResolveResponse == true) {
+                this.sweetAlertService.showNotification(
+                  "success",
+                  this.resServicesDiscardConsecutive["message"],
+                );
+                this.onSearchId(this.paramOID, this.authorization);
+                // Cargando false
+                this.sweetAlertService.sweetClose();
+              }
+            });
         },
         (err) => {
           this.resServicesDiscardConsecutiveErr = err;
           // Evaluar respuesta de error del servicio
-          this.globalAppService.resolveResponseError(this.resServicesDiscardConsecutiveErr).then((res) => { });
-        }
+          this.globalAppService
+            .resolveResponseError(this.resServicesDiscardConsecutiveErr)
+            .then((res) => {});
+        },
       );
   }
 
@@ -4122,27 +5108,38 @@ export class FilingFormComponent implements OnInit, OnDestroy {
     };
 
     this.restService
-      .restPost(this.versionApi + "radicacion/transacciones/include-expedient", params, this.authorization)
+      .restPost(
+        this.versionApi + "radicacion/transacciones/include-expedient",
+        params,
+        this.authorization,
+      )
       .subscribe(
         (res) => {
           this.resSerIncludeFiles = res;
           // console.log(this.resSerIncludeFiles);
 
-          this.globalAppService.resolveResponse(this.resSerIncludeFiles, false).then((res) => {
-            const responseResolveResponse = res;
-            if (responseResolveResponse == true) {
-              this.sweetAlertService.showNotification("success", this.resSerIncludeFiles["message"]);
-              // Cargando false
-              this.sweetAlertService.sweetClose();
-            }
-            this.onSearchId(this.paramOID, this.authorization);
-          });
+          this.globalAppService
+            .resolveResponse(this.resSerIncludeFiles, false)
+            .then((res) => {
+              const responseResolveResponse = res;
+              if (responseResolveResponse == true) {
+                this.sweetAlertService.showNotification(
+                  "success",
+                  this.resSerIncludeFiles["message"],
+                );
+                // Cargando false
+                this.sweetAlertService.sweetClose();
+              }
+              this.onSearchId(this.paramOID, this.authorization);
+            });
         },
         (err) => {
           this.resSerIncludeFilesErr = err;
           // Evaluar respuesta de error del servicio
-          this.globalAppService.resolveResponseError(this.resSerIncludeFilesErr).then((res) => { });
-        }
+          this.globalAppService
+            .resolveResponseError(this.resSerIncludeFilesErr)
+            .then((res) => {});
+        },
       );
   }
 
@@ -4161,31 +5158,42 @@ export class FilingFormComponent implements OnInit, OnDestroy {
     };
 
     this.restService
-      .restPost(this.versionApi + "radicacion/transacciones/print-sticker", params, this.authorization)
+      .restPost(
+        this.versionApi + "radicacion/transacciones/print-sticker",
+        params,
+        this.authorization,
+      )
       .subscribe(
         (res) => {
           this.resSerPrintStickers = res;
           // console.log(this.resSerPrintStickers);
 
-          this.globalAppService.resolveResponse(this.resSerPrintStickers, false).then((res) => {
-            const responseResolveResponse = res;
-            if (responseResolveResponse == true) {
-              this.sweetAlertService.showNotification("success", this.resSerPrintStickers["message"]);
-              if (this.resSerPrintStickers.datafile) {
-                this.resSerPrintStickers.datafile.forEach((dtFile) => {
-                  this.downloadFile(dtFile.dataFile, dtFile.fileName);
-                });
+          this.globalAppService
+            .resolveResponse(this.resSerPrintStickers, false)
+            .then((res) => {
+              const responseResolveResponse = res;
+              if (responseResolveResponse == true) {
+                this.sweetAlertService.showNotification(
+                  "success",
+                  this.resSerPrintStickers["message"],
+                );
+                if (this.resSerPrintStickers.datafile) {
+                  this.resSerPrintStickers.datafile.forEach((dtFile) => {
+                    this.downloadFile(dtFile.dataFile, dtFile.fileName);
+                  });
+                }
               }
-            }
-            // Cargando false
-            this.sweetAlertService.sweetClose();
-          });
+              // Cargando false
+              this.sweetAlertService.sweetClose();
+            });
         },
         (err) => {
           this.resSerPrintStickersErr = err;
           // Evaluar respuesta de error del servicio
-          this.globalAppService.resolveResponseError(this.resSerPrintStickersErr).then((res) => { });
-        }
+          this.globalAppService
+            .resolveResponseError(this.resSerPrintStickersErr)
+            .then((res) => {});
+        },
       );
   }
 
@@ -4194,35 +5202,47 @@ export class FilingFormComponent implements OnInit, OnDestroy {
     let params = {
       id: this.paramOID,
     };
-    params['correoRemitente'] = this.resServicesDestinatario.modelClientes[0].correoElectronicoCliente;
+    params["correoRemitente"] =
+      this.resServicesDestinatario.modelClientes[0].correoElectronicoCliente;
     console.log(params);
     this.restService
-      .restPost(this.versionApi + "radicacion/transacciones/send-email-radicado", params, this.authorization)
+      .restPost(
+        this.versionApi + "radicacion/transacciones/send-email-radicado",
+        params,
+        this.authorization,
+      )
       .subscribe(
         (res) => {
           this.resSerPrintStickers = res;
           // console.log(this.resSerPrintStickers);
 
-          this.globalAppService.resolveResponse(this.resSerPrintStickers, false).then((res) => {
-            const responseResolveResponse = res;
-            if (responseResolveResponse == true) {
-              this.sweetAlertService.showNotification("success", this.resSerPrintStickers["message"]);
-              if (this.resSerPrintStickers.datafile) {
-                this.resSerPrintStickers.datafile.forEach((dtFile) => {
-                  this.downloadFile(dtFile.dataFile, dtFile.fileName);
-                });
+          this.globalAppService
+            .resolveResponse(this.resSerPrintStickers, false)
+            .then((res) => {
+              const responseResolveResponse = res;
+              if (responseResolveResponse == true) {
+                this.sweetAlertService.showNotification(
+                  "success",
+                  this.resSerPrintStickers["message"],
+                );
+                if (this.resSerPrintStickers.datafile) {
+                  this.resSerPrintStickers.datafile.forEach((dtFile) => {
+                    this.downloadFile(dtFile.dataFile, dtFile.fileName);
+                  });
+                }
               }
-            }
-            // Cargando false
-            this.sweetAlertService.sweetClose();
-            this.changeChildrenService.changeProcess({ proccess: "reload" });
-          });
+              // Cargando false
+              this.sweetAlertService.sweetClose();
+              this.changeChildrenService.changeProcess({ proccess: "reload" });
+            });
         },
         (err) => {
           this.resSerPrintStickersErr = err;
           // Evaluar respuesta de error del servicio
-          this.globalAppService.resolveResponseError(this.resSerPrintStickersErr).then((res) => { });
-        }
+          this.globalAppService
+            .resolveResponseError(this.resSerPrintStickersErr)
+            .then((res) => {});
+        },
       );
   }
 
@@ -4246,29 +5266,40 @@ export class FilingFormComponent implements OnInit, OnDestroy {
     this.sweetAlertService.sweetLoading();
 
     this.restService
-      .restPost(this.versionApi + "radicacion/transacciones/withdrawal", params, this.authorization)
+      .restPost(
+        this.versionApi + "radicacion/transacciones/withdrawal",
+        params,
+        this.authorization,
+      )
       .subscribe(
         (res) => {
           this.resSerWithdrawal = res;
           // console.log(this.resSerWithdrawal);
 
-          this.globalAppService.resolveResponse(this.resSerWithdrawal, false).then((res) => {
-            let responseResolveResponseDown = res;
+          this.globalAppService
+            .resolveResponse(this.resSerWithdrawal, false)
+            .then((res) => {
+              let responseResolveResponseDown = res;
 
-            if (responseResolveResponseDown == true) {
-              this.sweetAlertService.showNotification("success", this.resSerWithdrawal.message);
-              // loading false
-              this.sweetAlertService.sweetClose();
-              // Redirecciona
-              this.router.navigate([this.redirectionPath]);
-            }
-          });
+              if (responseResolveResponseDown == true) {
+                this.sweetAlertService.showNotification(
+                  "success",
+                  this.resSerWithdrawal.message,
+                );
+                // loading false
+                this.sweetAlertService.sweetClose();
+                // Redirecciona
+                this.router.navigate([this.redirectionPath]);
+              }
+            });
         },
         (err) => {
           this.resSerWithdrawalErr = err;
           // Evaluar respuesta de error del servicio
-          this.globalAppService.resolveResponseError(this.resSerWithdrawalErr).then((res) => { });
-        }
+          this.globalAppService
+            .resolveResponseError(this.resSerWithdrawalErr)
+            .then((res) => {});
+        },
       );
   }
 
@@ -4278,7 +5309,9 @@ export class FilingFormComponent implements OnInit, OnDestroy {
       this.resSerLenguage = res;
       // console.log( this.resSerLenguage );
       this.titleMsg = this.resSerLenguage.titleMsg;
-      this.textMsg = this.resSerLenguage["textMsgSendMail"] + this.hashLocalStorage.data.radiSendReplyEMail;
+      this.textMsg =
+        this.resSerLenguage["textMsgSendMail"] +
+        this.hashLocalStorage.data.radiSendReplyEMail;
       this.bntCancelar = this.resSerLenguage["bntCancelarSendMail"];
       this.btnConfirmacion = this.resSerLenguage["btnConfirmacionSendMail"];
 
@@ -4306,18 +5339,29 @@ export class FilingFormComponent implements OnInit, OnDestroy {
           this.sweetAlertService.sweetLoading();
 
           this.restService
-            .restPut(this.versionApi + "radicacion/transacciones/send-reply-mail", data, this.authorization)
+            .restPut(
+              this.versionApi + "radicacion/transacciones/send-reply-mail",
+              data,
+              this.authorization,
+            )
             .subscribe(
               (res) => {
                 this.resServicesSendEmailCli = res;
 
                 // Evaluar respuesta del servicio
                 this.globalAppService
-                  .resolveResponse(this.resServicesSendEmailCli, true, this.redirectionPath)
+                  .resolveResponse(
+                    this.resServicesSendEmailCli,
+                    true,
+                    this.redirectionPath,
+                  )
                   .then((res) => {
                     let responseResolveResponse = res;
                     if (responseResolveResponse == true) {
-                      this.sweetAlertService.showNotification("success", this.resServicesSendEmailCli.message);
+                      this.sweetAlertService.showNotification(
+                        "success",
+                        this.resServicesSendEmailCli.message,
+                      );
                       // this.sweetAlertService.showSwal( 'success-message', 'Datos almacenados', this.resServicesSendEmailCli.message);
                       // Redirecciona a la pagina principal
                       this.router.navigate([this.redirectionPath]);
@@ -4328,9 +5372,13 @@ export class FilingFormComponent implements OnInit, OnDestroy {
                 this.resServicesSendEmailCliErr = err;
                 // Evaluar respuesta de error del servicio
                 this.globalAppService
-                  .resolveResponseError(this.resServicesSendEmailCliErr, true, this.redirectionPath)
-                  .then((res) => { });
-              }
+                  .resolveResponseError(
+                    this.resServicesSendEmailCliErr,
+                    true,
+                    this.redirectionPath,
+                  )
+                  .then((res) => {});
+              },
             );
         }
       });
@@ -4342,7 +5390,9 @@ export class FilingFormComponent implements OnInit, OnDestroy {
     const titleMsg = this.translate.instant("titleMsg");
     const textMsg = this.translate.instant("textMsgDownloadDocumentPackage");
     const bntCancelar = this.translate.instant("bntCancelar");
-    const btnConfirmacion = this.translate.instant("btnConfirmacionDownloadDocumentPackage");
+    const btnConfirmacion = this.translate.instant(
+      "btnConfirmacionDownloadDocumentPackage",
+    );
 
     swal({
       title: titleMsg,
@@ -4367,30 +5417,39 @@ export class FilingFormComponent implements OnInit, OnDestroy {
         this.sweetAlertService.sweetLoading();
 
         this.restService
-          .restPost(this.versionApi + "radicacion/radicados/download-document-package", data, this.authorization)
+          .restPost(
+            this.versionApi + "radicacion/radicados/download-document-package",
+            data,
+            this.authorization,
+          )
           .subscribe(
             (res) => {
               this.resServicesDownloadDocumentPackage = res;
               // Evaluar respuesta del servicio
-              this.globalAppService.resolveResponse(this.resServicesDownloadDocumentPackage, false).then((res) => {
-                let responseResolveResponse = res;
-                if (responseResolveResponse == true) {
-                  this.downloadFile(
-                    this.resServicesDownloadDocumentPackage.datafile,
-                    this.resServicesDownloadDocumentPackage.fileName
-                  );
-                }
-                // Cargando false
-                this.sweetAlertService.sweetClose();
-              });
+              this.globalAppService
+                .resolveResponse(this.resServicesDownloadDocumentPackage, false)
+                .then((res) => {
+                  let responseResolveResponse = res;
+                  if (responseResolveResponse == true) {
+                    this.downloadFile(
+                      this.resServicesDownloadDocumentPackage.datafile,
+                      this.resServicesDownloadDocumentPackage.fileName,
+                    );
+                  }
+                  // Cargando false
+                  this.sweetAlertService.sweetClose();
+                });
             },
             (err) => {
               this.resServicesDownloadDocumentPackageErr = err;
               // Evaluar respuesta de error del servicio
               this.globalAppService
-                .resolveResponseError(this.resServicesDownloadDocumentPackageErr, false)
-                .then((res) => { });
-            }
+                .resolveResponseError(
+                  this.resServicesDownloadDocumentPackageErr,
+                  false,
+                )
+                .then((res) => {});
+            },
           );
       }
     });
@@ -4456,10 +5515,13 @@ export class FilingFormComponent implements OnInit, OnDestroy {
   }
 
   detectLanguageChange() {
-    this.subscriptionTranslateService$ = this.activateTranslateService.activateLanguageChange.subscribe((language) => {
-      this.languageReceive = language;
-      this.translate.setDefaultLang(this.languageReceive);
-    });
+    this.subscriptionTranslateService$ =
+      this.activateTranslateService.activateLanguageChange.subscribe(
+        (language) => {
+          this.languageReceive = language;
+          this.translate.setDefaultLang(this.languageReceive);
+        },
+      );
   }
   /** Fin Métodos para el uso de la internacionalización */
 
@@ -4472,7 +5534,8 @@ export class FilingFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (!!this.subscriptionTranslateService$) this.subscriptionTranslateService$.unsubscribe();
+    if (!!this.subscriptionTranslateService$)
+      this.subscriptionTranslateService$.unsubscribe();
   }
 
   tipoRadicadoIdEntrada = environment.tipoRadicadoId.entrada;
@@ -4489,7 +5552,13 @@ export class FilingFormComponent implements OnInit, OnDestroy {
   /** Método para validar la busqueda personalizada de archivos en el navegador */
   validateInputFile() {
     this.accept = "";
-    var validateFile: any = [{ type: "xls" }, { type: "xlsx" }, { type: "pdf" }, { type: "doc" }, { type: "docx" }];
+    var validateFile: any = [
+      { type: "xls" },
+      { type: "xlsx" },
+      { type: "pdf" },
+      { type: "doc" },
+      { type: "docx" },
+    ];
 
     validateFile.forEach((element) => {
       this.accept = this.accept + "." + element.type + ",";
@@ -4514,14 +5583,18 @@ export class FilingFormComponent implements OnInit, OnDestroy {
             this.inputFile.nativeElement.value = '';
             this.nombreArchivoSeleccionado = "";*/
           // } else {
-          this.moduleForm.controls["fileUpload"].setValue(event.target.files[0]);
+          this.moduleForm.controls["fileUpload"].setValue(
+            event.target.files[0],
+          );
           this.uploadValid = true;
           // }
         } else {
-          const notificationErrExt = this.translate.instant(this.notificationErrExt);
+          const notificationErrExt = this.translate.instant(
+            this.notificationErrExt,
+          );
           this.sweetAlertService.sweetInfoText(
             "Archivo no válido",
-            notificationErrExt + " " + this.notificationErrExtArray.join()
+            notificationErrExt + " " + this.notificationErrExtArray.join(),
           );
           this.uploadValid = false;
           this.inputFile.nativeElement.value = "";
@@ -4558,76 +5631,155 @@ export class FilingFormComponent implements OnInit, OnDestroy {
 
   onFileSelectedV1(event: any): void {
     const selectedFiles = event.target.files;
-    const extensionesPermitidas = ['3gp', 'avi', 'bmp', 'csv', 'doc', 'docx', 'gif', 'html', 'jpeg', 'jpg', 'mov', 'mp2', 'mp3', 'mp4', 'mpeg', 'odg', 'odp', 'odt', 'otg', 'pdf', 'png', 'ppsx', 'ppt', 'pptx', 'rar', 'tar', 'tif', 'txt', 'wav', 'wma', 'wmv', 'xls', 'xlsx', 'zip'];
-    const MAX_TOTAL_SIZE_MB = 25 * 1024 * 1024 ; // 25 Megabytes en bytes
+    const extensionesPermitidas = [
+      "3gp",
+      "avi",
+      "bmp",
+      "csv",
+      "doc",
+      "docx",
+      "gif",
+      "html",
+      "jpeg",
+      "jpg",
+      "mov",
+      "mp2",
+      "mp3",
+      "mp4",
+      "mpeg",
+      "odg",
+      "odp",
+      "odt",
+      "otg",
+      "pdf",
+      "png",
+      "ppsx",
+      "ppt",
+      "pptx",
+      "rar",
+      "tar",
+      "tif",
+      "txt",
+      "wav",
+      "wma",
+      "wmv",
+      "xls",
+      "xlsx",
+      "zip",
+    ];
+    const MAX_TOTAL_SIZE_MB = 25 * 1024 * 1024; // 25 Megabytes en bytes
     const MAX_FILES = 10; // Máximo de 10 archivos
-    let totalSize = this.archivosSubidos.reduce((acc, file) => acc + file.size, 0); // Suma actual de los archivos subidos
+    let totalSize = this.archivosSubidos.reduce(
+      (acc, file) => acc + file.size,
+      0,
+    ); // Suma actual de los archivos subidos
     let archivosInvalidos = false;
-  
+
     // Verificar si ya hay más de 10 archivos subidos
-    
+
     if (this.archivosSubidos.length + selectedFiles.length > MAX_FILES) {
       this.toastSvc.open({
-        title: 'Error',
+        title: "Error",
         description: `No puedes subir más de ${MAX_FILES} archivos.`,
-        success: false
+        success: false,
       });
       return;
     }
-    
-  
+
     for (let i = 0; i < selectedFiles.length; i++) {
       const file = selectedFiles[i];
-      const extension = file.name.split('.').pop().toLowerCase();
+      const extension = file.name.split(".").pop().toLowerCase();
       const size = file.size;
-  
+
       // Verificar si la extensión es permitida y el archivo no es un .exe
-      if (extensionesPermitidas.includes(extension) && extension !== 'exe') {
+      if (extensionesPermitidas.includes(extension) && extension !== "exe") {
         // Verificar si la suma total de los archivos seleccionados no supera 25 MB
-        if ((totalSize + size) <= MAX_TOTAL_SIZE_MB) {
+        if (totalSize + size <= MAX_TOTAL_SIZE_MB) {
           this.archivosSubidos.push(file);
           totalSize += size; // Actualiza el tamaño total
         } else {
           archivosInvalidos = true;
           this.toastSvc.open({
-            title: 'Error',
+            title: "Error",
             description: `La suma total de los archivos seleccionados excede el tamaño máximo de 25 MB.`,
-            success: false
+            success: false,
           });
           break; // Salir del bucle si ya se excede el límite
         }
       } else {
         archivosInvalidos = true;
         this.toastSvc.open({
-          title: 'Error',
+          title: "Error",
           description: `El archivo "${file.name}" tiene una extensión no permitida o es un .exe.`,
-          success: false
+          success: false,
         });
       }
     }
-  
+
     if (archivosInvalidos) {
       this.toastSvc.open({
-        title: 'Error',
-        description: 'Hay archivos que no cumplen con las condiciones (extensión o tamaño).',
-        success: false
+        title: "Error",
+        description:
+          "Hay archivos que no cumplen con las condiciones (extensión o tamaño).",
+        success: false,
       });
     }
-  
-    this.moduleForm.controls["fileUpload"].setValue(this.archivosSubidos);
-    this.moduleForm.get('anexos').setValue(this.archivosSubidos.length > 0 ? this.archivosSubidos.length : null);
-  }  
 
+    this.moduleForm.controls["fileUpload"].setValue(this.archivosSubidos);
+    this.moduleForm
+      .get("anexos")
+      .setValue(
+        this.archivosSubidos.length > 0 ? this.archivosSubidos.length : null,
+      );
+  }
 
   onFileSelected(event: any): void {
     const selectedFiles = event.target.files;
-    const extensionesPermitidas = ['3gp', 'avi', 'bmp', 'csv', 'doc', 'docx', 'gif', 'html', 'jpeg', 'jpg', 'mov', 'mp2', 'mp3', 'mp4', 'mpeg', 'odg', 'odp', 'odt', 'otg', 'pdf', 'png', 'ppsx', 'ppt', 'pptx', 'rar', 'tar', 'tif', 'txt', 'wav', 'wma', 'wmv', 'xls', 'xlsx', 'zip'];
-    const MAX_TOTAL_SIZE_MB = 25 * 1024 * 1024 ; // 25 Megabytes en bytes
-    const MAX_TOTAL_ALL_SIZE_MB = 25 * 1024 * 1024 * 1024 ; // 25 Megabytes en bytes
+    const extensionesPermitidas = [
+      "3gp",
+      "avi",
+      "bmp",
+      "csv",
+      "doc",
+      "docx",
+      "gif",
+      "html",
+      "jpeg",
+      "jpg",
+      "mov",
+      "mp2",
+      "mp3",
+      "mp4",
+      "mpeg",
+      "odg",
+      "odp",
+      "odt",
+      "otg",
+      "pdf",
+      "png",
+      "ppsx",
+      "ppt",
+      "pptx",
+      "rar",
+      "tar",
+      "tif",
+      "txt",
+      "wav",
+      "wma",
+      "wmv",
+      "xls",
+      "xlsx",
+      "zip",
+    ];
+    const MAX_TOTAL_SIZE_MB = 25 * 1024 * 1024; // 25 Megabytes en bytes
+    const MAX_TOTAL_ALL_SIZE_MB = 25 * 1024 * 1024 * 1024; // 25 Megabytes en bytes
     const MAX_FILES = 10; // Máximo de 10 archivos
-    let totalSize = this.archivosSubidos.reduce((acc, file) => acc + file.size, 0); // Suma actual de los archivos subidos
+    let totalSize = this.archivosSubidos.reduce(
+      (acc, file) => acc + file.size,
+      0,
+    ); // Suma actual de los archivos subidos
     let archivosInvalidos = false;
-  
+
     // Verificar si ya hay más de 10 archivos subidos
     /*
     if (this.archivosSubidos.length + selectedFiles.length > MAX_FILES) {
@@ -4639,15 +5791,14 @@ export class FilingFormComponent implements OnInit, OnDestroy {
       return;
     }
     */
-  
+
     for (let i = 0; i < selectedFiles.length; i++) {
       const file = selectedFiles[i];
-      const extension = file.name.split('.').pop().toLowerCase();
+      const extension = file.name.split(".").pop().toLowerCase();
       const size = file.size;
-  
-      // Verificar si la extensión es permitida y el archivo no es un .exe
-      if (extensionesPermitidas.includes(extension) && extension !== 'exe') {
 
+      // Verificar si la extensión es permitida y el archivo no es un .exe
+      if (extensionesPermitidas.includes(extension) && extension !== "exe") {
         // Verificar si la suma total de los archivos seleccionados no supera 25 MB
         this.archivosSubidos.push(file);
         /*
@@ -4667,31 +5818,39 @@ export class FilingFormComponent implements OnInit, OnDestroy {
       } else {
         archivosInvalidos = true;
         this.toastSvc.open({
-          title: 'Error',
+          title: "Error",
           description: `El archivo "${file.name}" tiene una extensión no permitida o es un .exe.`,
-          success: false
+          success: false,
         });
       }
     }
-  
+
     if (archivosInvalidos) {
       this.toastSvc.open({
-        title: 'Error',
-        description: 'Hay archivos que no cumplen con las condiciones (extensión o tamaño).',
-        success: false
+        title: "Error",
+        description:
+          "Hay archivos que no cumplen con las condiciones (extensión o tamaño).",
+        success: false,
       });
     }
-  
-    this.moduleForm.controls["fileUpload"].setValue(this.archivosSubidos);
-    this.moduleForm.get('anexos').setValue(this.archivosSubidos.length > 0 ? this.archivosSubidos.length : null);
-  }  
 
+    this.moduleForm.controls["fileUpload"].setValue(this.archivosSubidos);
+    this.moduleForm
+      .get("anexos")
+      .setValue(
+        this.archivosSubidos.length > 0 ? this.archivosSubidos.length : null,
+      );
+  }
 
   // Método para eliminar un archivo de la lista.
   eliminarArchivo(index: number): void {
     this.archivosSubidos.splice(index, 1);
     // Actualizar el valor del formulario después de eliminar el archivo.
-    this.moduleForm.get('anexos').setValue(this.archivosSubidos.length > 0 ? this.archivosSubidos.length : null);
+    this.moduleForm
+      .get("anexos")
+      .setValue(
+        this.archivosSubidos.length > 0 ? this.archivosSubidos.length : null,
+      );
     this.moduleForm.controls["fileUpload"].setValue("");
   }
 
@@ -4700,7 +5859,7 @@ export class FilingFormComponent implements OnInit, OnDestroy {
     // Actualizar el valor del formulario después de eliminar el archivo.
     if (event.checked == false) {
       this.archivosSubidos = [];
-      this.moduleForm.get('anexos').setValue(null);
+      this.moduleForm.get("anexos").setValue(null);
     }
   }
 
@@ -4735,52 +5894,70 @@ export class FilingFormComponent implements OnInit, OnDestroy {
   }
   //elimina todos los emojis del texto proporcionado y devuelve el texto limpio.
   removeEmojis(text: string): string {
-    return text.replace(/\p{Extended_Pictographic}/gu, '');
+    return text.replace(/\p{Extended_Pictographic}/gu, "");
   }
 
   //procesa y limpia emojis de la entrada de texto
   handleInput(event: Event) {
     const textarea = event.target as HTMLTextAreaElement;
     textarea.value = this.removeEmojis(textarea.value);
-    this.moduleForm.controls['asuntoRadiRadicado'].setValue(textarea.value);
+    this.moduleForm.controls["asuntoRadiRadicado"].setValue(textarea.value);
   }
 
-
   updateDireccionNotificacion() {
-    if (this.moduleForm.get('tipoZonaNotificacion').value === false) {
-      const tipoDeViaNotificacion = this.moduleForm.get('tipoDeViaNotificacion').value;
-      const numViaNotificacion = this.moduleForm.get('numViaNotificacion').value;
-      const letraNotificacion = this.moduleForm.get('letraNotificacion').value;
-      const bisNotificacion = this.moduleForm.get('bisNotificacion').value === 'SI' ? 'BIS' : '';
-      const letraDosNotificacionDos = this.moduleForm.get('letraDosNotificacionDos').value;
-      const sufijoNotificacion = this.moduleForm.get('sufijoNotificacion').value;
-      const nPlacaNotificacion = this.moduleForm.get('nPlacaNotificacion').value;
-      const letraTresNotificacion = this.moduleForm.get('letraTresNotificacion').value;
-      const nPlacaDosNotificacion = this.moduleForm.get('nPlacaDosNotificacion').value;
-      const sufijoDosNotificacion = this.moduleForm.get('sufijoDosNotificacion').value;
-      const complementoNotificacion = this.moduleForm.get('complementoNotificacion').value;
+    if (this.moduleForm.get("tipoZonaNotificacion").value === false) {
+      const tipoDeViaNotificacion = this.moduleForm.get(
+        "tipoDeViaNotificacion",
+      ).value;
+      const numViaNotificacion =
+        this.moduleForm.get("numViaNotificacion").value;
+      const letraNotificacion = this.moduleForm.get("letraNotificacion").value;
+      const bisNotificacion =
+        this.moduleForm.get("bisNotificacion").value === "SI" ? "BIS" : "";
+      const letraDosNotificacionDos = this.moduleForm.get(
+        "letraDosNotificacionDos",
+      ).value;
+      const sufijoNotificacion =
+        this.moduleForm.get("sufijoNotificacion").value;
+      const nPlacaNotificacion =
+        this.moduleForm.get("nPlacaNotificacion").value;
+      const letraTresNotificacion = this.moduleForm.get(
+        "letraTresNotificacion",
+      ).value;
+      const nPlacaDosNotificacion = this.moduleForm.get(
+        "nPlacaDosNotificacion",
+      ).value;
+      const sufijoDosNotificacion = this.moduleForm.get(
+        "sufijoDosNotificacion",
+      ).value;
+      const complementoNotificacion = this.moduleForm.get(
+        "complementoNotificacion",
+      ).value;
 
       const direccionNotificacion = `${tipoDeViaNotificacion} ${numViaNotificacion} ${letraNotificacion} ${bisNotificacion} ${letraDosNotificacionDos}
       ${sufijoNotificacion} ${nPlacaNotificacion} ${letraTresNotificacion} ${nPlacaDosNotificacion} ${sufijoDosNotificacion}
       ${complementoNotificacion} `;
-      if (!this.moduleForm.get('direccionManualCuentaContrato').value)
-        this.moduleForm.get('direccionCliente').setValue(direccionNotificacion.toUpperCase(), { emitEvent: false });
+      if (!this.moduleForm.get("direccionManualCuentaContrato").value)
+        this.moduleForm
+          .get("direccionCliente")
+          .setValue(direccionNotificacion.toUpperCase(), { emitEvent: false });
     } else {
-      let direccionNotificacionManual = this.moduleForm.get('direccion').value;
-      this.moduleForm.get('direccionCliente').setValue(direccionNotificacionManual.toUpperCase());
+      let direccionNotificacionManual = this.moduleForm.get("direccion").value;
+      this.moduleForm
+        .get("direccionCliente")
+        .setValue(direccionNotificacionManual.toUpperCase());
     }
   }
 
   /** FIN HU 030 - Radicados con varias cuentas contrato y agregar o editar cuentas contrato en un radicado */
   openDialogCreacionContactos() {
-
     const dialogRef = this.dialog.open(CreacionContactosComponent, {
       data: this.resSerFormSubmit.data.idRadiRadicado,
-      width: '1200px',
-      disableClose: true
+      width: "1200px",
+      disableClose: true,
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
   }
@@ -4788,28 +5965,42 @@ export class FilingFormComponent implements OnInit, OnDestroy {
   direccionManualCuentaContratoChange(event) {
     if (event.checked) {
       // Validamos si la direccion esta vacia
-      if (this.moduleForm.get('direccion').value == '') {
-        this.sweetAlertService.sweetInfoText('Dirección', 'Por favor diligencie la dirección');
+      if (this.moduleForm.get("direccion").value == "") {
+        this.sweetAlertService.sweetInfoText(
+          "Dirección",
+          "Por favor diligencie la dirección",
+        );
         // Hacemos que el checkbox quede desmarcado
-        this.moduleForm.controls["direccionManualCuentaContrato"].setValue(false);
+        this.moduleForm.controls["direccionManualCuentaContrato"].setValue(
+          false,
+        );
         event.checked = false;
-
       } else {
         //  this.moduleForm.controls["tipoZonaNotificacion"].setValue(true);
-        this.moduleForm.controls["direccionCliente"].setValue(this.moduleForm.controls["direccion"].value);
+        this.moduleForm.controls["direccionCliente"].setValue(
+          this.moduleForm.controls["direccion"].value,
+        );
       }
     } else {
       this.sweetAlertService.sweetClose();
       //  this.moduleForm.controls["tipoZonaNotificacion"].setValue(false);
-      this.moduleForm.controls["direccionCliente"].setValue(this.direccionCliente);
+      this.moduleForm.controls["direccionCliente"].setValue(
+        this.direccionCliente,
+      );
     }
   }
 
-  validarCuentaContrato(control: AbstractControl): { [key: string]: any } | null {
+  validarCuentaContrato(
+    control: AbstractControl,
+  ): { [key: string]: any } | null {
     const control2 = control.value;
     // Validamos que solo se permita entre 6 y 12 caracteres
     if (control2.length > 12) {
-      return { noEsCuentaContrato: true, mensaje: 'El número de cuenta contrato no puede tener más de 12 caracteres.' };
+      return {
+        noEsCuentaContrato: true,
+        mensaje:
+          "El número de cuenta contrato no puede tener más de 12 caracteres.",
+      };
     } else {
       return { noEsCuentaContrato: false };
     }
@@ -4821,8 +6012,9 @@ export class FilingFormComponent implements OnInit, OnDestroy {
 
     if (controlValue && controlValue[0].length > 0 && !this.validarUnaVez2) {
       this.validarUnaVez2 = true;
-      this.moduleForm.controls["numeroCuentaContrato"].setValidators([this.validarCuentaContrato]);
-
+      this.moduleForm.controls["numeroCuentaContrato"].setValidators([
+        this.validarCuentaContrato,
+      ]);
     }
     if (!controlValue || controlValue[0].length === 0) {
       this.validarUnaVez2 = false;
@@ -4833,14 +6025,20 @@ export class FilingFormComponent implements OnInit, OnDestroy {
     }
 
     setTimeout(() => {
-      if (controlValue && !this.moduleForm.controls["numeroCuentaContrato"]?.hasError('noEsCuentaContrato')) {
+      if (
+        controlValue &&
+        !this.moduleForm.controls["numeroCuentaContrato"]?.hasError(
+          "noEsCuentaContrato",
+        )
+      ) {
         this.validarUnaVez2 = false;
         this.moduleForm.controls["numeroCuentaContrato"].setValidators([]);
-        this.moduleForm.controls["numeroCuentaContrato"].updateValueAndValidity();
+        this.moduleForm.controls[
+          "numeroCuentaContrato"
+        ].updateValueAndValidity();
         this.buscarCuentaContrato();
       }
     });
-
 
     this.moduleForm.controls["numeroCuentaContrato"].updateValueAndValidity();
   }
@@ -4850,30 +6048,47 @@ export class FilingFormComponent implements OnInit, OnDestroy {
   buscarCuentaContrato() {
     this.sweetAlertService.sweetLoading();
     let cuenta = this.moduleForm.controls["numeroCuentaContrato"].value;
-    this.restService.restGetNotDecrypt(this.versionApi + 'api/v1/cuenta-contrato/detalles/' + cuenta, this.authorization).subscribe(
-      (res) => {
-        this.resSerCuentaContrato = res;
-        if (this.resSerCuentaContrato.data.E_DETALLES.length > 0) {
-          this.showCreateDireccion = false;
-          this.moduleForm.controls["numeroCuentaInterna"].setValue(this.resSerCuentaContrato.data.E_DETALLES[0].CUENTA_INTERNA);
-          this.moduleForm.controls["direccion"].setValue(this.resSerCuentaContrato.data.E_DETALLES[0].CALLE);
-          this.moduleForm.controls["zona"].setValue(this.resSerCuentaContrato.data.E_DETALLES[0].ZONA);
-        } else {
-          this.showCreateDireccion = true;
-          this.moduleForm.controls["numeroCuentaInterna"].reset();
-          this.moduleForm.controls["direccion"].reset();
-          this.moduleForm.controls["zona"].reset();
-          this.sweetAlertService.sweetInfo("Info", ["No se encontró información con el número de cuenta contrato ingresado: " + cuenta + "."]);
-        }
-        this.sweetAlertService.sweetClose();
-      },
-      (err) => {
-        this.resSerCuentaContratoErr = err;
-        // Evaluar respuesta de error del servicio
-        this.sweetAlertService.sweetClose();
-        this.globalAppService.resolveResponseError(this.resSerCuentaContratoErr).then((res) => { });
-      }
-    );
+    this.restService
+      .restGetNotDecrypt(
+        this.versionApi + "api/v1/cuenta-contrato/detalles/" + cuenta,
+        this.authorization,
+      )
+      .subscribe(
+        (res) => {
+          this.resSerCuentaContrato = res;
+          if (this.resSerCuentaContrato.data.E_DETALLES.length > 0) {
+            this.showCreateDireccion = false;
+            this.moduleForm.controls["numeroCuentaInterna"].setValue(
+              this.resSerCuentaContrato.data.E_DETALLES[0].CUENTA_INTERNA,
+            );
+            this.moduleForm.controls["direccion"].setValue(
+              this.resSerCuentaContrato.data.E_DETALLES[0].CALLE,
+            );
+            this.moduleForm.controls["zona"].setValue(
+              this.resSerCuentaContrato.data.E_DETALLES[0].ZONA,
+            );
+          } else {
+            this.showCreateDireccion = true;
+            this.moduleForm.controls["numeroCuentaInterna"].reset();
+            this.moduleForm.controls["direccion"].reset();
+            this.moduleForm.controls["zona"].reset();
+            this.sweetAlertService.sweetInfo("Info", [
+              "No se encontró información con el número de cuenta contrato ingresado: " +
+                cuenta +
+                ".",
+            ]);
+          }
+          this.sweetAlertService.sweetClose();
+        },
+        (err) => {
+          this.resSerCuentaContratoErr = err;
+          // Evaluar respuesta de error del servicio
+          this.sweetAlertService.sweetClose();
+          this.globalAppService
+            .resolveResponseError(this.resSerCuentaContratoErr)
+            .then((res) => {});
+        },
+      );
   }
 
   validarSiClonado() {
@@ -4889,8 +6104,8 @@ export class FilingFormComponent implements OnInit, OnDestroy {
 
   onInputChangeOnlyNumbers(event: Event): void {
     const input = event.target as HTMLInputElement;
-    input.value = input.value.replace(/[^0-9]/g, '');
+    input.value = input.value.replace(/[^0-9]/g, "");
     let int = parseInt(input.value, 10) || 0;
-    this.moduleForm.get('foliosRadiRadicado')?.setValue(int);
+    this.moduleForm.get("foliosRadiRadicado")?.setValue(int);
   }
 }

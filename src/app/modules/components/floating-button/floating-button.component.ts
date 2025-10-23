@@ -1,39 +1,45 @@
-/**
-
- */
-
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy,
+} from "@angular/core";
+import { Router } from "@angular/router";
 import { ModalService } from "src/app/services/modal/modal.service";
 
 @Component({
-  selector: 'app-floating-button',
-  templateUrl: './floating-button.component.html',
-  styleUrls: ['./floating-button.component.css']
+  selector: "app-floating-button",
+  templateUrl: "./floating-button.component.html",
+  styleUrls: ["./floating-button.component.css"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FloatingButtonComponent implements OnInit {
-
   /**
    * Configuraciones para el botón flotante
    *
    * Estilo para el botón, json abierto a css
    */
   public spin: boolean = true;
-  public direction = 'up';
-  public animationMode = 'fling';
-  @Input() textBtn: string = '';
+  public menuOpen: boolean = false;
+  public direction = "up";
+  public animationMode = "fling";
+  @Input() textBtn: string = "";
   @Input() styleButtonFloat: any = {
-    'right': '30px',
-    'z-index': 10000,
-    'position': 'fixed',
-    'bottom': '15px',
-    'color': 'red'
+    right: "30px",
+    "z-index": 10000,
+    position: "fixed",
+    bottom: "15px",
+    color: "red",
   };
 
   /**
    * Nombre del icono principal
    */
-  @Input() iconMenu: string = 'menu';
+  @Input() iconMenu = this.menuOpen ? "chevron_right" : "chevron_left";
+
+  /**
 
   /**
    * Data del menu a desplegar
@@ -44,8 +50,8 @@ export class FloatingButtonComponent implements OnInit {
    */
   @Input() styleButtonIcon: any;
   /**
-  * Data del style para el icono
-  */
+   * Data del style para el icono
+   */
   @Input() styleIcon: any;
   /**
    * Data para recibir el texto del title
@@ -62,8 +68,11 @@ export class FloatingButtonComponent implements OnInit {
   @Output() public menuPrimaryEmiterData = new EventEmitter<any>();
   @Output() public menuEmiterCancel = new EventEmitter<any>();
 
-
-  constructor(private router: Router, private modal: ModalService, private modalSvc: ModalService) { }
+  constructor(
+    private router: Router,
+    private modal: ModalService,
+    private modalSvc: ModalService,
+  ) {}
 
   ngOnInit() {
     if (this.statusInitialScroll) {
@@ -72,16 +81,16 @@ export class FloatingButtonComponent implements OnInit {
   }
 
   isPhysicalSpaceCreateRoute(): boolean {
-    return this.router.url === '/archiveManagement/physical-space-create';
+    return this.router.url === "/archiveManagement/physical-space-create";
   }
 
   isPhysicalSpaceUpdateRoute(): boolean {
     const currentUrl = this.router.url;
-    return currentUrl.startsWith('/archiveManagement/physical-space-update');
+    return currentUrl.startsWith("/archiveManagement/physical-space-update");
   }
 
   isArchiveManagementCreateRoute(): boolean {
-    return this.router.url === '/archiveManagement/archive-filing-index';
+    return this.router.url === "/archiveManagement/archive-filing-index";
   }
 
   /**
@@ -90,18 +99,23 @@ export class FloatingButtonComponent implements OnInit {
    */
   menuButtonClick(data) {
     if (data.action === "changeStatus") {
-      this.modalSvc.openAction("", "¿Está seguro que desea cambiar el estado ?", () => { this.menuEmiterData.emit(data) })
-
+      this.modalSvc.openAction(
+        "",
+        "¿Está seguro que desea cambiar el estado ?",
+        () => {
+          this.menuEmiterData.emit(data);
+        },
+      );
     } else this.menuEmiterData.emit(data);
   }
 
   menuButtonPrimaryClick() {
     this.menuPrimaryEmiterData.emit({ data: true });
+    this.menuOpen = !this.menuOpen;
+    this.iconMenu = this.menuOpen ? "chevron_right" : "chevron_left";
   }
 
   clickCancel() {
     window.location.reload(); // Recarga la página
   }
-
-  /** Validar si el boton es un array vacio o no tiene data para ocultar los botones */
 }

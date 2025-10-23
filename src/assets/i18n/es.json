@@ -1005,5 +1005,12 @@
   "mailBody": "Cuerpo del correo",
   "continue": "Continuar",
   "successUpdateDocument": "Archivo cargado correctamente",
-  "nombre": "Alex"
+  "nombre": "Alex",
+
+  "pucCuentas": {
+    "codigo": "Codigo",
+    "ingrese el codigo de la cuenta": "Ingrese el codigo de la cuenta",
+    "ingrese el nombre de la cuenta": "Ingrese el nombre de la cuenta",
+    "nombreCuenta": "Nombre cuenta"
+  }
 }

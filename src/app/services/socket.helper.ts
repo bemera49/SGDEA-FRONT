@@ -29,14 +29,12 @@ export class SocketHelper {
 
   constructor() {
     // SOLUCIÓN TEMPORAL: Comentar la conexión
-    console.log("SocketHelper initialized but connection disabled");
     this.socket = connect(environment.SOCKET_ENDPOINT);
 
     /**
      * Evento que se dispara cuando se conecta al socket.
      */
     this.on<any>(IOEvents.connect, () => {
-      console.log("Connected to socket", { socket: this.socket });
       this.socketId = this.socket?.id;
     });
 

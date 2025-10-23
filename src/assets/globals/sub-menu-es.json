@@ -360,9 +360,6 @@
       "operacion": "ocupacional%listar",
       "icon": "backup_table"
     }
-
-
-
   ],
 
   "predial": [
@@ -372,9 +369,7 @@
       "operacion": "predial%create%request",
       "icon": "backup_table"
     }
-
   ],
-
 
   "juridica": [
     {
@@ -487,13 +482,33 @@
       "ruta_completa": 1
     }
   ],
-  "gestionTramite": [
+  "gestiontramite": [
     {
-      "name": "Actos Administrativos",
+      "name": "actos administrativos",
       "route": "/filing/filing-acts/false",
-      "operacion": "actosAdministrativos%consulta",
+      "operacion": "actosadministrativos%consulta",
       "icon": "api",
       "ruta_completa": 1
+    }
+  ],
+  "pucCuentas": [
+    {
+      "name": "Plan de cuentas",
+      "route": "/puc-cuentas-index",
+      "operacion": "pucCuentas%puc-cuentas%index",
+      "icon": "person"
+    },
+    {
+      "name": "Catalogo Terceros",
+      "route": "/ph-terceros-index",
+      "operacion": "pucCuentas%ph-terceros%index",
+      "icon": "person"
+    },
+    {
+      "name": "Gestión de Unidades",
+      "route": "/ph-terceros-apartamentos-index",
+      "operacion": "pucCuentas%ph-terceros-apartamentos%index",
+      "icon": "person"
     }
   ]
 }

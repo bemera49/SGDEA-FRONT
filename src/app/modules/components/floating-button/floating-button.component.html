@@ -1,44 +1,92 @@
 <div class="btnFloatContentVertical" [ngStyle]="styleButtonFloat">
-    <div class="btn-group-vertical" role="group" aria-label="Floating Navigation">
-        <button type="button" class="btn btn-primary buttonIconSubmenu" (click)="menuButtonPrimaryClick()">
-            <mat-icon>{{ iconMenu }}</mat-icon>
-            <p class="wrap-text-main">{{ ( iconMenu==='save' && textBtn !== 'Actualizar' ? 'Guardar':titleButton) }}</p>
-            <p class="wrap-text-main" style="font-size: 11px;">{{ ( iconMenu==='save' && textBtn == 'Actualizar' ?
-                'Actualizar':titleButton) }}</p>
+  <div class="btn-group-vertical" role="group" aria-label="Floating Navigation">
+    <button
+      type="button"
+      class="btn btn-primary buttonIconSubmenu"
+      (click)="menuButtonPrimaryClick()"
+    >
+      <mat-icon>{{ iconMenu }}</mat-icon>
+      <p class="wrap-text-main">
+        {{
+          iconMenu === "save" && textBtn !== "Actualizar"
+            ? "Guardar"
+            : titleButton
+        }}
+      </p>
+      <p class="wrap-text-main" style="font-size: 11px">
+        {{
+          iconMenu === "save" && textBtn == "Actualizar"
+            ? "Actualizar"
+            : titleButton
+        }}
+      </p>
+    </button>
+    <!-- <button mat-raised-button type="button" [routerLink]="['/archiveManagement/physical-space-index']" class="btn btn-danger buttonIconSubmenu"> -->
+    <!-- <button *ngIf="isPhysicalSpaceCreateRoute()" type="button" class="btn btn-primary buttonIconSubmenu" (click)="menuButtonPrimaryClick()"> -->
+    <button
+      *ngIf="isPhysicalSpaceCreateRoute()"
+      mat-raised-button
+      type="button"
+      [routerLink]="['/archiveManagement/physical-space-index']"
+      class="btn btn-danger buttonIconSubmenu"
+    >
+      <!-- {{ 'Cancelar' | translate }} -->
+      <mat-icon class="material-icons">close</mat-icon>
+      <p
+        class="wrap-text-main"
+        style="display: flex; justify-content: center; font-size: 11px"
+      >
+        {{ iconMenu === "save" ? "Cancelar" : titleButton }}
+      </p>
+    </button>
 
-        </button>
-        <!-- <button mat-raised-button type="button" [routerLink]="['/archiveManagement/physical-space-index']" class="btn btn-danger buttonIconSubmenu"> -->
-        <!-- <button *ngIf="isPhysicalSpaceCreateRoute()" type="button" class="btn btn-primary buttonIconSubmenu" (click)="menuButtonPrimaryClick()"> -->
-        <button *ngIf="isPhysicalSpaceCreateRoute()" mat-raised-button type="button"
-            [routerLink]="['/archiveManagement/physical-space-index']" class="btn btn-danger buttonIconSubmenu">
-            <!-- {{ 'Cancelar' | translate }} -->
-            <mat-icon class="material-icons">close</mat-icon>
-            <p class="wrap-text-main" style="display: flex;justify-content: center;font-size: 11px;">{{ (
-                iconMenu==='save' ? 'Cancelar':titleButton) }}</p>
-        </button>
+    <button
+      *ngIf="isPhysicalSpaceUpdateRoute()"
+      mat-raised-button
+      type="button"
+      [routerLink]="['/archiveManagement/physical-space-index']"
+      class="btn btn-danger buttonIconSubmenu"
+    >
+      <!-- {{ 'Cancelar' | translate }} -->
+      <mat-icon class="material-icons">close</mat-icon>
+      <p
+        class="wrap-text-main"
+        style="display: flex; justify-content: center; font-size: 11px"
+      >
+        {{ iconMenu === "save" ? "Cancelar" : titleButton }}
+      </p>
+    </button>
 
-        <button *ngIf="isPhysicalSpaceUpdateRoute()" mat-raised-button type="button"
-            [routerLink]="['/archiveManagement/physical-space-index']" class="btn btn-danger buttonIconSubmenu">
-            <!-- {{ 'Cancelar' | translate }} -->
-            <mat-icon class="material-icons">close</mat-icon>
-            <p class="wrap-text-main" style="display: flex;justify-content: center;font-size: 11px;">{{ (
-                iconMenu==='save' ? 'Cancelar':titleButton) }}</p>
-        </button>
+    <button
+      *ngIf="iconMenu == 'save' && isArchiveManagementCreateRoute()"
+      mat-raised-button
+      type="button"
+      class="btn btn-danger buttonIconSubmenu"
+      (click)="clickCancel()"
+    >
+      <!-- {{ 'Cancelar' | translate }} -->
+      <mat-icon class="material-icons">close</mat-icon>
+      <p
+        class="wrap-text-main"
+        style="display: flex; justify-content: center; font-size: 11px"
+      >
+        {{ iconMenu === "save" ? "Cancelar" : titleButton }}
+      </p>
+    </button>
 
-        <button *ngIf="iconMenu == 'save' && isArchiveManagementCreateRoute()" mat-raised-button type="button"
-            class="btn btn-danger buttonIconSubmenu" (click)="clickCancel()">
-            <!-- {{ 'Cancelar' | translate }} -->
-            <mat-icon class="material-icons">close</mat-icon>
-            <p class="wrap-text-main" style="display: flex;justify-content: center;font-size: 11px;">{{ (
-                iconMenu==='save' ? 'Cancelar':titleButton) }}</p>
-        </button>
-        <ng-container *ngFor="let button of menuButtons">
-            <ng-container *can="button?.permission">
-                <button type="button" class="btn btn-secondary buttonIconSubmenu" (click)="menuButtonClick(button)">
-                    <mat-icon>{{ button.icon }}</mat-icon>
-                    <p class="wrap-text">{{ button.title | translate }}</p>
-                </button>
-            </ng-container>
-        </ng-container>
-    </div>
+    <ng-container *ngFor="let button of menuButtons">
+      <ng-container *can="button?.permission">
+        <div *ngIf="menuOpen">
+          <button
+            type="button"
+            class="btn btn-secondary buttonIconSubmenu"
+            (click)="menuButtonClick(button)"
+          >
+            <mat-icon>{{ button.icon }}</mat-icon>
+            <p class="wrap-text">{{ button.title | translate }}</p>
+          </button>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
 </div>

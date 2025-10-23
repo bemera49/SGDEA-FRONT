@@ -1,13 +1,25 @@
 <div class="wrapper">
-    <app-admin-top-nav-alfresco></app-admin-top-nav-alfresco>
-    <div class="main-panel">
-        <app-admin-top-nav-bar [topNavBarTitle]="topNavBarTitle" [topNavBarOn]="topNavBarOn" [topNavBarRouteActive]="topNavBarRouteActive"></app-admin-top-nav-bar>
-        <router-outlet (activate)="onActivate()"></router-outlet>
-        <app-sub-menu [subMenuStatus]="subMenuStatus" [subMenuTitle]="subMenuTitle" [subMenuActive]="subMenuActive" [subMenuNotificationStatus]="subMenuNotificationStatus" [subMenuNotificationClassAlert]="subMenuNotificationClassAlert" [subMenuNotificationMessage]="subMenuNotificationMessage">
-        </app-sub-menu>
-        <div *ngIf="!isMap()">
-            <app-admin-footer-nav-bar></app-admin-footer-nav-bar>
-        </div>
+  <app-admin-top-nav-alfresco></app-admin-top-nav-alfresco>
+  <div class="main-panel">
+    <app-admin-top-nav-bar
+      [topNavBarTitle]="topNavBarTitle"
+      [topNavBarOn]="topNavBarOn"
+      [topNavBarRouteActive]="topNavBarRouteActive"
+    ></app-admin-top-nav-bar>
+    <router-outlet (activate)="onActivate()"></router-outlet>
+    <app-sub-menu
+      [subMenuStatus]="subMenuStatus"
+      [subMenuTitle]="subMenuTitle"
+      [subMenuActive]="subMenuActive"
+      [subMenuNotificationStatus]="subMenuNotificationStatus"
+      [subMenuNotificationClassAlert]="subMenuNotificationClassAlert"
+      [subMenuNotificationMessage]="subMenuNotificationMessage"
+    >
+    </app-sub-menu>
+    <div *ngIf="!isMap()">
+      <app-admin-footer-nav-bar></app-admin-footer-nav-bar>
     </div>
-    <!-- <app-fixedplugin></app-fixedplugin> -->
+  </div>
+  <!-- <app-fixedplugin></app-fixedplugin> -->
 </div>
+

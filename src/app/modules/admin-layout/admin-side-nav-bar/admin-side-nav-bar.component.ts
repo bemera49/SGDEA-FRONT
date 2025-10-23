@@ -23,6 +23,24 @@ export interface Breadcrumb {
   styleUrls: ["./admin-side-nav-bar.component.css"],
 })
 export class AdminSideNavBarComponent implements OnInit {
+  // Propiedad para controlar la visibilidad del sidebar
+  sidebarVisible: boolean = true;
+
+  // Método para alternar la visibilidad del sidebar
+  toggleSidebar(): void {
+    this.sidebarVisible = !this.sidebarVisible;
+  }
+
+  // Método para ocultar el sidebar
+  hideSidebar(): void {
+    this.sidebarVisible = false;
+  }
+
+  // Método para mostrar el sidebar
+  showSidebar(): void {
+    this.sidebarVisible = true;
+  }
+
   authorization: string; // Token de autorización
   responseMenuUser: any; // Respuesta del servicio
   localStorageMenu: any; // Menu guardado en el local storage
@@ -202,6 +220,7 @@ export class AdminSideNavBarComponent implements OnInit {
     return new Promise<any>((resolve) => {
       if (data) {
         // Enviar el menu a la variable que se asigna del local storage
+        console.log("setMenuLocalStorage", data);
         this.localStorageMenu = data;
         // Asigna el menu al local storage
         localStorage.setItem(
@@ -376,7 +395,6 @@ export class AdminSideNavBarComponent implements OnInit {
   // Método para obtener el submenu que se encuentra en el json
   jsonSubMenu(dataService, menuItem) {
     this.subMenuCols = [];
-
     this.globalAppService.subMenuGet().then((res) => {
       this.responseJsonSubMenus = res;
       menuItem.forEach((menuArr) => {

@@ -1,7 +1,3 @@
-/**
-
- */
-
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -12,7 +8,7 @@ import { MaterialModule } from "../../app.material.module";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatSelectModule } from "@angular/material/select";
 import { NgxMatSelectSearchModule } from "ngx-mat-select-search";
-import { BnNgIdleService } from 'bn-ng-idle';
+import { BnNgIdleService } from "bn-ng-idle";
 /**
  * Importación de modulos
  */
@@ -27,10 +23,13 @@ import { CorManagMassReassignmentIndexComponent } from "./cor-manag-mass-reassig
 import { CorManagAnnulmentIndexComponent } from "./cor-manag-annulment-index/cor-manag-annulment-index.component";
 import { CorManagDistributionShippingIndexComponent } from "./cor-manag-distribution-shipping-index/cor-manag-distribution-shipping-index.component";
 import { CorManagDistributionShippingViewComponent } from "./cor-manag-distribution-shipping-view/cor-manag-distribution-shipping-view.component";
-import { RadicatePqrsComponent } from './radicate-pqrs/radicate-pqrs.component';
+import { RadicatePqrsComponent } from "./radicate-pqrs/radicate-pqrs.component";
 import { PqrsFormComponent } from "../components/pqrs-form/pqrs-form.component";
 import { BreadcrumbComponent } from "../components/breadcrumb/breadcrumb.component";
-import { DetailCuatroSetentaDosComponent, ViewCuatroSetentaDosModalDialog } from './detail-cuatro-setenta-dos/detail-cuatro-setenta-dos.component';
+import {
+  DetailCuatroSetentaDosComponent,
+  ViewCuatroSetentaDosModalDialog,
+} from "./detail-cuatro-setenta-dos/detail-cuatro-setenta-dos.component";
 
 @NgModule({
   declarations: [
@@ -68,9 +67,9 @@ import { DetailCuatroSetentaDosComponent, ViewCuatroSetentaDosModalDialog } from
     MatFormFieldModule,
     NgxMatSelectSearchModule,
     PqrsFormComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
   ],
   exports: [],
-  providers: [BnNgIdleService]
+  providers: [BnNgIdleService],
 })
-export class CorrespondenceManagementModule { }
+export class CorrespondenceManagementModule {}

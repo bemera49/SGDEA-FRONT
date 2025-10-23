@@ -7,10 +7,10 @@
   flex-direction: column;
   align-items: flex-end;
   padding: 10px;
-  width: 50px;
+  width: 100px;
   overflow-y: auto;
   max-height: 100%;
-  width: 100px;
+  transition: top 0.3s ease-in-out;
 }
 
 p {
@@ -23,7 +23,6 @@ p {
   align-items: flex-end;
 }
 
-
 .btn.btn-secondary {
   text-align: center;
   width: 100%; /* Adjust as needed */
@@ -35,7 +34,6 @@ p {
   height: auto; /* Adjust as needed */
   padding: 8px 5px; /* Adjust as needed */
   max-width: 75px;
-
 }
 
 .wrap-text {
@@ -47,11 +45,11 @@ p {
   padding: 0;
 }
 
-small{
+small {
   font-size: 9px;
 }
 
-.material-icons{
+.material-icons {
   font-size: 11px;
 }
 
@@ -64,7 +62,7 @@ small{
   display: inline;
 }
 
-.wrap-text-main{
+.wrap-text-main {
   color: white !important;
   margin: 0 !important;
 }

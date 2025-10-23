@@ -1,7 +1,3 @@
-/**
-
- */
-
 import {
   AfterViewChecked,
   AfterViewInit,
@@ -37,7 +33,7 @@ import { SweetAlertService } from "src/app/services/sweet-alert.service";
  */
 import { ChangeChildrenService } from "../../../services/change-children.service";
 
-import { ToastService } from '@app/services/toast/toast.service';
+import { ToastService } from "@app/services/toast/toast.service";
 import { takeUntil } from "rxjs/operators";
 import swal from "sweetalert2";
 
@@ -56,8 +52,11 @@ declare const $: any;
   templateUrl: "./initial-list.component.html",
   styleUrls: ["./initial-list.component.css"],
 })
-export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChecked, OnDestroy, OnChanges {
-  @ViewChild(DataTableDirective, { static: false }) dtElement: DataTableDirective;
+export class InitialListComponent
+  implements AfterViewInit, OnInit, AfterViewChecked, OnDestroy, OnChanges
+{
+  @ViewChild(DataTableDirective, { static: false })
+  dtElement: DataTableDirective;
 
   /**
    * Valida si los filtros deben abrir automaticamente
@@ -100,9 +99,8 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
   @Input() paramOID = 0;
   @Input() dataFilter: any; // Data del filtro
   @Input() tipoRadicado: any; // Data del filtro
-  @Input() page: string = '1';
-  @Input() limit: string = '100';
-
+  @Input() page: string = "1";
+  @Input() limit: string = "100";
 
   /** Propiedades del Initial List */
 
@@ -126,7 +124,8 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
 
   /** Las variables para mostrar la alerta informativa  */
   @Input() initialNotificationStatus: boolean = false;
-  @Input() initialNotificationClassAlert: string = "alert alert-info alert-with-icon";
+  @Input() initialNotificationClassAlert: string =
+    "alert alert-info alert-with-icon";
   @Input() initialNotificationMessage: string;
   @Input() initialNotificationMessageArray: any = [];
 
@@ -275,7 +274,8 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
       sLengthMenu: "Mostrar _MENU_ registros",
       sZeroRecords: "No se encontraron resultados",
       sEmptyTable: "No se encontraron documentos",
-      sInfo: "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+      sInfo:
+        "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
       sInfoEmpty: "Mostrando registros del 0 al 0 de un total de 0 registros",
       sInfoFiltered: "(filtrado de un total de _MAX_ registros)",
       sInfoPostFix: "",
@@ -290,8 +290,10 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
         sPrevious: "Anterior",
       },
       oAria: {
-        sSortAscending: ": Activar para ordenar la columna de manera ascendente",
-        sSortDescending: ": Activar para ordenar la columna de manera descendente",
+        sSortAscending:
+          ": Activar para ordenar la columna de manera ascendente",
+        sSortDescending:
+          ": Activar para ordenar la columna de manera descendente",
       },
       buttons: {
         csv: "CSV",
@@ -335,7 +337,8 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
       sLengthMenu: "Mostrar _MENU_ registros",
       sZeroRecords: "Nenhum resultado encontrado",
       sEmptyTable: "Nenhum documento encontrado",
-      sInfo: "Mostrando registros del _START_ a _END_ de um total de _TOTAL_ registros",
+      sInfo:
+        "Mostrando registros del _START_ a _END_ de um total de _TOTAL_ registros",
       sInfoEmpty: "Mostrando registros del 0 a 0 de um total de 0 registros",
       sInfoFiltered: "(filtrando um total de _MAX_ registros)",
       sInfoPostFix: "",
@@ -351,13 +354,14 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
       },
       oAria: {
         sSortAscending: ": Ative para classificar a coluna em ordem crescente",
-        sSortDescending: ": Ative para classificar a coluna em ordem decrescente",
+        sSortDescending:
+          ": Ative para classificar a coluna em ordem decrescente",
       },
       buttons: {
         csv: "CSV",
         excel: "EXCEL",
         pdf: "PDF",
-        print: "IMPRIMIR"
+        print: "IMPRIMIR",
       },
     },
   };
@@ -377,7 +381,10 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
 
   // files
   uploadResponse: any = { status: false, message: "Cargando...", proccess: 50 };
-  ruoteServiceDocuments: string = environment.apiUrl + this.versionApi + "radicacion/transacciones/upload-file";
+  ruoteServiceDocuments: string =
+    environment.apiUrl +
+    this.versionApi +
+    "radicacion/transacciones/upload-file";
   urlEndSend: any;
   uploadProcess: any;
 
@@ -417,8 +424,8 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
     this.detectLanguageInitial();
   }
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['dataParamsAdd'] && !!this.dataParamsAdd) {
-      this.dataTablesInitService(true)
+    if (changes["dataParamsAdd"] && !!this.dataParamsAdd) {
+      this.dataTablesInitService(true);
     }
   }
   ngOnInit() {
@@ -436,9 +443,16 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
   matDrawerContainerStyle: any;
   ngAfterViewInit() {
     // Obtenemos los estilos del mat-drawe-container
-    const matDrawerContainer = document.querySelector('.mat-drawer-container') as HTMLElement;
+    const matDrawerContainer = document.querySelector(
+      ".mat-drawer-container",
+    ) as HTMLElement;
     const style = window.getComputedStyle(matDrawerContainer);
-    this.matDrawerContainerStyle = [style.width, style.maxWidth, style.height, style.maxHeight];
+    this.matDrawerContainerStyle = [
+      style.width,
+      style.maxWidth,
+      style.height,
+      style.maxHeight,
+    ];
     if (this.viewColumStatus == true) {
       this.changeStatusDetected();
     }
@@ -455,8 +469,6 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
     $(".buttons-pdf").addClass("btn btn-primary btn-round mat-raised-button");
     $(".buttons-print").addClass("btn btn-primary btn-round mat-raised-button");
     $(".dt-button").addClass("btn btn-primary btn-round mat-raised-button");
-
-
   }
 
   /**
@@ -482,7 +494,10 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
    * por esto se retorna la variable "reloadLangDatatable"
    */
   reloadDatatableByLang() {
-    if (this.reloadLangDatatable == true && environment.supportedLanguages[this.languageReceive] == true) {
+    if (
+      this.reloadLangDatatable == true &&
+      environment.supportedLanguages[this.languageReceive] == true
+    ) {
       this.reloadLangDatatable = false;
       this.rerender();
     }
@@ -505,66 +520,64 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
     this.selectedRowsEmiter.emit(this.selectedRows);
   }
 
-
   /** Método para configurar las propiedades estandar del datatable */
   configDtOptions() {
     return new Promise((resolve) => {
       let textList = this.translate.instant(this.initCardHeaderTitle);
       const convertToXML = (data) => {
         let xml = '<?xml version="1.0" encoding="UTF-8"?>\n<rows>\n';
-        data.body.forEach(row => {
-          xml += '  <row>\n';
+        data.body.forEach((row) => {
+          xml += "  <row>\n";
           row.forEach((cell, index) => {
             xml += `    <column${index + 1}>${cell}</column${index + 1}>\n`;
           });
-          xml += '  </row>\n';
+          xml += "  </row>\n";
         });
-        xml += '</rows>';
+        xml += "</rows>";
         return xml;
-      }
+      };
 
-      let buttonsTable: any[] = [{
-        extend: "csvHtml5",
-        title: textList,
-      },
-      {
-        extend: "excelHtml5",
-        title: textList,
-      },
-      {
-        extend: "pdfHtml5",
-        title: textList,
-        orientation: "landscape",
-        pageSize: "LEGAL",
-      },
-      {
-        extend: "print",
-        title: textList,
-      }];
+      let buttonsTable: any[] = [
+        {
+          extend: "csvHtml5",
+          title: textList,
+        },
+        {
+          extend: "excelHtml5",
+          title: textList,
+        },
+        {
+          extend: "pdfHtml5",
+          title: textList,
+          orientation: "landscape",
+          pageSize: "LEGAL",
+        },
+        {
+          extend: "print",
+          title: textList,
+        },
+      ];
 
       if (this.xmlButton) {
-
         buttonsTable = [
           ...buttonsTable,
           {
-
-            text: 'XML INDICE ELECTRONICO',
+            text: "XML INDICE ELECTRONICO",
             action: function (e, dt, button, config) {
               const data = dt.buttons.exportData(); // Get table data
               const xml = convertToXML(data); // Convert data to XML format
-              const blob = new Blob([xml], { type: 'application/xml' });
+              const blob = new Blob([xml], { type: "application/xml" });
               const url = URL.createObjectURL(blob);
-              const a = document.createElement('a');
+              const a = document.createElement("a");
               a.href = url;
-              a.download = textList + '.xml';
+              a.download = textList + ".xml";
               document.body.appendChild(a);
               a.click();
               document.body.removeChild(a);
               URL.revokeObjectURL(url);
-
-            }
-          }
-        ]
+            },
+          },
+        ];
       }
 
       this.dtOptions = {
@@ -593,14 +606,12 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
         }
       }
 
-      if (this.router.url === '/archiveManagement/physical-space-index') {
-        this.viewColumStatus = false
+      if (this.router.url === "/archiveManagement/physical-space-index") {
+        this.viewColumStatus = false;
       }
       resolve(true);
     });
   }
-
-
 
   getUserLS() {
     this.lhs.getUser().then((res: any) => {
@@ -615,9 +626,16 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
     if (this.authorization == "" || this.authorization == null) {
       this.lhs.getToken().then((res: string) => {
         this.authorization = res;
-        this.dataListLocalStorage = localStorage.getItem(environment.hashDataList);
-        this.moduloLocalStorage = localStorage.getItem(environment.hashDataListModule);
-        this.moduloLocalStorage = this.restService.decryptAES(this.moduloLocalStorage, this.authorization);
+        this.dataListLocalStorage = localStorage.getItem(
+          environment.hashDataList,
+        );
+        this.moduloLocalStorage = localStorage.getItem(
+          environment.hashDataListModule,
+        );
+        this.moduloLocalStorage = this.restService.decryptAES(
+          this.moduloLocalStorage,
+          this.authorization,
+        );
 
         /*if (this.moduloLocalStorage == this.routeData) {
           this.dataTablesInitLocalStorage();
@@ -634,8 +652,11 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
   analizeDataMailLocalStorage() {
     return new Promise<any>((resolve) => {
       /** Validar si existia data guardada del initial list de la radicacion mail */
-      let pruebaCorreoInitial = localStorage.getItem(environment.hashMailInitialListSgdea);
-      let pruebaCorreoInitialDecipted = this.authService.decryptAES(pruebaCorreoInitial);
+      let pruebaCorreoInitial = localStorage.getItem(
+        environment.hashMailInitialListSgdea,
+      );
+      let pruebaCorreoInitialDecipted =
+        this.authService.decryptAES(pruebaCorreoInitial);
       if (pruebaCorreoInitialDecipted != null) {
         this.responseServiceInit = pruebaCorreoInitialDecipted;
         if (this.responseServiceInit.fechaActual) {
@@ -652,8 +673,6 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
     });
   }
 
-
-
   /** Método para consultar el servicio que retorna la data para el dataTable */
   dataTablesInit() {
     if (this.sweetLoadingInitStatus) {
@@ -665,7 +684,9 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
         if (res == true) {
           this.sweetAlertService.showNotification(
             "success",
-            this.translate.instant("Está visualizando la última consulta realizada el ") + this.fechaActual
+            this.translate.instant(
+              "Está visualizando la última consulta realizada el ",
+            ) + this.fechaActual,
           );
           /** Se llama directamente al metodo que procesa la respuesta correcta del servicio del datatable ya que se utiliza la data del local storage */
           this.dataTablesInitProcessService(true);
@@ -690,7 +711,7 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
       if (this.dataFilter) {
         if (this.dataFilter.status) {
           params = this.dataFilter.data;
-          console.log(params)
+          console.log(params);
           // Valida Si llega un id
           if (this.paramOID != 0) {
             params["id"] = this.paramOID;
@@ -712,7 +733,9 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
         }
       }
       if (this.moduleEmail) {
-        let dataUser = this.authService.decryptAES(localStorage.getItem(environment.hashMailSgdea));
+        let dataUser = this.authService.decryptAES(
+          localStorage.getItem(environment.hashMailSgdea),
+        );
 
         params["dataEmail"] = dataUser;
       } else if (this.statusParamsAdd) {
@@ -721,160 +744,233 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
       if (!params["filterOperation"]) {
         params["filterOperation"] = [];
       }
-      if (this.dataParamsAdd && this.dataParamsAdd.hasOwnProperty('tipoComunicacionId')) {
-        params["filterOperation"].push({ "tipoComunicacionId": this.dataParamsAdd.tipoComunicacionId });
+      if (
+        this.dataParamsAdd &&
+        this.dataParamsAdd.hasOwnProperty("tipoComunicacionId")
+      ) {
+        params["filterOperation"].push({
+          tipoComunicacionId: this.dataParamsAdd.tipoComunicacionId,
+        });
       }
 
       if (this.menu != "") {
-        params['menu'] = this.menu;
+        params["menu"] = this.menu;
       }
 
-      if (typeof this.tipoRadicado === 'string' && this.tipoRadicado === '2') {
-        params["filterOperation"].push({ "idCgTipoRadicado": this.tipoRadicado });
+      if (typeof this.tipoRadicado === "string" && this.tipoRadicado === "2") {
+        params["filterOperation"].push({ idCgTipoRadicado: this.tipoRadicado });
       }
 
-      if (typeof this.tipoRadicado === 'string' && this.tipoRadicado === 'actoAdmin') {
-        params["filterOperation"].push({ "actoAdmin": 1 });
+      if (
+        typeof this.tipoRadicado === "string" &&
+        this.tipoRadicado === "actoAdmin"
+      ) {
+        params["filterOperation"].push({ actoAdmin: 1 });
       }
     } else {
-      params = null
+      params = null;
       params = this.dataParamsAdd;
     }
     if (this.medodDataTablesService == "GET" && this.NoDecrypt == false) {
-      this.restService.restGetParams(this.routeLoadDataTablesService, params, this.authorization).subscribe(
-        (res: any) => {
-          this.responseServiceInit = res;
-          if (this.responseServiceInit.data.length <= 0) {
-            this.toast.open({
-              title: 'No se encontraron registros que coincidan con su consulta',
-              description: ``,
-              duration: 3000,
-            })
-          }
-          this.globalAppService
-            .resolveResponse(this.responseServiceInit, this.isredirectionPath, this.redirectionPath)
-            .then((res) => {
-              let responseResolveResponse = res;
-              if (responseResolveResponse == true) {
-                /** Llamado al metodo que procesa la respuesta correcta del servicio del datatable */
-                this.dataTablesInitProcessService(responseResolveResponse);
-                // Retornar data al componente padre
-                if (this.dataInitialListReturn.length > 0) {
-                  const dataReturn = [];
-                  this.dataInitialListReturn.forEach((element) => {
-                    dataReturn.push({ name: element["name"], value: this.responseServiceInit[element["name"]] });
-                  });
-                  this.dataIndexReturn.emit(dataReturn);
+      this.restService
+        .restGetParams(
+          this.routeLoadDataTablesService,
+          params,
+          this.authorization,
+        )
+        .subscribe(
+          (res: any) => {
+            this.responseServiceInit = res;
+            if (this.responseServiceInit.data.length <= 0) {
+              this.toast.open({
+                title:
+                  "No se encontraron registros que coincidan con su consulta",
+                description: ``,
+                duration: 3000,
+              });
+            }
+            this.globalAppService
+              .resolveResponse(
+                this.responseServiceInit,
+                this.isredirectionPath,
+                this.redirectionPath,
+              )
+              .then((res) => {
+                let responseResolveResponse = res;
+                if (responseResolveResponse == true) {
+                  /** Llamado al metodo que procesa la respuesta correcta del servicio del datatable */
+                  this.dataTablesInitProcessService(responseResolveResponse);
+                  // Retornar data al componente padre
+                  if (this.dataInitialListReturn.length > 0) {
+                    const dataReturn = [];
+                    this.dataInitialListReturn.forEach((element) => {
+                      dataReturn.push({
+                        name: element["name"],
+                        value: this.responseServiceInit[element["name"]],
+                      });
+                    });
+                    this.dataIndexReturn.emit(dataReturn);
+                  }
                 }
-              }
-            });
-        },
-        (err) => {
-          this.responseServiceInitErr = err;
-          // Evaluar respuesta de error del servicio
-          this.globalAppService
-            .resolveResponseError(this.responseServiceInitErr, this.isredirectionPath, this.redirectionPath)
-            .then((res) => { });
-        }
-      );
+              });
+          },
+          (err) => {
+            this.responseServiceInitErr = err;
+            // Evaluar respuesta de error del servicio
+            this.globalAppService
+              .resolveResponseError(
+                this.responseServiceInitErr,
+                this.isredirectionPath,
+                this.redirectionPath,
+              )
+              .then((res) => {});
+          },
+        );
     } else if (this.medodDataTablesService == "GET" && this.NoDecrypt == true) {
-      this.restService.restGetNotDecrypt(this.routeLoadDataTablesService, this.authorization, this.page, this.limit, params).subscribe((data: any) => {
-
-        if (!!data.data) {
-          for (let i = 0; i < data.data.length; i++) {
-            if (data.data[i]['activo'] !== undefined) {
-              if (data.data[i]['activo'] == true) {
-                data.data[i]['estado'] = 'Activo';
-              } else {
-                data.data[i]['estado'] = 'Inactivo';
+      console.log(this.authorization);
+      this.restService
+        .restGetNotDecrypt(
+          this.routeLoadDataTablesService,
+          this.authorization,
+          this.page,
+          this.limit,
+          params,
+        )
+        .subscribe((data: any) => {
+          if (!!data.data) {
+            for (let i = 0; i < data.data.length; i++) {
+              if (data.data[i]["activo"] !== undefined) {
+                if (data.data[i]["activo"] == true) {
+                  data.data[i]["estado"] = "Activo";
+                } else {
+                  data.data[i]["estado"] = "Inactivo";
+                }
               }
             }
           }
-        }
-        this.responseServiceInit = data
-        this.dtData = this.responseServiceInit?.data ?? this.responseServiceInit;
-        if (new_form == false)
-          this.globalAppService
-            .resolveResponse(this.responseServiceInit, this.isredirectionPath, this.redirectionPath)
-            .then((res) => {
-              let responseResolveResponse = res;
-              if (responseResolveResponse == true) {
-                /** Llamado al metodo que procesa la respuesta correcta del servicio del datatable */
-                this.dataTablesInitProcessService(responseResolveResponse);
-                //Retornar data al componente padre
-                if (this.dataInitialListReturn.length > 0) {
-                  const dataReturn = [];
-                  this.dataInitialListReturn.forEach((element) => {
-                    dataReturn.push({ name: element["name"], value: this.responseServiceInit[element["name"]] });
-                  });
-                  this.dataIndexReturn.emit(dataReturn);
+          this.responseServiceInit = data;
+          this.dtData =
+            this.responseServiceInit?.data ?? this.responseServiceInit;
+          if (new_form == false)
+            this.globalAppService
+              .resolveResponse(
+                this.responseServiceInit,
+                this.isredirectionPath,
+                this.redirectionPath,
+              )
+              .then((res) => {
+                let responseResolveResponse = res;
+                if (responseResolveResponse == true) {
+                  /** Llamado al metodo que procesa la respuesta correcta del servicio del datatable */
+                  this.dataTablesInitProcessService(responseResolveResponse);
+                  //Retornar data al componente padre
+                  if (this.dataInitialListReturn.length > 0) {
+                    const dataReturn = [];
+                    this.dataInitialListReturn.forEach((element) => {
+                      dataReturn.push({
+                        name: element["name"],
+                        value: this.responseServiceInit[element["name"]],
+                      });
+                    });
+                    this.dataIndexReturn.emit(dataReturn);
+                  }
                 }
-              }
-            });
-      }
-      )
-    }
-    else {
-      this.restService.restPost(this.routeLoadDataTablesService, params, this.authorization).subscribe(
-        (res) => {
-          console.log('POST', res)
-          this.responseServiceInit = res;
-          // Evaluar respuesta del servicio
-          this.globalAppService
-            .resolveResponse(this.responseServiceInit, this.isredirectionPath, this.redirectionPath)
-            .then((res) => {
-              let responseResolveResponse = res;
-              if (responseResolveResponse == true) {
-                /** Llamado al metodo que procesa la respuesta correcta del servicio del datatable */
-                this.dataTablesInitProcessService(responseResolveResponse);
-                // Retornar data al componente padre
-                if (this.dataInitialListReturn.length > 0) {
-                  const dataReturn = [];
-                  this.dataInitialListReturn.forEach((element) => {
-                    dataReturn.push({ name: element["name"], value: this.responseServiceInit[element["name"]] });
-                  });
-                  this.dataIndexReturn.emit(dataReturn);
+              });
+        });
+    } else {
+      this.restService
+        .restPost(this.routeLoadDataTablesService, params, this.authorization)
+        .subscribe(
+          (res) => {
+            console.log("POST", res);
+            this.responseServiceInit = res;
+            // Evaluar respuesta del servicio
+            this.globalAppService
+              .resolveResponse(
+                this.responseServiceInit,
+                this.isredirectionPath,
+                this.redirectionPath,
+              )
+              .then((res) => {
+                let responseResolveResponse = res;
+                if (responseResolveResponse == true) {
+                  /** Llamado al metodo que procesa la respuesta correcta del servicio del datatable */
+                  this.dataTablesInitProcessService(responseResolveResponse);
+                  // Retornar data al componente padre
+                  if (this.dataInitialListReturn.length > 0) {
+                    const dataReturn = [];
+                    this.dataInitialListReturn.forEach((element) => {
+                      dataReturn.push({
+                        name: element["name"],
+                        value: this.responseServiceInit[element["name"]],
+                      });
+                    });
+                    this.dataIndexReturn.emit(dataReturn);
+                  }
                 }
-              }
-            });
-        },
-        (err) => {
-          this.responseServiceInitErr = err;
-          // Evaluar respuesta de error del servicio
-          this.globalAppService
-            .resolveResponseError(this.responseServiceInitErr, this.isredirectionPath, this.redirectionPath)
-            .then((res) => { });
-        }
-      );
+              });
+          },
+          (err) => {
+            this.responseServiceInitErr = err;
+            // Evaluar respuesta de error del servicio
+            this.globalAppService
+              .resolveResponseError(
+                this.responseServiceInitErr,
+                this.isredirectionPath,
+                this.redirectionPath,
+              )
+              .then((res) => {});
+          },
+        );
     }
   }
 
   /** Método utilizado para procesar la respuesta correcta del del servicio del datatable */
   dataTablesInitProcessService(responseResolveResponse) {
-
     if (responseResolveResponse == true) {
       // Información del Filter initial list asignada en el local storage
       localStorage.setItem(
         environment.hashDataFilter,
-        this.restService.encryptAES(this.responseServiceInit.filtersData, this.authorization, false)
+        this.restService.encryptAES(
+          this.responseServiceInit.filtersData,
+          this.authorization,
+          false,
+        ),
       );
 
       // Utilizo el esquema creado del api
       if (this.responseServiceInit.filtersData) {
-
-        if (this.router.url === '/archiveManagement/physical-space-index') {
+        if (this.router.url === "/archiveManagement/physical-space-index") {
           // this.responseServiceInit.filtersData.numeroGaPiso = String(this.responseServiceInit.filtersData.numeroGaPiso);
-          this.responseServiceInit.filtersData.schema[0]['fieldArray']['fieldGroup'][2]['templateOptions']['type'] = "string"
-          this.responseServiceInit.filtersData.schema[0]['fieldArray']['fieldGroup'][5]['templateOptions']['placeholder'] = "Módulo"
-          this.responseServiceInit.filtersData.schema[0]['fieldArray']['fieldGroup'][5]['templateOptions']['label'] = "Módulo"
+          this.responseServiceInit.filtersData.schema[0]["fieldArray"][
+            "fieldGroup"
+          ][2]["templateOptions"]["type"] = "string";
+          this.responseServiceInit.filtersData.schema[0]["fieldArray"][
+            "fieldGroup"
+          ][5]["templateOptions"]["placeholder"] = "Módulo";
+          this.responseServiceInit.filtersData.schema[0]["fieldArray"][
+            "fieldGroup"
+          ][5]["templateOptions"]["label"] = "Módulo";
 
-          this.responseServiceInit.filtersData.schema[0]['fieldArray']['fieldGroup'][5]['templateOptions']['attributes']['maxlength'] = 50
-          this.responseServiceInit.filtersData.schema[0]['fieldArray']['fieldGroup'][5]['templateOptions']['maxlength'] = 50
+          this.responseServiceInit.filtersData.schema[0]["fieldArray"][
+            "fieldGroup"
+          ][5]["templateOptions"]["attributes"]["maxlength"] = 50;
+          this.responseServiceInit.filtersData.schema[0]["fieldArray"][
+            "fieldGroup"
+          ][5]["templateOptions"]["maxlength"] = 50;
 
-          this.responseServiceInit.filtersData.schema[0]['fieldArray']['fieldGroup'][6]['templateOptions']['type'] = "string"
-          this.responseServiceInit.filtersData.schema[0]['fieldArray']['fieldGroup'][6]['templateOptions']['attributes']['maxlength'] = 50
-          this.responseServiceInit.filtersData.schema[0]['fieldArray']['fieldGroup'][6]['templateOptions']['maxlength'] = 50
-          delete (this.responseServiceInit.filtersData.schema[0]['fieldArray']['fieldGroup'][8])
+          this.responseServiceInit.filtersData.schema[0]["fieldArray"][
+            "fieldGroup"
+          ][6]["templateOptions"]["type"] = "string";
+          this.responseServiceInit.filtersData.schema[0]["fieldArray"][
+            "fieldGroup"
+          ][6]["templateOptions"]["attributes"]["maxlength"] = 50;
+          this.responseServiceInit.filtersData.schema[0]["fieldArray"][
+            "fieldGroup"
+          ][6]["templateOptions"]["maxlength"] = 50;
+          delete this.responseServiceInit.filtersData.schema[0]["fieldArray"][
+            "fieldGroup"
+          ][8];
           // console.log(this.dataFilterSchema,  this.responseServiceInit, this.responseServiceInit.filtersData.schema[0]['fieldArray']['fieldGroup'], 'dataFilterSchema')
         }
         this.dataFilterSchema = this.responseServiceInit.filtersData;
@@ -893,13 +989,14 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
         // Guardar consulta del correo en el local storage
         localStorage.setItem(
           environment.hashMailInitialListSgdea,
-          this.authService.encryptAES(this.responseServiceInit, false)
+          this.authService.encryptAES(this.responseServiceInit, false),
         );
         this.fechaActual = this.responseServiceInit.fechaActual;
         this.mailBox = this.responseServiceInit.mailBox;
         this.infoMailCount = this.responseServiceInit.infoMailCount;
         if (this.responseServiceInit.initCardHeaderTitle) {
-          this.initCardHeaderTitle = this.responseServiceInit.initCardHeaderTitle;
+          this.initCardHeaderTitle =
+            this.responseServiceInit.initCardHeaderTitle;
         }
         this.changeDataMail();
       }
@@ -919,12 +1016,16 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
       // Información del modulo
       localStorage.setItem(
         environment.hashDataListModule,
-        this.restService.encryptAES(this.routeData, this.authorization, false)
+        this.restService.encryptAES(this.routeData, this.authorization, false),
       );
       // Información del data
       localStorage.setItem(
         environment.hashDataList,
-        this.restService.encryptAES(this.responseServiceInit.data, this.authorization, false)
+        this.restService.encryptAES(
+          this.responseServiceInit.data,
+          this.authorization,
+          false,
+        ),
       );
       this.dtTrigger.next(0);
 
@@ -935,7 +1036,7 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
   }
 
   validateLength(input) {
-    console.log(input, 'input')
+    console.log(input, "input");
     if (input.value.length > 50) {
       input.value = input.value.slice(0, 50);
       alert("La longitud máxima permitida es 50 caracteres.");
@@ -955,11 +1056,18 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
     // console.log('localStorage '+this.routeData);
     // Evaluar respuesta del servicio
     this.globalAppService
-      .resolveResponse(this.dataListLocalStorage, this.isredirectionPath, this.redirectionPath)
+      .resolveResponse(
+        this.dataListLocalStorage,
+        this.isredirectionPath,
+        this.redirectionPath,
+      )
       .then((res) => {
         let responseResolveResponse = res;
         if (responseResolveResponse == true) {
-          this.dtData = this.restService.decryptAES(this.dataListLocalStorage, this.authorization);
+          this.dtData = this.restService.decryptAES(
+            this.dataListLocalStorage,
+            this.authorization,
+          );
           this.dtTrigger.next(0);
         }
       });
@@ -987,160 +1095,188 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
   }
 
   changeStatusDetected() {
-    this.subscriptionChangeStatus = this.floatingButtonService.clickChangeStatus.subscribe((emit) => {
-      this.receivedDataChangeStatus = emit;
-      this.loadIdsChangeStatus().then((res) => {
-        this.serviceChangeStatus(res);
-      });
-    });
-
-    this.subscriptionChangeStatusAnulation = this.floatingButtonService.clickChangeStatusAnulation.subscribe((emit) => {
-      this.receivedDataAnnulment = emit;
-      this.loadChangeStatusAnnulment().then((res) => {
-        this.transactionAnnulment(this.receivedDataAnnulment);
-      });
-    });
-
-    this.subscriptionTransactionReasign = this.floatingButtonService.clickTransactionReasign.subscribe((emit) => {
-      this.receivedDataReasign = emit;
-      this.transactionReasing(this.receivedDataReasign);
-    });
-
-    this.subscriptionTransactionReturnFiling = this.floatingButtonService.clickTransactionReturnFiling.subscribe(
-      (emit) => {
-        this.receivedDataReturnFiling = emit;
-        this.transactionReturnFiling(this.receivedDataReturnFiling);
-      }
-    );
-
-    this.subscriptionTransactionVobo = this.floatingButtonService.clickTransactionVobo.subscribe((emit) => {
-      this.receivedDataVobo = emit;
-      this.transactionVobo(this.receivedDataVobo);
-    });
-
-    this.subscriptionTransactionCopyInfo = this.floatingButtonService.clickTransactionCopyInformaded.subscribe(
-      (emit) => {
-        this.receivedDataCopyInformaded = emit;
-        this.transactionCopyInformaded(this.receivedDataCopyInformaded);
-      }
-    );
-
-    this.subscriptionTransactionFinalizeFiling = this.floatingButtonService.clickTransactionFinalizeFiling.subscribe(
-      (emit) => {
-        this.receivedDataFinalizeFiling = emit;
-        this.loadChangeStatusFinalizeFiling().then((res) => {
-          this.transactionFinalizeFiling(this.receivedDataFinalizeFiling);
+    this.subscriptionChangeStatus =
+      this.floatingButtonService.clickChangeStatus.subscribe((emit) => {
+        this.receivedDataChangeStatus = emit;
+        this.loadIdsChangeStatus().then((res) => {
+          this.serviceChangeStatus(res);
         });
-      }
-    );
-
-    this.subscriptionTransactionShippingReady = this.floatingButtonService.clickTransactionShippingReady.subscribe(
-      (emit) => {
-        this.receivedDataShippingReady = emit;
-        this.transactionShippingReady(this.receivedDataShippingReady);
-      }
-    );
-
-    this.subscriptionTransactionArchiveFiling = this.floatingButtonService.clickTransactionArchiveFiling.subscribe(
-      (emit) => {
-        this.receivedDataArchiveFiling = emit;
-        this.transactionArchiveFiling(this.receivedDataArchiveFiling);
-      }
-    );
-
-    this.subscriptionApplyForLoan = this.floatingButtonService.clickApplyForLoan.subscribe((emit) => {
-      this.receivedDataApplyForLoan = emit;
-      this.transactionApplyForLoan(this.receivedDataApplyForLoan);
-    });
-
-    this.subscriptionApproveLoan = this.floatingButtonService.clickApproveLoan.subscribe((emit) => {
-      this.receivedDataApproveLoan = emit;
-      this.transactionApproveLoan(this.receivedDataApproveLoan);
-    });
-
-    this.subscriptionCancelLoan = this.floatingButtonService.clickCancelLoan.subscribe((emit) => {
-      this.receivedDataCancelLoan = emit;
-      this.transactionCancelLoan(this.receivedDataCancelLoan);
-    });
-
-    this.subscriptionReturnLoan = this.floatingButtonService.clickReturnLoan.subscribe((emit) => {
-      this.receivedDataReturnLoan = emit;
-      this.transactionReturnLoan(this.receivedDataReturnLoan);
-    });
-
-    this.subscriptionDownloadRotulos = this.floatingButtonService.clickDownloadRotulos.subscribe((emit) => {
-      this.receivedDataDownloadRotulos = emit;
-      this.getDownloadRotulos(this.receivedDataDownloadRotulos);
-    });
-
-    this.subscriptionManualTransfer = this.floatingButtonService.clickManualTransfer.subscribe((emit) => {
-      this.receivedDataManualTransfer = emit;
-      this.transactionManualTransfer(this.receivedDataManualTransfer);
-    });
-
-    this.subscriptionDownloadFuit = this.floatingButtonService.clickDownloadFuit.subscribe((emit) => {
-      this.receivedDataDownloadFuit = emit;
-      this.getDownloadFuit(this.receivedDataDownloadFuit);
-    });
-
-    this.subscriptionAcceptTransfer = this.floatingButtonService.clickAcceptTransfer.subscribe((emit) => {
-      this.receivedDataAcceptTransfer = emit;
-      this.transactionAcceptTransfer(this.receivedDataAcceptTransfer);
-    });
-
-    this.subscriptionRejectTransfer = this.floatingButtonService.clickRejectTransfer.subscribe((emit) => {
-      this.receivedDataRejectTransfer = emit;
-      this.loadIdsChangeStatus().then((res) => {
-        this.transactionRejectTransfer(this.receivedDataRejectTransfer);
       });
-    });
 
-    this.subscriptionArchiveFolder = this.floatingButtonService.clickArchiveFolder.subscribe((emit) => {
-      this.receivedDataArchiveFolder = emit;
-      this.transactionArchiveFolder(this.receivedDataArchiveFolder);
-    });
+    this.subscriptionChangeStatusAnulation =
+      this.floatingButtonService.clickChangeStatusAnulation.subscribe(
+        (emit) => {
+          this.receivedDataAnnulment = emit;
+          this.loadChangeStatusAnnulment().then((res) => {
+            this.transactionAnnulment(this.receivedDataAnnulment);
+          });
+        },
+      );
 
-    this.subscriptionReturnPqrToCitizen = this.floatingButtonService.clickReturnPqrToCitizen.subscribe((emit) => {
-      this.receivedDataReturnPqrToCitizen = emit;
-      this.transactionReturnPqrToCitizen(this.receivedDataReturnPqrToCitizen);
-    });
+    this.subscriptionTransactionReasign =
+      this.floatingButtonService.clickTransactionReasign.subscribe((emit) => {
+        this.receivedDataReasign = emit;
+        this.transactionReasing(this.receivedDataReasign);
+      });
 
-    this.subscriptionWithdrawal = this.floatingButtonService.clickWithdrawal.subscribe((emit) => {
-      this.receivedDataWithdrawal = emit;
-      this.transactionWithdrawal(this.receivedDataWithdrawal);
-    });
+    this.subscriptionTransactionReturnFiling =
+      this.floatingButtonService.clickTransactionReturnFiling.subscribe(
+        (emit) => {
+          this.receivedDataReturnFiling = emit;
+          this.transactionReturnFiling(this.receivedDataReturnFiling);
+        },
+      );
 
-    this.subscriptionDataChangeDelivered = this.floatingButtonService.clickChangeTransactionDelivered.subscribe(
-      (emit) => {
-        this.receivedDataChangeDelivered = emit;
-        this.receivedDataChangeStatus = emit.ButtonSelectedData;
-        this.loadIdsChangeStatus();
-        this.transactionDelivered(this.receivedDataChangeDelivered);
-      }
-    );
+    this.subscriptionTransactionVobo =
+      this.floatingButtonService.clickTransactionVobo.subscribe((emit) => {
+        this.receivedDataVobo = emit;
+        this.transactionVobo(this.receivedDataVobo);
+      });
+
+    this.subscriptionTransactionCopyInfo =
+      this.floatingButtonService.clickTransactionCopyInformaded.subscribe(
+        (emit) => {
+          this.receivedDataCopyInformaded = emit;
+          this.transactionCopyInformaded(this.receivedDataCopyInformaded);
+        },
+      );
+
+    this.subscriptionTransactionFinalizeFiling =
+      this.floatingButtonService.clickTransactionFinalizeFiling.subscribe(
+        (emit) => {
+          this.receivedDataFinalizeFiling = emit;
+          this.loadChangeStatusFinalizeFiling().then((res) => {
+            this.transactionFinalizeFiling(this.receivedDataFinalizeFiling);
+          });
+        },
+      );
+
+    this.subscriptionTransactionShippingReady =
+      this.floatingButtonService.clickTransactionShippingReady.subscribe(
+        (emit) => {
+          this.receivedDataShippingReady = emit;
+          this.transactionShippingReady(this.receivedDataShippingReady);
+        },
+      );
+
+    this.subscriptionTransactionArchiveFiling =
+      this.floatingButtonService.clickTransactionArchiveFiling.subscribe(
+        (emit) => {
+          this.receivedDataArchiveFiling = emit;
+          this.transactionArchiveFiling(this.receivedDataArchiveFiling);
+        },
+      );
+
+    this.subscriptionApplyForLoan =
+      this.floatingButtonService.clickApplyForLoan.subscribe((emit) => {
+        this.receivedDataApplyForLoan = emit;
+        this.transactionApplyForLoan(this.receivedDataApplyForLoan);
+      });
+
+    this.subscriptionApproveLoan =
+      this.floatingButtonService.clickApproveLoan.subscribe((emit) => {
+        this.receivedDataApproveLoan = emit;
+        this.transactionApproveLoan(this.receivedDataApproveLoan);
+      });
+
+    this.subscriptionCancelLoan =
+      this.floatingButtonService.clickCancelLoan.subscribe((emit) => {
+        this.receivedDataCancelLoan = emit;
+        this.transactionCancelLoan(this.receivedDataCancelLoan);
+      });
+
+    this.subscriptionReturnLoan =
+      this.floatingButtonService.clickReturnLoan.subscribe((emit) => {
+        this.receivedDataReturnLoan = emit;
+        this.transactionReturnLoan(this.receivedDataReturnLoan);
+      });
+
+    this.subscriptionDownloadRotulos =
+      this.floatingButtonService.clickDownloadRotulos.subscribe((emit) => {
+        this.receivedDataDownloadRotulos = emit;
+        this.getDownloadRotulos(this.receivedDataDownloadRotulos);
+      });
+
+    this.subscriptionManualTransfer =
+      this.floatingButtonService.clickManualTransfer.subscribe((emit) => {
+        this.receivedDataManualTransfer = emit;
+        this.transactionManualTransfer(this.receivedDataManualTransfer);
+      });
+
+    this.subscriptionDownloadFuit =
+      this.floatingButtonService.clickDownloadFuit.subscribe((emit) => {
+        this.receivedDataDownloadFuit = emit;
+        this.getDownloadFuit(this.receivedDataDownloadFuit);
+      });
+
+    this.subscriptionAcceptTransfer =
+      this.floatingButtonService.clickAcceptTransfer.subscribe((emit) => {
+        this.receivedDataAcceptTransfer = emit;
+        this.transactionAcceptTransfer(this.receivedDataAcceptTransfer);
+      });
+
+    this.subscriptionRejectTransfer =
+      this.floatingButtonService.clickRejectTransfer.subscribe((emit) => {
+        this.receivedDataRejectTransfer = emit;
+        this.loadIdsChangeStatus().then((res) => {
+          this.transactionRejectTransfer(this.receivedDataRejectTransfer);
+        });
+      });
+
+    this.subscriptionArchiveFolder =
+      this.floatingButtonService.clickArchiveFolder.subscribe((emit) => {
+        this.receivedDataArchiveFolder = emit;
+        this.transactionArchiveFolder(this.receivedDataArchiveFolder);
+      });
+
+    this.subscriptionReturnPqrToCitizen =
+      this.floatingButtonService.clickReturnPqrToCitizen.subscribe((emit) => {
+        this.receivedDataReturnPqrToCitizen = emit;
+        this.transactionReturnPqrToCitizen(this.receivedDataReturnPqrToCitizen);
+      });
+
+    this.subscriptionWithdrawal =
+      this.floatingButtonService.clickWithdrawal.subscribe((emit) => {
+        this.receivedDataWithdrawal = emit;
+        this.transactionWithdrawal(this.receivedDataWithdrawal);
+      });
+
+    this.subscriptionDataChangeDelivered =
+      this.floatingButtonService.clickChangeTransactionDelivered.subscribe(
+        (emit) => {
+          this.receivedDataChangeDelivered = emit;
+          this.receivedDataChangeStatus = emit.ButtonSelectedData;
+          this.loadIdsChangeStatus();
+          this.transactionDelivered(this.receivedDataChangeDelivered);
+        },
+      );
 
     this.subscriptionDataChangeReturnDelivery =
-      this.floatingButtonService.clickChangeTransactionReturnDelivered.subscribe((emit) => {
-        this.receivedDataChangeReturnDelivery = emit;
-        this.receivedDataChangeStatus = emit.ButtonSelectedData;
-        this.loadIdsChangeStatus();
-        this.transactionReturnDelivery(this.receivedDataChangeReturnDelivery);
-      });
+      this.floatingButtonService.clickChangeTransactionReturnDelivered.subscribe(
+        (emit) => {
+          this.receivedDataChangeReturnDelivery = emit;
+          this.receivedDataChangeStatus = emit.ButtonSelectedData;
+          this.loadIdsChangeStatus();
+          this.transactionReturnDelivery(this.receivedDataChangeReturnDelivery);
+        },
+      );
 
-    this.subscriptionDataChangeShipping = this.floatingButtonService.clickChangeTransactionShipping.subscribe(
-      (emit) => {
-        this.receivedDataChangeShipping = emit;
-        this.receivedDataChangeStatus = emit.ButtonSelectedData;
-        this.loadIdsChangeStatus();
-        this.transactionShipping(this.receivedDataChangeShipping);
-      }
-    );
+    this.subscriptionDataChangeShipping =
+      this.floatingButtonService.clickChangeTransactionShipping.subscribe(
+        (emit) => {
+          this.receivedDataChangeShipping = emit;
+          this.receivedDataChangeStatus = emit.ButtonSelectedData;
+          this.loadIdsChangeStatus();
+          this.transactionShipping(this.receivedDataChangeShipping);
+        },
+      );
     //  emit Envio correo
-    this.subscriptionDataChangeShippingElectronic = this.floatingButtonService.clickChangeTransactionShippingElectronic.subscribe(
-      (emit) => {
-        this.transactionShippingElectronic(emit);
-      }
-    );
+    this.subscriptionDataChangeShippingElectronic =
+      this.floatingButtonService.clickChangeTransactionShippingElectronic.subscribe(
+        (emit) => {
+          this.transactionShippingElectronic(emit);
+        },
+      );
   }
 
   transactionShippingElectronic(data) {
@@ -1198,82 +1334,105 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
   }
 
   serviceChangeStatus(data) {
-    this.restService.restPut(this.routeChangeStatus, data, this.authorization).subscribe(
-      (res) => {
-        this.responseServiceChangeStatus = res;
-        // console.log(this.responseServiceChangeStatus);
-        if (this.responseServiceChangeStatus.status == environment.statusErrorValidacion) {
-          /** Mensaje de error */
-          this.sweetAlertService.sweetInfo("Algo está mal", this.responseServiceChangeStatus.data);
-          // Object.keys(this.responseServiceChangeStatus.data).forEach(keyname => {
-          //   this.sweetAlertService.showNotification('danger', this.responseServiceChangeStatus.data[keyname] );
-          // });
-          /** Retorno de data original de los status */
-          if (this.responseServiceChangeStatus.dataStatus) {
-            this.responseServiceChangeStatus.dataStatus.forEach((data) => {
-              this.dtData[data.idInitialList]["status"] = data.status;
-              this.dtData[data.idInitialList]["statusText"] = data.statusText;
-            });
-          }
-          /** Retorno de data original de los status */
-          if (this.responseServiceChangeStatus.dataResponse) {
-            this.responseServiceChangeStatus.dataResponse.forEach((data) => {
-              this.dtData[data.idInitialList]["status"] = data.status;
-              this.dtData[data.idInitialList]["statusText"] = data.statusText;
-            });
-          }
+    this.restService
+      .restPut(this.routeChangeStatus, data, this.authorization)
+      .subscribe(
+        (res) => {
+          this.responseServiceChangeStatus = res;
+          // console.log(this.responseServiceChangeStatus);
+          if (
+            this.responseServiceChangeStatus.status ==
+            environment.statusErrorValidacion
+          ) {
+            /** Mensaje de error */
+            this.sweetAlertService.sweetInfo(
+              "Algo está mal",
+              this.responseServiceChangeStatus.data,
+            );
+            // Object.keys(this.responseServiceChangeStatus.data).forEach(keyname => {
+            //   this.sweetAlertService.showNotification('danger', this.responseServiceChangeStatus.data[keyname] );
+            // });
+            /** Retorno de data original de los status */
+            if (this.responseServiceChangeStatus.dataStatus) {
+              this.responseServiceChangeStatus.dataStatus.forEach((data) => {
+                this.dtData[data.idInitialList]["status"] = data.status;
+                this.dtData[data.idInitialList]["statusText"] = data.statusText;
+              });
+            }
+            /** Retorno de data original de los status */
+            if (this.responseServiceChangeStatus.dataResponse) {
+              this.responseServiceChangeStatus.dataResponse.forEach((data) => {
+                this.dtData[data.idInitialList]["status"] = data.status;
+                this.dtData[data.idInitialList]["statusText"] = data.statusText;
+              });
+            }
 
-          this.rerenderChangeStatus(); // Recargar el dataTable para actualizar los datos
-        } else if (this.responseServiceChangeStatus.status == environment.statusErrorAccessDenied) {
-          /** Mensaje de error */
-          this.sweetAlertService.sweetInfo("Algo está mal", { error: this.responseServiceChangeStatus.message });
-          // this.sweetAlertService.showNotification('danger', this.responseServiceChangeStatus.message );
-          /** Retorno de data original de los status */
-          if (this.responseServiceChangeStatus.dataStatus) {
-            this.responseServiceChangeStatus.dataStatus.forEach((data) => {
-              this.dtData[data.idInitialList]["status"] = data.status;
-              this.dtData[data.idInitialList]["statusText"] = data.statusText;
-            });
-          }
-          /** Retorno de data original de los status */
-          if (this.responseServiceChangeStatus.dataResponse) {
-            this.responseServiceChangeStatus.dataResponse.forEach((data) => {
-              this.dtData[data.idInitialList]["status"] = data.status;
-              this.dtData[data.idInitialList]["statusText"] = data.statusText;
-            });
-          }
-          this.rerenderChangeStatus(); // Recargar el dataTable para actualizar los datos
-        } else {
-          /** Mensaje de exito */
-          this.sweetAlertService.showNotification("success", this.responseServiceChangeStatus.message);
-
-          /** Valida si llega dataNotification para mostrar notificaciones */
-          if (this.responseServiceChangeStatus.dataNotification) {
-            let dataNotifi = this.responseServiceChangeStatus.dataNotification;
-            dataNotifi.forEach((element) => {
-              this.sweetAlertService.showNotification(element.type, element.message);
-            });
-          }
-
-          if (this.responseServiceChangeStatus.reloadInitialList) {
-            /** Recargar initial list */
-            this.reloadInitialList();
-          } else {
-            /** Retorno de data de los estatus modificados */
-            this.responseServiceChangeStatus.data.forEach((data) => {
-              this.dtData[data.idInitialList]["status"] = data.status;
-              this.dtData[data.idInitialList]["statusText"] = data.statusText;
-            });
             this.rerenderChangeStatus(); // Recargar el dataTable para actualizar los datos
+          } else if (
+            this.responseServiceChangeStatus.status ==
+            environment.statusErrorAccessDenied
+          ) {
+            /** Mensaje de error */
+            this.sweetAlertService.sweetInfo("Algo está mal", {
+              error: this.responseServiceChangeStatus.message,
+            });
+            // this.sweetAlertService.showNotification('danger', this.responseServiceChangeStatus.message );
+            /** Retorno de data original de los status */
+            if (this.responseServiceChangeStatus.dataStatus) {
+              this.responseServiceChangeStatus.dataStatus.forEach((data) => {
+                this.dtData[data.idInitialList]["status"] = data.status;
+                this.dtData[data.idInitialList]["statusText"] = data.statusText;
+              });
+            }
+            /** Retorno de data original de los status */
+            if (this.responseServiceChangeStatus.dataResponse) {
+              this.responseServiceChangeStatus.dataResponse.forEach((data) => {
+                this.dtData[data.idInitialList]["status"] = data.status;
+                this.dtData[data.idInitialList]["statusText"] = data.statusText;
+              });
+            }
+            this.rerenderChangeStatus(); // Recargar el dataTable para actualizar los datos
+          } else {
+            /** Mensaje de exito */
+            this.sweetAlertService.showNotification(
+              "success",
+              this.responseServiceChangeStatus.message,
+            );
+
+            /** Valida si llega dataNotification para mostrar notificaciones */
+            if (this.responseServiceChangeStatus.dataNotification) {
+              let dataNotifi =
+                this.responseServiceChangeStatus.dataNotification;
+              dataNotifi.forEach((element) => {
+                this.sweetAlertService.showNotification(
+                  element.type,
+                  element.message,
+                );
+              });
+            }
+
+            if (this.responseServiceChangeStatus.reloadInitialList) {
+              /** Recargar initial list */
+              this.reloadInitialList();
+            } else {
+              console.log(this.responseServiceChangeStatus);
+              /** Retorno de data de los estatus modificados */
+              this.responseServiceChangeStatus.data.forEach((data) => {
+                this.dtData[data.idInitialList]["status"] = data.status;
+                this.dtData[data.idInitialList]["statusText"] = data.statusText;
+              });
+              this.rerenderChangeStatus(); // Recargar el dataTable para actualizar los datos
+            }
           }
-        }
-      },
-      (err) => {
-        // Evaluar respuesta de error del servicio
-        this.responseServiceChangeStatusErr = err;
-        this.globalAppService.resolveResponseError(this.responseServiceChangeStatusErr, false).then((res) => { });
-      }
-    );
+        },
+        (err) => {
+          // Evaluar respuesta de error del servicio
+          this.responseServiceChangeStatusErr = err;
+          this.globalAppService
+            .resolveResponseError(this.responseServiceChangeStatusErr, false)
+            .then((res) => {});
+        },
+      );
   }
 
   rerender(): void {
@@ -1343,15 +1502,18 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
   }
 
   detectLanguageChange() {
-    this.subscriptionTranslateService$ = this.activateTranslateService.activateLanguageChange.subscribe((language) => {
-      this.languageReceive = language;
-      this.translate.setDefaultLang(this.languageReceive);
-      /** Configurando variables de internacionalización */
-      this.activeLang = this.languageReceive;
-      localStorage.setItem("language", this.languageReceive);
-      this.configDtOptions();
-      this.reloadLangDatatable = true; // Se indica que se debe recargar el datatable
-    });
+    this.subscriptionTranslateService$ =
+      this.activateTranslateService.activateLanguageChange.subscribe(
+        (language) => {
+          this.languageReceive = language;
+          this.translate.setDefaultLang(this.languageReceive);
+          /** Configurando variables de internacionalización */
+          this.activeLang = this.languageReceive;
+          localStorage.setItem("language", this.languageReceive);
+          this.configDtOptions();
+          this.reloadLangDatatable = true; // Se indica que se debe recargar el datatable
+        },
+      );
   }
 
   /**
@@ -1367,35 +1529,47 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
     // loading true
     this.sweetAlertService.sweetLoading();
 
-    this.restService.restPut(this.routeChangeStatus, dataSend, this.authorization).subscribe(
-      (res) => {
-        this.resServicesAnnulment = res;
-        // console.log(this.resServicesAnnulment);
+    this.restService
+      .restPut(this.routeChangeStatus, dataSend, this.authorization)
+      .subscribe(
+        (res) => {
+          this.resServicesAnnulment = res;
+          // console.log(this.resServicesAnnulment);
 
-        this.globalAppService.resolveResponse(this.resServicesAnnulment, false).then((res) => {
-          let responseResolveResponseDown = res;
+          this.globalAppService
+            .resolveResponse(this.resServicesAnnulment, false)
+            .then((res) => {
+              let responseResolveResponseDown = res;
 
-          if (responseResolveResponseDown == true) {
-            if (data.action == "checkRequest") {
-              this.downloadFile(this.resServicesAnnulment.datafile, this.resServicesAnnulment.fileName);
-            }
-            this.sweetAlertService.showNotification("success", this.resServicesAnnulment["message"]);
+              if (responseResolveResponseDown == true) {
+                if (data.action == "checkRequest") {
+                  this.downloadFile(
+                    this.resServicesAnnulment.datafile,
+                    this.resServicesAnnulment.fileName,
+                  );
+                }
+                this.sweetAlertService.showNotification(
+                  "success",
+                  this.resServicesAnnulment["message"],
+                );
 
-            // Recarga el Initial List
-            this.reloadInitialList();
-          }
+                // Recarga el Initial List
+                this.reloadInitialList();
+              }
 
-          // Cargando false
-          this.sweetAlertService.sweetClose();
-          // this.rerenderChangeStatus();
-        });
-      },
-      (err) => {
-        this.resServicesAnnulmentErr = err;
-        // Evaluar respuesta de error del servicio
-        this.globalAppService.resolveResponseError(this.resServicesAnnulmentErr).then((res) => { });
-      }
-    );
+              // Cargando false
+              this.sweetAlertService.sweetClose();
+              // this.rerenderChangeStatus();
+            });
+        },
+        (err) => {
+          this.resServicesAnnulmentErr = err;
+          // Evaluar respuesta de error del servicio
+          this.globalAppService
+            .resolveResponseError(this.resServicesAnnulmentErr)
+            .then((res) => {});
+        },
+      );
   }
 
   /**
@@ -1412,32 +1586,46 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
     this.sweetAlertService.showNotificationLoading();
 
     this.restService
-      .restPut(this.versionApi + "gestionArchivo/gestion-archivo/download-rotulos", dataSend, this.authorization)
+      .restPut(
+        this.versionApi + "gestionArchivo/gestion-archivo/download-rotulos",
+        dataSend,
+        this.authorization,
+      )
       .subscribe(
         (res) => {
           this.resSerDownloadRotulos = res;
           // console.log(this.resSerDownloadRotulos);
 
-          this.globalAppService.resolveResponse(this.resSerDownloadRotulos, false).then((res) => {
-            let responseResolveResponseDown = res;
-            // Cargando false
-            this.sweetAlertService.showNotificationClose();
-            if (responseResolveResponseDown) {
-              if (this.resSerDownloadRotulos.datafile) {
-                this.downloadFile(this.resSerDownloadRotulos.datafile, this.resSerDownloadRotulos.fileName);
+          this.globalAppService
+            .resolveResponse(this.resSerDownloadRotulos, false)
+            .then((res) => {
+              let responseResolveResponseDown = res;
+              // Cargando false
+              this.sweetAlertService.showNotificationClose();
+              if (responseResolveResponseDown) {
+                if (this.resSerDownloadRotulos.datafile) {
+                  this.downloadFile(
+                    this.resSerDownloadRotulos.datafile,
+                    this.resSerDownloadRotulos.fileName,
+                  );
+                }
+                this.sweetAlertService.showNotification(
+                  "success",
+                  this.resSerDownloadRotulos["message"],
+                );
               }
-              this.sweetAlertService.showNotification("success", this.resSerDownloadRotulos["message"]);
-            }
-          });
+            });
         },
         (err) => {
           this.resSerDownloadRotulosErr = err;
           // Evaluar respuesta de error del servicio
-          this.globalAppService.resolveResponseError(this.resSerDownloadRotulosErr).then((res) => {
-            // Cargando false
-            this.sweetAlertService.showNotificationClose();
-          });
-        }
+          this.globalAppService
+            .resolveResponseError(this.resSerDownloadRotulosErr)
+            .then((res) => {
+              // Cargando false
+              this.sweetAlertService.showNotificationClose();
+            });
+        },
       );
   }
 
@@ -1456,39 +1644,47 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
 
     this.restService
       .restPost(
-        this.versionApi + "gestionDocumental/trd-transferencia/transferencia-manual",
+        this.versionApi +
+          "gestionDocumental/trd-transferencia/transferencia-manual",
         dataSend,
-        this.authorization
+        this.authorization,
       )
       .subscribe(
         (res) => {
           this.resSerManualTransfer = res;
           // console.log(this.resSerManualTransfer);
 
-          this.globalAppService.resolveResponse(this.resSerManualTransfer, false).then((res) => {
-            let responseResolveResponseDown = res;
+          this.globalAppService
+            .resolveResponse(this.resSerManualTransfer, false)
+            .then((res) => {
+              let responseResolveResponseDown = res;
 
-            if (responseResolveResponseDown == true) {
-              if (this.resSerManualTransfer.notificacion) {
-                this.resSerManualTransfer.notificacion.forEach((dataSer) => {
-                  this.sweetAlertService.showNotification(dataSer.type, dataSer.message);
-                });
+              if (responseResolveResponseDown == true) {
+                if (this.resSerManualTransfer.notificacion) {
+                  this.resSerManualTransfer.notificacion.forEach((dataSer) => {
+                    this.sweetAlertService.showNotification(
+                      dataSer.type,
+                      dataSer.message,
+                    );
+                  });
+                }
+
+                // Recarga el Initial List
+                this.reloadInitialList();
               }
 
-              // Recarga el Initial List
-              this.reloadInitialList();
-            }
-
-            // Cargando false
-            this.sweetAlertService.sweetClose();
-            // this.rerenderChangeStatus();
-          });
+              // Cargando false
+              this.sweetAlertService.sweetClose();
+              // this.rerenderChangeStatus();
+            });
         },
         (err) => {
           this.resSerManualTransferErr = err;
           // Evaluar respuesta de error del servicio
-          this.globalAppService.resolveResponseError(this.resSerManualTransferErr).then((res) => { });
-        }
+          this.globalAppService
+            .resolveResponseError(this.resSerManualTransferErr)
+            .then((res) => {});
+        },
       );
   }
 
@@ -1505,34 +1701,45 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
     this.sweetAlertService.showNotificationLoading();
 
     this.restService
-      .restPut(this.versionApi + "gestionDocumental/trd-transferencia/download-fuit", dataSend, this.authorization)
+      .restPut(
+        this.versionApi + "gestionDocumental/trd-transferencia/download-fuit",
+        dataSend,
+        this.authorization,
+      )
       .subscribe(
         (res) => {
           this.resSerDownloadFuit = res;
           // console.log(this.resSerDownloadFuit);
 
-          this.globalAppService.resolveResponse(this.resSerDownloadFuit, false).then((res) => {
-            let responseResolveResponseDown = res;
-            // Cargando false
-            this.sweetAlertService.showNotificationClose();
-            if (responseResolveResponseDown) {
-              if (this.resSerDownloadFuit.datafile) {
-                this.resSerDownloadFuit.datafile.forEach((dataFiles) => {
-                  this.downloadFile(dataFiles.datafile, dataFiles.fileName);
-                });
+          this.globalAppService
+            .resolveResponse(this.resSerDownloadFuit, false)
+            .then((res) => {
+              let responseResolveResponseDown = res;
+              // Cargando false
+              this.sweetAlertService.showNotificationClose();
+              if (responseResolveResponseDown) {
+                if (this.resSerDownloadFuit.datafile) {
+                  this.resSerDownloadFuit.datafile.forEach((dataFiles) => {
+                    this.downloadFile(dataFiles.datafile, dataFiles.fileName);
+                  });
+                }
+                this.sweetAlertService.showNotification(
+                  "success",
+                  this.resSerDownloadFuit["message"],
+                );
               }
-              this.sweetAlertService.showNotification("success", this.resSerDownloadFuit["message"]);
-            }
-          });
+            });
         },
         (err) => {
           this.resSerDownloadFuitErr = err;
           // Evaluar respuesta de error del servicio
-          this.globalAppService.resolveResponseError(this.resSerDownloadFuitErr).then((res) => {
-            // Cargando false
-            this.sweetAlertService.showNotificationClose();
-          });
-        }
+          this.globalAppService
+            .resolveResponseError(this.resSerDownloadFuitErr)
+            .then((res) => {
+              // Cargando false
+              this.sweetAlertService.showNotificationClose();
+            });
+        },
       );
   }
 
@@ -1551,35 +1758,43 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
 
     this.restService
       .restPost(
-        this.versionApi + "gestionDocumental/trd-transferencia/transferencia-aceptada",
+        this.versionApi +
+          "gestionDocumental/trd-transferencia/transferencia-aceptada",
         dataSend,
-        this.authorization
+        this.authorization,
       )
       .subscribe(
         (res) => {
           this.resSerAcceptTransfer = res;
           // console.log(this.resSerAcceptTransfer);
 
-          this.globalAppService.resolveResponse(this.resSerAcceptTransfer, false).then((res) => {
-            let responseResolveResponseDown = res;
+          this.globalAppService
+            .resolveResponse(this.resSerAcceptTransfer, false)
+            .then((res) => {
+              let responseResolveResponseDown = res;
 
-            if (responseResolveResponseDown == true) {
-              if (this.resSerAcceptTransfer.notificacion) {
-                this.resSerAcceptTransfer.notificacion.forEach((dataSer) => {
-                  this.sweetAlertService.showNotification(dataSer.type, dataSer.message);
-                });
+              if (responseResolveResponseDown == true) {
+                if (this.resSerAcceptTransfer.notificacion) {
+                  this.resSerAcceptTransfer.notificacion.forEach((dataSer) => {
+                    this.sweetAlertService.showNotification(
+                      dataSer.type,
+                      dataSer.message,
+                    );
+                  });
+                }
+
+                // Recarga el Initial List
+                this.reloadInitialList();
               }
-
-              // Recarga el Initial List
-              this.reloadInitialList();
-            }
-          });
+            });
         },
         (err) => {
           this.resSerAcceptTransferErr = err;
           // Evaluar respuesta de error del servicio
-          this.globalAppService.resolveResponseError(this.resSerAcceptTransferErr).then((res) => { });
-        }
+          this.globalAppService
+            .resolveResponseError(this.resSerAcceptTransferErr)
+            .then((res) => {});
+        },
       );
   }
 
@@ -1598,35 +1813,43 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
 
     this.restService
       .restPost(
-        this.versionApi + "gestionDocumental/trd-transferencia/transferencia-rechazada",
+        this.versionApi +
+          "gestionDocumental/trd-transferencia/transferencia-rechazada",
         dataSend,
-        this.authorization
+        this.authorization,
       )
       .subscribe(
         (res) => {
           this.resSerRejectTransfer = res;
           // console.log(this.resSerRejectTransfer);
 
-          this.globalAppService.resolveResponse(this.resSerRejectTransfer, false).then((res) => {
-            let responseResolveResponseDown = res;
+          this.globalAppService
+            .resolveResponse(this.resSerRejectTransfer, false)
+            .then((res) => {
+              let responseResolveResponseDown = res;
 
-            if (responseResolveResponseDown == true) {
-              if (this.resSerRejectTransfer.notificacion) {
-                this.resSerRejectTransfer.notificacion.forEach((dataSer) => {
-                  this.sweetAlertService.showNotification(dataSer.type, dataSer.message);
-                });
+              if (responseResolveResponseDown == true) {
+                if (this.resSerRejectTransfer.notificacion) {
+                  this.resSerRejectTransfer.notificacion.forEach((dataSer) => {
+                    this.sweetAlertService.showNotification(
+                      dataSer.type,
+                      dataSer.message,
+                    );
+                  });
+                }
+
+                // Recarga el Initial List
+                this.reloadInitialList();
               }
-
-              // Recarga el Initial List
-              this.reloadInitialList();
-            }
-          });
+            });
         },
         (err) => {
           this.resSerRejectTransferErr = err;
           // Evaluar respuesta de error del servicio
-          this.globalAppService.resolveResponseError(this.resSerRejectTransferErr).then((res) => { });
-        }
+          this.globalAppService
+            .resolveResponseError(this.resSerRejectTransferErr)
+            .then((res) => {});
+        },
       );
   }
 
@@ -1644,31 +1867,42 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
     this.sweetAlertService.sweetLoading();
 
     this.restService
-      .restPost(this.versionApi + "radicacion/transacciones/archive-expedient", dataSend, this.authorization)
+      .restPost(
+        this.versionApi + "radicacion/transacciones/archive-expedient",
+        dataSend,
+        this.authorization,
+      )
       .subscribe(
         (res) => {
           this.resSerArchiveFolder = res;
           // console.log(this.resSerArchiveFolder);
 
-          this.globalAppService.resolveResponse(this.resSerArchiveFolder, false).then((res) => {
-            let responseResolveResponseDown = res;
+          this.globalAppService
+            .resolveResponse(this.resSerArchiveFolder, false)
+            .then((res) => {
+              let responseResolveResponseDown = res;
 
-            if (responseResolveResponseDown == true) {
-              if (this.resSerArchiveFolder.notificacion) {
-                this.resSerArchiveFolder.notificacion.forEach((dataSer) => {
-                  this.sweetAlertService.showNotification(dataSer.type, dataSer.message);
-                });
+              if (responseResolveResponseDown == true) {
+                if (this.resSerArchiveFolder.notificacion) {
+                  this.resSerArchiveFolder.notificacion.forEach((dataSer) => {
+                    this.sweetAlertService.showNotification(
+                      dataSer.type,
+                      dataSer.message,
+                    );
+                  });
+                }
+                // Recarga el Initial List
+                this.reloadInitialList();
               }
-              // Recarga el Initial List
-              this.reloadInitialList();
-            }
-          });
+            });
         },
         (err) => {
           this.resSerArchiveFolderErr = err;
           // Evaluar respuesta de error del servicio
-          this.globalAppService.resolveResponseError(this.resSerArchiveFolderErr).then((res) => { });
-        }
+          this.globalAppService
+            .resolveResponseError(this.resSerArchiveFolderErr)
+            .then((res) => {});
+        },
       );
   }
 
@@ -1686,27 +1920,38 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
     this.sweetAlertService.sweetLoading();
 
     this.restService
-      .restPost(this.versionApi + "radicacion/transacciones/return-pqr-to-citizen", dataSend, this.authorization)
+      .restPost(
+        this.versionApi + "radicacion/transacciones/return-pqr-to-citizen",
+        dataSend,
+        this.authorization,
+      )
       .subscribe(
         (res) => {
           this.resSerReturnPqrToCitizen = res;
           // console.log(this.resSerReturnPqrToCitizen);
 
-          this.globalAppService.resolveResponse(this.resSerReturnPqrToCitizen, false).then((res) => {
-            let responseResolveResponseDown = res;
+          this.globalAppService
+            .resolveResponse(this.resSerReturnPqrToCitizen, false)
+            .then((res) => {
+              let responseResolveResponseDown = res;
 
-            if (responseResolveResponseDown == true) {
-              this.sweetAlertService.showNotification("success", this.resSerReturnPqrToCitizen.message);
-              // Recarga el Initial List
-              this.reloadInitialList();
-            }
-          });
+              if (responseResolveResponseDown == true) {
+                this.sweetAlertService.showNotification(
+                  "success",
+                  this.resSerReturnPqrToCitizen.message,
+                );
+                // Recarga el Initial List
+                this.reloadInitialList();
+              }
+            });
         },
         (err) => {
           this.resSerReturnPqrToCitizenErr = err;
           // Evaluar respuesta de error del servicio
-          this.globalAppService.resolveResponseError(this.resSerReturnPqrToCitizenErr).then((res) => { });
-        }
+          this.globalAppService
+            .resolveResponseError(this.resSerReturnPqrToCitizenErr)
+            .then((res) => {});
+        },
       );
   }
 
@@ -1723,35 +1968,46 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
     // loading true
     this.sweetAlertService.sweetLoading();
 
-    this.restService.restPost(this.routeChangeStatus, dataSend, this.authorization).subscribe(
-      (res) => {
-        this.resServicesReasign = res;
+    this.restService
+      .restPost(this.routeChangeStatus, dataSend, this.authorization)
+      .subscribe(
+        (res) => {
+          this.resServicesReasign = res;
 
-        this.globalAppService.resolveResponse(this.resServicesReasign, false).then((res) => {
-          const responseResolveResponse = res;
-          if (responseResolveResponse == true) {
-            this.sweetAlertService.showNotification("success", this.resServicesReasign["message"]);
+          this.globalAppService
+            .resolveResponse(this.resServicesReasign, false)
+            .then((res) => {
+              const responseResolveResponse = res;
+              if (responseResolveResponse == true) {
+                this.sweetAlertService.showNotification(
+                  "success",
+                  this.resServicesReasign["message"],
+                );
 
-            if (
-              typeof this.resServicesReasign["messageRadicadosNoProcesados"] !== "undefined" &&
-              this.resServicesReasign.messageRadicadosNoProcesados != ""
-            ) {
-              this.sweetAlertService.showNotification(
-                "danger",
-                this.resServicesReasign["messageRadicadosNoProcesados"]
-              );
-            }
+                if (
+                  typeof this.resServicesReasign[
+                    "messageRadicadosNoProcesados"
+                  ] !== "undefined" &&
+                  this.resServicesReasign.messageRadicadosNoProcesados != ""
+                ) {
+                  this.sweetAlertService.showNotification(
+                    "danger",
+                    this.resServicesReasign["messageRadicadosNoProcesados"],
+                  );
+                }
 
-            this.reloadInitialList();
-          }
-        });
-      },
-      (err) => {
-        this.resServicesReasignErr = err;
-        // Evaluar respuesta de error del servicio
-        this.globalAppService.resolveResponseError(this.resServicesReasignErr).then((res) => { });
-      }
-    );
+                this.reloadInitialList();
+              }
+            });
+        },
+        (err) => {
+          this.resServicesReasignErr = err;
+          // Evaluar respuesta de error del servicio
+          this.globalAppService
+            .resolveResponseError(this.resServicesReasignErr)
+            .then((res) => {});
+        },
+      );
   }
 
   /**
@@ -1767,25 +2023,34 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
     // loading true
     this.sweetAlertService.sweetLoading();
 
-    this.restService.restPost(this.routeChangeStatus, dataSend, this.authorization).subscribe(
-      (res) => {
-        this.resServicesVobo = res;
+    this.restService
+      .restPost(this.routeChangeStatus, dataSend, this.authorization)
+      .subscribe(
+        (res) => {
+          this.resServicesVobo = res;
 
-        this.globalAppService.resolveResponse(this.resServicesVobo, false).then((res) => {
-          const responseResolveResponse = res;
-          if (responseResolveResponse == true) {
-            this.sweetAlertService.showNotification("success", this.resServicesVobo["message"]);
+          this.globalAppService
+            .resolveResponse(this.resServicesVobo, false)
+            .then((res) => {
+              const responseResolveResponse = res;
+              if (responseResolveResponse == true) {
+                this.sweetAlertService.showNotification(
+                  "success",
+                  this.resServicesVobo["message"],
+                );
 
-            this.reloadInitialList();
-          }
-        });
-      },
-      (err) => {
-        this.resServicesVoboErr = err;
-        // Evaluar respuesta de error del servicio
-        this.globalAppService.resolveResponseError(this.resServicesVoboErr).then((res) => { });
-      }
-    );
+                this.reloadInitialList();
+              }
+            });
+        },
+        (err) => {
+          this.resServicesVoboErr = err;
+          // Evaluar respuesta de error del servicio
+          this.globalAppService
+            .resolveResponseError(this.resServicesVoboErr)
+            .then((res) => {});
+        },
+      );
   }
 
   /**
@@ -1801,25 +2066,34 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
     // loading true
     this.sweetAlertService.sweetLoading();
 
-    this.restService.restPost(this.routeChangeStatus, dataSend, this.authorization).subscribe(
-      (res) => {
-        this.resServicesFinalizeFiling = res;
+    this.restService
+      .restPost(this.routeChangeStatus, dataSend, this.authorization)
+      .subscribe(
+        (res) => {
+          this.resServicesFinalizeFiling = res;
 
-        this.globalAppService.resolveResponse(this.resServicesFinalizeFiling, false).then((res) => {
-          const responseResolveResponse = res;
-          if (responseResolveResponse == true) {
-            this.sweetAlertService.showNotification("success", this.resServicesFinalizeFiling["message"]);
+          this.globalAppService
+            .resolveResponse(this.resServicesFinalizeFiling, false)
+            .then((res) => {
+              const responseResolveResponse = res;
+              if (responseResolveResponse == true) {
+                this.sweetAlertService.showNotification(
+                  "success",
+                  this.resServicesFinalizeFiling["message"],
+                );
 
-            this.reloadInitialList();
-          }
-        });
-      },
-      (err) => {
-        this.resServicesFinalizeFilingErr = err;
-        // Evaluar respuesta de error del servicio
-        this.globalAppService.resolveResponseError(this.resServicesFinalizeFilingErr).then((res) => { });
-      }
-    );
+                this.reloadInitialList();
+              }
+            });
+        },
+        (err) => {
+          this.resServicesFinalizeFilingErr = err;
+          // Evaluar respuesta de error del servicio
+          this.globalAppService
+            .resolveResponseError(this.resServicesFinalizeFilingErr)
+            .then((res) => {});
+        },
+      );
   }
 
   /**
@@ -1831,25 +2105,36 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
     this.sweetAlertService.sweetLoading();
 
     this.restService
-      .restPost(this.versionApi + "radicacion/transacciones/shipping-ready", dataVal, this.authorization)
+      .restPost(
+        this.versionApi + "radicacion/transacciones/shipping-ready",
+        dataVal,
+        this.authorization,
+      )
       .subscribe(
         (res) => {
           this.resSerShippingReady = res;
 
-          this.globalAppService.resolveResponse(this.resSerShippingReady, false).then((res) => {
-            const responseResolveResponse = res;
-            if (responseResolveResponse == true) {
-              this.sweetAlertService.showNotification("success", this.resSerShippingReady["message"]);
+          this.globalAppService
+            .resolveResponse(this.resSerShippingReady, false)
+            .then((res) => {
+              const responseResolveResponse = res;
+              if (responseResolveResponse == true) {
+                this.sweetAlertService.showNotification(
+                  "success",
+                  this.resSerShippingReady["message"],
+                );
 
-              this.reloadInitialList();
-            }
-          });
+                this.reloadInitialList();
+              }
+            });
         },
         (err) => {
           this.resSerShippingReadyErr = err;
           // Evaluar respuesta de error del servicio
-          this.globalAppService.resolveResponseError(this.resSerShippingReadyErr).then((res) => { });
-        }
+          this.globalAppService
+            .resolveResponseError(this.resSerShippingReadyErr)
+            .then((res) => {});
+        },
       );
   }
 
@@ -1862,34 +2147,45 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
     this.sweetAlertService.sweetLoading();
 
     this.restService
-      .restPost(this.versionApi + "radicacion/transacciones/archive-filing", dataVal, this.authorization)
+      .restPost(
+        this.versionApi + "radicacion/transacciones/archive-filing",
+        dataVal,
+        this.authorization,
+      )
       .subscribe(
         (res) => {
           this.resSerArchiveFiling = res;
           // console.log(this.resSerArchiveFiling);
 
-          this.globalAppService.resolveResponse(this.resSerArchiveFiling, false).then((res) => {
-            const responseResolveResponse = res;
-            if (responseResolveResponse == true) {
-              // Muestra las notificaciones
-              if (this.resSerArchiveFiling.notificacion) {
-                this.resSerArchiveFiling.notificacion.forEach((dataSer) => {
-                  this.sweetAlertService.showNotification(dataSer.type, dataSer.message);
-                });
-              }
+          this.globalAppService
+            .resolveResponse(this.resSerArchiveFiling, false)
+            .then((res) => {
+              const responseResolveResponse = res;
+              if (responseResolveResponse == true) {
+                // Muestra las notificaciones
+                if (this.resSerArchiveFiling.notificacion) {
+                  this.resSerArchiveFiling.notificacion.forEach((dataSer) => {
+                    this.sweetAlertService.showNotification(
+                      dataSer.type,
+                      dataSer.message,
+                    );
+                  });
+                }
 
-              // Recarga el Initial List
-              this.reloadInitialList();
-            }
-            // Cargando false
-            // this.sweetAlertService.sweetClose();
-          });
+                // Recarga el Initial List
+                this.reloadInitialList();
+              }
+              // Cargando false
+              // this.sweetAlertService.sweetClose();
+            });
         },
         (err) => {
           this.resSerArchiveFilingErr = err;
           // Evaluar respuesta de error del servicio
-          this.globalAppService.resolveResponseError(this.resSerArchiveFilingErr).then((res) => { });
-        }
+          this.globalAppService
+            .resolveResponseError(this.resSerArchiveFilingErr)
+            .then((res) => {});
+        },
       );
   }
 
@@ -1901,29 +2197,38 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
     // loading true
     this.sweetAlertService.sweetLoading();
 
-    this.restService.restPost(dataVal.route, dataVal, this.authorization).subscribe(
-      (res) => {
-        this.resSerApplyForLoan = res;
+    this.restService
+      .restPost(dataVal.route, dataVal, this.authorization)
+      .subscribe(
+        (res) => {
+          this.resSerApplyForLoan = res;
 
-        this.globalAppService.resolveResponse(this.resSerApplyForLoan, false).then((res) => {
-          const responseResolveResponse = res;
-          if (responseResolveResponse == true) {
-            // Muestra las notificaciones
-            this.sweetAlertService.showNotification("success", this.resSerApplyForLoan.message);
+          this.globalAppService
+            .resolveResponse(this.resSerApplyForLoan, false)
+            .then((res) => {
+              const responseResolveResponse = res;
+              if (responseResolveResponse == true) {
+                // Muestra las notificaciones
+                this.sweetAlertService.showNotification(
+                  "success",
+                  this.resSerApplyForLoan.message,
+                );
 
-            // Recarga el Initial List
-            this.reloadInitialList();
-          }
-          // Cargando false
-          this.sweetAlertService.sweetClose();
-        });
-      },
-      (err) => {
-        this.resSerApplyForLoanErr = err;
-        // Evaluar respuesta de error del servicio
-        this.globalAppService.resolveResponseError(this.resSerApplyForLoanErr).then((res) => { });
-      }
-    );
+                // Recarga el Initial List
+                this.reloadInitialList();
+              }
+              // Cargando false
+              this.sweetAlertService.sweetClose();
+            });
+        },
+        (err) => {
+          this.resSerApplyForLoanErr = err;
+          // Evaluar respuesta de error del servicio
+          this.globalAppService
+            .resolveResponseError(this.resSerApplyForLoanErr)
+            .then((res) => {});
+        },
+      );
   }
 
   /**
@@ -1934,28 +2239,37 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
     // loading true
     this.sweetAlertService.sweetLoading();
 
-    this.restService.restPost(dataVal.route, dataVal, this.authorization).subscribe(
-      (res) => {
-        this.resSerApproveLoan = res;
+    this.restService
+      .restPost(dataVal.route, dataVal, this.authorization)
+      .subscribe(
+        (res) => {
+          this.resSerApproveLoan = res;
 
-        this.globalAppService.resolveResponse(this.resSerApproveLoan, false).then((res) => {
-          const responseResolveResponse = res;
-          if (responseResolveResponse == true) {
-            // Muestra las notificaciones
-            this.sweetAlertService.showNotification("success", this.resSerApproveLoan.message);
-          }
-          // Cargando false
-          this.sweetAlertService.sweetClose();
-          // Recarga el Initial List
-          this.reloadInitialList();
-        });
-      },
-      (err) => {
-        this.resSerApproveLoanErr = err;
-        // Evaluar respuesta de error del servicio
-        this.globalAppService.resolveResponseError(this.resSerApproveLoanErr).then((res) => { });
-      }
-    );
+          this.globalAppService
+            .resolveResponse(this.resSerApproveLoan, false)
+            .then((res) => {
+              const responseResolveResponse = res;
+              if (responseResolveResponse == true) {
+                // Muestra las notificaciones
+                this.sweetAlertService.showNotification(
+                  "success",
+                  this.resSerApproveLoan.message,
+                );
+              }
+              // Cargando false
+              this.sweetAlertService.sweetClose();
+              // Recarga el Initial List
+              this.reloadInitialList();
+            });
+        },
+        (err) => {
+          this.resSerApproveLoanErr = err;
+          // Evaluar respuesta de error del servicio
+          this.globalAppService
+            .resolveResponseError(this.resSerApproveLoanErr)
+            .then((res) => {});
+        },
+      );
   }
 
   /**
@@ -1966,30 +2280,39 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
     // loading true
     this.sweetAlertService.sweetLoading();
 
-    this.restService.restPost(dataVal.route, dataVal, this.authorization).subscribe(
-      (res) => {
-        this.resSerCancelLoan = res;
-        // console.log(this.resSerCancelLoan);
+    this.restService
+      .restPost(dataVal.route, dataVal, this.authorization)
+      .subscribe(
+        (res) => {
+          this.resSerCancelLoan = res;
+          // console.log(this.resSerCancelLoan);
 
-        this.globalAppService.resolveResponse(this.resSerCancelLoan, false).then((res) => {
-          const responseResolveResponse = res;
-          if (responseResolveResponse == true) {
-            // Muestra las notificaciones
-            this.sweetAlertService.showNotification("success", this.resSerCancelLoan.message);
+          this.globalAppService
+            .resolveResponse(this.resSerCancelLoan, false)
+            .then((res) => {
+              const responseResolveResponse = res;
+              if (responseResolveResponse == true) {
+                // Muestra las notificaciones
+                this.sweetAlertService.showNotification(
+                  "success",
+                  this.resSerCancelLoan.message,
+                );
 
-            // Recarga el Initial List
-            this.reloadInitialList();
-          }
-          // Cargando false
-          this.sweetAlertService.sweetClose();
-        });
-      },
-      (err) => {
-        this.resSerCancelLoanErr = err;
-        // Evaluar respuesta de error del servicio
-        this.globalAppService.resolveResponseError(this.resSerCancelLoanErr).then((res) => { });
-      }
-    );
+                // Recarga el Initial List
+                this.reloadInitialList();
+              }
+              // Cargando false
+              this.sweetAlertService.sweetClose();
+            });
+        },
+        (err) => {
+          this.resSerCancelLoanErr = err;
+          // Evaluar respuesta de error del servicio
+          this.globalAppService
+            .resolveResponseError(this.resSerCancelLoanErr)
+            .then((res) => {});
+        },
+      );
   }
 
   /**
@@ -1999,30 +2322,39 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
   transactionReturnLoan(dataVal) {
     // loading true
     this.sweetAlertService.sweetLoading();
-    this.restService.restPost(dataVal.route, dataVal, this.authorization).subscribe(
-      (res) => {
-        this.resSerReturnLoan = res;
-        // console.log(this.resSerReturnLoan);
+    this.restService
+      .restPost(dataVal.route, dataVal, this.authorization)
+      .subscribe(
+        (res) => {
+          this.resSerReturnLoan = res;
+          // console.log(this.resSerReturnLoan);
 
-        this.globalAppService.resolveResponse(this.resSerReturnLoan, false).then((res) => {
-          const responseResolveResponse = res;
-          if (responseResolveResponse == true) {
-            // Muestra las notificaciones
-            this.sweetAlertService.showNotification("success", this.resSerReturnLoan.message);
+          this.globalAppService
+            .resolveResponse(this.resSerReturnLoan, false)
+            .then((res) => {
+              const responseResolveResponse = res;
+              if (responseResolveResponse == true) {
+                // Muestra las notificaciones
+                this.sweetAlertService.showNotification(
+                  "success",
+                  this.resSerReturnLoan.message,
+                );
 
-            // Recarga el Initial List
-            this.reloadInitialList();
-          }
-          // Cargando false
-          this.sweetAlertService.sweetClose();
-        });
-      },
-      (err) => {
-        this.resSerReturnLoanErr = err;
-        // Evaluar respuesta de error del servicio
-        this.globalAppService.resolveResponseError(this.resSerReturnLoanErr).then((res) => { });
-      }
-    );
+                // Recarga el Initial List
+                this.reloadInitialList();
+              }
+              // Cargando false
+              this.sweetAlertService.sweetClose();
+            });
+        },
+        (err) => {
+          this.resSerReturnLoanErr = err;
+          // Evaluar respuesta de error del servicio
+          this.globalAppService
+            .resolveResponseError(this.resSerReturnLoanErr)
+            .then((res) => {});
+        },
+      );
   }
 
   /**
@@ -2044,78 +2376,124 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
 
     this.uploadResponse = { status: true, message: "Cargando...", proccess: 0 };
 
-    this.encryptService.generateRouteGetParams(this.ruoteServiceDocuments, dataSend, this.authorization).then((res) => {
-      this.urlEndSend = res;
+    this.encryptService
+      .generateRouteGetParams(
+        this.ruoteServiceDocuments,
+        dataSend,
+        this.authorization,
+      )
+      .then((res) => {
+        this.urlEndSend = res;
 
-      /** Comsumo de servicio  */
-      this.http
-        .post(this.urlEndSend, formData, {
-          headers: new HttpHeaders({
-            Authorization: "Bearer " + this.authorization,
-            language: localStorage.getItem("language") ? localStorage.getItem("language") : "es",
-          }),
-          reportProgress: true,
-          observe: "events",
-        })
-        .subscribe(
-          (event: any) => {
-            switch (event.type) {
-              case HttpEventType.UploadProgress: // Cuando el archivo está siendo cargado
-                const progress = Math.round((100 * event.loaded) / event.total);
-                this.uploadResponse = { status: true, message: "Cargando...", proccess: progress };
-                break;
-              case HttpEventType.Response: // Cuando termina la carga
-                if (event.body) {
-                  this.resServiceShipping = event.body;
-                  // Desencriptar respuesta del servicio
-                  this.encryptService.decryptAES(this.resServiceShipping.encrypted, this.authorization).then((res) => {
-                    let resUploadFileDecrypt: any = res;
-                    // console.log(resUploadFileDecrypt);
-                    // Evaluar respuesta del servicio
-                    this.globalAppService
-                      .resolveResponse(resUploadFileDecrypt, true, this.redirectionPath)
+        /** Comsumo de servicio  */
+        this.http
+          .post(this.urlEndSend, formData, {
+            headers: new HttpHeaders({
+              Authorization: "Bearer " + this.authorization,
+              language: localStorage.getItem("language")
+                ? localStorage.getItem("language")
+                : "es",
+            }),
+            reportProgress: true,
+            observe: "events",
+          })
+          .subscribe(
+            (event: any) => {
+              switch (event.type) {
+                case HttpEventType.UploadProgress: // Cuando el archivo está siendo cargado
+                  const progress = Math.round(
+                    (100 * event.loaded) / event.total,
+                  );
+                  this.uploadResponse = {
+                    status: true,
+                    message: "Cargando...",
+                    proccess: progress,
+                  };
+                  break;
+                case HttpEventType.Response: // Cuando termina la carga
+                  if (event.body) {
+                    this.resServiceShipping = event.body;
+                    // Desencriptar respuesta del servicio
+                    this.encryptService
+                      .decryptAES(
+                        this.resServiceShipping.encrypted,
+                        this.authorization,
+                      )
                       .then((res) => {
-                        let responseResolveResponse = res;
-                        // Cargando false
-                        this.sweetAlertService.sweetClose();
-                        if (responseResolveResponse == true) {
-                          this.uploadResponse = { status: true, message: "Completado", proccess: 100 };
-                          this.sweetAlertService.showNotification("success", resUploadFileDecrypt.message);
+                        let resUploadFileDecrypt: any = res;
+                        // console.log(resUploadFileDecrypt);
+                        // Evaluar respuesta del servicio
+                        this.globalAppService
+                          .resolveResponse(
+                            resUploadFileDecrypt,
+                            true,
+                            this.redirectionPath,
+                          )
+                          .then((res) => {
+                            let responseResolveResponse = res;
+                            // Cargando false
+                            this.sweetAlertService.sweetClose();
+                            if (responseResolveResponse == true) {
+                              this.uploadResponse = {
+                                status: true,
+                                message: "Completado",
+                                proccess: 100,
+                              };
+                              this.sweetAlertService.showNotification(
+                                "success",
+                                resUploadFileDecrypt.message,
+                              );
 
-                          if (resUploadFileDecrypt.data) {
-                            resUploadFileDecrypt.data.forEach((data) => {
-                              this.dtData[data.idInitialList]["status"] = data.status;
-                              this.dtData[data.idInitialList]["statusText"] = data.statusText;
-                            });
-                          }
+                              if (resUploadFileDecrypt.data) {
+                                resUploadFileDecrypt.data.forEach((data) => {
+                                  this.dtData[data.idInitialList]["status"] =
+                                    data.status;
+                                  this.dtData[data.idInitialList][
+                                    "statusText"
+                                  ] = data.statusText;
+                                });
+                              }
 
-                          this.selectedRowsEmiter.emit(data.ButtonSelectedData);
-                          //recargar la data de la tabla
-                          this.reloadInitialList();
-                        } else {
-                          this.uploadProcess = false;
-                        }
+                              this.selectedRowsEmiter.emit(
+                                data.ButtonSelectedData,
+                              );
+                              //recargar la data de la tabla
+                              this.reloadInitialList();
+                            } else {
+                              this.uploadProcess = false;
+                            }
+                          });
+                        // Fin Evaluar respuesta del servicio
                       });
-                    // Fin Evaluar respuesta del servicio
-                  });
-                  // Fin Desencriptar respuesta del servicio
-                }
-                break;
-            }
-          },
-          (err) => {
-            this.resServiceShippingErr = err;
-            // Evaluar respuesta de error del servicio
-            this.globalAppService
-              .resolveResponseError(this.resServiceShippingErr, true, this.redirectionPath)
-              .then((res) => { });
-            this.uploadResponse = { status: true, message: "Cargando...", proccess: 0 };
-            this.sweetAlertService.sweetInfoText("El archivo no pudo ser procesado", "");
-            this.uploadProcess = false;
-          }
-        );
-      /** Fin Comsumo de servicio  */
-    });
+                    // Fin Desencriptar respuesta del servicio
+                  }
+                  break;
+              }
+            },
+            (err) => {
+              this.resServiceShippingErr = err;
+              // Evaluar respuesta de error del servicio
+              this.globalAppService
+                .resolveResponseError(
+                  this.resServiceShippingErr,
+                  true,
+                  this.redirectionPath,
+                )
+                .then((res) => {});
+              this.uploadResponse = {
+                status: true,
+                message: "Cargando...",
+                proccess: 0,
+              };
+              this.sweetAlertService.sweetInfoText(
+                "El archivo no pudo ser procesado",
+                "",
+              );
+              this.uploadProcess = false;
+            },
+          );
+        /** Fin Comsumo de servicio  */
+      });
 
     return false;
   }
@@ -2133,41 +2511,50 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
     };
 
     this.restService
-      .restPost(this.versionApi + "radicacion/transacciones/delivered", params, this.authorization)
+      .restPost(
+        this.versionApi + "radicacion/transacciones/delivered",
+        params,
+        this.authorization,
+      )
       .subscribe(
         (res) => {
           this.resServiceDelivered = res;
 
-          this.globalAppService.resolveResponse(this.resServiceDelivered, false).then((res) => {
-            const responseResolveResponse = res;
+          this.globalAppService
+            .resolveResponse(this.resServiceDelivered, false)
+            .then((res) => {
+              const responseResolveResponse = res;
 
-            if (responseResolveResponse == true) {
-              for (let key in this.resServiceDelivered.notificacion) {
-                this.sweetAlertService.showNotification(
-                  this.resServiceDelivered.notificacion[key]["type"],
-                  this.resServiceDelivered.notificacion[key]["message"]
-                );
+              if (responseResolveResponse == true) {
+                for (let key in this.resServiceDelivered.notificacion) {
+                  this.sweetAlertService.showNotification(
+                    this.resServiceDelivered.notificacion[key]["type"],
+                    this.resServiceDelivered.notificacion[key]["message"],
+                  );
+                }
+
+                if (this.resServiceDelivered.data) {
+                  this.resServiceDelivered.data.forEach((data) => {
+                    this.dtData[data.idInitialList]["status"] = data.status;
+                    this.dtData[data.idInitialList]["statusText"] =
+                      data.statusText;
+                  });
+                }
+
+                this.selectedRowsEmiter.emit(data.ButtonSelectedData);
               }
 
-              if (this.resServiceDelivered.data) {
-                this.resServiceDelivered.data.forEach((data) => {
-                  this.dtData[data.idInitialList]["status"] = data.status;
-                  this.dtData[data.idInitialList]["statusText"] = data.statusText;
-                });
-              }
-
-              this.selectedRowsEmiter.emit(data.ButtonSelectedData);
-            }
-
-            // Cargando false
-            this.sweetAlertService.sweetClose();
-          });
+              // Cargando false
+              this.sweetAlertService.sweetClose();
+            });
         },
         (err) => {
           this.resServiceDeliveredErr = err;
           // Evaluar respuesta de error del servicio
-          this.globalAppService.resolveResponseError(this.resServiceDeliveredErr).then((res) => { });
-        }
+          this.globalAppService
+            .resolveResponseError(this.resServiceDeliveredErr)
+            .then((res) => {});
+        },
       );
   }
 
@@ -2186,44 +2573,53 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
     this.sweetAlertService.sweetLoading();
 
     this.restService
-      .restPost(this.versionApi + "radicacion/transacciones/return-delivery", params, this.authorization)
+      .restPost(
+        this.versionApi + "radicacion/transacciones/return-delivery",
+        params,
+        this.authorization,
+      )
       .subscribe(
         (res) => {
           this.resServiceReturnDelivered = res;
 
-          this.globalAppService.resolveResponse(this.resServiceReturnDelivered, false).then((res) => {
-            const responseResolveResponse = res;
+          this.globalAppService
+            .resolveResponse(this.resServiceReturnDelivered, false)
+            .then((res) => {
+              const responseResolveResponse = res;
 
-            this.sweetAlertService.showNotificationClose();
+              this.sweetAlertService.showNotificationClose();
 
-            if (responseResolveResponse == true) {
-              for (let key in this.resServiceReturnDelivered.notificacion) {
-                this.sweetAlertService.showNotification(
-                  this.resServiceReturnDelivered.notificacion[key]["type"],
-                  this.resServiceReturnDelivered.notificacion[key]["message"]
-                );
+              if (responseResolveResponse == true) {
+                for (let key in this.resServiceReturnDelivered.notificacion) {
+                  this.sweetAlertService.showNotification(
+                    this.resServiceReturnDelivered.notificacion[key]["type"],
+                    this.resServiceReturnDelivered.notificacion[key]["message"],
+                  );
+                }
+
+                if (this.resServiceReturnDelivered.data) {
+                  this.resServiceReturnDelivered.data.forEach((data) => {
+                    this.dtData[data.idInitialList]["status"] = data.status;
+                    this.dtData[data.idInitialList]["statusText"] =
+                      data.statusText;
+                  });
+                }
+                this.selectedRowsEmiter.emit(data.ButtonSelectedData);
+                //recargar la data de la tabla
+                this.reloadInitialList();
               }
 
-              if (this.resServiceReturnDelivered.data) {
-                this.resServiceReturnDelivered.data.forEach((data) => {
-                  this.dtData[data.idInitialList]["status"] = data.status;
-                  this.dtData[data.idInitialList]["statusText"] = data.statusText;
-                });
-              }
-              this.selectedRowsEmiter.emit(data.ButtonSelectedData);
-              //recargar la data de la tabla
-              this.reloadInitialList();
-            }
-
-            // Cargando false
-            this.sweetAlertService.sweetClose();
-          });
+              // Cargando false
+              this.sweetAlertService.sweetClose();
+            });
         },
         (err) => {
           this.resServiceReturnDeliveredErr = err;
           // Evaluar respuesta de error del servicio
-          this.globalAppService.resolveResponseError(this.resServiceReturnDeliveredErr).then((res) => { });
-        }
+          this.globalAppService
+            .resolveResponseError(this.resServiceReturnDeliveredErr)
+            .then((res) => {});
+        },
       );
   }
 
@@ -2240,31 +2636,40 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
     // loading true
     this.sweetAlertService.sweetLoading();
 
-    this.restService.restPost(this.routeChangeStatus, dataSend, this.authorization).subscribe(
-      (res) => {
-        this.resServicesCopyInfo = res;
+    this.restService
+      .restPost(this.routeChangeStatus, dataSend, this.authorization)
+      .subscribe(
+        (res) => {
+          this.resServicesCopyInfo = res;
 
-        this.globalAppService.resolveResponse(this.resServicesCopyInfo, false).then((res) => {
-          const responseResolveResponse = res;
-          if (responseResolveResponse == true) {
-            // Cargando false
-            this.sweetAlertService.showNotificationClose();
-            this.sweetAlertService.showNotification("success", this.resServicesCopyInfo["message"]);
-            this.reloadInitialList();
-          }
-          // this.rerenderChangeStatus();
-          // // Cargando false
-          // this.sweetAlertService.sweetClose();
-        });
-      },
-      (err) => {
-        this.resServicesCopyInfoErr = err;
-        // Evaluar respuesta de error del servicio
-        // Cargando false
-        this.sweetAlertService.showNotificationClose();
-        this.globalAppService.resolveResponseError(this.resServicesCopyInfoErr).then((res) => { });
-      }
-    );
+          this.globalAppService
+            .resolveResponse(this.resServicesCopyInfo, false)
+            .then((res) => {
+              const responseResolveResponse = res;
+              if (responseResolveResponse == true) {
+                // Cargando false
+                this.sweetAlertService.showNotificationClose();
+                this.sweetAlertService.showNotification(
+                  "success",
+                  this.resServicesCopyInfo["message"],
+                );
+                this.reloadInitialList();
+              }
+              // this.rerenderChangeStatus();
+              // // Cargando false
+              // this.sweetAlertService.sweetClose();
+            });
+        },
+        (err) => {
+          this.resServicesCopyInfoErr = err;
+          // Evaluar respuesta de error del servicio
+          // Cargando false
+          this.sweetAlertService.showNotificationClose();
+          this.globalAppService
+            .resolveResponseError(this.resServicesCopyInfoErr)
+            .then((res) => {});
+        },
+      );
   }
 
   /**
@@ -2301,44 +2706,52 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
           this.sweetAlertService.sweetLoading();
 
           this.restService
-            .restPost(this.versionApi + "radicacion/transacciones/return-filing", params, this.authorization)
+            .restPost(
+              this.versionApi + "radicacion/transacciones/return-filing",
+              params,
+              this.authorization,
+            )
             .subscribe(
               (res) => {
                 this.resServiceReturnFil = res;
 
-                this.globalAppService.resolveResponse(this.resServiceReturnFil, false).then((res) => {
-                  const responseResolveResponse = res;
+                this.globalAppService
+                  .resolveResponse(this.resServiceReturnFil, false)
+                  .then((res) => {
+                    const responseResolveResponse = res;
 
-                  if (responseResolveResponse == true) {
-                    for (let key in this.resServiceReturnFil.notificacion) {
-                      this.sweetAlertService.showNotification(
-                        this.resServiceReturnFil.notificacion[key]["type"],
-                        this.resServiceReturnFil.notificacion[key]["message"]
-                      );
+                    if (responseResolveResponse == true) {
+                      for (let key in this.resServiceReturnFil.notificacion) {
+                        this.sweetAlertService.showNotification(
+                          this.resServiceReturnFil.notificacion[key]["type"],
+                          this.resServiceReturnFil.notificacion[key]["message"],
+                        );
+                      }
+                      // if (data.action) {
+                      //   if (this.resServiceReturnFil.data) {
+                      //     this.resServiceReturnFil.data.forEach( (dataSer, index) => {
+                      //       this.eliminarRegistro(dataSer.idInitialList);
+                      //       /** Emitir data seleccionada al componente padre, luego de finalizar la eliminación de registros */
+                      //       if(this.resServiceReturnFil.data.length == index + 1) {
+                      //         this.selectedRowsEmiter.emit(this.selectedRows);
+                      //       }
+                      //       /** Emitir data seleccionada al componente padre, luego de finalizar la eliminación de registros */
+                      //     });
+                      //   }
+                      // }
+                      // this.sweetAlertService.sweetClose();
+
+                      this.reloadInitialList();
                     }
-                    // if (data.action) {
-                    //   if (this.resServiceReturnFil.data) {
-                    //     this.resServiceReturnFil.data.forEach( (dataSer, index) => {
-                    //       this.eliminarRegistro(dataSer.idInitialList);
-                    //       /** Emitir data seleccionada al componente padre, luego de finalizar la eliminación de registros */
-                    //       if(this.resServiceReturnFil.data.length == index + 1) {
-                    //         this.selectedRowsEmiter.emit(this.selectedRows);
-                    //       }
-                    //       /** Emitir data seleccionada al componente padre, luego de finalizar la eliminación de registros */
-                    //     });
-                    //   }
-                    // }
-                    // this.sweetAlertService.sweetClose();
-
-                    this.reloadInitialList();
-                  }
-                });
+                  });
               },
               (err) => {
                 this.resServiceReturnFilErr = err;
                 // Evaluar respuesta de error del servicio
-                this.globalAppService.resolveResponseError(this.resServiceReturnFilErr).then((res) => { });
-              }
+                this.globalAppService
+                  .resolveResponseError(this.resServiceReturnFilErr)
+                  .then((res) => {});
+              },
             );
         }
       });
@@ -2359,27 +2772,38 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
     this.sweetAlertService.sweetLoading();
 
     this.restService
-      .restPost(this.versionApi + "radicacion/transacciones/withdrawal", dataSend, this.authorization)
+      .restPost(
+        this.versionApi + "radicacion/transacciones/withdrawal",
+        dataSend,
+        this.authorization,
+      )
       .subscribe(
         (res) => {
           this.resSerWithdrawal = res;
           // console.log(this.resSerWithdrawal);
 
-          this.globalAppService.resolveResponse(this.resSerWithdrawal, false).then((res) => {
-            let responseResolveResponseDown = res;
+          this.globalAppService
+            .resolveResponse(this.resSerWithdrawal, false)
+            .then((res) => {
+              let responseResolveResponseDown = res;
 
-            if (responseResolveResponseDown == true) {
-              this.sweetAlertService.showNotification("success", this.resSerWithdrawal.message);
-              // Recarga el Initial List
-              this.reloadInitialList();
-            }
-          });
+              if (responseResolveResponseDown == true) {
+                this.sweetAlertService.showNotification(
+                  "success",
+                  this.resSerWithdrawal.message,
+                );
+                // Recarga el Initial List
+                this.reloadInitialList();
+              }
+            });
         },
         (err) => {
           this.resSerWithdrawalErr = err;
           // Evaluar respuesta de error del servicio
-          this.globalAppService.resolveResponseError(this.resSerWithdrawalErr).then((res) => { });
-        }
+          this.globalAppService
+            .resolveResponseError(this.resSerWithdrawalErr)
+            .then((res) => {});
+        },
       );
   }
 
@@ -2418,16 +2842,21 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
   }
 
   changeDetectedService() {
-    this.subscriptionChangeDetectedService = this.changeChildrenService.reloadComponent.subscribe((emit) => {
-      this.reloadInitialList();
-    });
-    this.subscriptionChangeDetectedServiceOpenFilter = this.changeChildrenService.openFilter.subscribe((emit) => {
-      this.openFilter();
-    });
+    this.subscriptionChangeDetectedService =
+      this.changeChildrenService.reloadComponent.subscribe((emit) => {
+        this.reloadInitialList();
+      });
+    this.subscriptionChangeDetectedServiceOpenFilter =
+      this.changeChildrenService.openFilter.subscribe((emit) => {
+        this.openFilter();
+      });
   }
 
   copyToClipboard(item) {
-    this.sweetAlertService.showNotification("success", this.translate.instant("Copiado"));
+    this.sweetAlertService.showNotification(
+      "success",
+      this.translate.instant("Copiado"),
+    );
 
     document.addEventListener("copy", (e: ClipboardEvent) => {
       e.clipboardData.setData("text/plain", item);
@@ -2448,9 +2877,8 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
     this.selectedRowsEmiter.emit(this.selectedRows);
   }
 
-
   selectAllRows(checked: boolean) {
-    this.dtData.forEach(row => (row.rowSelect = checked));
+    this.dtData.forEach((row) => (row.rowSelect = checked));
     this.selectedRows = checked ? [...this.dtData] : [];
 
     this.selectedRowsEmiter.emit(this.selectedRows);
@@ -2462,53 +2890,92 @@ export class InitialListComponent implements AfterViewInit, OnInit, AfterViewChe
 
   /** Fin Métodos para el uso de la internacionalización */
   ngOnDestroy() {
-    if (!!this.subscriptionChangeStatus) this.subscriptionChangeStatus.unsubscribe();
-    if (!!this.subscriptionChangeStatusAnulation) this.subscriptionChangeStatusAnulation.unsubscribe();
-    if (!!this.subscriptionTransactionReasign) this.subscriptionTransactionReasign.unsubscribe();
-    if (!!this.subscriptionTransactionVobo) this.subscriptionTransactionVobo.unsubscribe();
-    if (!!this.subscriptionTransactionReturnFiling) this.subscriptionTransactionReturnFiling.unsubscribe(); // Devolucion de Radicado
-    if (!!this.subscriptionTransactionCopyInfo) this.subscriptionTransactionCopyInfo.unsubscribe();
-    if (!!this.subscriptionTransactionFinalizeFiling) this.subscriptionTransactionFinalizeFiling.unsubscribe();
-    if (!!this.subscriptionDataChangeShipping) this.subscriptionDataChangeShipping.unsubscribe(); // Envio Correspondencia
-    if (!!this.subscriptionDataChangeShippingElectronic) this.subscriptionDataChangeShippingElectronic.unsubscribe(); // Envio Correspondencia
-    if (!!this.subscriptionDataChangeReturnDelivery) this.subscriptionDataChangeReturnDelivery.unsubscribe(); // Devolver Correspondencia
-    if (!!this.subscriptionDataChangeDelivered) this.subscriptionDataChangeDelivered.unsubscribe(); // Entregar Correspondencia
-    if (!!this.subscriptionTransactionShippingReady) this.subscriptionTransactionShippingReady.unsubscribe(); // Envio de documentos
-    if (!!this.subscriptionTransactionArchiveFiling) this.subscriptionTransactionArchiveFiling.unsubscribe(); // Archivar radicado
-    if (!!this.subscriptionApplyForLoan) this.subscriptionApplyForLoan.unsubscribe(); // Solicitar préstamo
-    if (!!this.subscriptionApproveLoan) this.subscriptionApproveLoan.unsubscribe(); // Aceptar préstamo
-    if (!!this.subscriptionCancelLoan) this.subscriptionCancelLoan.unsubscribe(); // Cancelar préstamo
-    if (!!this.subscriptionReturnLoan) this.subscriptionReturnLoan.unsubscribe(); // Devolver préstamo
-    if (!!this.subscriptionDownloadRotulos) this.subscriptionDownloadRotulos.unsubscribe(); // Descargar rotulos
-    if (!!this.subscriptionManualTransfer) this.subscriptionManualTransfer.unsubscribe(); // Transferencia manual
-    if (!!this.subscriptionDownloadFuit) this.subscriptionDownloadFuit.unsubscribe(); // Descargar Fuit expedientes
-    if (!!this.subscriptionAcceptTransfer) this.subscriptionAcceptTransfer.unsubscribe(); // Acepta transferencia de expedientes
-    if (!!this.subscriptionRejectTransfer) this.subscriptionRejectTransfer.unsubscribe(); // Rechaza transferencia de expedientes
-    if (!!this.subscriptionArchiveFolder) this.subscriptionArchiveFolder.unsubscribe(); // Archiva expedientes
-    if (!!this.subscriptionReturnPqrToCitizen) this.subscriptionReturnPqrToCitizen.unsubscribe(); // Devuelve radicado PQRSD al ciudadano
-    if (!!this.subscriptionWithdrawal) this.subscriptionWithdrawal.unsubscribe(); // Desiste el ciudadano
+    if (!!this.subscriptionChangeStatus)
+      this.subscriptionChangeStatus.unsubscribe();
+    if (!!this.subscriptionChangeStatusAnulation)
+      this.subscriptionChangeStatusAnulation.unsubscribe();
+    if (!!this.subscriptionTransactionReasign)
+      this.subscriptionTransactionReasign.unsubscribe();
+    if (!!this.subscriptionTransactionVobo)
+      this.subscriptionTransactionVobo.unsubscribe();
+    if (!!this.subscriptionTransactionReturnFiling)
+      this.subscriptionTransactionReturnFiling.unsubscribe(); // Devolucion de Radicado
+    if (!!this.subscriptionTransactionCopyInfo)
+      this.subscriptionTransactionCopyInfo.unsubscribe();
+    if (!!this.subscriptionTransactionFinalizeFiling)
+      this.subscriptionTransactionFinalizeFiling.unsubscribe();
+    if (!!this.subscriptionDataChangeShipping)
+      this.subscriptionDataChangeShipping.unsubscribe(); // Envio Correspondencia
+    if (!!this.subscriptionDataChangeShippingElectronic)
+      this.subscriptionDataChangeShippingElectronic.unsubscribe(); // Envio Correspondencia
+    if (!!this.subscriptionDataChangeReturnDelivery)
+      this.subscriptionDataChangeReturnDelivery.unsubscribe(); // Devolver Correspondencia
+    if (!!this.subscriptionDataChangeDelivered)
+      this.subscriptionDataChangeDelivered.unsubscribe(); // Entregar Correspondencia
+    if (!!this.subscriptionTransactionShippingReady)
+      this.subscriptionTransactionShippingReady.unsubscribe(); // Envio de documentos
+    if (!!this.subscriptionTransactionArchiveFiling)
+      this.subscriptionTransactionArchiveFiling.unsubscribe(); // Archivar radicado
+    if (!!this.subscriptionApplyForLoan)
+      this.subscriptionApplyForLoan.unsubscribe(); // Solicitar préstamo
+    if (!!this.subscriptionApproveLoan)
+      this.subscriptionApproveLoan.unsubscribe(); // Aceptar préstamo
+    if (!!this.subscriptionCancelLoan)
+      this.subscriptionCancelLoan.unsubscribe(); // Cancelar préstamo
+    if (!!this.subscriptionReturnLoan)
+      this.subscriptionReturnLoan.unsubscribe(); // Devolver préstamo
+    if (!!this.subscriptionDownloadRotulos)
+      this.subscriptionDownloadRotulos.unsubscribe(); // Descargar rotulos
+    if (!!this.subscriptionManualTransfer)
+      this.subscriptionManualTransfer.unsubscribe(); // Transferencia manual
+    if (!!this.subscriptionDownloadFuit)
+      this.subscriptionDownloadFuit.unsubscribe(); // Descargar Fuit expedientes
+    if (!!this.subscriptionAcceptTransfer)
+      this.subscriptionAcceptTransfer.unsubscribe(); // Acepta transferencia de expedientes
+    if (!!this.subscriptionRejectTransfer)
+      this.subscriptionRejectTransfer.unsubscribe(); // Rechaza transferencia de expedientes
+    if (!!this.subscriptionArchiveFolder)
+      this.subscriptionArchiveFolder.unsubscribe(); // Archiva expedientes
+    if (!!this.subscriptionReturnPqrToCitizen)
+      this.subscriptionReturnPqrToCitizen.unsubscribe(); // Devuelve radicado PQRSD al ciudadano
+    if (!!this.subscriptionWithdrawal)
+      this.subscriptionWithdrawal.unsubscribe(); // Desiste el ciudadano
 
-    if (!!this.subscriptionTranslateService$) this.subscriptionTranslateService$.unsubscribe(); // Subscripción de cambio de lenguaje
+    if (!!this.subscriptionTranslateService$)
+      this.subscriptionTranslateService$.unsubscribe(); // Subscripción de cambio de lenguaje
 
-    if (!!this.subscriptionChangeDetectedService) this.subscriptionChangeDetectedService.unsubscribe();
+    if (!!this.subscriptionChangeDetectedService)
+      this.subscriptionChangeDetectedService.unsubscribe();
     if (!!this.subscriptionChangeDetectedServiceOpenFilter)
       this.subscriptionChangeDetectedServiceOpenFilter.unsubscribe();
     this.dtTrigger.unsubscribe();
   }
 
   isObjectAndHasNombre(item: any, headerName: string): boolean {
-    return item[headerName] && typeof item[headerName] === 'object' && !!item[headerName].nombre;
+    return (
+      item[headerName] &&
+      typeof item[headerName] === "object" &&
+      !!item[headerName].nombre
+    );
   }
 
   isObjectAndHasNombreCgMedioRecepcion(item: any, headerName: string): boolean {
-    return item[headerName] && typeof item[headerName] === 'object' && !!item[headerName].nombreCgMedioRecepcion;
+    return (
+      item[headerName] &&
+      typeof item[headerName] === "object" &&
+      !!item[headerName].nombreCgMedioRecepcion
+    );
   }
 
   isObjectAndHasEstado(item: any, headerName: string): boolean {
-    return item[headerName] && typeof item[headerName] === 'object' && !!item[headerName].estado;
+    return (
+      item[headerName] &&
+      typeof item[headerName] === "object" &&
+      !!item[headerName].estado
+    );
   }
 
   isNotObject(item: any, headerName: string): boolean {
-    return !item[headerName] || typeof item[headerName] !== 'object';
+    return !item[headerName] || typeof item[headerName] !== "object";
   }
 }

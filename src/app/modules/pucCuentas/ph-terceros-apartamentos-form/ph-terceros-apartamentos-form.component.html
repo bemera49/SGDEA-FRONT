@@ -1,0 +1,446 @@
+<app-breadcrumb
+  [breadcrumbOn]="breadcrumbOn"
+  [breadcrumbRouteActive]="breadcrumbRouteActive"
+></app-breadcrumb>
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <form
+          [formGroup]="moduleForm"
+          class="form-horizontal"
+          (ngSubmit)="submitTercero()"
+        >
+          <!-- card Header -->
+          <div class="card">
+            <div class="card-header card-header-info card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">{{ initCardHeaderIcon }}</i>
+              </div>
+              <h4 class="card-title">{{ textFormTercero | translate }}</h4>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>{{
+                      "Seleccione tercero" | translate
+                    }}</mat-label>
+                    <mat-select
+                      id="idph_tercero"
+                      formControlName="idph_tercero"
+                    >
+                      <mat-option>
+                        <ngx-mat-select-search
+                          [placeholderLabel]="'Buscar...' | translate"
+                          [noEntriesFoundLabel]="
+                            'No se encontraron coincidencias' | translate
+                          "
+                          formControlName="idph_tercero"
+                          [searching]="true"
+                        ></ngx-mat-select-search>
+                      </mat-option>
+                      <mat-option
+                        *ngFor="let value of filteredlistTercero | async"
+                        [value]="value.id"
+                      >
+                        {{ value.cc }} - {{ value.val }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error
+                      *ngIf="
+                        !moduleForm.get('idph_tercero').valid &&
+                        moduleForm.get('idph_tercero').touched
+                      "
+                    >
+                      {{ "El campo es obligatorio" | translate }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <!-- Torre, Apartamento y Referencia -->
+              <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>{{ "Torre" | translate }}</mat-label>
+                    <input matInput formControlName="torre" type="number" />
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>{{ "Apartamento" | translate }}</mat-label>
+                    <input
+                      matInput
+                      formControlName="apartamento"
+                      type="number"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>{{ "Referencia" | translate }}</mat-label>
+                    <input
+                      matInput
+                      formControlName="referencia"
+                      maxlength="20"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <!-- Tipo de zona -->
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <mat-card-content>
+                    <label class="text-dark">{{
+                      "Tipo de zona" | translate
+                    }}</label>
+                    <section
+                      class="section-slider-toggle"
+                      style="padding-bottom: 35px"
+                    >
+                      <span class="left-slider-toggle mr-2">
+                        {{ "Urbana" | translate }}</span
+                      >
+                      <mat-slide-toggle
+                        class="example-margin"
+                        formControlName="tipo_zona"
+                      >
+                        {{ "Rural" | translate }}
+                      </mat-slide-toggle>
+                    </section>
+                  </mat-card-content>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <mat-card-content>
+                    <label class="text-dark">{{
+                      "Dirección principal" | translate
+                    }}</label>
+                    <section
+                      class="section-slider-toggle"
+                      style="padding-bottom: 35px"
+                    >
+                      <mat-slide-toggle
+                        class="example-margin"
+                        formControlName="principal"
+                      >
+                        {{ "Es dirección principal" | translate }}
+                      </mat-slide-toggle>
+                    </section>
+                  </mat-card-content>
+                </div>
+              </div>
+
+              <!-- Dirección -->
+              <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <label class="text-dark"
+                    >{{ "Dirección" | translate }} *</label
+                  >
+                </div>
+
+                <div
+                  class="col-lg-1 col-md-1 col-sm-12 col-xs-12"
+                  *ngIf="!moduleForm.get('tipo_zona').value"
+                >
+                  <mat-form-field>
+                    <mat-label>Tipo de Vía</mat-label>
+                    <mat-select
+                      formControlName="tipo_via"
+                      (selectionChange)="updateDireccionCompleta()"
+                    >
+                      <mat-option
+                        *ngFor="let tipo of tiposDeViaOptions"
+                        [value]="tipo.value"
+                      >
+                        {{ tipo.viewValue }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div
+                  class="col-lg-1 col-md-1 col-sm-12 col-xs-12"
+                  *ngIf="!moduleForm.get('tipo_zona').value"
+                >
+                  <mat-form-field>
+                    <mat-label>N° Vía</mat-label>
+                    <input
+                      matInput
+                      formControlName="via_numero"
+                      (change)="updateDireccionCompleta()"
+                    />
+                  </mat-form-field>
+                </div>
+                <div
+                  class="col-lg-1 col-md-1 col-sm-12 col-xs-12"
+                  *ngIf="!moduleForm.get('tipo_zona').value"
+                >
+                  <mat-form-field>
+                    <mat-label>Letra</mat-label>
+                    <mat-select
+                      formControlName="via_letra"
+                      (selectionChange)="updateDireccionCompleta()"
+                    >
+                      <mat-option
+                        *ngFor="let letra of letraOptions"
+                        [value]="letra.value"
+                      >
+                        {{ letra.viewValue }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div
+                  class="col-lg-1 col-md-1 col-sm-12 col-xs-12"
+                  *ngIf="!moduleForm.get('tipo_zona').value"
+                >
+                  <mat-form-field>
+                    <mat-label>Sufijo</mat-label>
+                    <mat-select
+                      formControlName="via_sufijo"
+                      (selectionChange)="updateDireccionCompleta()"
+                    >
+                      <mat-option
+                        *ngFor="let sufijo of sufijoOptions"
+                        [value]="sufijo.value"
+                      >
+                        {{ sufijo.viewValue }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <!-- BIS -->
+                <div
+                  class="col-lg-1 col-md-1 col-sm-12 col-xs-12"
+                  *ngIf="!moduleForm.get('tipo_zona').value"
+                >
+                  <mat-form-field>
+                    <mat-label>Bis</mat-label>
+                    <mat-select
+                      formControlName="bis"
+                      (selectionChange)="updateDireccionCompleta()"
+                    >
+                      <mat-option
+                        *ngFor="let bis of bisOptions"
+                        [value]="bis.value"
+                      >
+                        {{ bis.viewValue }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <!-- Bis Letra -->
+                <div
+                  class="col-lg-1 col-md-1 col-sm-12 col-xs-12"
+                  *ngIf="!moduleForm.get('tipo_zona').value"
+                >
+                  <mat-form-field>
+                    <mat-label>Letra</mat-label>
+                    <mat-select
+                      formControlName="bis_letra"
+                      (selectionChange)="updateDireccionCompleta()"
+                    >
+                      <mat-option
+                        *ngFor="let letraDos of letraOptions"
+                        [value]="letraDos.value"
+                      >
+                        {{ letraDos.viewValue }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div
+                  class="col-lg-1 col-md-1 col-sm-12 col-xs-12"
+                  *ngIf="!moduleForm.get('tipo_zona').value"
+                >
+                  <mat-form-field>
+                    <mat-label>Sufijo</mat-label>
+                    <mat-select
+                      formControlName="bis_sufijo"
+                      (selectionChange)="updateDireccionCompleta()"
+                    >
+                      <mat-option
+                        *ngFor="let sufijo of sufijoOptions"
+                        [value]="sufijo.value"
+                      >
+                        {{ sufijo.viewValue }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div
+                  class="col-lg-1 col-md-1 col-sm-12 col-xs-12"
+                  *ngIf="!moduleForm.get('tipo_zona').value"
+                >
+                  <mat-form-field>
+                    <mat-label>N° Placa</mat-label>
+                    <input
+                      matInput
+                      formControlName="placa_numero"
+                      (change)="updateDireccionCompleta()"
+                    />
+                  </mat-form-field>
+                </div>
+                <!-- Placa Letra -->
+                <div
+                  class="col-lg-1 col-md-1 col-sm-12 col-xs-12"
+                  *ngIf="!moduleForm.get('tipo_zona').value"
+                >
+                  <mat-form-field>
+                    <mat-label>Letra</mat-label>
+                    <mat-select
+                      formControlName="placa_letra"
+                      (selectionChange)="updateDireccionCompleta()"
+                    >
+                      <mat-option
+                        *ngFor="let letraTres of letraOptions"
+                        [value]="letraTres.value"
+                      >
+                        {{ letraTres.viewValue }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <!-- Placa Sufijo -->
+                <div
+                  class="col-lg-1 col-md-1 col-sm-12 col-xs-12"
+                  *ngIf="!moduleForm.get('tipo_zona').value"
+                >
+                  <mat-form-field>
+                    <mat-label>Sufijo</mat-label>
+                    <mat-select
+                      formControlName="placa_sufijo"
+                      (selectionChange)="updateDireccionCompleta()"
+                    >
+                      <mat-option
+                        *ngFor="let sufijoDos of sufijoOptions"
+                        [value]="sufijoDos.value"
+                      >
+                        {{ sufijoDos.viewValue }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div
+                  class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
+                  *ngIf="!moduleForm.get('tipo_zona').value"
+                >
+                  <mat-form-field>
+                    <mat-label>Complemento</mat-label>
+                    <input
+                      matInput
+                      formControlName="complemento"
+                      (change)="updateDireccionCompleta()"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <mat-form-field appearance="fill" class="example-full-width">
+                    <mat-label>{{
+                      "Dirección completa" | translate
+                    }}</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      [readonly]="!moduleForm.get('tipo_zona').value"
+                      formControlName="direccion_completa"
+                      maxlength="255"
+                    />
+                    <mat-error
+                      *ngIf="
+                        moduleForm.get('direccion_completa').invalid &&
+                        moduleForm.get('direccion_completa').touched
+                      "
+                    >
+                      {{ "El campo es obligatorio" | translate }}.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <!-- Ciudad, Departamento, Código Postal -->
+              <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>{{ "Departamento" | translate }}</mat-label>
+                    <mat-select formControlName="departamento">
+                      <mat-option
+                        *ngFor="let depto of departamentosList"
+                        [value]="depto.id"
+                      >
+                        {{ depto.nombre }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>{{ "Ciudad" | translate }}</mat-label>
+                    <mat-select formControlName="ciudad">
+                      <mat-option
+                        *ngFor="let city of ciudadesList"
+                        [value]="city.id"
+                      >
+                        {{ city.nombre }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>{{ "Código postal" | translate }}</mat-label>
+                    <input
+                      matInput
+                      formControlName="codigo_postal"
+                      maxlength="20"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <!-- Fechas -->
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>{{ "Fecha inicio" | translate }}</mat-label>
+                    <input
+                      matInput
+                      [matDatepicker]="pickerInicio"
+                      formControlName="fecha_inicio"
+                    />
+                    <mat-datepicker-toggle
+                      matSuffix
+                      [for]="pickerInicio"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker #pickerInicio></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>{{ "Fecha fin" | translate }}</mat-label>
+                    <input
+                      matInput
+                      [matDatepicker]="pickerFin"
+                      formControlName="fecha_fin"
+                    />
+                    <mat-datepicker-toggle
+                      matSuffix
+                      [for]="pickerFin"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker #pickerFin></mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Termina sección -->
+        </form>
+      </div>
+    </div>
+    <app-floating-button
+      [iconMenu]="iconMenu"
+      (menuPrimaryEmiterData)="menuPrimaryReceiveData($event)"
+    ></app-floating-button>
+  </div>
+</div>

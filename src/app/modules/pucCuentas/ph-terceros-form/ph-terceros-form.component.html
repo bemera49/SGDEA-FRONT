@@ -1,0 +1,1091 @@
+<app-breadcrumb
+  [breadcrumbOn]="breadcrumbOn"
+  [breadcrumbRouteActive]="breadcrumbRouteActive"
+></app-breadcrumb>
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <form
+          [formGroup]="moduleForm"
+          class="form-horizontal"
+          (ngSubmit)="submitTercero()"
+        >
+          <!-- card Header -->
+          <div class="card">
+            <div class="card-header card-header-info card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">{{ initCardHeaderIcon }}</i>
+              </div>
+              <h4 class="card-title">{{ textFormTercero | translate }}</h4>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <!-- Tipo Persona -->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>{{ "Tipo de Persona" | translate }}</mat-label>
+                    <mat-select
+                      id="tipoPersona"
+                      formControlName="tipoPersona"
+                      name="tipoPersona"
+                    >
+                      <mat-option>
+                        <ngx-mat-select-search
+                          [placeholderLabel]="'Buscar...' | translate"
+                          [noEntriesFoundLabel]="
+                            'No se encontraron coincidencias' | translate
+                          "
+                          formControlName="listTipoPersonaFilter"
+                          [searching]="true"
+                        >
+                        </ngx-mat-select-search>
+                      </mat-option>
+                      <mat-option
+                        *ngFor="let value of filteredlistTipoPersona | async"
+                        [value]="value.id"
+                      >
+                        {{ value.val }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error
+                      *ngIf="
+                        !moduleForm.get('tipoPersona').valid &&
+                        moduleForm.get('tipoPersona').touched
+                      "
+                    >
+                      {{ "El campo es obligatorio" | translate }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <!-- Tipo Identificación -->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>{{
+                      "Tipo de Identificación" | translate
+                    }}</mat-label>
+                    <mat-select
+                      id="idTipoIdentificacion"
+                      formControlName="idTipoIdentificacion"
+                      name="idTipoIdentificacion"
+                    >
+                      <mat-option
+                        *ngFor="let value of listTipoIdentificacion"
+                        [value]="value.id"
+                      >
+                        {{ value.val }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error
+                      *ngIf="
+                        !moduleForm.get('idTipoIdentificacion').valid &&
+                        moduleForm.get('idTipoIdentificacion').touched
+                      "
+                    >
+                      {{ "El campo es obligatorio" | translate }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <!-- Identificación -->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>{{
+                      "Número de Identificación" | translate
+                    }}</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      id="numeroIdentificacion"
+                      formControlName="numeroIdentificacion"
+                      placeholder="{{
+                        'Ingrese el número de identificación' | translate
+                      }}"
+                      maxlength="15"
+                      (input)="ValidateNumeroIdentificacion($event)"
+                      min="0"
+                      step="1"
+                      required
+                    />
+                    <mat-error
+                      *ngIf="
+                        !moduleForm.get('numeroIdentificacion').valid &&
+                        moduleForm.get('numeroIdentificacion').touched
+                      "
+                    >
+                      {{ "El campo es obligatorio" | translate }}.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <!-- Nombre -->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>{{ "Nombre Completo" | translate }}</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      id="nombre"
+                      formControlName="nombre"
+                      placeholder="{{
+                        'Ingrese el nombre completo' | translate
+                      }}"
+                      maxlength="80"
+                      required
+                    />
+                    <mat-error
+                      *ngIf="
+                        !moduleForm.get('nombre').valid &&
+                        moduleForm.get('nombre').touched
+                      "
+                    >
+                      {{ "El campo es obligatorio" | translate }}.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <!-- Nombre comercial -->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>{{ "Nombre Comercial" | translate }}</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      id="nombreComercial"
+                      formControlName="nombreComercial"
+                      placeholder="{{
+                        'Ingrese el nombre comercial' | translate
+                      }}"
+                      maxlength="15"
+                      min="0"
+                      step="1"
+                    />
+                    <mat-error
+                      *ngIf="
+                        !moduleForm.get('nombreComercial').valid &&
+                        moduleForm.get('nombreComercial').touched
+                      "
+                    >
+                      {{ "El campo es obligatorio" | translate }}.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <!-- Género -->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>{{ "Género" | translate }}</mat-label>
+                    <mat-select id="genero" formControlName="genero">
+                      <mat-option value="M">{{
+                        "Masculino" | translate
+                      }}</mat-option>
+                      <mat-option value="F">{{
+                        "Femenino" | translate
+                      }}</mat-option>
+                      <mat-option value="O">{{
+                        "Otro" | translate
+                      }}</mat-option>
+                    </mat-select>
+                    <mat-error
+                      *ngIf="
+                        !moduleForm.get('genero')?.valid &&
+                        moduleForm.get('genero')?.touched
+                      "
+                    >
+                      {{ "El campo es obligatorio" | translate }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <!-- País -->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>{{ "País" | translate }}</mat-label>
+                    <mat-select
+                      id="idNivelGeografico1"
+                      formControlName="idNivelGeografico1"
+                      (selectionChange)="nivelGeografico2($event.value)"
+                    >
+                      <mat-option>
+                        <ngx-mat-select-search
+                          [placeholderLabel]="'Buscar...' | translate"
+                          [noEntriesFoundLabel]="
+                            'No se encontraron coincidencias' | translate
+                          "
+                          formControlName="listNivelGeografico1Filter"
+                          [searching]="true"
+                        ></ngx-mat-select-search>
+                      </mat-option>
+                      <mat-option
+                        *ngFor="
+                          let value of filteredlistNivelGeografico1 | async
+                        "
+                        [value]="value.id"
+                      >
+                        {{ value.val }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error
+                      *ngIf="
+                        !moduleForm.get('idNivelGeografico1').valid &&
+                        moduleForm.get('idNivelGeografico1').touched
+                      "
+                    >
+                      {{ "El campo es obligatorio" | translate }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <!-- Departamento -->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>{{ "Departamento" | translate }}</mat-label>
+                    <mat-select
+                      id="idNivelGeografico2"
+                      formControlName="idNivelGeografico2"
+                      (selectionChange)="nivelGeografico3($event.value)"
+                    >
+                      <mat-option>
+                        <ngx-mat-select-search
+                          [placeholderLabel]="'Buscar...' | translate"
+                          [noEntriesFoundLabel]="
+                            'No se encontraron coincidencias' | translate
+                          "
+                          formControlName="listNivelGeografico2Filter"
+                          [searching]="true"
+                        >
+                        </ngx-mat-select-search>
+                      </mat-option>
+                      <mat-option
+                        *ngFor="
+                          let value of filteredlistNivelGeografico2 | async
+                        "
+                        [value]="value.id"
+                      >
+                        {{ value.val }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error
+                      *ngIf="
+                        !moduleForm.get('idNivelGeografico2').valid &&
+                        moduleForm.get('idNivelGeografico2').touched
+                      "
+                    >
+                      {{ "El campo es obligatorio" | translate }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <!-- Municipio -->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>{{ "Municipio" | translate }}</mat-label>
+                    <mat-select
+                      id="idNivelGeografico3"
+                      formControlName="idNivelGeografico3"
+                    >
+                      <mat-option>
+                        <ngx-mat-select-search
+                          [placeholderLabel]="'Buscar...' | translate"
+                          [noEntriesFoundLabel]="
+                            'No se encontraron coincidencias' | translate
+                          "
+                          formControlName="listNivelGeografico3Filter"
+                          [searching]="true"
+                        ></ngx-mat-select-search>
+                      </mat-option>
+                      <mat-option
+                        *ngFor="
+                          let value of filteredlistNivelGeografico3 | async
+                        "
+                        [value]="value.id"
+                      >
+                        {{ value.val }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error
+                      *ngIf="
+                        !moduleForm.get('idNivelGeografico3').valid &&
+                        moduleForm.get('idNivelGeografico3').touched
+                      "
+                    >
+                      {{ "El campo es obligatorio" | translate }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <!-- Copropiedad 
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>{{ "Copropiedad" | translate }}</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      id="idPhCopopropiedad"
+                      formControlName="idPhCopopropiedad"
+                      placeholder="{{ 'Ingrese la copropiedad' | translate }}"
+                      maxlength="100"
+                    />
+                    <mat-error
+                      *ngIf="
+                        !moduleForm.get('idPhCopopropiedad').valid &&
+                        moduleForm.get('idPhCopopropiedad').touched
+                      "
+                    >
+                      {{ "El campo es obligatorio" | translate }}.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                -->
+
+                <!-- Dirección -->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>{{ "Dirección" | translate }}</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      id="direccion1"
+                      formControlName="direccion1"
+                      placeholder="{{ 'Ingrese la dirección' | translate }}"
+                      maxlength="150"
+                    />
+                    <mat-error
+                      *ngIf="
+                        !moduleForm.get('direccion1').valid &&
+                        moduleForm.get('direccion1').touched
+                      "
+                    >
+                      {{ "El campo es obligatorio" | translate }}.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <!-- Celular -->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>{{ "Teléfono Celular" | translate }}</mat-label>
+                    <input
+                      matInput
+                      type="tel"
+                      id="celular"
+                      formControlName="celular"
+                      placeholder="{{
+                        'Ingrese el número celular' | translate
+                      }}"
+                      maxlength="15"
+                      (input)="ValidateTelefonoCelular($event)"
+                      min="0"
+                      step="1"
+                    />
+                    <mat-error
+                      *ngIf="
+                        !moduleForm.get('celular').valid &&
+                        moduleForm.get('celular').touched
+                      "
+                    >
+                      {{ "El campo es obligatorio" | translate }}.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <!-- Correo -->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>{{
+                      "Correo Electrónico" | translate
+                    }}</mat-label>
+                    <input
+                      matInput
+                      type="email"
+                      id="email"
+                      formControlName="email"
+                      placeholder="{{
+                        'Ingrese el correo electrónico' | translate
+                      }}"
+                      (input)="verificarCorreo($event)"
+                      maxlength="80"
+                    />
+                    <mat-error
+                      *ngIf="
+                        !moduleForm.get('email').valid &&
+                        moduleForm.get('email').touched
+                      "
+                    >
+                      {{ "Ingrese un correo válido" | translate }}.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <!-- Estado Civil -->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>{{ "Estado Civil" | translate }}</mat-label>
+                    <mat-select
+                      id="idEstadoCivil"
+                      formControlName="idEstadoCivil"
+                    >
+                      <mat-option
+                        *ngFor="let value of listEstadoCivil"
+                        [value]="value.id"
+                      >
+                        {{ value.val }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error
+                      *ngIf="
+                        !moduleForm.get('idEstadoCivil').valid &&
+                        moduleForm.get('idEstadoCivil').touched
+                      "
+                    >
+                      {{ "El campo es obligatorio" | translate }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <!-- Fecha de Nacimiento -->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>{{
+                      "Fecha de Nacimiento" | translate
+                    }}</mat-label>
+                    <input
+                      matInput
+                      [matDatepicker]="picker"
+                      id="fechaNacimiento"
+                      formControlName="fechaNacimiento"
+                      placeholder="{{
+                        'Seleccione la fecha de nacimiento' | translate
+                      }}"
+                    />
+                    <mat-datepicker-toggle
+                      matSuffix
+                      [for]="picker"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+
+                <!-- Observaciones -->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>{{ "Observaciones" | translate }}</mat-label>
+                    <textarea
+                      matInput
+                      id="observaciones"
+                      formControlName="observaciones"
+                      placeholder="{{
+                        'Ingrese sus observaciones aquí...' | translate
+                      }}"
+                      maxlength="500"
+                      rows="4"
+                    ></textarea>
+                    <mat-error
+                      *ngIf="
+                        !moduleForm.get('observaciones').valid &&
+                        moduleForm.get('observaciones').touched
+                      "
+                    >
+                      {{ "El campo es obligatorio" | translate }}.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>{{ "Barrio" | translate }}</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      id="barrio"
+                      formControlName="barrio"
+                      placeholder="{{ 'Ingrese el barrio' | translate }}"
+                      maxlength="100"
+                    />
+                  </mat-form-field>
+                </div>
+
+                <!-- Dirección 2 -->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>{{ "Dirección 2" | translate }}</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      id="direccion2"
+                      formControlName="direccion2"
+                      placeholder="{{ 'Ingrese la dirección 2' | translate }}"
+                      maxlength="150"
+                    />
+                  </mat-form-field>
+                </div>
+
+                <!-- Teléfono 1 -->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>{{ "Teléfono 1" | translate }}</mat-label>
+                    <input
+                      matInput
+                      type="tel"
+                      id="telefono1"
+                      formControlName="telefono1"
+                      placeholder="{{ 'Ingrese el teléfono 1' | translate }}"
+                      maxlength="15"
+                      (input)="ValidateTelefono1($event)"
+                      min="0"
+                      step="1"
+                    />
+                  </mat-form-field>
+                </div>
+
+                <!-- Teléfono 2 -->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>{{ "Teléfono 2" | translate }}</mat-label>
+                    <input
+                      matInput
+                      type="tel"
+                      id="telefono2"
+                      formControlName="telefono2"
+                      placeholder="{{ 'Ingrese el teléfono 2' | translate }}"
+                      maxlength="15"
+                      (input)="ValidateTelefono2($event)"
+                      min="0"
+                      step="1"
+                    />
+                  </mat-form-field>
+                </div>
+
+                <!-- Agregar después del campo Correo Electrónico -->
+
+                <!-- Código Postal -->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>{{ "Código Postal" | translate }}</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      id="codigoPostal"
+                      formControlName="codigoPostal"
+                      placeholder="{{ 'Ingrese el código postal' | translate }}"
+                      maxlength="10"
+                    />
+                  </mat-form-field>
+                </div>
+
+                <!-- Representante Legal -->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>{{
+                      "Representante Legal" | translate
+                    }}</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      id="representanteLegal"
+                      formControlName="representanteLegal"
+                      placeholder="{{
+                        'Ingrese el representante legal' | translate
+                      }}"
+                      maxlength="100"
+                    />
+                  </mat-form-field>
+                </div>
+
+                <!-- Sección de Checkboxes -->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <h5 class="card-title">{{ "Clasificación" | translate }}</h5>
+                  <div class="row">
+                    <!-- Cliente -->
+                    <!--
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                      <mat-checkbox
+                        id="cliente"
+                        formControlName="cliente"
+                        class="example-margin"
+                      >
+                        {{ "Cliente" | translate }}
+                      </mat-checkbox>
+                    </div>
+                    -->
+
+                    <!-- Cliente -->
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                      <mat-card-content>
+                        <label class="text-dark">
+                          {{ "Cliente" | translate }}</label
+                        >
+                        <section class="example-section">
+                          <mat-slide-toggle
+                            (change)="MatSlideToggleCliente($event)"
+                            formControlName="cliente"
+                          >
+                            {{ messageCliente | translate }}
+                          </mat-slide-toggle>
+                        </section>
+                      </mat-card-content>
+                    </div>
+
+                    <!-- Proveedor -->
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                      <mat-card-content>
+                        <label class="text-dark">
+                          {{ "Proveedor" | translate }}</label
+                        >
+                        <section class="example-section">
+                          <mat-slide-toggle
+                            (change)="MatSlideToggleProveedor($event)"
+                            formControlName="proveedor"
+                          >
+                            {{ messageProveedor | translate }}
+                          </mat-slide-toggle>
+                        </section>
+                      </mat-card-content>
+                    </div>
+
+                    <!-- Vendedor -->
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                      <mat-card-content>
+                        <label class="text-dark">
+                          {{ "Vendedor" | translate }}</label
+                        >
+                        <section class="example-section">
+                          <mat-slide-toggle
+                            (change)="MatSlideToggleVendedor($event)"
+                            formControlName="vendedor"
+                          >
+                            {{ messageVendedor | translate }}
+                          </mat-slide-toggle>
+                        </section>
+                      </mat-card-content>
+                    </div>
+
+                    <!-- Asociado -->
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                      <mat-card-content>
+                        <label class="text-dark">
+                          {{ "Asociado" | translate }}</label
+                        >
+                        <section class="example-section">
+                          <mat-slide-toggle
+                            (change)="MatSlideToggleAsociado($event)"
+                            formControlName="asosiado"
+                          >
+                            {{ messageAsociado | translate }}
+                          </mat-slide-toggle>
+                        </section>
+                      </mat-card-content>
+                    </div>
+
+                    <!-- Empleado -->
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                      <mat-card-content>
+                        <label class="text-dark">
+                          {{ "Empleado" | translate }}</label
+                        >
+                        <section class="example-section">
+                          <mat-slide-toggle
+                            (change)="MatSlideToggleEmpleado($event)"
+                            formControlName="empleado"
+                          >
+                            {{ messageEmpleado | translate }}
+                          </mat-slide-toggle>
+                        </section>
+                      </mat-card-content>
+                    </div>
+
+                    <!-- Prospecto -->
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                      <mat-card-content>
+                        <label class="text-dark">
+                          {{ "Prospecto" | translate }}</label
+                        >
+                        <section class="example-section">
+                          <mat-slide-toggle
+                            (change)="MatSlideToggleProspecto($event)"
+                            formControlName="prospecto"
+                          >
+                            {{ messageProspecto | translate }}
+                          </mat-slide-toggle>
+                        </section>
+                      </mat-card-content>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-footer text-right">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"></div>
+              <button
+                mat-raised-button
+                type="submit"
+                id="sendForm"
+                style="display: none"
+                class="btn btn-fill btn-rose"
+              >
+                {{ textButtonForm }}
+              </button>
+            </div>
+          </div>
+
+          <!-- Sección de Información Tributaria - Card separado -->
+          <div class="card">
+            <div class="card-header card-header-info card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">account_balance</i>
+              </div>
+              <h4 class="card-title">
+                {{ "Información Tributaria" | translate }}
+              </h4>
+            </div>
+
+            <div class="card-body">
+              <div class="row">
+                <!-- Régimen Tributario -->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>{{
+                      "Régimen Tributario" | translate
+                    }}</mat-label>
+                    <mat-select
+                      id="idPhRegimenTributario"
+                      formControlName="idPhRegimenTributario"
+                    >
+                      <mat-option
+                        *ngFor="let value of listRegimenTributario"
+                        [value]="value.id"
+                      >
+                        {{ value.val }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <!-- Impuesto a las Ventas -->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>{{
+                      "Impuesto a las Ventas" | translate
+                    }}</mat-label>
+                    <mat-select
+                      id="idPhImpuestoVentas"
+                      formControlName="idPhImpuestoVentas"
+                    >
+                      <mat-option
+                        *ngFor="let value of listImpuestoVentas"
+                        [value]="value.id"
+                      >
+                        {{ value.val }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <!-- Tarifa de ICA -->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>{{ "Tarifa de ICA" | translate }}</mat-label>
+                    <mat-select id="idTarifaICA" formControlName="idTarifaICA">
+                      <mat-option
+                        *ngFor="let value of listTarifaICA"
+                        [value]="value.id"
+                      >
+                        {{ value.val }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <!-- Código CIIU - Actividad Principal -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>{{
+                      "Código CIIU - Actividad Principal" | translate
+                    }}</mat-label>
+                    <mat-select
+                      id="idActividadPrincipal"
+                      formControlName="idActividadPrincipal"
+                    >
+                      <mat-option>
+                        <ngx-mat-select-search
+                          [placeholderLabel]="
+                            'Buscar actividad principal...' | translate
+                          "
+                          [noEntriesFoundLabel]="
+                            'No se encontraron coincidencias' | translate
+                          "
+                          formControlName="listActividadPrincipalFilter"
+                          [searching]="true"
+                        ></ngx-mat-select-search>
+                      </mat-option>
+                      <mat-option
+                        *ngFor="
+                          let value of filteredlistActividadPrincipal | async
+                        "
+                        [value]="value.id"
+                      >
+                        {{ value.codigo }} - {{ value.descripcion }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <!-- Código CIIU - Actividad Secundaria -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>{{
+                      "Código CIIU - Actividad Secundaria" | translate
+                    }}</mat-label>
+                    <mat-select
+                      id="idActividadSecundaria"
+                      formControlName="idActividadSecundaria"
+                    >
+                      <mat-option>
+                        <ngx-mat-select-search
+                          [placeholderLabel]="
+                            'Buscar actividad secundaria...' | translate
+                          "
+                          [noEntriesFoundLabel]="
+                            'No se encontraron coincidencias' | translate
+                          "
+                          formControlName="listActividadSecundariaFilter"
+                          [searching]="true"
+                        ></ngx-mat-select-search>
+                      </mat-option>
+                      <mat-option
+                        *ngFor="
+                          let value of filteredlistActividadSecundaria | async
+                        "
+                        [value]="value.id"
+                      >
+                        {{ value.codigo }} - {{ value.descripcion }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <!-- Sección de Información Tributaria -->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <h6 class="card-subtitle mb-3">
+                    {{ "Características Tributarias" | translate }}
+                  </h6>
+
+                  <div class="row">
+                    <!-- Primera fila -->
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                      <mat-card-content>
+                        <label class="text-dark">
+                          {{ "Gran Contribuyente" | translate }}
+                        </label>
+                        <section class="example-section">
+                          <mat-slide-toggle
+                            (change)="MatSlideToggleGranContribuyente($event)"
+                            formControlName="granContribuyente"
+                          >
+                            {{ messageGranContribuyente | translate }}
+                          </mat-slide-toggle>
+                        </section>
+                      </mat-card-content>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                      <mat-card-content>
+                        <label class="text-dark">
+                          {{ "Es declarante de renta" | translate }}
+                        </label>
+                        <section class="example-section">
+                          <mat-slide-toggle
+                            (change)="MatSlideToggleDeclaranteRenta($event)"
+                            formControlName="esDeclaranteRenta"
+                          >
+                            {{ messageDeclaranteRenta | translate }}
+                          </mat-slide-toggle>
+                        </section>
+                      </mat-card-content>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                      <mat-card-content>
+                        <label class="text-dark">
+                          {{ "Es agente retenedor" | translate }}
+                        </label>
+                        <section class="example-section">
+                          <mat-slide-toggle
+                            (change)="MatSlideToggleAgenteRetenedor($event)"
+                            formControlName="esAgenteRetenedor"
+                          >
+                            {{ messageAgenteRetenedor | translate }}
+                          </mat-slide-toggle>
+                        </section>
+                      </mat-card-content>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                      <mat-card-content>
+                        <label class="text-dark">
+                          {{ "Es autorretenedor" | translate }}
+                        </label>
+                        <section class="example-section">
+                          <mat-slide-toggle
+                            (change)="MatSlideToggleAutorretenedor($event)"
+                            formControlName="esAutorretenedor"
+                          >
+                            {{ messageAutorretenedor | translate }}
+                          </mat-slide-toggle>
+                        </section>
+                      </mat-card-content>
+                    </div>
+
+                    <!-- Segunda fila -->
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                      <mat-card-content>
+                        <label class="text-dark">
+                          {{ "Es agente retenedor de ICA" | translate }}
+                        </label>
+                        <section class="example-section">
+                          <mat-slide-toggle
+                            (change)="MatSlideToggleAgenteRetenedorICA($event)"
+                            formControlName="esAgenteRetenedorICA"
+                          >
+                            {{ messageAgenteRetenedorICA | translate }}
+                          </mat-slide-toggle>
+                        </section>
+                      </mat-card-content>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                      <mat-card-content>
+                        <label class="text-dark">
+                          {{ "Aplicar ReteIva en compras" | translate }}
+                        </label>
+                        <section class="example-section">
+                          <mat-slide-toggle
+                            (change)="MatSlideToggleAplicarReteIva($event)"
+                            formControlName="aplicarReteIva"
+                          >
+                            {{ messageAplicarReteIva | translate }}
+                          </mat-slide-toggle>
+                        </section>
+                      </mat-card-content>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                      <mat-card-content>
+                        <label class="text-dark">
+                          {{ "No aplicar sobretasa bomberil" | translate }}
+                        </label>
+                        <section class="example-section">
+                          <mat-slide-toggle
+                            (change)="MatSlideToggleNoAplicarSobretasa($event)"
+                            formControlName="noAplicarSobretasa"
+                          >
+                            {{ messageNoAplicarSobretasa | translate }}
+                          </mat-slide-toggle>
+                        </section>
+                      </mat-card-content>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                      <mat-card-content>
+                        <label class="text-dark">
+                          {{ "No genera IVA" | translate }}
+                        </label>
+                        <section class="example-section">
+                          <mat-slide-toggle
+                            (change)="MatSlideToggleNoGeneraIva($event)"
+                            formControlName="noGeneraIva"
+                          >
+                            {{ messageNoGeneraIva | translate }}
+                          </mat-slide-toggle>
+                        </section>
+                      </mat-card-content>
+                    </div>
+
+                    <!-- Tercera fila -->
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                      <mat-card-content>
+                        <label class="text-dark">
+                          {{ "No general ad valorem" | translate }}
+                        </label>
+                        <section class="example-section">
+                          <mat-slide-toggle
+                            (change)="MatSlideToggleNoGeneralAdValorem($event)"
+                            formControlName="noGeneralAdValorem"
+                          >
+                            {{ messageNoGeneralAdValorem | translate }}
+                          </mat-slide-toggle>
+                        </section>
+                      </mat-card-content>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                      <mat-card-content>
+                        <label class="text-dark">
+                          {{ "No aplica impuesto de Auto Renta" | translate }}
+                        </label>
+                        <section class="example-section">
+                          <mat-slide-toggle
+                            (change)="
+                              MatSlideToggleNoAplicaImpuestoAutoRenta($event)
+                            "
+                            formControlName="noAplicaImpuestoAutoRenta"
+                          >
+                            {{ messageNoAplicaImpuestoAutoRenta | translate }}
+                          </mat-slide-toggle>
+                        </section>
+                      </mat-card-content>
+                    </div>
+
+                    <!-- Cuarta fila - Campos más anchos para textos largos -->
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                      <mat-card-content>
+                        <label class="text-dark">
+                          {{
+                            "Aplicar retenciones en la fuente e IVA (proveedor/cliente permanente)"
+                              | translate
+                          }}
+                        </label>
+                        <section class="example-section">
+                          <mat-slide-toggle
+                            (change)="
+                              MatSlideToggleAplicarRetencionesIva($event)
+                            "
+                            formControlName="aplicarRetencionesIva"
+                          >
+                            {{ messageAplicarRetencionesIva | translate }}
+                          </mat-slide-toggle>
+                        </section>
+                      </mat-card-content>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                      <mat-card-content>
+                        <label class="text-dark">
+                          {{ "Aplicar siempre retención de ICA" | translate }}
+                        </label>
+                        <section class="example-section">
+                          <mat-slide-toggle
+                            (change)="MatSlideToggleAplicarRetencionIca($event)"
+                            formControlName="aplicarRetencionIca"
+                          >
+                            {{ messageAplicarRetencionIca | translate }}
+                          </mat-slide-toggle>
+                        </section>
+                      </mat-card-content>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Termina sección Información Tributaria -->
+        </form>
+      </div>
+    </div>
+    <app-floating-button
+      [iconMenu]="iconMenu"
+      (menuPrimaryEmiterData)="menuPrimaryReceiveData($event)"
+    ></app-floating-button>
+  </div>
+</div>

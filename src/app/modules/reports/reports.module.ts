@@ -1,7 +1,3 @@
-/**
-
- */
-
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -12,7 +8,7 @@ import { MaterialModule } from "../../app.material.module";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatSelectModule } from "@angular/material/select";
 import { NgxMatSelectSearchModule } from "ngx-mat-select-search";
-import { BnNgIdleService } from 'bn-ng-idle';
+import { BnNgIdleService } from "bn-ng-idle";
 
 import { ReportsRoutingModule } from "./reports-routing.module";
 import { AdminLayoutModule } from "../admin-layout/admin-layout.module";
@@ -24,7 +20,11 @@ import { ReportsCustomComponent } from "./reports-custom/reports-custom.componen
 import { BreadcrumbComponent } from "../components/breadcrumb/breadcrumb.component";
 
 @NgModule({
-  declarations: [ReportMainComponent, ReportIndexComponent, ReportsCustomComponent],
+  declarations: [
+    ReportMainComponent,
+    ReportIndexComponent,
+    ReportsCustomComponent,
+  ],
   imports: [
     CommonModule,
     ReportsRoutingModule,
@@ -49,9 +49,9 @@ import { BreadcrumbComponent } from "../components/breadcrumb/breadcrumb.compone
     MatSelectModule,
     MatFormFieldModule,
     NgxMatSelectSearchModule,
-    BreadcrumbComponent
+    BreadcrumbComponent,
   ],
   exports: [],
-  providers: [BnNgIdleService]
+  providers: [BnNgIdleService],
 })
-export class ReportsModule { }
+export class ReportsModule {}

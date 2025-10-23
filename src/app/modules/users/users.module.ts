@@ -1,7 +1,3 @@
-/**
-
- */
-
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -14,7 +10,7 @@ import { MaterialModule } from "../../app.material.module";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatSelectModule } from "@angular/material/select";
 import { NgxMatSelectSearchModule } from "ngx-mat-select-search";
-import { BnNgIdleService } from 'bn-ng-idle';
+import { BnNgIdleService } from "bn-ng-idle";
 
 /**
  * Importación de componentes
@@ -98,6 +94,6 @@ import { BreadcrumbComponent } from "../components/breadcrumb/breadcrumb.compone
     NgxMatSelectSearchModule,
   ],
   exports: [UsersUsersFormComponent, UsersRolesFormComponent],
-  providers: [BnNgIdleService]
+  providers: [BnNgIdleService],
 })
-export class UsersModule { }
+export class UsersModule {}
